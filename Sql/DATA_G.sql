@@ -10,7 +10,7 @@ GO
 CREATE SCHEMA [DATA_G]
 GO
 
-CREATE TABLE ROL(
+CREATE TABLE DATA_G.ROL(
 
 	Rol_IdRol int PRIMARY KEY,
 
@@ -19,18 +19,18 @@ CREATE TABLE ROL(
 )
 
 
-CREATE TABLE FUNCIONALIDADES(
+CREATE TABLE DATA_G.FUNCIONALIDADES(
 
 	Func_IdFuncionalidad int PRIMARY KEY,
-	Rol_IdRol int REFERENCES ROL
+	Rol_IdRol int REFERENCES DATA_G.ROL
 
 )
 
 
-CREATE TABLE CLIENTE (
+CREATE TABLE DATA_G.CLIENTE (
 
 	Cli_Dni numeric(18, 0) PRIMARY KEY,
-	Rol_IdRol int REFERENCES ROL,
+	Rol_IdRol int REFERENCES DATA_G.ROL,
 	
 	Cli_Nombre nvarchar(255),
 	Cli_Apellido nvarchar(255),
@@ -42,7 +42,7 @@ CREATE TABLE CLIENTE (
 )
 
 
-CREATE TABLE PRODUCTO(
+CREATE TABLE DATA_G.PRODUCTO(
 
 	Prod_IdProducto int PRIMARY KEY,	
 
@@ -52,38 +52,38 @@ CREATE TABLE PRODUCTO(
 )
 
 
-CREATE TABLE BENEFICIOS(
+CREATE TABLE DATA_G.BENEFICIOS(
 
 	Benef_IdBeneficio int PRIMARY KEY,
-	Prod_IdProducto int REFERENCES PRODUCTO,
-	Cli_Dni numeric(18, 0) REFERENCES CLIENTE,
+	Prod_IdProducto int REFERENCES DATA_G.PRODUCTO,
+	Cli_Dni numeric(18, 0) REFERENCES DATA_G.CLIENTE,
 
 	Benef_Milla int
 	
 )
 
-CREATE TABLE PUNTO_DE_COMPRA(
+CREATE TABLE DATA_G.PUNTO_DE_COMPRA(
 
 	PdC_IdPuntoDeCompra int PRIMARY KEY,
 	PdC_TipoDePunto varchar(255)
 
 )
 
-CREATE TABLE CIUDAD(
+CREATE TABLE DATA_G.CIUDAD(
 	
 	Ciudad_ID int PRIMARY KEY,
 
-	Nombre nvarchar(18,0)
+	Nombre nvarchar(18)
 
 )
 
-CREATE TABLE AEROPUERTO(
+CREATE TABLE DATA_G.AEROPUERTO(
 
-	Aeropuerto_Codigo nvarchar(18,0) PRIMARY KEY,
+	Aeropuerto_Codigo nvarchar(18) PRIMARY KEY,
 
-	Ciudad_ID int REFERENCES CIUDAD
+	Ciudad_ID int REFERENCES DATA_G.CIUDAD
 )
-CREATE TABLE RUTA(
+CREATE TABLE DATA_G.RUTA(
 
 	Ruta_Codigo numeric(18, 0) PRIMARY KEY,
 	Ruta_Precio_BaseKG numeric(18, 2),
@@ -91,12 +91,12 @@ CREATE TABLE RUTA(
 	Ruta_Ciudad_Origen nvarchar(255),
 	Ruta_Ciudad_Destino nvarchar(255),
 
-	Aeropuerto_Origen nvarchar(18,0) REFERENCES AEROPUERTO,
-	Aeropuerto_Destino nvarchar(18,0) REFERENCES AEROPUERTO
+	Aeropuerto_Origen nvarchar(18) REFERENCES DATA_G.AEROPUERTO,
+	Aeropuerto_Destino nvarchar(18) REFERENCES DATA_G.AEROPUERTO
 
 )
 
-CREATE TABLE AERONAVE(
+CREATE TABLE DATA_G.AERONAVE(
 
 	Aeronave_Matricula nvarchar(255) PRIMARY KEY,
 	Aeronave_Modelo nvarchar(255),
@@ -106,37 +106,37 @@ CREATE TABLE AERONAVE(
 
 )
 
-CREATE TABLE FUERA_DE_SERVICIO(
+CREATE TABLE DATA_G.FUERA_DE_SERVICIO(
 
 	FdServ_Id int PRIMARY KEY,
 
-	Aeronave_Matricula nvarchar(255) REFERENCES AERONAVE
+	Aeronave_Matricula nvarchar(255) REFERENCES DATA_G.AERONAVE
 )
 
-CREATE TABLE VUELO(
+CREATE TABLE DATA_G.VUELO(
 
 	Vuelo_NroVuelo int PRIMARY KEY,
 	Vuelo_FechaEstimadaLlegada datetime,
 	Vuelo_FechaLlegada datetime,
 	Vuelo_FechaSalida datetime,
 
-	Ruta_Codigo int REFERENCES RUTA,
-	AeroNave_Matricula int REFERENCES AERONAVE
+	Ruta_Codigo numeric(18, 0) REFERENCES DATA_G.RUTA,
+	AeroNave_Matricula nvarchar(255) REFERENCES DATA_G.AERONAVE
 	
 )
 
 
-CREATE TABLE BUTACA(
+CREATE TABLE DATA_G.BUTACA(
 
 	Butaca_Nro numeric (18, 0) PRIMARY KEY,
 	Butaca_Tipo nvarchar(255),
 	Butaca_Piso numeric(18, 0),
 
-	Vuelo_NroVuelo int REFERENCES VUELO
+	Vuelo_NroVuelo int REFERENCES DATA_G.VUELO
 
 )
 
-CREATE TABLE PASAJE(
+CREATE TABLE DATA_G.PASAJE(
 
 	Pasaje_Codigo numeric(18, 0) PRIMARY KEY,
 	Pasaje_Precio numeric(18, 2),
@@ -145,11 +145,11 @@ CREATE TABLE PASAJE(
 	Pasaje_DniPasajero numeric(18, 0),
 	Pasaje_NroVuelo int,
 	
-	Butaca_Nro numeric(18, 0) REFERENCES BUTACA
+	Butaca_Nro numeric(18, 0) REFERENCES DATA_G.BUTACA
 
 )
 
-CREATE TABLE PAQUETE(
+CREATE TABLE DATA_G.PAQUETE(
 
 	Paquete_Codigo numeric(18,2) PRIMARY KEY,
 	
@@ -157,31 +157,31 @@ CREATE TABLE PAQUETE(
 	Paquete_KG numeric(18,0),
 	Paquete_FechaCompra datetime,
 
-	Vuelo_NroVuelo int REFERENCES VUELO
+	Vuelo_NroVuelo int REFERENCES DATA_G.VUELO
 )
 
-CREATE TABLE DEVOLUCION(
+CREATE TABLE DATA_G.DEVOLUCION(
 
 	Devolucion_Id int PRIMARY KEY,
 
-	Paquete_Codigo numeric(18,2) REFERENCES PAQUETE,
-	Pasaje_Codigo numeric(18,0) REFERENCES PASAJE
+	Paquete_Codigo numeric(18,2) REFERENCES DATA_G.PAQUETE,
+	Pasaje_Codigo numeric(18,0) REFERENCES DATA_G.PASAJE
 )
 
-CREATE TABLE COMPRADOR(
+CREATE TABLE DATA_G.COMPRADOR(
 
-	Pasaje_Codigo numeric(18, 0) REFERENCES PASAJE,
-	Cli_Dni numeric(18, 0) REFERENCES CLIENTE,
-	PdC_IdPuntoDeCompra int REFERENCES PUNTO_DE_COMPRA
+	Pasaje_Codigo numeric(18, 0) REFERENCES DATA_G.PASAJE,
+	Cli_Dni numeric(18, 0) REFERENCES DATA_G.CLIENTE,
+	PdC_IdPuntoDeCompra int REFERENCES DATA_G.PUNTO_DE_COMPRA
 
 )
 
-CREATE TABLE MILLAS(
+CREATE TABLE DATA_G.MILLAS(
 
 	Millas_IdMillas int PRIMARY KEY,
 	Millas_CantMillas int,
 	
-	Cli_Dni numeric(18, 0) REFERENCES CLIENTE,
-	Vuelo_NroVuelo int REFERENCES VUELO
+	Cli_Dni numeric(18, 0) REFERENCES DATA_G.CLIENTE,
+	Vuelo_NroVuelo int REFERENCES DATA_G.VUELO
 ) 
 
