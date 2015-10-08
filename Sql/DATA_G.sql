@@ -100,16 +100,21 @@ CREATE TABLE DATA_G.ROL_POR_FUNCIONALIDADES(
 
 CREATE TABLE DATA_G.CLIENTE (
 
-	Cli_Dni numeric(18, 0) PRIMARY KEY,
+	Cli_Id int PRIMARY KEY IDENTITY(1,1),
 	Rol_IdRol bit FOREIGN KEY REFERENCES DATA_G.ROL,
 	
+	/** PONGO NULL PARA QUE LOS USUARIOS NO TENGAN USERNAME NI PASSWORD**/
+	Cli_Username nvarchar(255) NULL, /** Validar desd c# que sea unico**/
+	Cli_Password nvarchar(255) NULL, 
+
+	Cli_Dni numeric(18, 0), 
 	Cli_Nombre nvarchar(255),
 	Cli_Apellido nvarchar(255),
 	Cli_Dir nvarchar(255),
 	Cli_Telefono numeric(18, 0),
 	Cli_Mail nvarchar(255),
 	Cli_Fecha_Nac datetime
-
+	
 )
 
 
@@ -127,7 +132,7 @@ CREATE TABLE DATA_G.BENEFICIOS(
 
 	Benef_IdBeneficio int PRIMARY KEY,
 	Prod_IdProducto int FOREIGN KEY REFERENCES DATA_G.PRODUCTO,
-	Cli_Dni numeric(18, 0) FOREIGN KEY REFERENCES DATA_G.CLIENTE,
+	Cli_Id int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
 
 	Benef_Milla int
 	
@@ -213,9 +218,9 @@ CREATE TABLE DATA_G.PASAJE(
 	Pasaje_Precio numeric(18, 2),
 	Pasaje_FechaCompra datetime, 
 	Pasaje_CantMillas int,
-	Pasaje_DniPasajero numeric(18, 0),
 	Pasaje_NroVuelo int,
-	
+
+	Cli_Id int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
 	Butaca_Nro numeric(18, 0) FOREIGN KEY REFERENCES DATA_G.BUTACA
 
 )
@@ -242,7 +247,7 @@ CREATE TABLE DATA_G.DEVOLUCION(
 CREATE TABLE DATA_G.COMPRADOR(
 
 	Pasaje_Codigo numeric(18, 0) FOREIGN KEY REFERENCES DATA_G.PASAJE,
-	Cli_Dni numeric(18, 0) FOREIGN KEY REFERENCES DATA_G.CLIENTE,
+	Cli_Id int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
 	PdC_IdPuntoDeCompra int FOREIGN KEY REFERENCES DATA_G.PUNTO_DE_COMPRA
 
 )
@@ -252,7 +257,7 @@ CREATE TABLE DATA_G.MILLAS(
 	Millas_IdMillas int PRIMARY KEY,
 	Millas_CantMillas int,
 	
-	Cli_Dni numeric(18, 0) FOREIGN KEY REFERENCES DATA_G.CLIENTE,
+	Cli_Id int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
 	Vuelo_NroVuelo int FOREIGN KEY REFERENCES DATA_G.VUELO
 ) 
 
@@ -273,8 +278,7 @@ INSERT INTO DATA_G.FUNCIONALIDADES(Func_IdFuncionalidad,Func_DescripcionFunc)
 VALUES (1,'Modificar acceso usuario')
 INSERT INTO DATA_G.FUNCIONALIDADES(Func_IdFuncionalidad,Func_DescripcionFunc)
 VALUES (2,'Eliminar acceso usuario')
-INSERT INTO DATA_G.FUNCIONALIDADES(Func_IdFuncionalidad,Func_DescripcionFunc)
-VALUES (3,'Esque es un genio')
+
 SET IDENTITY_INSERT DATA_G.FUNCIONALIDADES OFF
 
 /** FUNCIONALIDADES POR ROL **/
@@ -282,11 +286,33 @@ SET IDENTITY_INSERT DATA_G.FUNCIONALIDADES OFF
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
 VALUES(0,0)
 
+ /** CLIENTE **/ 
 
+ INSERT INTO DATA_G.CLIENTE(Rol_IdRol,Cli_Nombre, Cli_Apellido,Cli_Dni,Cli_Dir,Cli_Telefono,Cli_Mail,Cli_Fecha_Nac)
+ SELECT DISTINCT 1,Cli_Nombre,Cli_Apellido, Cli_Dni,Cli_Dir,Cli_Telefono,Cli_Mail,Cli_Fecha_Nac FROM gd_esquema.Maestra  
 
+ INSERT INTO DATA_G.CLIENTE(Rol_IdRol,Cli_Nombre, Cli_Apellido,Cli_Dni, Cli_Dir,Cli_Telefono,Cli_Mail,Cli_Fecha_Nac,Cli_Username,Cli_Password)
+ VALUES(0,'Maria','Lopez',33652149,'J.C Paz 520',47921563,'mlopez@gmail.com', '1990-05-21','mlopez','w23e')
 
+ /** PASAJE  **/
 
+ INSERT INTO DATA_G.PASAJE(Pasaje_Codigo,Pasaje_Precio,Pasaje_FechaCompra)
+ SELECT DISTINCT Pasaje_Codigo,Pasaje_Precio,Pasaje_FechaCompra FROM gd_esquema.Maestra
 
+ /**CREATE FUNCTION DATA_G.GetMillas( @Pasaje_Precio numeric(18,2))
+	RETURNS int
+	AS BEGIN 
+	DECLARE @RETORNO int
+	BEGIN TRY 	
+		SELECT @RETORNO=Pasaje_Precio/10 FROM DATA_G.PASAJE WHERE Pasaje_Precio=@Pasaje_Precio
+		RETURN @RETORNO
+	END TRY
+	BEGIN CATCH
+		RETURN NULL
+	END CATCH
+	END **/
+
+	 
 
 
 
