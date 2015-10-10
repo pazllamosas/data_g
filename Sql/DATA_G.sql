@@ -289,16 +289,25 @@ VALUES(0,0)
  /** CLIENTE **/ 
 
  INSERT INTO DATA_G.CLIENTE(Rol_IdRol,Cli_Nombre, Cli_Apellido,Cli_Dni,Cli_Dir,Cli_Telefono,Cli_Mail,Cli_Fecha_Nac)
- SELECT DISTINCT 1,Cli_Nombre,Cli_Apellido, Cli_Dni,Cli_Dir,Cli_Telefono,Cli_Mail,Cli_Fecha_Nac FROM gd_esquema.Maestra  
+ SELECT distinct 1,Cli_Nombre,Cli_Apellido, Cli_Dni,Cli_Dir,Cli_Telefono,Cli_Mail,Cli_Fecha_Nac FROM gd_esquema.Maestra 
+ Order by 4
+ /**SELECT top 4 ma.Cli_Apellido, ma.Cli_Nombre, ma.Cli_Dni
+ FROM gd_esquema.Maestra ma
+ where exists (select 1 
+				from gd_esquema.Maestra ma2 where ma2.Cli_Dni = ma.Cli_Dni and  ma.Cli_Apellido <> ma2.Cli_Apellido and ma.Cli_Nombre <> ma2.Cli_Nombre)
+ **/
 
  INSERT INTO DATA_G.CLIENTE(Rol_IdRol,Cli_Nombre, Cli_Apellido,Cli_Dni, Cli_Dir,Cli_Telefono,Cli_Mail,Cli_Fecha_Nac,Cli_Username,Cli_Password)
  VALUES(0,'Maria','Lopez',33652149,'J.C Paz 520',47921563,'mlopez@gmail.com', '1990-05-21','mlopez','w23e')
 
  /** PASAJE  **/
 
- INSERT INTO DATA_G.PASAJE(Pasaje_Codigo,Pasaje_Precio,Pasaje_FechaCompra)
- SELECT DISTINCT Pasaje_Codigo,Pasaje_Precio,Pasaje_FechaCompra FROM gd_esquema.Maestra
+ INSERT INTO DATA_G.PASAJE(Pasaje_Codigo,Pasaje_Precio,Pasaje_FechaCompra, Pasaje_CantMillas)
+ SELECT DISTINCT Pasaje_Codigo,Pasaje_Precio,Pasaje_FechaCompra, CAST(ROUND(Pasaje_Precio/10,1) AS decimal(10,0)) AS Pasaje_CantMillas FROM gd_esquema.Maestra 
+	WHERE Paquete_Codigo = 0
+ ORDER BY 1
 
+ 
  /**CREATE FUNCTION DATA_G.GetMillas( @Pasaje_Precio numeric(18,2))
 	RETURNS int
 	AS BEGIN 
