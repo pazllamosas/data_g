@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace AerolineaFrba.Abm_Rol
 {
-    public partial class Form1 : Form
+    public partial class AgregarRol : Form
     {
-        public Form1()
+        public AgregarRol()
         {
             InitializeComponent();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
