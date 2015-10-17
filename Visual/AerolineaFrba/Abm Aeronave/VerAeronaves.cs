@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AerolineaFrba.Registro_de_Usuario
+namespace AerolineaFrba.Abm_Aeronave
 {
-    public partial class Form1 : Form
+    public partial class VerAeronaves : Form
     {
-        public Form1()
+        public VerAeronaves()
         {
             InitializeComponent();
         }

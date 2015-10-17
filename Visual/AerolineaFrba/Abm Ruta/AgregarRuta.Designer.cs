@@ -1,6 +1,6 @@
-﻿namespace AerolineaFrba.Listado_Estadistico
+﻿namespace AerolineaFrba.Abm_Ruta
 {
-    partial class Form1
+    partial class AgregarRuta
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.Text = "AgregarRuta";
         }
 
         #endregion

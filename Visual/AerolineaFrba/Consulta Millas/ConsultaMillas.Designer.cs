@@ -1,6 +1,6 @@
-﻿namespace AerolineaFrba.Registro_Llegada_Destino
+﻿namespace AerolineaFrba.Consulta_Millas
 {
-    partial class Form1
+    partial class ConsultaMillas
     {
         /// <summary>
         /// Required designer variable.

@@ -44,11 +44,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abm Aeronave\Form1.cs">
+    <Compile Include="Abm Aeronave\AgregarAeronave.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Aeronave\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Abm Aeronave\AgregarAeronave.Designer.cs">
+      <DependentUpon>AgregarAeronave.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Aeronave\VerAeronaves.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Aeronave\VerAeronaves.Designer.cs">
+      <DependentUpon>VerAeronaves.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Ciudad\VerCiudades.cs">
       <SubType>Form</SubType>
@@ -56,7 +62,7 @@
     <Compile Include="Abm Ciudad\VerCiudades.Designer.cs">
       <DependentUpon>VerCiudades.cs</DependentUpon>
     </Compile>
-	<Compile Include="Abm Ciudad\AgregarCiudad.cs">
+    <Compile Include="Abm Ciudad\AgregarCiudad.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Abm Ciudad\AgregarCiudades.Designer.cs">
@@ -74,47 +80,59 @@
     <Compile Include="Abm Rol\VerRoles.Designer.cs">
       <DependentUpon>VerRoles.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Ruta\Form1.cs">
+    <Compile Include="Abm Ruta\AgregarRuta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Ruta\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Abm Ruta\AgregarRuta.Designer.cs">
+      <DependentUpon>AgregarRuta.cs</DependentUpon>
     </Compile>
-    <Compile Include="Canje Millas\Form1.cs">
+    <Compile Include="Abm Ruta\VerRutas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Canje Millas\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Abm Ruta\VerRutas.Designer.cs">
+      <DependentUpon>VerRutas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra\Form1.cs">
+    <Compile Include="Canje Millas\CanjeMillas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Compra\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Canje Millas\CanjeMillas.Designer.cs">
+      <DependentUpon>CanjeMillas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Consulta Millas\Form1.cs">
+    <Compile Include="Compra\ElegirButaca.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Consulta Millas\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Compra\ElegirButaca.Designer.cs">
+      <DependentUpon>ElegirButaca.cs</DependentUpon>
     </Compile>
-    <Compile Include="Devolucion\Form1.cs">
+    <Compile Include="Compra\IngresarDatosCompra.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Devolucion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Compra\IngresarDatosCompra.Designer.cs">
+      <DependentUpon>IngresarDatosCompra.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Consulta Millas\ConsultaMillas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Consulta Millas\ConsultaMillas.Designer.cs">
+      <DependentUpon>ConsultaMillas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Generacion Viaje\Form1.cs">
+    <Compile Include="Devolucion\Devolucion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Generacion Viaje\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Devolucion\Devolucion.Designer.cs">
+      <DependentUpon>Devolucion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Generacion Viaje\GenerarViaje.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Generacion Viaje\GenerarViaje.Designer.cs">
+      <DependentUpon>GenerarViaje.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Inicio\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inicio\Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Inicio\Menu.cs">
       <SubType>Form</SubType>
@@ -122,25 +140,55 @@
     <Compile Include="Inicio\Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listado Estadistico\Form1.cs">
+    <Compile Include="Listado Estadistico\AeronavesConMayorCantidadDeDiasFueraDeServicio.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listado Estadistico\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Listado Estadistico\AeronavesConMayorCantidadDeDiasFueraDeServicio.Designer.cs">
+      <DependentUpon>AeronavesConMayorCantidadDeDiasFueraDeServicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listado Estadistico\ClientesConMasPuntosAcumuladosALaFecha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listado Estadistico\ClientesConMasPuntosAcumuladosALaFecha.Designer.cs">
+      <DependentUpon>ClientesConMasPuntosAcumuladosALaFecha.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listado Estadistico\DestinosConAeronavesMasVacias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listado Estadistico\DestinosConAeronavesMasVacias.Designer.cs">
+      <DependentUpon>DestinosConAeronavesMasVacias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listado Estadistico\DestinosConMasPasajesComprados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listado Estadistico\DestinosConMasPasajesComprados.Designer.cs">
+      <DependentUpon>DestinosConMasPasajesComprados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listado Estadistico\DestinosConPasajesCancelados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listado Estadistico\DestinosConPasajesCancelados.Designer.cs">
+      <DependentUpon>DestinosConPasajesCancelados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Listado Estadistico\ListadoEstadistico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Listado Estadistico\ListadoEstadistico.Designer.cs">
+      <DependentUpon>ListadoEstadistico.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registro de Usuario\Form1.cs">
+    <Compile Include="Registro de Usuario\RegistrarUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro de Usuario\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Registro de Usuario\RegistrarUsuario.Designer.cs">
+      <DependentUpon>RegistrarUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Registro Llegada Destino\Form1.cs">
+    <Compile Include="Registro Llegada Destino\RegistroLlegadaDestino.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro Llegada Destino\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Registro Llegada Destino\RegistroLlegadaDestino.Designer.cs">
+      <DependentUpon>RegistroLlegadaDestino.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Abm Rol\AgregarRol.resx">
       <DependentUpon>AgregarRol.cs</DependentUpon>
@@ -148,7 +196,7 @@
     <EmbeddedResource Include="Abm Rol\VerRoles.resx">
       <DependentUpon>VerRoles.cs</DependentUpon>
     </EmbeddedResource>
-	<EmbeddedResource Include="Abm Ciudad\AgregarCiudad.resx">
+    <EmbeddedResource Include="Abm Ciudad\AgregarCiudad.resx">
       <DependentUpon>AgregarCiudad.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Ciudad\VerCiudades.resx">

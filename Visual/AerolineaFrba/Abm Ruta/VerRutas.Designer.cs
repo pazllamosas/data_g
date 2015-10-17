@@ -1,6 +1,6 @@
 ﻿namespace AerolineaFrba.Abm_Ruta
 {
-    partial class Form1
+    partial class VerRutas
     {
         /// <summary>
         /// Required designer variable.
