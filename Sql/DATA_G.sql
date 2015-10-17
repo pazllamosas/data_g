@@ -78,21 +78,21 @@ GO
 
 CREATE TABLE DATA_G.ROL(
 
-	Rol_IdRol bit PRIMARY KEY,
+	IdRol bit PRIMARY KEY,
 
-	Rol_Descripcion varchar(255)
+	Descripcion varchar(255)
 
 )
 
 CREATE TABLE DATA_G.FUNCIONALIDADES(
-	Func_IdFuncionalidad int PRIMARY KEY IDENTITY (1,1),
-	Func_DescripcionFunc varchar(255)
+	IdFuncionalidad int PRIMARY KEY IDENTITY (1,1),
+	DescripcionFunc varchar(255)
 	)
 
 CREATE TABLE DATA_G.ROL_POR_FUNCIONALIDADES(
 
-	Func_IdFuncionalidad int FOREIGN KEY REFERENCES DATA_G.FUNCIONALIDADES,
-	Rol_IdRol bit FOREIGN KEY REFERENCES DATA_G.ROL
+	IdFuncionalidad int FOREIGN KEY REFERENCES DATA_G.FUNCIONALIDADES,
+	IdRol bit FOREIGN KEY REFERENCES DATA_G.ROL
 
 )
 
@@ -100,54 +100,54 @@ CREATE TABLE DATA_G.ROL_POR_FUNCIONALIDADES(
 
 CREATE TABLE DATA_G.CLIENTE (
 
-	Cli_Id int PRIMARY KEY IDENTITY(1,1),
-	Rol_IdRol bit FOREIGN KEY REFERENCES DATA_G.ROL,
+	IdCli int PRIMARY KEY IDENTITY(1,1),
+	IdRol bit FOREIGN KEY REFERENCES DATA_G.ROL,
 	
 	/** PONGO NULL PARA QUE LOS USUARIOS NO TENGAN USERNAME NI PASSWORD**/
-	Cli_Username nvarchar(255) NULL, /** Validar desd c# que sea unico**/
-	Cli_Password nvarchar(255) NULL, 
+	Username nvarchar(255) NULL, /** Validar desd c# que sea unico**/
+	Password nvarchar(255) NULL, 
 
-	Cli_Dni numeric(18, 0), 
-	Cli_Nombre nvarchar(255),
-	Cli_Apellido nvarchar(255),
-	Cli_Dir nvarchar(255),
-	Cli_Telefono numeric(18, 0),
-	Cli_Mail nvarchar(255),
-	Cli_Fecha_Nac datetime
+	Dni numeric(18, 0), 
+	Nombre nvarchar(255),
+	Apellido nvarchar(255),
+	Direccion nvarchar(255),
+	Telefono numeric(18, 0),
+	Mail nvarchar(255),
+	Fecha_Nac datetime
 	
 )
 
 
 CREATE TABLE DATA_G.PRODUCTO(
 
-	Prod_IdProducto int PRIMARY KEY,	
+	IdProducto int PRIMARY KEY,	
 
-	Prod_CostoEnMillas int,
-	Prod_Descripcion varchar(255)
+	CostoEnMillas int,
+	Descripcion varchar(255)
 
 )
 
 
 CREATE TABLE DATA_G.BENEFICIOS(
 
-	Benef_IdBeneficio int PRIMARY KEY,
-	Prod_IdProducto int FOREIGN KEY REFERENCES DATA_G.PRODUCTO,
-	Cli_Id int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
+	IdBeneficio int PRIMARY KEY,
+	IdProducto int FOREIGN KEY REFERENCES DATA_G.PRODUCTO,
+	IdCli int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
 
-	Benef_Milla int
+	Milla int
 	
 )
 
 CREATE TABLE DATA_G.PUNTO_DE_COMPRA(
 
-	PdC_IdPuntoDeCompra int PRIMARY KEY,
-	PdC_TipoDePunto varchar(255)
+	IdPuntoDeCompra int PRIMARY KEY,
+	TipoDePunto varchar(255)
 
 )
 
 CREATE TABLE DATA_G.CIUDAD(
 	
-	Ciudad_ID int PRIMARY KEY,
+	IDCiudad int PRIMARY KEY,
 
 	Nombre nvarchar(18)
 
@@ -155,128 +155,130 @@ CREATE TABLE DATA_G.CIUDAD(
 
 CREATE TABLE DATA_G.AEROPUERTO(
 
-	Aeropuerto_Codigo nvarchar(18) PRIMARY KEY,
+	Codigo nvarchar(18) PRIMARY KEY,
 
-	Ciudad_ID int FOREIGN KEY REFERENCES DATA_G.CIUDAD
+	IDCiudad int FOREIGN KEY REFERENCES DATA_G.CIUDAD
 )
 CREATE TABLE DATA_G.RUTA(
 
-	Ruta_Codigo numeric(18, 0) PRIMARY KEY,
-	Ruta_Precio_BaseKG numeric(18, 2),
-	Ruta_Precio_BasePasaje numeric(18, 2),
-	Ruta_Ciudad_Origen nvarchar(255),
-	Ruta_Ciudad_Destino nvarchar(255),
+	Codigo numeric(18, 0) PRIMARY KEY,
+	
+	Precio_BaseKG numeric(18, 2),
+	Precio_BasePasaje numeric(18, 2),
+	Ciudad_Origen nvarchar(255),
+	Ciudad_Destino nvarchar(255),
 
-	Aeropuerto_Origen nvarchar(18) FOREIGN KEY REFERENCES DATA_G.AEROPUERTO,
-	Aeropuerto_Destino nvarchar(18) FOREIGN KEY REFERENCES DATA_G.AEROPUERTO
+	Origen nvarchar(18) FOREIGN KEY REFERENCES DATA_G.AEROPUERTO,
+	Destino nvarchar(18) FOREIGN KEY REFERENCES DATA_G.AEROPUERTO
 
 )
 
 CREATE TABLE DATA_G.AERONAVE(
 
-	Aeronave_Matricula nvarchar(255) PRIMARY KEY,
-	Aeronave_Modelo nvarchar(255),
-	Aeronave_KG_Disponibles numeric(18, 0),
-	Aeronave_Fabricante nvarchar(255),
-	Aeronave_CantButacas int /*fijarse la cant max para el numeric*/
+	Matricula nvarchar(255) PRIMARY KEY,
+	Modelo nvarchar(255),
+	KG_Disponibles numeric(18, 0),
+	Fabricante nvarchar(255),
+	CantButacas int /*fijarse la cant max para el numeric*/,
+	Piso int
 
 )
 
 CREATE TABLE DATA_G.FUERA_DE_SERVICIO(
 
-	FdServ_Id int PRIMARY KEY,
+	IdFdS int PRIMARY KEY,
 
-	Aeronave_Matricula nvarchar(255) FOREIGN KEY REFERENCES DATA_G.AERONAVE
+	Matricula nvarchar(255) FOREIGN KEY REFERENCES DATA_G.AERONAVE
 )
 
 CREATE TABLE DATA_G.VUELO(
 
-	Vuelo_NroVuelo int PRIMARY KEY,
-	Vuelo_FechaEstimadaLlegada datetime,
-	Vuelo_FechaLlegada datetime,
-	Vuelo_FechaSalida datetime,
+	NroVuelo int PRIMARY KEY,
+	FechaEstimadaLlegada datetime,
+	FechaLlegada datetime,
+	FechaSalida datetime,
 
-	Ruta_Codigo numeric(18, 0) FOREIGN KEY REFERENCES DATA_G.RUTA,
-	AeroNave_Matricula nvarchar(255) FOREIGN KEY REFERENCES DATA_G.AERONAVE
+	Codigo numeric(18, 0) FOREIGN KEY REFERENCES DATA_G.RUTA,
+	Matricula nvarchar(255) FOREIGN KEY REFERENCES DATA_G.AERONAVE
 	
 )
 
 
 CREATE TABLE DATA_G.BUTACA(
 
-	Butaca_Nro numeric (18, 0) PRIMARY KEY,
-	Butaca_Tipo nvarchar(255),
-	Butaca_Piso numeric(18, 0),
+	NroButaca numeric (18, 0) PRIMARY KEY,
+	Tipo nvarchar(255),
+	Piso numeric(18, 0),
 
-	Vuelo_NroVuelo int FOREIGN KEY REFERENCES DATA_G.VUELO
+	NroVuelo int FOREIGN KEY REFERENCES DATA_G.VUELO
 
 )
 
 CREATE TABLE DATA_G.PASAJE(
 
 	Pasaje_Codigo numeric(18, 0) PRIMARY KEY,
-	Pasaje_Precio numeric(18, 2),
-	Pasaje_FechaCompra datetime, 
-	Pasaje_CantMillas int,
-	Pasaje_NroVuelo int,
+	Precio numeric(18, 2),
+	FechaCompra datetime, 
+	CantMillas int,
+	NroVuelo int,
 
-	Cli_Id int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
-	Butaca_Nro numeric(18, 0) FOREIGN KEY REFERENCES DATA_G.BUTACA
+	IdCli int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
+	NroButaca numeric(18, 0) FOREIGN KEY REFERENCES DATA_G.BUTACA
 
 )
 
 CREATE TABLE DATA_G.PAQUETE(
 
-	Paquete_Codigo numeric(18,2) PRIMARY KEY,
+	Codigo numeric(18,2) PRIMARY KEY,
 	
-	Paquete_Precio numeric(18,2),
-	Paquete_KG numeric(18,0),
-	Paquete_FechaCompra datetime,
+	Precio numeric(18,2),
+	KG numeric(18,0),
+	FechaCompra datetime,
 
-	Vuelo_NroVuelo int FOREIGN KEY REFERENCES DATA_G.VUELO
+	NroVuelo int FOREIGN KEY REFERENCES DATA_G.VUELO
 )
 
 CREATE TABLE DATA_G.DEVOLUCION(
 
-	Devolucion_Id int PRIMARY KEY,
+	IdDevolucion int PRIMARY KEY,
 
-	Paquete_Codigo numeric(18,2) FOREIGN KEY REFERENCES DATA_G.PAQUETE,
+	Codigo numeric(18,2) FOREIGN KEY REFERENCES DATA_G.PAQUETE,
 	Pasaje_Codigo numeric(18,0) FOREIGN KEY REFERENCES DATA_G.PASAJE
 )
 
 CREATE TABLE DATA_G.COMPRADOR(
 
 	Pasaje_Codigo numeric(18, 0) FOREIGN KEY REFERENCES DATA_G.PASAJE,
-	Cli_Id int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
-	PdC_IdPuntoDeCompra int FOREIGN KEY REFERENCES DATA_G.PUNTO_DE_COMPRA
+	IdCli int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
+	IdPuntoDeCompra int FOREIGN KEY REFERENCES DATA_G.PUNTO_DE_COMPRA
 
 )
 
 CREATE TABLE DATA_G.MILLAS(
 
-	Millas_IdMillas int PRIMARY KEY,
-	Millas_CantMillas int,
+	IdMillas int PRIMARY KEY,
+	CantMillas int,
 	
-	Cli_Id int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
-	Vuelo_NroVuelo int FOREIGN KEY REFERENCES DATA_G.VUELO
+	IdCli int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
+	NroVuelo int FOREIGN KEY REFERENCES DATA_G.VUELO
 ) 
 
 /** FUNCIONES **/
 
 /**Roles**/
 
-INSERT INTO DATA_G.ROL(Rol_IdRol, Rol_Descripcion)
+INSERT INTO DATA_G.ROL(IdRol, Descripcion)
 VALUES (0,'Administrador')
-INSERT INTO DATA_G.ROL(Rol_IdRol, Rol_Descripcion)
+INSERT INTO DATA_G.ROL(IdRol, Descripcion)
 VALUES (1, 'Cliente')
 
 /** FUNCIONALIDADES **/
 SET IDENTITY_INSERT DATA_G.FUNCIONALIDADES ON
-INSERT INTO DATA_G.FUNCIONALIDADES(Func_IdFuncionalidad,Func_DescripcionFunc)
+INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
 VALUES (0,'Crear acceso usuario')
-INSERT INTO DATA_G.FUNCIONALIDADES(Func_IdFuncionalidad,Func_DescripcionFunc)
+INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
 VALUES (1,'Modificar acceso usuario')
-INSERT INTO DATA_G.FUNCIONALIDADES(Func_IdFuncionalidad,Func_DescripcionFunc)
+INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
 VALUES (2,'Eliminar acceso usuario')
 
 SET IDENTITY_INSERT DATA_G.FUNCIONALIDADES OFF
@@ -288,7 +290,7 @@ VALUES(0,0)
 
  /** CLIENTE **/ 
 
- INSERT INTO DATA_G.CLIENTE(Rol_IdRol,Cli_Nombre, Cli_Apellido,Cli_Dni,Cli_Dir,Cli_Telefono,Cli_Mail,Cli_Fecha_Nac)
+ INSERT INTO DATA_G.CLIENTE(IdRol,Nombre, Apellido,Dni,Direccion,Telefono,Mail,Fecha_Nac)
  SELECT distinct 1,Cli_Nombre,Cli_Apellido, Cli_Dni,Cli_Dir,Cli_Telefono,Cli_Mail,Cli_Fecha_Nac FROM gd_esquema.Maestra 
  Order by 4
  /**SELECT top 4 ma.Cli_Apellido, ma.Cli_Nombre, ma.Cli_Dni
@@ -296,16 +298,36 @@ VALUES(0,0)
  where exists (select 1 
 				from gd_esquema.Maestra ma2 where ma2.Cli_Dni = ma.Cli_Dni and  ma.Cli_Apellido <> ma2.Cli_Apellido and ma.Cli_Nombre <> ma2.Cli_Nombre)
  **/
-
- INSERT INTO DATA_G.CLIENTE(Rol_IdRol,Cli_Nombre, Cli_Apellido,Cli_Dni, Cli_Dir,Cli_Telefono,Cli_Mail,Cli_Fecha_Nac,Cli_Username,Cli_Password)
+ INSERT INTO DATA_G.CLIENTE(IdRol,Nombre, Apellido,Dni,Direccion,Telefono,Mail,Fecha_Nac,Username,Password)
  VALUES(0,'Maria','Lopez',33652149,'J.C Paz 520',47921563,'mlopez@gmail.com', '1990-05-21','mlopez','w23e')
+ INSERT INTO DATA_G.CLIENTE(IdRol,Nombre, Apellido,Dni,Direccion,Telefono,Mail,Fecha_Nac,Username,Password)
+ VALUES(0,'Administrador General',' ',32652149,'J.C Paz 720',47971573,'admin@gmail.com', '1990-05-11','admin','w23e')
 
  /** PASAJE  **/
 
- INSERT INTO DATA_G.PASAJE(Pasaje_Codigo,Pasaje_Precio,Pasaje_FechaCompra, Pasaje_CantMillas)
- SELECT DISTINCT Pasaje_Codigo,Pasaje_Precio,Pasaje_FechaCompra, CAST(ROUND(Pasaje_Precio/10,1) AS decimal(10,0)) AS Pasaje_CantMillas FROM gd_esquema.Maestra 
-	WHERE Paquete_Codigo = 0
- ORDER BY 1
+ INSERT INTO DATA_G.PASAJE(Pasaje_Codigo,Precio,FechaCompra, CantMillas, NroVuelo, IdCli)
+ 
+ SELECT DISTINCT	M.Pasaje_Codigo,
+					M.Pasaje_Precio,
+					M.Pasaje_FechaCompra,
+					CAST(ROUND(M.Pasaje_Precio/10,1) AS decimal(10,0)) AS 'CantMillas',  
+	
+ (SELECT NroVuelo FROM DATA_G.VUELO v
+ 	WHERE v.FechaSalida = M.FechaSalida
+	AND v.FechaLlegada = M.FechaLLegada
+	AND v.Matricula = M.Aeronave_Modelo) AS 'NroVuelo',
+ 
+ (SELECT idCli FROM DATA_G.CLIENTE c
+	WHERE c.Dni = M.Cli_Dni)/**,
+ 
+ (SELECT NroButaca FROM DATA_G.BUTACA b
+	WHERE b.NroVuelo = v.NroVuelo
+	AND b.Piso = DATA_G.AERONAVE.Piso) **/
+ 
+ FROM gd_esquema.Maestra M
+  
+  WHERE M.Paquete_Codigo = 0
+  
 
  
  /**CREATE FUNCTION DATA_G.GetMillas( @Pasaje_Precio numeric(18,2))
