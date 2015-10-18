@@ -208,6 +208,9 @@
     <EmbeddedResource Include="Abm Ruta\VerRutas.resx">
       <DependentUpon>VerRutas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Compra\IngresarDatosCompra.resx">
+      <DependentUpon>IngresarDatosCompra.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Inicio\Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
