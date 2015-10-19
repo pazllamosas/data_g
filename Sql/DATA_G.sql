@@ -112,6 +112,7 @@ CREATE TABLE DATA_G.CLIENTE (
 	Username nvarchar(255) NULL, /** Validar desd c# que sea unico**/
 	Password nvarchar(255) NULL, 
 
+
 	Dni numeric(18, 0), 
 	Nombre nvarchar(255),
 	Apellido nvarchar(255),
@@ -171,6 +172,7 @@ CREATE TABLE DATA_G.RUTA(
 	Codigo numeric(18, 0),
 	Precio_BaseKG numeric(18, 2),
 	Precio_BasePasaje numeric(18, 2),
+	Tipo_Servicio nvarchar(255),
 	
 	Origen numeric(18,0) FOREIGN KEY REFERENCES DATA_G.CIUDAD,
 	Destino numeric(18,0) FOREIGN KEY REFERENCES DATA_G.CIUDAD
@@ -181,13 +183,14 @@ CREATE TABLE DATA_G.RUTA(
 
 CREATE TABLE DATA_G.AERONAVE(
 
-	Matricula nvarchar(255) PRIMARY KEY,
+	IdAeronave numeric(18,0) PRIMARY KEY IDENTITY (1,1),
 
+	Matricula nvarchar(255),
 	Modelo nvarchar(255),
 	KG_Disponibles numeric(18, 0),
 	Fabricante nvarchar(255),
-	CantButacas int /*fijarse la cant max para el numeric*/,
-	Piso int
+	CantButacas int NULL
+	
 
 )
 
@@ -195,7 +198,7 @@ CREATE TABLE DATA_G.FUERA_DE_SERVICIO(
 
 	IdFdS binary PRIMARY KEY, --0: completo vida util, 1:fuera de servicio--
 
-	Matricula nvarchar(255) FOREIGN KEY REFERENCES DATA_G.AERONAVE
+	IdAeronave numeric(18,0) FOREIGN KEY REFERENCES DATA_G.AERONAVE
 
 )
 
@@ -209,7 +212,7 @@ CREATE TABLE DATA_G.VUELO(
 	FechaSalida datetime,
 
 	IdRuta int FOREIGN KEY REFERENCES DATA_G.RUTA,
-	Matricula nvarchar(255) FOREIGN KEY REFERENCES DATA_G.AERONAVE
+	IdAeronave numeric(18,0) FOREIGN KEY REFERENCES DATA_G.AERONAVE
 	
 )
 
@@ -222,7 +225,7 @@ CREATE TABLE DATA_G.BUTACA(
 	Piso numeric(18, 0),
 	Estado binary, /** 0:LIBRE  1:OCUPADO**/
 
-	NroVuelo int FOREIGN KEY REFERENCES DATA_G.VUELO
+	IdAeronave numeric(18,0) FOREIGN KEY REFERENCES DATA_G.AERONAVE
 
 )
 
@@ -268,7 +271,7 @@ CREATE TABLE DATA_G.COMPRADOR(
 
 CREATE TABLE DATA_G.DEVOLUCION(
 
-	IdDevolucion int PRIMARY KEY,
+	IdDevolucion int PRIMARY KEY IDENTITY (1,1),
 	FechaDevolucion datetime,
 
 	Codigo_Compra numeric(18,0) FOREIGN KEY REFERENCES DATA_G.COMPRADOR,
@@ -363,45 +366,236 @@ SET IDENTITY_INSERT DATA_G.PUNTO_DE_COMPRA OFF
 INSERT INTO DATA_G.CIUDAD(Nombre)
 SELECT DISTINCT Ruta_Ciudad_Destino FROM gd_esquema.Maestra
 
-/**
-INSERT INTO DATA_G.RUTA(Codigo, Precio_BaseKG, Precio_BasePasaje, Origen, Destino)
 
-SELECT DISTINCT M.Ruta_Codigo,
+INSERT INTO DATA_G.RUTA(Codigo, Precio_BaseKG, Precio_BasePasaje, Tipo_Servicio, Origen, Destino)
+
+SELECT RUTAS.Ruta_Codigo
+	, SUM(RUTAS.Ruta_Precio_BaseKG)
+	, SUM(RUTAS.Ruta_Precio_BasePasaje)
+	, RUTAS.Origen
+	, RUTAS.Destino
+FROM
+(SELECT DISTINCT M.Ruta_Codigo,
 	   M.Ruta_Precio_BaseKG,
 	   M.Ruta_Precio_BasePasaje,
 	   c1.Nombre AS 'Origen',
 	   c2.Nombre AS 'Destino'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 FROM gd_esquema.Maestra M, DATA_G.CIUDAD c1, DATA_G.CIUDAD c2
 WHERE M.Ruta_Ciudad_Origen = c1.Nombre
-	AND M.Ruta_Ciudad_Destino = c2.Nombre
- Order by 1
- **/
+	AND M.Ruta_Ciudad_Destino = c2.Nombre) RUTAS
+GROUP BY RUTAS.Ruta_Codigo, RUTAS.Origen, RUTAS.Destino
+ORDER BY 4, 5
+ 
 
- /**INSERT INTO DATA_G.AERONAVE(Matricula, Modelo, KG_Disponibles, Fabricante, CantButacas, Piso)
-SELECT M.Aeronave_Matricula, M.Aeronave_Modelo, M.Aeronave_KG_Disponibles, M.Aeronave_Fabricante, ,
-FROM gd_esquema.Maestra M**/
+INSERT INTO DATA_G.AERONAVE(Matricula, Modelo, KG_Disponibles, Fabricante)
 
-INSERT INTO DATA_G.FUERA_DE_SERVICIO( IdFdS,Matricula)
-SELECT ( Matricula)
+SELECT M.Aeronave_Matricula, M.Aeronave_Modelo, M.Aeronave_KG_Disponibles, M.Aeronave_Fabricante
+FROM gd_esquema.Maestra M
+GROUP BY M.Aeronave_Matricula, M.Aeronave_Modelo, M.Aeronave_KG_Disponibles, M.Aeronave_Fabricante
+ORDER BY 1
+
+INSERT INTO DATA_G.FUERA_DE_SERVICIO( IdFdS,IdAeronave)
+SELECT ( IdAeronave)
 FROM DATA_G.AERONAVE
 
-INSERT INTO DATA_G.VUELO(FechaEstimadaLlegada, FechaLlegada, FechaSalida, IdRuta, Matricula)
+INSERT INTO DATA_G.VUELO(FechaEstimadaLlegada, FechaLlegada, FechaSalida, IdRuta, IdAeronave)
 SELECT M.Fecha_Llegada_Estimada,
 	   M.FechaLlegada,
 	   M.FechaSalida,
 	   R.IdRuta,
-	   M.Aeronave_Matricula
-FROM gd_esquema.Maestra M, DATA_G.RUTA R
+	   A.IdAeronave
+	   
+FROM gd_esquema.Maestra M, DATA_G.RUTA R, DATA_G.AERONAVE A
 
-INSERT INTO DATA_G.BUTACA(NroButaca, Tipo, Piso, Estado)
+INSERT INTO DATA_G.BUTACA(NroButaca, Tipo, Piso, Estado, IdAeronave)
 SELECT DISTINCT M.Butaca_Nro,
 				M.Butaca_Tipo,
 				M.Butaca_Piso,
-				0 AS 'Estado'
-FROM gd_esquema.Maestra M 
-WHERE M.Butaca_Tipo <> '0'
+				0 AS 'Estado',
+				A.IdAeronave
+				
+FROM gd_esquema.Maestra M, DATA_G.AERONAVE A 
+--tipo butaca  0 es ENCOMIENDA
+WHERE M.Aeronave_Matricula = A.Matricula
+	AND  M.Aeronave_Modelo = A.Modelo
+	AND M.Aeronave_KG_Disponibles = A.KG_Disponibles
+	AND M.Aeronave_Fabricante = A.Fabricante
 ORDER BY 1
+
+--UPDATE DATA_G.AERONAVE SET CantButacas = ()
+
+--SELECT B.IdAeronave, COUNT(*) FROM DATA_G.BUTACA B GROUP BY B.IdAeronave
+
 
 INSERT INTO DATA_G.PASAJE(Pasaje_Codigo,Precio,FechaCompra, CantMillas, NroVuelo, IdCli, IdButaca, Ciudad_Origen, Ciudad_Destino)
 SELECT 	M.Pasaje_Codigo,
@@ -433,13 +627,18 @@ SELECT M.Paquete_Codigo,
 FROM gd_esquema.Maestra M, DATA_G.VUELO V 
 WHERE M.Paquete_Codigo <> 0
 
-INSERT INTO DATA_G.COMPRADOR(Pasaje_Codigo, IdCli, Codigo_Compra, IdPuntoDeCompra)
-SELECT
-FROM DATA_G.CLIENTE C, DATA_G.PASAJE, 
+INSERT INTO DATA_G.COMPRADOR(IdCli,Pasaje_Codigo, Paquete_Codigo, IdPuntoDeCompra)
+SELECT  C.IdCli,
+		PJ.Pasaje_Codigo,
+		PQ.Codigo,
+		PC.IdPuntoDeCompra
+FROM DATA_G.CLIENTE C, DATA_G.PASAJE PJ, DATA_G.PAQUETE PQ, DATA_G.PUNTO_DE_COMPRA PC 
 
-INSERT INTO DATA_G.DEVOLUCION(IdDevolucion, Codigo_Compra Pasaje_Codigo, Paquete_Codigo)
-SELECT
-FROM
+INSERT INTO DATA_G.DEVOLUCION(Codigo_Compra, Pasaje_Codigo, Paquete_Codigo)
+SELECT  C.Codigo_Compra,
+		PJ.Pasaje_Codigo,
+		PQ.Codigo
+FROM DATA_G.COMPRADOR C, DATA_G.PASAJE PJ, DATA_G.PAQUETE PQ
 
 INSERT INTO DATA_G.MILLAS (IdCli, CantMillas, NroVuelo)
 SELECT DISTINCT C.IdCli,
