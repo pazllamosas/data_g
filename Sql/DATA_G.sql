@@ -125,7 +125,7 @@ CREATE TABLE DATA_G.CLIENTE (
 
 CREATE TABLE DATA_G.PRODUCTO(
 
-	IdProducto int PRIMARY KEY,	
+	IdProducto int PRIMARY KEY IDENTITY (1,1),	
 
 	CostoEnMillas int,
 	Descripcion varchar(255)
@@ -135,7 +135,7 @@ CREATE TABLE DATA_G.PRODUCTO(
 
 CREATE TABLE DATA_G.BENEFICIOS(
 
-	IdBeneficio int PRIMARY KEY,
+	IdBeneficio int PRIMARY KEY IDENTITY (1,1),
 
 	IdProducto int FOREIGN KEY REFERENCES DATA_G.PRODUCTO,
 	IdCli int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
@@ -156,7 +156,7 @@ CREATE TABLE DATA_G.PUNTO_DE_COMPRA(
 
 CREATE TABLE DATA_G.CIUDAD(
 	
-	CodigoCiudad nvarchar(255) PRIMARY KEY,
+	CodigoCiudad numeric(18,0)  PRIMARY KEY IDENTITY(1,1),
 
 	Nombre nvarchar(255)
 
@@ -172,8 +172,9 @@ CREATE TABLE DATA_G.RUTA(
 	Precio_BaseKG numeric(18, 2),
 	Precio_BasePasaje numeric(18, 2),
 	
-	Origen nvarchar(255) FOREIGN KEY REFERENCES DATA_G.CIUDAD,
-	Destino nvarchar(255) FOREIGN KEY REFERENCES DATA_G.CIUDAD
+	Origen numeric(18,0) FOREIGN KEY REFERENCES DATA_G.CIUDAD,
+	Destino numeric(18,0) FOREIGN KEY REFERENCES DATA_G.CIUDAD
+	 
 
 )
 
@@ -215,7 +216,8 @@ CREATE TABLE DATA_G.VUELO(
 
 CREATE TABLE DATA_G.BUTACA(
 
-	NroButaca numeric (18, 0) PRIMARY KEY,
+	IdButaca numeric (18, 0) PRIMARY KEY IDENTITY (1,1),
+	NroButaca numeric (18, 0),
 	Tipo nvarchar(255),
 	Piso numeric(18, 0),
 	Estado binary, /** 0:LIBRE  1:OCUPADO**/
@@ -237,7 +239,7 @@ CREATE TABLE DATA_G.PASAJE(
 	Ciudad_Destino nvarchar(255),
 
 	IdCli int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
-	NroButaca numeric(18, 0) FOREIGN KEY REFERENCES DATA_G.BUTACA
+	IdButaca numeric (18, 0) FOREIGN KEY REFERENCES DATA_G.BUTACA
 
 )
 
@@ -331,7 +333,7 @@ VALUES(0,'Administrador General',' ',32652149,'J.C Paz 720',47971573,'admin@gmai
 
 /** PASAJE  **/
 
-INSERT INTO DATA_G.PASAJE(Pasaje_Codigo,Precio,FechaCompra, CantMillas, NroVuelo, IdCli, NroButaca, Ciudad_Origen, Ciudad_Destino)
+INSERT INTO DATA_G.PASAJE(Pasaje_Codigo,Precio,FechaCompra, CantMillas, NroVuelo, IdCli, IdButaca, Ciudad_Origen, Ciudad_Destino)
  
 SELECT 	M.Pasaje_Codigo,
 		M.Pasaje_Precio,
@@ -339,7 +341,7 @@ SELECT 	M.Pasaje_Codigo,
 		CAST(ROUND(M.Pasaje_Precio/10,1) AS decimal(10,0)) AS 'CantMillas',
 		v.NroVuelo,
 		c.idCli,
-		b.NroButaca,
+		(b.NroButaca) AS 'Nro Butaca',
 		r.Origen,
 		r.Destino 
 	 
@@ -351,7 +353,9 @@ FROM gd_esquema.Maestra M, DATA_G.BUTACA b, DATA_G.VUELO v, DATA_G.AERONAVE a, D
 	AND v.Matricula = M.Aeronave_Matricula
 	AND c.Dni = M.Cli_Dni
 	AND b.NroVuelo = v.NroVuelo
-	AND b.Piso = a.Piso**/
+	AND b.Piso = a.Piso
+	AND 
+	**/
 
 
 /** PAQUETE **/
@@ -380,18 +384,20 @@ SELECT M.Fecha_Llegada_Estimada,
 
 FROM gd_esquema.Maestra M, DATA_G.RUTA R
 
-
+/**
 INSERT INTO DATA_G.RUTA(Codigo, Precio_BaseKG, Precio_BasePasaje, Origen, Destino)
 
 SELECT DISTINCT M.Ruta_Codigo,
 	   M.Ruta_Precio_BaseKG,
 	   M.Ruta_Precio_BasePasaje,
-	   M.Ruta_Ciudad_Origen,
-	   M.Ruta_Ciudad_Destino
-
-
-FROM gd_esquema.Maestra M Order by 1
-
+	   c1.Nombre AS 'Origen',
+	   c2.Nombre AS 'Destino'
+    
+FROM gd_esquema.Maestra M, DATA_G.CIUDAD c1, DATA_G.CIUDAD c2
+WHERE M.Ruta_Ciudad_Origen = c1.Nombre
+	AND M.Ruta_Ciudad_Destino = c2.Nombre
+ Order by 1
+ **/
 
 INSERT INTO DATA_G.BUTACA(NroButaca, Tipo, Piso, Estado)
 
@@ -409,9 +415,50 @@ ORDER BY 1
 SELECT M.Aeronave_Matricula, M.Aeronave_Modelo, M.Aeronave_KG_Disponibles, M.Aeronave_Fabricante, ,
 FROM gd_esquema.Maestra M**/
 
-  
-
+INSERT INTO DATA_G.CIUDAD(Nombre)
+  SELECT DISTINCT Ruta_Ciudad_Destino FROM gd_esquema.Maestra 
  
+INSERT INTO DATA_G.PRODUCTO(Descripcion, CostoEnMillas)
+VALUES('Mochila',125)
+INSERT INTO DATA_G.PRODUCTO(Descripcion, CostoEnMillas)
+VALUES('Linterna',100)
+INSERT INTO DATA_G.PRODUCTO(Descripcion, CostoEnMillas)
+VALUES('Colchon Infable',225)
+INSERT INTO DATA_G.PRODUCTO(Descripcion, CostoEnMillas)
+VALUES('Equipo Termo',125)
+INSERT INTO DATA_G.PRODUCTO(Descripcion, CostoEnMillas)
+VALUES('Guía Turistica',100)
+INSERT INTO DATA_G.PRODUCTO(Descripcion, CostoEnMillas)
+VALUES('Viaje a Buenos Aires gratis',1500)
+INSERT INTO DATA_G.PRODUCTO(Descripcion, CostoEnMillas)
+VALUES('Tostadora',500)
+INSERT INTO DATA_G.PRODUCTO(Descripcion, CostoEnMillas)
+VALUES('Brujula',150)
+INSERT INTO DATA_G.PRODUCTO(Descripcion, CostoEnMillas)
+VALUES('Licuadora',500)
+INSERT INTO DATA_G.PRODUCTO(Descripcion, CostoEnMillas)
+VALUES('Estadia en Sao Paulo 5 dias',2000)
+INSERT INTO DATA_G.PRODUCTO(Descripcion, CostoEnMillas)
+VALUES('Viaje a Barcelona',1750) 
+
+INSERT INTO DATA_G.MILLAS (IdCli, CantMillas, NroVuelo)
+SELECT DISTINCT C.IdCli,
+				P.CantMillas,
+				V.NroVuelo
+FROM DATA_G.CLIENTE C, DATA_G.VUELO V, DATA_G.PASAJE P
+
+	
+
+INSERT INTO DATA_G.BENEFICIOS (IdCli, Milla)
+SELECT DISTINCT C.IdCli,
+				(SUM(P.CostoEnMillas)) AS 'MILLA'
+FROM DATA_G.CLIENTE C, DATA_G.PRODUCTO P
+GROUP BY C.IdCli
+
+
+
+
+
  /**CREATE FUNCTION DATA_G.GetMillas( @Pasaje_Precio numeric(18,2))
 	RETURNS int
 	AS BEGIN 
