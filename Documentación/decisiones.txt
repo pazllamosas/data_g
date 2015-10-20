@@ -1,0 +1,5 @@
+DECISIONES:
+ACORDARSE!! ORDEN EN LOS WHERE PUEDE REDUCIR TIEMPO!!!
+
+
+Atributo MILLAS en BENEFICIOS es la suma de todo lo que el usuario canjeo
