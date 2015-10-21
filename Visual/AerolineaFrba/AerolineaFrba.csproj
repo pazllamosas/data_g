@@ -190,6 +190,12 @@
     <Compile Include="Registro Llegada Destino\RegistroLlegadaDestino.Designer.cs">
       <DependentUpon>RegistroLlegadaDestino.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Abm Aeronave\AgregarAeronave.resx">
+      <DependentUpon>AgregarAeronave.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Aeronave\VerAeronaves.resx">
+      <DependentUpon>VerAeronaves.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\AgregarRol.resx">
       <DependentUpon>AgregarRol.cs</DependentUpon>
     </EmbeddedResource>
@@ -208,11 +214,38 @@
     <EmbeddedResource Include="Abm Ruta\VerRutas.resx">
       <DependentUpon>VerRutas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Canje Millas\CanjeMillas.resx">
+      <DependentUpon>CanjeMillas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Compra\IngresarDatosCompra.resx">
       <DependentUpon>IngresarDatosCompra.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Consulta Millas\ConsultaMillas.resx">
+      <DependentUpon>ConsultaMillas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generacion Viaje\GenerarViaje.resx">
+      <DependentUpon>GenerarViaje.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Inicio\Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listado Estadistico\AeronavesConMayorCantidadDeDiasFueraDeServicio.resx">
+      <DependentUpon>AeronavesConMayorCantidadDeDiasFueraDeServicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listado Estadistico\ClientesConMasPuntosAcumuladosALaFecha.resx">
+      <DependentUpon>ClientesConMasPuntosAcumuladosALaFecha.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listado Estadistico\DestinosConAeronavesMasVacias.resx">
+      <DependentUpon>DestinosConAeronavesMasVacias.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listado Estadistico\DestinosConMasPasajesComprados.resx">
+      <DependentUpon>DestinosConMasPasajesComprados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listado Estadistico\DestinosConPasajesCancelados.resx">
+      <DependentUpon>DestinosConPasajesCancelados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listado Estadistico\ListadoEstadistico.resx">
+      <DependentUpon>ListadoEstadistico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

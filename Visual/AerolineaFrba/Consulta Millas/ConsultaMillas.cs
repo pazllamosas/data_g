@@ -16,5 +16,10 @@ namespace AerolineaFrba.Consulta_Millas
         {
             InitializeComponent();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

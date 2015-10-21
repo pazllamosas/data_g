@@ -16,5 +16,10 @@ namespace AerolineaFrba.Abm_Aeronave
         {
             InitializeComponent();
         }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

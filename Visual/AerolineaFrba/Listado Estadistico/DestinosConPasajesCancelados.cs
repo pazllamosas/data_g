@@ -16,5 +16,10 @@ namespace AerolineaFrba.Listado_Estadistico
         {
             InitializeComponent();
         }
+
+        private void DestinosConPasajesCancelados_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
