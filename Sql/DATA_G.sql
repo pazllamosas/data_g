@@ -9,7 +9,6 @@ GO
 
 /** DROP TABLAS **/
 
-
 IF OBJECT_ID('DATA_G.MILLAS') IS NOT NULL
 DROP TABLE DATA_G.MILLAS
 
@@ -31,11 +30,11 @@ DROP TABLE DATA_G.BUTACA
 IF OBJECT_ID('DATA_G.VUELO') IS NOT NULL
 DROP TABLE DATA_G.VUELO
 
-IF OBJECT_ID('DATA_G.FUERA_DE_SERVICIO') IS NOT NULL
-DROP TABLE DATA_G.FUERA_DE_SERVICIO
-
 IF OBJECT_ID('DATA_G.AERONAVE') IS NOT NULL
 DROP TABLE DATA_G.AERONAVE
+
+IF OBJECT_ID('DATA_G.ESTADO') IS NOT NULL
+DROP TABLE DATA_G.ESTADO
 
 IF OBJECT_ID('DATA_G.RUTA') IS NOT NULL
 DROP TABLE DATA_G.RUTA
@@ -174,14 +173,21 @@ CREATE TABLE DATA_G.RUTA(
 	Precio_BaseKG numeric(18, 2),
 	Precio_BasePasaje numeric(18, 2),
 	Tipo_Servicio nvarchar(255),
-	Ciudad_Origen  nvarchar(255),
-	Ciudad_Destino nvarchar (255),
+	--Ciudad_Origen  nvarchar(255),
+	--Ciudad_Destino nvarchar (255),
 	Origen numeric(18,0) FOREIGN KEY REFERENCES DATA_G.CIUDAD,
 	Destino numeric(18,0) FOREIGN KEY REFERENCES DATA_G.CIUDAD
 	 
 
 )
 
+CREATE TABLE DATA_G.ESTADO(
+
+	IdEstado int PRIMARY KEY,
+	Descripcion nvarchar(255),
+	CantDias int 
+
+)
 
 CREATE TABLE DATA_G.AERONAVE(
 
@@ -191,16 +197,9 @@ CREATE TABLE DATA_G.AERONAVE(
 	Modelo nvarchar(255),
 	KG_Disponibles numeric(18, 0),
 	Fabricante nvarchar(255),
-	CantButacas int NULL
+	CantButacas int NULL,
+	IdEstado int FOREIGN KEY REFERENCES DATA_G.ESTADO DEFAULT 1
 	
-
-)
-
-CREATE TABLE DATA_G.FUERA_DE_SERVICIO(
-
-	IdFdS binary PRIMARY KEY, --0: completo vida util, 1:fuera de servicio--
-
-	IdAeronave numeric(18,0) FOREIGN KEY REFERENCES DATA_G.AERONAVE
 
 )
 
@@ -446,28 +445,34 @@ SELECT DISTINCT Ruta_Ciudad_Destino
 FROM gd_esquema.Maestra
 ORDER BY 1
 
---ESTARIA BIEN QUE QEDE NULL EN CODIGO? SOLO USO PARA FK POR PROBLEMAS DE TIPO
-INSERT INTO DATA_G.RUTA(Codigo, Precio_BaseKG, Precio_BasePasaje, Tipo_Servicio, Ciudad_Origen, Ciudad_Destino)
+INSERT INTO DATA_G.RUTA(Codigo, Precio_BaseKG, Precio_BasePasaje, Tipo_Servicio, Origen, Destino)
 
 SELECT   RUTAS.Ruta_Codigo,
-		 SUM(RUTAS.Ruta_Precio_BaseKG),
-		 SUM(RUTAS.Ruta_Precio_BasePasaje),
+		 SUM(RUTAS.Ruta_Precio_BaseKG) AS 'Precio Base KG',
+		 SUM(RUTAS.Ruta_Precio_BasePasaje)AS 'Precio Base Pasaje',
 		 RUTAS.Tipo_Servicio,
 		 RUTAS.Origen,
 		 RUTAS.Destino
 FROM
 (SELECT DISTINCT M.Ruta_Codigo,
-	   M.Ruta_Precio_BaseKG,
-	   M.Ruta_Precio_BasePasaje,
+	   M.Ruta_Precio_BaseKG ,
+	   M.Ruta_Precio_BasePasaje ,
 	   M.Tipo_Servicio,
-	   c1.Nombre AS 'Origen',
-	   c2.Nombre AS 'Destino'    
+	   c1.CodigoCiudad AS 'Origen',
+	   c2.CodigoCiudad AS 'Destino'    
 FROM gd_esquema.Maestra M, DATA_G.CIUDAD c1, DATA_G.CIUDAD c2
 WHERE M.Ruta_Ciudad_Origen = c1.Nombre
 	AND M.Ruta_Ciudad_Destino = c2.Nombre) RUTAS
 GROUP BY RUTAS.Ruta_Codigo,RUTAS.Tipo_Servicio,RUTAS.Origen, RUTAS.Destino
 ORDER BY 4, 5
  
+ INSERT INTO DATA_G.ESTADO(IdEstado, Descripcion)
+VALUES(1, 'Activo')
+INSERT INTO DATA_G.ESTADO(IdEstado, Descripcion)
+VALUES(2, 'Completo Vida Util')
+INSERT INTO DATA_G.ESTADO(IdEstado, Descripcion, CantDias)
+VALUES(3, 'Fuera de Servicio',0)
+
  --AGREGAR LOS OTROS CAMPOS QUE PIDE EL ENUNCIADO?
 INSERT INTO DATA_G.AERONAVE(Matricula, Modelo, KG_Disponibles, Fabricante)
 
@@ -476,25 +481,21 @@ FROM gd_esquema.Maestra M
 GROUP BY M.Aeronave_Matricula, M.Aeronave_Modelo, M.Aeronave_KG_Disponibles, M.Aeronave_Fabricante
 ORDER BY 1
 
---ESTADOS?
---INSERT INTO DATA_G.FUERA_DE_SERVICIO(IdAeronave)
---SELECT ( IdAeronave)
---FROM DATA_G.AERONAVE
-
+--DA MUCHOS VUELOS, LUEGO SE VALIDARA MEJOR
 INSERT INTO DATA_G.VUELO(IdRuta,IdAeronave,FechaSalida,FechaLlegada,FechaEstimadaLlegada)
 SELECT DISTINCT R.IdRuta,
 				A.IdAeronave, 
 				M.FechaSalida,
 				M.FechaLlegada,
 				M.Fecha_Llegada_Estimada	   
-FROM gd_esquema.Maestra M, DATA_G.RUTA R, DATA_G.AERONAVE A, gd_esquema.Maestra M2
+FROM gd_esquema.Maestra M, DATA_G.RUTA R, DATA_G.AERONAVE A, DATA_G.CIUDAD C,  DATA_G.CIUDAD C2
 WHERE	M.FechaSalida < M.FechaLLegada
 	AND M.Aeronave_Matricula = A.Matricula
-	AND M.Aeronave_Modelo = A.Modelo
 	AND M.Aeronave_Fabricante = A.Fabricante
 	AND M.Ruta_Codigo = R.Codigo
-	AND M.Ruta_Ciudad_Destino = R.Ciudad_Destino
-	AND M.Ruta_Ciudad_Origen = R.Ciudad_Origen
+	AND M.Aeronave_Modelo = A.Modelo
+	AND C.CodigoCiudad = R.Origen
+	AND C2.CodigoCiudad = R.Destino
 	-- COMPROBAR QUE LA FECHA SALIENTE DE LLEGADA SEA MAYOR A LA SIG DE SALIDA  
 ORDER BY 2, 3, 4
 
@@ -529,17 +530,20 @@ SELECT DISTINCT	M.Pasaje_Codigo,
 		(b.NroButaca) AS 'Nro Butaca',
 		r.Origen,
 		r.Destino 
-FROM gd_esquema.Maestra M, DATA_G.BUTACA b, DATA_G.VUELO v, DATA_G.AERONAVE a, DATA_G.CLIENTE c, DATA_G.RUTA r
+FROM gd_esquema.Maestra M, DATA_G.BUTACA b, DATA_G.VUELO v, DATA_G.AERONAVE a, DATA_G.CLIENTE c, DATA_G.RUTA r, DATA_G.CIUDAD CI, DATA_G.CIUDAD CI2
 WHERE	 M.Pasaje_Codigo <> 0
+	AND  c.Dni = M.Cli_Dni
+	AND  c.Apellido = M.Cli_Apellido
+	AND c.Nombre = M.Cli_Nombre
+	AND  r.Codigo = M.Ruta_Codigo
+	--AND  a.Matricula = M.Aeronave_Matricula
+	AND  b.NroButaca = M.Butaca_Nro
 	AND  v.FechaSalida = M.FechaSalida
 	AND  v.FechaLlegada = M.FechaLLegada
-	AND  a.Matricula = M.Aeronave_Matricula
-	AND  c.Dni = M.Cli_Dni
-	AND  b.NroButaca = M.Butaca_Nro
 	AND  b.Tipo = M.Butaca_Tipo
-	AND	 r.Ciudad_Destino = M.Ruta_Ciudad_Destino
-	AND  r.Ciudad_Origen = M.Ruta_Ciudad_Origen
-	AND  r.Codigo = M.Ruta_Codigo
+	AND	 r.Destino = CI.CodigoCiudad
+	AND  r.Origen = CI2.CodigoCiudad
+	
 	
 	
 --MISMO COD DE PAQUETE CON DISTINTOS NROS DE VUELO tarda!!
