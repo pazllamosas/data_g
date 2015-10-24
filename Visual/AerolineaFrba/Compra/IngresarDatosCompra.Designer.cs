@@ -141,7 +141,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(283, 64);
+            this.label4.Location = new System.Drawing.Point(319, 64);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(107, 13);
             this.label4.TabIndex = 13;
@@ -150,14 +150,14 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(400, 61);
+            this.textBox1.Location = new System.Drawing.Point(436, 61);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(121, 20);
             this.textBox1.TabIndex = 14;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(400, 88);
+            this.textBox2.Location = new System.Drawing.Point(436, 88);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(121, 20);
             this.textBox2.TabIndex = 16;
@@ -165,7 +165,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(283, 91);
+            this.label5.Location = new System.Drawing.Point(319, 91);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(111, 13);
             this.label5.TabIndex = 15;
@@ -174,7 +174,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(527, 91);
+            this.label6.Location = new System.Drawing.Point(563, 91);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(19, 13);
             this.label6.TabIndex = 17;
@@ -195,7 +195,7 @@
             this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button4.Location = new System.Drawing.Point(12, 30);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(58, 23);
             this.button4.TabIndex = 6;
             this.button4.Text = "Volver";
             this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;

@@ -134,7 +134,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(260, 35);
             this.button6.TabIndex = 26;
-            this.button6.Text = "Comprar pasaje";
+            this.button6.Text = "Comprar Pasaje";
             this.button6.UseVisualStyleBackColor = true;
             // 
             // button7
