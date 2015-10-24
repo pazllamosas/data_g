@@ -123,6 +123,16 @@ namespace AerolineaFrba.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap noplane {
+            get {
+                object obj = ResourceManager.GetObject("noplane", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap plane {
             get {
                 object obj = ResourceManager.GetObject("plane", resourceCulture);
