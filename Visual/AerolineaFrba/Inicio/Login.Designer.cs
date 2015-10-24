@@ -98,7 +98,6 @@
             this.label3.Size = new System.Drawing.Size(306, 25);
             this.label3.TabIndex = 5;
             this.label3.Text = "¡Bienvenido a Aerolineas FRBA!";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // button1
             // 
@@ -133,7 +132,6 @@
             this.MinimumSize = new System.Drawing.Size(650, 400);
             this.Name = "Login";
             this.Text = "Login";
-            this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

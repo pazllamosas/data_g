@@ -1,6 +1,6 @@
 ﻿namespace AerolineaFrba.Abm_Ciudad
 {
-    partial class From1
+    partial class VerCiudades
     {
         /// <summary>
         /// Required designer variable.

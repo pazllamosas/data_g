@@ -19,4 +19,20 @@ namespace AerolineaFrba
             Application.Run(new Inicio.Login());
         }
     }
+
+    public class FormProvider
+    {
+        public static Inicio.Menu MainMenu
+        {
+            get
+            {
+                if (_mainMenu == null)
+                {
+                    _mainMenu = new Inicio.Menu();
+                }
+                return _mainMenu;
+            }
+        }
+        private static Inicio.Menu _mainMenu;
+    }
 }

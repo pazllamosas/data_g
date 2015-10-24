@@ -28,18 +28,12 @@ namespace AerolineaFrba.Inicio
             if (checkBox1.Checked)
             {
                 this.Hide();
-                var Menu = new Menu();
-                Menu.Show();
+                FormProvider.MainMenu.Show();
             }
             else
             {
                 // TODO logear usuario contra DB
             }
-        }
-
-        private void Login_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -66,9 +60,5 @@ namespace AerolineaFrba.Inicio
             }
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

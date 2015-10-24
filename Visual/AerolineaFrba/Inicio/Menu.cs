@@ -59,7 +59,9 @@ namespace AerolineaFrba.Inicio
 
         private void button11_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            var ListadoEstadistico = new Listado_Estadistico.ListadoEstadistico();
+            ListadoEstadistico.Show();
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -86,7 +88,7 @@ namespace AerolineaFrba.Inicio
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var abmRoles = new Abm_Roles.VerRoles();
+            var abmRoles = new Abm_Rol.VerRoles();
             abmRoles.Show();
         }
 
