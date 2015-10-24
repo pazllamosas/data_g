@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace AerolineaFrba.Abm_Aeronave
 {
-    public partial class VerAeronaves : Form
+    public partial class BajaAeronave : Form
     {
-        public VerAeronaves()
+        public BajaAeronave()
         {
             InitializeComponent();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

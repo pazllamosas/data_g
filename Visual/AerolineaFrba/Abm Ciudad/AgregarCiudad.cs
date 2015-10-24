@@ -24,6 +24,7 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgregarCiudad));
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -71,14 +72,18 @@ namespace AerolineaFrba.Abm_Ciudad
             this.button2.Text = "Cancelar";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // AgregarCiudad
             // 
+            this.AcceptButton = this.button1;
+            this.CancelButton = this.button2;
             this.ClientSize = new System.Drawing.Size(418, 127);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AgregarCiudad";
             this.Load += new System.EventHandler(this.AgregarCiudad_Load);
             this.ResumeLayout(false);
@@ -97,6 +102,11 @@ namespace AerolineaFrba.Abm_Ciudad
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
         {
 
         }

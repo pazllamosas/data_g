@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(From1));
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -102,6 +103,7 @@
             // 
             // Botton4
             // 
+            this.Botton4.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.Botton4.Image = global::AerolineaFrba.Properties.Resources.back;
             this.Botton4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.Botton4.Location = new System.Drawing.Point(12, 27);
@@ -111,6 +113,7 @@
             this.Botton4.Text = "Volver";
             this.Botton4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.Botton4.UseVisualStyleBackColor = true;
+            this.Botton4.Click += new System.EventHandler(this.Botton4_Click);
             // 
             // menuStrip1
             // 
@@ -140,6 +143,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.Botton4;
             this.ClientSize = new System.Drawing.Size(634, 361);
             this.Controls.Add(this.Botton4);
             this.Controls.Add(this.dataGridView1);
@@ -148,6 +152,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "From1";
             this.Text = "Ciudades";

@@ -21,5 +21,10 @@ namespace AerolineaFrba.Abm_Aeronave
         {
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
