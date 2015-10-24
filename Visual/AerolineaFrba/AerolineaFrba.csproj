@@ -365,6 +365,45 @@
   <ItemGroup>
     <None Include="Resources\airplane.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrival_large.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\return_large.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\route_large.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\city_large.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\miles_large.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\xchangemiles_large.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\travel_large.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ticket_large.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\airplane_large.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\roles_large.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\top_large.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\person.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\select.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
