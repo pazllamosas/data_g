@@ -19,7 +19,50 @@ namespace AerolineaFrba.Inicio
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
+            textBox1.Enabled = !checkBox1.Checked;
+            textBox2.Enabled = !checkBox1.Checked;
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                var Menu = new Menu();
+                Menu.Show();
+            }
+            else
+            {
+                // TODO logear usuario contra DB
+            }
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(this.Text) && !string.IsNullOrWhiteSpace(textBox2.Text))
+            {
+                button1.Enabled = true;
+            }
+            else
+            {
+                button1.Enabled = false;
+            }
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(this.Text) && !string.IsNullOrWhiteSpace(textBox1.Text))
+            {
+                button1.Enabled = true;
+            }
+            else
+            {
+                button1.Enabled = false;
+            }
         }
     }
 }

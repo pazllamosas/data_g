@@ -86,9 +86,6 @@
     <Compile Include="Abm Ciudad\AgregarCiudad.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Ciudad\AgregarCiudades.Designer.cs">
-      <DependentUpon>AgregarCiudad.cs</DependentUpon>
-    </Compile>
     <Compile Include="Abm Rol\AgregarRol.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -290,8 +287,8 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Registro de Usuario\RegistrarUsuario.resx">
-      <DependentUpon>RegistrarUsuario.cs</DependentUpon>
+    <EmbeddedResource Include="Registro Llegada Destino\RegistroLlegadaDestino.resx">
+      <DependentUpon>RegistroLlegadaDestino.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
