@@ -98,6 +98,7 @@
             this.label3.Size = new System.Drawing.Size(306, 25);
             this.label3.TabIndex = 5;
             this.label3.Text = "¡Bienvenido a Aerolineas FRBA!";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // button1
             // 

@@ -27,6 +27,7 @@ namespace AerolineaFrba.Inicio
         {
             if (checkBox1.Checked)
             {
+                this.Hide();
                 var Menu = new Menu();
                 Menu.Show();
             }
@@ -63,6 +64,11 @@ namespace AerolineaFrba.Inicio
             {
                 button1.Enabled = false;
             }
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

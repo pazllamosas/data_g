@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AerolineaFrba.Abm_Ciudad
 {
-    public partial class From1 : Form
+    public partial class VerCiudades : Form
     {
-        public From1()
+        public VerCiudades()
         {
             InitializeComponent();
         }
@@ -43,6 +43,11 @@ namespace AerolineaFrba.Abm_Ciudad
         }
 
         private void Botton4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
         }
