@@ -68,7 +68,7 @@
             this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button4.Location = new System.Drawing.Point(12, 32);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(59, 23);
             this.button4.TabIndex = 5;
             this.button4.Text = "Volver";
             this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -104,9 +104,9 @@
             this.button3.Enabled = false;
             this.button3.Image = global::AerolineaFrba.Properties.Resources.modify;
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(466, 32);
+            this.button3.Location = new System.Drawing.Point(491, 32);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(59, 23);
             this.button3.TabIndex = 3;
             this.button3.Text = "Editar";
             this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -118,9 +118,9 @@
             this.button2.Enabled = false;
             this.button2.Image = global::AerolineaFrba.Properties.Resources.delete;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(547, 32);
+            this.button2.Location = new System.Drawing.Point(556, 32);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(66, 23);
             this.button2.TabIndex = 1;
             this.button2.Text = "Eliminar";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -131,9 +131,9 @@
             // 
             this.button1.Image = global::AerolineaFrba.Properties.Resources.add;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(385, 32);
+            this.button1.Location = new System.Drawing.Point(418, 32);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(67, 23);
             this.button1.TabIndex = 0;
             this.button1.Text = "Agregar";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
