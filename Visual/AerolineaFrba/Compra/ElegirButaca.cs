@@ -16,5 +16,10 @@ namespace AerolineaFrba.Compra
         {
             InitializeComponent();
         }
+
+        private void ElegirButaca_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
