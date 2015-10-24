@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListadoEstadistico));
             this.button4 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -106,7 +107,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(260, 23);
             this.button2.TabIndex = 18;
-            this.button2.Text = "Destinos con pasajes cancelados";
+            this.button2.Text = "Destinos con más pasajes cancelados";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // button3
@@ -137,7 +138,7 @@
             this.button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button6.Location = new System.Drawing.Point(12, 243);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.Size = new System.Drawing.Size(60, 23);
             this.button6.TabIndex = 21;
             this.button6.Text = "Volver";
             this.button6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -175,6 +176,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.button4);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ListadoEstadistico";
             this.Text = "Listado Estadístico";
             this.menuStrip1.ResumeLayout(false);
