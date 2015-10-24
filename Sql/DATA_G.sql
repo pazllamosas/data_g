@@ -192,12 +192,20 @@ CREATE TABLE DATA_G.ESTADO(
 CREATE TABLE DATA_G.AERONAVE(
 
 	IdAeronave numeric(18,0) PRIMARY KEY IDENTITY (1,1),
-
+	FechaDeAlta datetime, 
 	Matricula nvarchar(255),
 	Modelo nvarchar(255),
 	KG_Disponibles numeric(18, 0),
 	Fabricante nvarchar(255),
+	TipoDeServicio nvarchar(255),
+	BajaPorFueraDeServicio bit DEFAULT 0, /** 0 false 1 true**/
+	BajaPorVidUtil bit DEFAULT 0,
+	FechaDeFueraDeServicio datetime,
+	FechaReinicioDeServicio datetime,
+	FechaBajaDefinitiva datetime,
 	CantButacas int NULL,
+	TipoButacas nvarchar(255) CHECK(TipoButacas IN ('Pasillo','Ventanilla')),
+	CantKGDisponibles int,
 	IdEstado int FOREIGN KEY REFERENCES DATA_G.ESTADO DEFAULT 1
 	
 
@@ -209,8 +217,8 @@ CREATE TABLE DATA_G.VUELO(
 	NroVuelo int PRIMARY KEY IDENTITY(1,1),
 
 	FechaEstimadaLlegada datetime,
-	FechaLlegada datetime,
-	FechaSalida datetime,
+	FechaLlegada datetime NOT NULL,
+	FechaSalida datetime NOT NULL,
 
 	IdRuta int FOREIGN KEY REFERENCES DATA_G.RUTA,
 	IdAeronave numeric(18,0) FOREIGN KEY REFERENCES DATA_G.AERONAVE
@@ -232,15 +240,15 @@ CREATE TABLE DATA_G.BUTACA(
 
 
 CREATE TABLE DATA_G.PASAJE(
-
-	Pasaje_Codigo numeric(18, 0) PRIMARY KEY,
+	IdPasaje int  PRIMARY KEY IDENTITY(1,1),
+	Pasaje_Codigo numeric(18, 0),
 
 	Precio numeric(18, 2),
 	FechaCompra datetime, 
 	CantMillas int,
 	NroVuelo int,
-	Ciudad_Origen nvarchar(255),
-	Ciudad_Destino nvarchar(255),
+	--Ciudad_Origen nvarchar(255),
+	--Ciudad_Destino nvarchar(255),
 
 	IdCli int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
 	IdButaca numeric (18, 0) FOREIGN KEY REFERENCES DATA_G.BUTACA
@@ -265,7 +273,7 @@ CREATE TABLE DATA_G.COMPRADOR(
 	Codigo_Compra numeric(18, 0) PRIMARY KEY IDENTITY(1,1),
 
 	IdPaquete numeric(18,0) FOREIGN KEY REFERENCES DATA_G.PAQUETE,
-	Pasaje_Codigo numeric(18, 0) FOREIGN KEY REFERENCES DATA_G.PASAJE,
+	IdPasaje int  FOREIGN KEY REFERENCES DATA_G.PASAJE,
 	IdCli int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
 	IdPuntoDeCompra int FOREIGN KEY REFERENCES DATA_G.PUNTO_DE_COMPRA
 
@@ -278,7 +286,7 @@ CREATE TABLE DATA_G.DEVOLUCION(
 
 	Codigo_Compra numeric(18,0) FOREIGN KEY REFERENCES DATA_G.COMPRADOR,
 	IdPaquete numeric(18,0) FOREIGN KEY REFERENCES DATA_G.PAQUETE,
-	Pasaje_Codigo numeric(18,0) FOREIGN KEY REFERENCES DATA_G.PASAJE
+	IdPasaje int  FOREIGN KEY REFERENCES DATA_G.PASAJE
 	
 
 )
@@ -479,6 +487,7 @@ INSERT INTO DATA_G.AERONAVE(Matricula, Modelo, KG_Disponibles, Fabricante)
 SELECT M.Aeronave_Matricula, M.Aeronave_Modelo, M.Aeronave_KG_Disponibles, M.Aeronave_Fabricante
 FROM gd_esquema.Maestra M
 GROUP BY M.Aeronave_Matricula, M.Aeronave_Modelo, M.Aeronave_KG_Disponibles, M.Aeronave_Fabricante
+
 ORDER BY 1
 
 --DA MUCHOS VUELOS, LUEGO SE VALIDARA MEJOR
@@ -493,9 +502,9 @@ WHERE	M.FechaSalida < M.FechaLLegada
 	AND M.Aeronave_Matricula = A.Matricula
 	AND M.Aeronave_Fabricante = A.Fabricante
 	AND M.Ruta_Codigo = R.Codigo
-	AND M.Aeronave_Modelo = A.Modelo
 	AND C.CodigoCiudad = R.Origen
 	AND C2.CodigoCiudad = R.Destino
+	AND M.Tipo_Servicio = R.Tipo_Servicio
 	-- COMPROBAR QUE LA FECHA SALIENTE DE LLEGADA SEA MAYOR A LA SIG DE SALIDA  
 ORDER BY 2, 3, 4
 
@@ -519,30 +528,36 @@ ORDER BY 1, 4
 
 --SELECT B.IdAeronave, COUNT(*) FROM DATA_G.BUTACA B GROUP BY B.IdAeronave
 
---VER COSTO PASAJE POR EL ENUNCIADO  TARDA MUCHO!!!
-INSERT INTO DATA_G.PASAJE(Pasaje_Codigo,Precio,FechaCompra, CantMillas, NroVuelo, IdCli, IdButaca, Ciudad_Origen, Ciudad_Destino)
-SELECT DISTINCT	M.Pasaje_Codigo,
+--VER COSTO PASAJE POR EL ENUNCIADO  TARDA MUCHO el problema esta en nro de vuelo, si valido fecha tarda años!!!
+INSERT INTO DATA_G.PASAJE(Pasaje_Codigo,Precio,FechaCompra, CantMillas, NroVuelo, IdCli, IdButaca)
+SELECT DISTINCT  M.Pasaje_Codigo,
 		M.Pasaje_Precio,
 		M.Pasaje_FechaCompra,
 		CAST(ROUND(M.Pasaje_Precio/10,1) AS decimal(10,0)) AS 'CantMillas',
 		v.NroVuelo,
 		c.idCli,
-		(b.NroButaca) AS 'Nro Butaca',
-		r.Origen,
-		r.Destino 
-FROM gd_esquema.Maestra M, DATA_G.BUTACA b, DATA_G.VUELO v, DATA_G.AERONAVE a, DATA_G.CLIENTE c, DATA_G.RUTA r, DATA_G.CIUDAD CI, DATA_G.CIUDAD CI2
+		(b.NroButaca) AS 'Nro Butaca'
+FROM gd_esquema.Maestra M, DATA_G.BUTACA b, DATA_G.VUELO v, DATA_G.AERONAVE a, DATA_G.CLIENTE c, DATA_G.RUTA r, DATA_G.CIUDAD CI,  DATA_G.CIUDAD CI2
 WHERE	 M.Pasaje_Codigo <> 0
 	AND  c.Dni = M.Cli_Dni
 	AND  c.Apellido = M.Cli_Apellido
-	AND c.Nombre = M.Cli_Nombre
+	AND  c.Nombre = M.Cli_Nombre
+	AND  a.Matricula = M.Aeronave_Matricula
+	AND  M.Aeronave_Fabricante = A.Fabricante
 	AND  r.Codigo = M.Ruta_Codigo
-	--AND  a.Matricula = M.Aeronave_Matricula
+	AND	 r.Origen = CI.CodigoCiudad
+	AND	 r.Destino = CI2.CodigoCiudad
+	AND  r.Tipo_Servicio = M.Tipo_Servicio
 	AND  b.NroButaca = M.Butaca_Nro
+	AND  b.Tipo = M.Butaca_Tipo
 	AND  v.FechaSalida = M.FechaSalida
 	AND  v.FechaLlegada = M.FechaLLegada
-	AND  b.Tipo = M.Butaca_Tipo
-	AND	 r.Destino = CI.CodigoCiudad
-	AND  r.Origen = CI2.CodigoCiudad
+	AND v.FechaEstimadaLlegada = M.Fecha_LLegada_Estimada
+
+	
+	
+	
+	
 	
 	
 	
