@@ -6,7 +6,6 @@ GO
 
 
 
-
 /** DROP TABLAS **/
 
 IF OBJECT_ID('DATA_G.MILLAS') IS NOT NULL
@@ -39,8 +38,8 @@ DROP TABLE DATA_G.ESTADO
 IF OBJECT_ID('DATA_G.RUTA') IS NOT NULL
 DROP TABLE DATA_G.RUTA
 
-IF OBJECT_ID('DATA_G.AEROPUERTO') IS NOT NULL
-DROP TABLE DATA_G.AEROPUERTO
+IF OBJECT_ID('DATA_G.TIPODESERVICIO') IS NOT NULL
+DROP TABLE DATA_G.TIPODESERVICIO
 
 IF OBJECT_ID('DATA_G.CIUDAD') IS NOT NULL
 DROP TABLE DATA_G.CIUDAD
@@ -66,6 +65,9 @@ DROP TABLE DATA_G.FUNCIONALIDADES
 IF OBJECT_ID('DATA_G.ROL') IS NOT NULL
 DROP TABLE DATA_G.ROL
 
+IF OBJECT_ID('tempdb.dbo.#TEMPPASAJE') IS NOT NULL
+DROP TABLE #TEMPPASAJE
+
 IF  EXISTS (SELECT * FROM sys.schemas WHERE name = N'DATA_G')
 DROP SCHEMA [DATA_G]
 GO
@@ -74,6 +76,30 @@ GO
 
 CREATE SCHEMA [DATA_G] AUTHORIZATION [dbo]
 GO
+
+CREATE TABLE #TEMPPASAJE(
+
+	Pasaje_Codigo numeric (18,0),
+	Pasaje_Precio numeric (18,2),
+	Pasaje_FechaCompra datetime,
+	CantMillas int, 
+	Cli_Dni numeric (18,0),
+	Cli_Apellido nvarchar(255),
+	Cli_Nombre nvarchar (255),
+	Ruta_Codigo numeric (18,0),
+	Tipo_Servicio nvarchar(255),
+	Butaca_Nro numeric(18,0),
+	Butaca_Tipo nvarchar(255),
+	FechaSalida datetime,
+	FechaLLegada datetime,
+	Fecha_LLegada_Estimada datetime,
+	Aeronave_Matricula nvarchar(255),
+	Aeronave_Fab nvarchar(255),
+	Origen nvarchar(255),
+	Destino nvarchar(255)
+
+	)
+
 
 CREATE TABLE DATA_G.ROL(
 
@@ -163,7 +189,10 @@ CREATE TABLE DATA_G.CIUDAD(
 
 )
 
-
+CREATE TABLE DATA_G.TIPODESERVICIO(
+	IdServicio int PRIMARY KEY,
+	Descripcion nvarchar (255)
+	)
 
 CREATE TABLE DATA_G.RUTA(
 
@@ -175,6 +204,7 @@ CREATE TABLE DATA_G.RUTA(
 	Tipo_Servicio nvarchar(255),
 	--Ciudad_Origen  nvarchar(255),
 	--Ciudad_Destino nvarchar (255),
+	IdServicio int FOREIGN KEY REFERENCES DATA_G.TIPODESERVICIO,
 	Origen numeric(18,0) FOREIGN KEY REFERENCES DATA_G.CIUDAD,
 	Destino numeric(18,0) FOREIGN KEY REFERENCES DATA_G.CIUDAD
 	 
@@ -204,8 +234,7 @@ CREATE TABLE DATA_G.AERONAVE(
 	FechaReinicioDeServicio datetime,
 	FechaBajaDefinitiva datetime,
 	CantButacas int NULL,
-	TipoButacas nvarchar(255) CHECK(TipoButacas IN ('Pasillo','Ventanilla')),
-	CantKGDisponibles int,
+	CantKGDisponibles int NULL,
 	IdEstado int FOREIGN KEY REFERENCES DATA_G.ESTADO DEFAULT 1
 	
 
@@ -264,6 +293,7 @@ CREATE TABLE DATA_G.PAQUETE(
 	Precio numeric(18,2),
 	KG numeric(18,0),
 	FechaCompra datetime,
+	Piso numeric(18, 0) CHECK (Piso IN ('0')),
 
 	NroVuelo int FOREIGN KEY REFERENCES DATA_G.VUELO
 
@@ -319,37 +349,31 @@ VALUES (2,'Eliminar acceso usuario')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
 VALUES (3,'Logueo') --FUNCIONALIDAD ESPECIAL
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (4,'Crear ciudad')
+VALUES (4,'Crear origen y destino viaje')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (5,'Modificar ciudad')
+VALUES (5,'Modificar origen y destino viaje')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (6,'Dar de baja ciudad')
+VALUES (6,'Dar de baja origen y destino viaje')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (7,'Crear origen y destino viaje')
+VALUES (7,'Incorporar aeronave')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (8,'Modificar origen y destino viaje')
+VALUES (8,'Modificar aeronave')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (9,'Dar de baja origen y destino viaje')
+VALUES (9,'Dar de baja aeronave')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (10,'Incorporar aeronave')
+VALUES (10,'Confeccionar ruta de viaje disponible')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (11,'Modificar aeronave')
+VALUES (11,'Compra de pasajes/encomiendas')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (12,'Dar de baja aeronave')
+VALUES (12,'Registro de llegada destino')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (13,'Confeccionar ruta de viaje disponible')
+VALUES (13,'Cancelacion/Devolucion de pasaje y/o encomienda')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (14,'Compra de pasajes/encomiendas')
+VALUES (14,'Consulta de millas de pasajero frecuente')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (15,'Registro de llegada destino')
+VALUES (15,'Canje de millas de pasajero frecuente')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (16,'Cancelacion/Devolucion de pasaje y/o encomienda')
-INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (17,'Consulta de millas de pasajero frecuente')
-INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (18,'Canje de millas de pasajero frecuente')
-INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (19,'Consulta TOP 5')
+VALUES (16,'Consulta TOP 5')
 /**faltan mas??**/
 SET IDENTITY_INSERT DATA_G.FUNCIONALIDADES OFF
 
@@ -376,30 +400,28 @@ VALUES(10,0)
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
 VALUES(11,0)
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
+VALUES(11,1)
+INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
 VALUES(12,0)
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
 VALUES(13,0)
-INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
-VALUES(14,0)
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
 VALUES(14,1)
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
 VALUES(15,0)
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
-VALUES(16,0)
-INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
-VALUES(17,1)
-INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
-VALUES(18,0) --FUNC. PARA EL CLIENTE PERO LA REALIZA EL ADMIN
-INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
-VALUES(19,0)
-INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
-VALUES(19,1)
+VALUES(16,1)
+
 
 
 INSERT INTO DATA_G.CLIENTE(IdRol,Nombre, Apellido,Dni,Direccion,Telefono,Mail,Fecha_Nac)
 SELECT distinct 1,Cli_Nombre,Cli_Apellido, Cli_Dni,Cli_Dir,Cli_Telefono,Cli_Mail,Cli_Fecha_Nac FROM gd_esquema.Maestra 
 Order by 4
+
+SELECT * FROM
+(SELECT distinct Cli_Nombre,Cli_Apellido, Cli_Dni from gd_esquema.Maestra) AS COCH
+WHERE COCH.Cli_Dni = 23718649
+
 /**SELECT top 4 ma.Cli_Apellido, ma.Cli_Nombre, ma.Cli_Dni
 FROM gd_esquema.Maestra ma
 where exists (select 1 
@@ -453,6 +475,22 @@ SELECT DISTINCT Ruta_Ciudad_Destino
 FROM gd_esquema.Maestra
 ORDER BY 1
 
+INSERT INTO DATA_G.TIPODESERVICIO(IdServicio, Descripcion)
+VALUES (1, 'Primera Clase')
+INSERT INTO DATA_G.TIPODESERVICIO(IdServicio, Descripcion)
+VALUES (2, 'Semi-Cama')
+INSERT INTO DATA_G.TIPODESERVICIO(IdServicio, Descripcion)
+VALUES (3, 'Cama')
+INSERT INTO DATA_G.TIPODESERVICIO(IdServicio, Descripcion)
+VALUES (4, 'Premium')
+INSERT INTO DATA_G.TIPODESERVICIO(IdServicio, Descripcion)
+VALUES (5, 'Ejecutivo')
+INSERT INTO DATA_G.TIPODESERVICIO(IdServicio, Descripcion)
+VALUES (6, 'Común')
+INSERT INTO DATA_G.TIPODESERVICIO(IdServicio, Descripcion)
+VALUES (7, 'Turista')
+
+
 INSERT INTO DATA_G.RUTA(Codigo, Precio_BaseKG, Precio_BasePasaje, Tipo_Servicio, Origen, Destino)
 
 SELECT   RUTAS.Ruta_Codigo,
@@ -475,12 +513,13 @@ GROUP BY RUTAS.Ruta_Codigo,RUTAS.Tipo_Servicio,RUTAS.Origen, RUTAS.Destino
 ORDER BY 4, 5
  
  INSERT INTO DATA_G.ESTADO(IdEstado, Descripcion)
-VALUES(1, 'Activo')
+VALUES(1, 'Volando')
 INSERT INTO DATA_G.ESTADO(IdEstado, Descripcion)
-VALUES(2, 'Completo Vida Util')
+VALUES(2, 'Reposo')
 INSERT INTO DATA_G.ESTADO(IdEstado, Descripcion, CantDias)
 VALUES(3, 'Fuera de Servicio',0)
-
+INSERT INTO DATA_G.ESTADO(IdEstado, Descripcion)
+VALUES(4, 'Completo Vida Util')
  --AGREGAR LOS OTROS CAMPOS QUE PIDE EL ENUNCIADO?
 INSERT INTO DATA_G.AERONAVE(Matricula, Modelo, KG_Disponibles, Fabricante)
 
@@ -498,8 +537,8 @@ SELECT DISTINCT R.IdRuta,
 				M.FechaLlegada,
 				M.Fecha_Llegada_Estimada	   
 FROM gd_esquema.Maestra M, DATA_G.RUTA R, DATA_G.AERONAVE A, DATA_G.CIUDAD C,  DATA_G.CIUDAD C2
-WHERE	M.FechaSalida < M.FechaLLegada
-	AND M.Aeronave_Matricula = A.Matricula
+WHERE	
+		M.Aeronave_Matricula = A.Matricula
 	AND M.Aeronave_Fabricante = A.Fabricante
 	AND M.Ruta_Codigo = R.Codigo
 	AND C.CodigoCiudad = R.Origen
@@ -521,45 +560,116 @@ WHERE M.Aeronave_Matricula = A.Matricula
 	AND M.Aeronave_KG_Disponibles = A.KG_Disponibles
 	AND M.Aeronave_Fabricante = A.Fabricante
 	AND M.Butaca_Tipo IN ('Ventanilla', 'Pasillo')
-	AND M.Butaca_Piso <> 0
+	AND M.Butaca_Piso <>0
 ORDER BY 1, 4
 
 --UPDATE DATA_G.AERONAVE SET CantButacas = ()
 
 --SELECT B.IdAeronave, COUNT(*) FROM DATA_G.BUTACA B GROUP BY B.IdAeronave
 
+--INSERT tabla temporal
+INSERT INTO #TEMPPASAJE(Pasaje_Codigo, Pasaje_Precio, Pasaje_FechaCompra, CantMillas, Cli_Dni, Cli_Apellido, Cli_Nombre, Ruta_Codigo, Tipo_Servicio, Aeronave_Matricula, Aeronave_Fab , Butaca_Nro, Butaca_Tipo, FechaSalida, FechaLLegada, Fecha_LLegada_Estimada, Origen, Destino)
+SELECT distinct M.Pasaje_Codigo,
+				M.Pasaje_Precio,
+				M.Pasaje_FechaCompra,
+				CAST(ROUND(M.Pasaje_Precio/10,1) AS decimal(10,0)) AS 'CantMillas',
+				M.Cli_Dni,
+				M.Cli_Apellido,
+				M.Cli_Nombre,
+				M.Ruta_Codigo,
+				M.Tipo_Servicio,
+				M.Aeronave_Matricula,
+				M.Aeronave_Fabricante,
+				M.Butaca_Nro,
+				M.Butaca_Tipo,
+				M.FechaSalida,
+				M.FechaLLegada,
+				M.Fecha_LLegada_Estimada,
+				M.Ruta_Ciudad_Origen,
+				M.Ruta_Ciudad_Destino
+
+	FROM gd_esquema.Maestra M
+	WHERE M.Pasaje_Codigo <> 0
+
 --VER COSTO PASAJE POR EL ENUNCIADO  TARDA MUCHO el problema esta en nro de vuelo, si valido fecha tarda años!!!
-INSERT INTO DATA_G.PASAJE(Pasaje_Codigo,Precio,FechaCompra, CantMillas, NroVuelo, IdCli, IdButaca)
-SELECT DISTINCT  M.Pasaje_Codigo,
-		M.Pasaje_Precio,
-		M.Pasaje_FechaCompra,
-		CAST(ROUND(M.Pasaje_Precio/10,1) AS decimal(10,0)) AS 'CantMillas',
+--INSERT INTO DATA_G.PASAJE(Pasaje_Codigo,Precio,FechaCompra, CantMillas, NroVuelo, IdCli, IdButaca)
+--SELECT distinct M.Pasaje_Codigo,
+--		M.Pasaje_Precio,
+--		M.Pasaje_FechaCompra,
+--		CAST(ROUND(M.Pasaje_Precio/10,1) AS decimal(10,0)) AS 'CantMillas'
+--		,M.Cli_Dni
+--,M.Cli_Apellido
+--,M.Cli_Nombre
+--,M.Ruta_Codigo
+--,M.Tipo_Servicio
+--,M.Butaca_Nro
+--,M.Butaca_Tipo
+--,M.FechaSalida
+--,M.FechaLLegada
+--,M.Fecha_LLegada_Estimada
+----		v.NroVuelo,
+----		c.idCli--,
+--		--(b.IdButaca) AS 'Nro Butaca'
+--FROM gd_esquema.Maestra M 
+----DATA_G.BUTACA b, 
+----DATA_G.VUELO v, 
+----DATA_G.CLIENTE c, 
+----DATA_G.RUTA r, 
+----DATA_G.CIUDAD CI,  
+----DATA_G.CIUDAD CI2
+--WHERE	 M.Pasaje_Codigo <> 0
+
+----	AND  c.Dni = M.Cli_Dni
+----	AND  c.Apellido = M.Cli_Apellido
+----	AND  c.Nombre = M.Cli_Nombre
+----	AND  r.Codigo = M.Ruta_Codigo
+----	AND	 r.Origen = CI.CodigoCiudad
+----	AND	 r.Destino = CI2.CodigoCiudad
+----	AND  r.Tipo_Servicio = M.Tipo_Servicio
+----	--AND  b.NroButaca = M.Butaca_Nro
+----	--AND  b.Tipo = M.Butaca_Tipo
+----	AND  v.FechaSalida = M.FechaSalida
+----	AND  v.FechaLlegada = M.FechaLLegada
+----	AND v.FechaEstimadaLlegada = M.Fecha_LLegada_Estimada
+
+INSERT INTO DATA_G.PASAJE (	Pasaje_Codigo, Precio, FechaCompra, CantMillas, NroVuelo, IdCli, IdButaca)
+	SELECT PJ.Pasaje_Codigo,
+		PJ.Pasaje_Precio,
+		PJ.Pasaje_FechaCompra,
+		PJ.CantMillas,
 		v.NroVuelo,
 		c.idCli,
-		(b.NroButaca) AS 'Nro Butaca'
-FROM gd_esquema.Maestra M, DATA_G.BUTACA b, DATA_G.VUELO v, DATA_G.AERONAVE a, DATA_G.CLIENTE c, DATA_G.RUTA r, DATA_G.CIUDAD CI,  DATA_G.CIUDAD CI2
-WHERE	 M.Pasaje_Codigo <> 0
-	AND  c.Dni = M.Cli_Dni
-	AND  c.Apellido = M.Cli_Apellido
-	AND  c.Nombre = M.Cli_Nombre
-	AND  a.Matricula = M.Aeronave_Matricula
-	AND  M.Aeronave_Fabricante = A.Fabricante
-	AND  r.Codigo = M.Ruta_Codigo
+		(b.IdButaca) AS 'Nro Butaca'
+	
+FROM  DATA_G.RUTA r, DATA_G.CIUDAD CI, DATA_G.CIUDAD CI2,DATA_G.BUTACA b, DATA_G.AERONAVE a, DATA_G.CLIENTE c, DATA_G.VUELO v, #TEMPPASAJE AS PJ
+WHERE	 
+	 c.Dni = PJ.Cli_Dni
+	AND  c.Apellido = PJ.Cli_Apellido
+	AND  c.Nombre = PJ.Cli_Nombre
+	and v.IdRuta = r.IdRuta
+	and v.IdAeronave = a.IdAeronave
+	AND a.Matricula = PJ.Aeronave_Matricula
+	AND   v.FechaSalida = PJ.FechaSalida
+	AND  v.FechaLlegada = PJ.FechaLLegada
+	AND  v.FechaEstimadaLlegada = PJ.Fecha_LLegada_Estimada
+	AND  r.Tipo_Servicio = PJ.Tipo_Servicio
+	AND r.Codigo = PJ.Ruta_Codigo
 	AND	 r.Origen = CI.CodigoCiudad
+	and ci.Nombre = pj.Origen
 	AND	 r.Destino = CI2.CodigoCiudad
-	AND  r.Tipo_Servicio = M.Tipo_Servicio
-	AND  b.NroButaca = M.Butaca_Nro
-	AND  b.Tipo = M.Butaca_Tipo
-	AND  v.FechaSalida = M.FechaSalida
-	AND  v.FechaLlegada = M.FechaLLegada
-	AND v.FechaEstimadaLlegada = M.Fecha_LLegada_Estimada
+	and CI2.Nombre = pj.Destino
+	
+--	AND b.NroButaca = PJ.Butaca_Nro
+	AND b.IdAeronave = a.IdAeronave
+	AND r.Codigo = PJ.Ruta_Codigo
+	AND	 r.Origen = CI.CodigoCiudad
+	and ci.Nombre = pj.Origen
+	AND	 r.Destino = CI2.CodigoCiudad
+	and CI2.Nombre = pj.Destino
 
-	
-	
-	
-	
-	
-	
+	AND a.Fabricante = PJ.Aeronave_Fab
+	--AND  b.Tipo = PJ.Butaca_Tipo
+
 	
 --MISMO COD DE PAQUETE CON DISTINTOS NROS DE VUELO tarda!!
 INSERT INTO DATA_G.PAQUETE(Codigo, FechaCompra, Precio, NroVuelo, KG)
