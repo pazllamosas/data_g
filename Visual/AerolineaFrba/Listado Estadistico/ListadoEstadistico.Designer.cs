@@ -54,6 +54,7 @@
             this.btnDestMasPasajesComprados.TabIndex = 14;
             this.btnDestMasPasajesComprados.Text = "Destinos con más pasajes comprados";
             this.btnDestMasPasajesComprados.UseVisualStyleBackColor = true;
+            this.btnDestMasPasajesComprados.Click += new System.EventHandler(this.btnDestMasPasajesComprados_Click);
             // 
             // menuStrip1
             // 
@@ -98,6 +99,7 @@
             this.btnDestAeronavesMasVacias.TabIndex = 17;
             this.btnDestAeronavesMasVacias.Text = "Destinos con aeronaves más vacias";
             this.btnDestAeronavesMasVacias.UseVisualStyleBackColor = true;
+            this.btnDestAeronavesMasVacias.Click += new System.EventHandler(this.btnDestAeronavesMasVacias_Click);
             // 
             // btnDestMasPasajesCancelados
             // 
@@ -109,6 +111,7 @@
             this.btnDestMasPasajesCancelados.TabIndex = 18;
             this.btnDestMasPasajesCancelados.Text = "Destinos con más pasajes cancelados";
             this.btnDestMasPasajesCancelados.UseVisualStyleBackColor = true;
+            this.btnDestMasPasajesCancelados.Click += new System.EventHandler(this.btnDestMasPasajesCancelados_Click);
             // 
             // btnCliMasPuntosAcumulados
             // 
@@ -120,6 +123,7 @@
             this.btnCliMasPuntosAcumulados.TabIndex = 19;
             this.btnCliMasPuntosAcumulados.Text = "Clientes con más puntos acumulados a la fecha";
             this.btnCliMasPuntosAcumulados.UseVisualStyleBackColor = true;
+            this.btnCliMasPuntosAcumulados.Click += new System.EventHandler(this.btnCliMasPuntosAcumulados_Click);
             // 
             // btnAeronavesMasDiasFueraServicio
             // 
@@ -131,6 +135,7 @@
             this.btnAeronavesMasDiasFueraServicio.TabIndex = 20;
             this.btnAeronavesMasDiasFueraServicio.Text = "Aeronaves con mayor cantidad de días fuera de servicio";
             this.btnAeronavesMasDiasFueraServicio.UseVisualStyleBackColor = true;
+            this.btnAeronavesMasDiasFueraServicio.Click += new System.EventHandler(this.btnAeronavesMasDiasFueraServicio_Click);
             // 
             // btnVolver
             // 
@@ -143,6 +148,7 @@
             this.btnVolver.Text = "Volver";
             this.btnVolver.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // label2
             // 
@@ -160,6 +166,7 @@
             this.cmbAnioAConsultar.Name = "cmbAnioAConsultar";
             this.cmbAnioAConsultar.Size = new System.Drawing.Size(121, 21);
             this.cmbAnioAConsultar.TabIndex = 23;
+            this.cmbAnioAConsultar.SelectedIndexChanged += new System.EventHandler(this.cmbAnioAConsultar_SelectedIndexChanged);
             // 
             // ListadoEstadistico
             // 

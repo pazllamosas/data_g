@@ -82,6 +82,7 @@
             this.btnVolver.Text = "Volver";
             this.btnVolver.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // DestinosConAeronavesMasVacias
             // 
@@ -96,6 +97,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DestinosConAeronavesMasVacias";
             this.Text = "Destinos Con Aeronaves Más Vacias";
+            this.Load += new System.EventHandler(this.DestinosConAeronavesMasVacias_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvListado)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

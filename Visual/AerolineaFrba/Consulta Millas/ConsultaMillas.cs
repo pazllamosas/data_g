@@ -21,5 +21,11 @@ namespace AerolineaFrba.Consulta_Millas
         {
 
         }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new Inicio.Menu().Show();
+        }
     }
 }

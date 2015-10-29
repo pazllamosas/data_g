@@ -32,7 +32,7 @@ namespace AerolineaFrba.Inicio
         private void button7_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var ConsultaMillas = new Consulta_Millas.ConsultaMillas;
+            var ConsultaMillas = new Consulta_Millas.ConsultaMillas();
             ConsultaMillas.Show();
         }
 
@@ -60,15 +60,13 @@ namespace AerolineaFrba.Inicio
         private void button11_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var ListadoEstadistico = new Listado_Estadistico.ListadoEstadistico();
-            ListadoEstadistico.Show();
+            new Listado_Estadistico.ListadoEstadistico().Show();
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var GeneracionViaje = new Generacion_Viaje.GenerarViaje();
-            GeneracionViaje.Show();
+            new Generacion_Viaje.GenerarViaje().Show();
         }
 
         private void button3_Click(object sender, EventArgs e)

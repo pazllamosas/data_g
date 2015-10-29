@@ -16,5 +16,15 @@ namespace AerolineaFrba.Listado_Estadistico
         {
             InitializeComponent();
         }
+
+        private void DestinosConAeronavesMasVacias_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
     }
 }

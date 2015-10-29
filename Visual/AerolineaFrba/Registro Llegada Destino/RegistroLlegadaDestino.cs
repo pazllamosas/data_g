@@ -26,5 +26,11 @@ namespace AerolineaFrba.Registro_Llegada_Destino
         {
 
         }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new Inicio.Menu().Show();
+        }
     }
 }

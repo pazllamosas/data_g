@@ -19,7 +19,8 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            new Inicio.Menu().Show();
         }
 
         private void button1_Click(object sender, EventArgs e)

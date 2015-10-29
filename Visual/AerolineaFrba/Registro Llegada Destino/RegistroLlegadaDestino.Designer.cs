@@ -140,6 +140,7 @@
             this.btnVolver.Text = "Volver";
             this.btnVolver.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // label4
             // 

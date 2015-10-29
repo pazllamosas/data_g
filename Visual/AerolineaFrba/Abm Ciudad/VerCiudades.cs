@@ -24,7 +24,7 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            new Abm_Ciudad.AgregarCiudad().Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -44,7 +44,8 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void Botton4_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            new Inicio.Menu().Show();
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)

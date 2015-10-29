@@ -287,6 +287,9 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Registro de Usuario\RegistrarUsuario.resx">
+      <DependentUpon>RegistrarUsuario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Registro Llegada Destino\RegistroLlegadaDestino.resx">
       <DependentUpon>RegistroLlegadaDestino.cs</DependentUpon>
     </EmbeddedResource>
