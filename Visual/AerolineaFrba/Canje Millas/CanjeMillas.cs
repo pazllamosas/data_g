@@ -16,5 +16,10 @@ namespace AerolineaFrba.Canje_Millas
         {
             InitializeComponent();
         }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

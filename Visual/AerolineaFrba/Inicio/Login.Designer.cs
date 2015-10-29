@@ -31,11 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.txtUsuario = new System.Windows.Forms.TextBox();
+            this.txtContasenia = new System.Windows.Forms.TextBox();
+            this.chkInvitado = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnIngresar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -58,35 +58,35 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Contraseña:";
             // 
-            // textBox1
+            // txtUsuario
             // 
-            this.textBox1.Location = new System.Drawing.Point(304, 167);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.txtUsuario.Location = new System.Drawing.Point(304, 167);
+            this.txtUsuario.Name = "txtUsuario";
+            this.txtUsuario.Size = new System.Drawing.Size(100, 20);
+            this.txtUsuario.TabIndex = 2;
+            this.txtUsuario.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // textBox2
+            // txtContasenia
             // 
-            this.textBox2.Location = new System.Drawing.Point(304, 195);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.PasswordChar = '●';
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 3;
-            this.textBox2.UseSystemPasswordChar = true;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.txtContasenia.Location = new System.Drawing.Point(304, 195);
+            this.txtContasenia.Name = "txtContasenia";
+            this.txtContasenia.PasswordChar = '●';
+            this.txtContasenia.Size = new System.Drawing.Size(100, 20);
+            this.txtContasenia.TabIndex = 3;
+            this.txtContasenia.UseSystemPasswordChar = true;
+            this.txtContasenia.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
-            // checkBox1
+            // chkInvitado
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox1.Location = new System.Drawing.Point(255, 221);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(133, 17);
-            this.checkBox1.TabIndex = 4;
-            this.checkBox1.Text = "Ingresar como invitado";
-            this.checkBox1.UseVisualStyleBackColor = false;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.chkInvitado.AutoSize = true;
+            this.chkInvitado.BackColor = System.Drawing.Color.Transparent;
+            this.chkInvitado.Location = new System.Drawing.Point(255, 221);
+            this.chkInvitado.Name = "chkInvitado";
+            this.chkInvitado.Size = new System.Drawing.Size(133, 17);
+            this.chkInvitado.TabIndex = 4;
+            this.chkInvitado.Text = "Ingresar como invitado";
+            this.chkInvitado.UseVisualStyleBackColor = false;
+            this.chkInvitado.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // label3
             // 
@@ -99,18 +99,18 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "¡Bienvenido a Aerolineas FRBA!";
             // 
-            // button1
+            // btnIngresar
             // 
-            this.button1.Image = global::AerolineaFrba.Properties.Resources.person;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(286, 244);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(67, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Ingresar";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnIngresar.Image = global::AerolineaFrba.Properties.Resources.person;
+            this.btnIngresar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnIngresar.Location = new System.Drawing.Point(286, 244);
+            this.btnIngresar.Name = "btnIngresar";
+            this.btnIngresar.Size = new System.Drawing.Size(67, 23);
+            this.btnIngresar.TabIndex = 6;
+            this.btnIngresar.Text = "Ingresar";
+            this.btnIngresar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnIngresar.UseVisualStyleBackColor = true;
+            this.btnIngresar.Click += new System.EventHandler(this.button1_Click);
             // 
             // Login
             // 
@@ -118,12 +118,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::AerolineaFrba.Properties.Resources.airplane2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(634, 362);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(634, 361);
+            this.Controls.Add(this.btnIngresar);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.chkInvitado);
+            this.Controls.Add(this.txtContasenia);
+            this.Controls.Add(this.txtUsuario);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -141,10 +141,10 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TextBox txtUsuario;
+        private System.Windows.Forms.TextBox txtContasenia;
+        private System.Windows.Forms.CheckBox chkInvitado;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnIngresar;
     }
 }

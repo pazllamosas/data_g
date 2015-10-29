@@ -32,12 +32,12 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deslogearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtCodItem = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnVolver = new System.Windows.Forms.Button();
+            this.rdbPasaje = new System.Windows.Forms.RadioButton();
+            this.rdbEncomienda = new System.Windows.Forms.RadioButton();
+            this.btnDevolver = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,13 +65,13 @@
             this.deslogearToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
             this.deslogearToolStripMenuItem.Text = "Salir";
             // 
-            // textBox1
+            // txtCodItem
             // 
-            this.textBox1.Location = new System.Drawing.Point(151, 77);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(121, 20);
-            this.textBox1.TabIndex = 16;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.txtCodItem.Location = new System.Drawing.Point(151, 77);
+            this.txtCodItem.Name = "txtCodItem";
+            this.txtCodItem.Size = new System.Drawing.Size(121, 20);
+            this.txtCodItem.TabIndex = 16;
+            this.txtCodItem.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label4
             // 
@@ -83,66 +83,66 @@
             this.label4.Text = "Código de item a devolver:";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
-            // button4
+            // btnVolver
             // 
-            this.button4.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button4.Image = global::AerolineaFrba.Properties.Resources.back;
-            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.Location = new System.Drawing.Point(15, 35);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(57, 23);
-            this.button4.TabIndex = 17;
-            this.button4.Text = "Volver";
-            this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnVolver.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnVolver.Image = global::AerolineaFrba.Properties.Resources.back;
+            this.btnVolver.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnVolver.Location = new System.Drawing.Point(15, 35);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(57, 23);
+            this.btnVolver.TabIndex = 17;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnVolver.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // rdbPasaje
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(15, 107);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(57, 17);
-            this.radioButton1.TabIndex = 18;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Pasaje";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rdbPasaje.AutoSize = true;
+            this.rdbPasaje.Location = new System.Drawing.Point(15, 107);
+            this.rdbPasaje.Name = "rdbPasaje";
+            this.rdbPasaje.Size = new System.Drawing.Size(57, 17);
+            this.rdbPasaje.TabIndex = 18;
+            this.rdbPasaje.TabStop = true;
+            this.rdbPasaje.Text = "Pasaje";
+            this.rdbPasaje.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // rdbEncomienda
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(15, 130);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(84, 17);
-            this.radioButton2.TabIndex = 19;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Encomienda";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rdbEncomienda.AutoSize = true;
+            this.rdbEncomienda.Location = new System.Drawing.Point(15, 130);
+            this.rdbEncomienda.Name = "rdbEncomienda";
+            this.rdbEncomienda.Size = new System.Drawing.Size(84, 17);
+            this.rdbEncomienda.TabIndex = 19;
+            this.rdbEncomienda.TabStop = true;
+            this.rdbEncomienda.Text = "Encomienda";
+            this.rdbEncomienda.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnDevolver
             // 
-            this.button3.Cursor = System.Windows.Forms.Cursors.Default;
-            this.button3.Enabled = false;
-            this.button3.Image = global::AerolineaFrba.Properties.Resources.next;
-            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button3.Location = new System.Drawing.Point(552, 327);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(70, 23);
-            this.button3.TabIndex = 20;
-            this.button3.Text = "Devolver";
-            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnDevolver.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btnDevolver.Enabled = false;
+            this.btnDevolver.Image = global::AerolineaFrba.Properties.Resources.next;
+            this.btnDevolver.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnDevolver.Location = new System.Drawing.Point(552, 327);
+            this.btnDevolver.Name = "btnDevolver";
+            this.btnDevolver.Size = new System.Drawing.Size(70, 23);
+            this.btnDevolver.TabIndex = 20;
+            this.btnDevolver.Text = "Devolver";
+            this.btnDevolver.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDevolver.UseVisualStyleBackColor = true;
             // 
             // Devolucion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.button4;
+            this.CancelButton = this.btnVolver;
             this.ClientSize = new System.Drawing.Size(634, 362);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.btnDevolver);
+            this.Controls.Add(this.rdbEncomienda);
+            this.Controls.Add(this.rdbPasaje);
+            this.Controls.Add(this.btnVolver);
+            this.Controls.Add(this.txtCodItem);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -161,11 +161,11 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deslogearToolStripMenuItem;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtCodItem;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.RadioButton rdbPasaje;
+        private System.Windows.Forms.RadioButton rdbEncomienda;
+        private System.Windows.Forms.Button btnDevolver;
     }
 }

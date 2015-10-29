@@ -32,17 +32,17 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deslogearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btnTop5 = new System.Windows.Forms.Button();
+            this.btnRegistroLlegada = new System.Windows.Forms.Button();
+            this.btnGenerarViaje = new System.Windows.Forms.Button();
+            this.btnDevolucion = new System.Windows.Forms.Button();
+            this.btnConsultarMillas = new System.Windows.Forms.Button();
+            this.btnComprarPasaje = new System.Windows.Forms.Button();
+            this.btnCanjearMillas = new System.Windows.Forms.Button();
+            this.btnVerRutas = new System.Windows.Forms.Button();
+            this.btnVerRoles = new System.Windows.Forms.Button();
+            this.btnVerAeronave = new System.Windows.Forms.Button();
+            this.btnVerCiudades = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,231 +71,231 @@
             this.deslogearToolStripMenuItem.Text = "Salir";
             this.deslogearToolStripMenuItem.Click += new System.EventHandler(this.deslogearToolStripMenuItem_Click);
             // 
-            // button11
+            // btnTop5
             // 
-            this.button11.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button11.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button11.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button11.FlatAppearance.BorderSize = 0;
-            this.button11.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button11.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightBlue;
-            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button11.Image = global::AerolineaFrba.Properties.Resources.top_large;
-            this.button11.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button11.Location = new System.Drawing.Point(167, 246);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(260, 35);
-            this.button11.TabIndex = 31;
-            this.button11.Text = "Top 5";
-            this.button11.UseVisualStyleBackColor = false;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
+            this.btnTop5.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnTop5.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnTop5.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnTop5.FlatAppearance.BorderSize = 0;
+            this.btnTop5.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnTop5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightBlue;
+            this.btnTop5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnTop5.Image = global::AerolineaFrba.Properties.Resources.top_large;
+            this.btnTop5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnTop5.Location = new System.Drawing.Point(167, 246);
+            this.btnTop5.Name = "btnTop5";
+            this.btnTop5.Size = new System.Drawing.Size(260, 35);
+            this.btnTop5.TabIndex = 31;
+            this.btnTop5.Text = "Top 5";
+            this.btnTop5.UseVisualStyleBackColor = false;
+            this.btnTop5.Click += new System.EventHandler(this.button11_Click);
             // 
-            // button10
+            // btnRegistroLlegada
             // 
-            this.button10.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button10.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button10.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button10.FlatAppearance.BorderSize = 0;
-            this.button10.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button10.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightBlue;
-            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button10.Image = global::AerolineaFrba.Properties.Resources.arrival_large;
-            this.button10.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button10.Location = new System.Drawing.Point(12, 164);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(260, 35);
-            this.button10.TabIndex = 30;
-            this.button10.Text = "Registro de Llegada a Destino";
-            this.button10.UseVisualStyleBackColor = false;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            this.btnRegistroLlegada.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnRegistroLlegada.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnRegistroLlegada.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnRegistroLlegada.FlatAppearance.BorderSize = 0;
+            this.btnRegistroLlegada.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnRegistroLlegada.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightBlue;
+            this.btnRegistroLlegada.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnRegistroLlegada.Image = global::AerolineaFrba.Properties.Resources.arrival_large;
+            this.btnRegistroLlegada.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRegistroLlegada.Location = new System.Drawing.Point(12, 164);
+            this.btnRegistroLlegada.Name = "btnRegistroLlegada";
+            this.btnRegistroLlegada.Size = new System.Drawing.Size(260, 35);
+            this.btnRegistroLlegada.TabIndex = 30;
+            this.btnRegistroLlegada.Text = "Registro de Llegada a Destino";
+            this.btnRegistroLlegada.UseVisualStyleBackColor = false;
+            this.btnRegistroLlegada.Click += new System.EventHandler(this.button10_Click);
             // 
-            // button9
+            // btnGenerarViaje
             // 
-            this.button9.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button9.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button9.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button9.FlatAppearance.BorderSize = 0;
-            this.button9.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button9.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightBlue;
-            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button9.Image = global::AerolineaFrba.Properties.Resources.travel_large;
-            this.button9.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button9.Location = new System.Drawing.Point(305, 41);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(260, 35);
-            this.button9.TabIndex = 29;
-            this.button9.Text = "Generar Viaje";
-            this.button9.UseVisualStyleBackColor = false;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
+            this.btnGenerarViaje.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnGenerarViaje.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnGenerarViaje.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnGenerarViaje.FlatAppearance.BorderSize = 0;
+            this.btnGenerarViaje.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnGenerarViaje.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightBlue;
+            this.btnGenerarViaje.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnGenerarViaje.Image = global::AerolineaFrba.Properties.Resources.travel_large;
+            this.btnGenerarViaje.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGenerarViaje.Location = new System.Drawing.Point(305, 41);
+            this.btnGenerarViaje.Name = "btnGenerarViaje";
+            this.btnGenerarViaje.Size = new System.Drawing.Size(260, 35);
+            this.btnGenerarViaje.TabIndex = 29;
+            this.btnGenerarViaje.Text = "Generar Viaje";
+            this.btnGenerarViaje.UseVisualStyleBackColor = false;
+            this.btnGenerarViaje.Click += new System.EventHandler(this.button9_Click);
             // 
-            // button8
+            // btnDevolucion
             // 
-            this.button8.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button8.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button8.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button8.FlatAppearance.BorderSize = 0;
-            this.button8.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button8.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightBlue;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button8.Image = global::AerolineaFrba.Properties.Resources.return_large;
-            this.button8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button8.Location = new System.Drawing.Point(12, 205);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(260, 35);
-            this.button8.TabIndex = 28;
-            this.button8.Text = "Devolución";
-            this.button8.UseVisualStyleBackColor = false;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.btnDevolucion.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnDevolucion.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnDevolucion.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnDevolucion.FlatAppearance.BorderSize = 0;
+            this.btnDevolucion.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnDevolucion.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightBlue;
+            this.btnDevolucion.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnDevolucion.Image = global::AerolineaFrba.Properties.Resources.return_large;
+            this.btnDevolucion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDevolucion.Location = new System.Drawing.Point(12, 205);
+            this.btnDevolucion.Name = "btnDevolucion";
+            this.btnDevolucion.Size = new System.Drawing.Size(260, 35);
+            this.btnDevolucion.TabIndex = 28;
+            this.btnDevolucion.Text = "Devolución";
+            this.btnDevolucion.UseVisualStyleBackColor = false;
+            this.btnDevolucion.Click += new System.EventHandler(this.button8_Click);
             // 
-            // button7
+            // btnConsultarMillas
             // 
-            this.button7.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button7.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button7.FlatAppearance.BorderSize = 0;
-            this.button7.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightBlue;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button7.Image = global::AerolineaFrba.Properties.Resources.xchangemiles_large;
-            this.button7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button7.Location = new System.Drawing.Point(12, 82);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(260, 35);
-            this.button7.TabIndex = 27;
-            this.button7.Text = "Consultar Millas";
-            this.button7.UseVisualStyleBackColor = false;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.btnConsultarMillas.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnConsultarMillas.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnConsultarMillas.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnConsultarMillas.FlatAppearance.BorderSize = 0;
+            this.btnConsultarMillas.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnConsultarMillas.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightBlue;
+            this.btnConsultarMillas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnConsultarMillas.Image = global::AerolineaFrba.Properties.Resources.xchangemiles_large;
+            this.btnConsultarMillas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnConsultarMillas.Location = new System.Drawing.Point(12, 82);
+            this.btnConsultarMillas.Name = "btnConsultarMillas";
+            this.btnConsultarMillas.Size = new System.Drawing.Size(260, 35);
+            this.btnConsultarMillas.TabIndex = 27;
+            this.btnConsultarMillas.Text = "Consultar Millas";
+            this.btnConsultarMillas.UseVisualStyleBackColor = false;
+            this.btnConsultarMillas.Click += new System.EventHandler(this.button7_Click);
             // 
-            // button6
+            // btnComprarPasaje
             // 
-            this.button6.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button6.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightBlue;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button6.Image = global::AerolineaFrba.Properties.Resources.ticket_large;
-            this.button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button6.Location = new System.Drawing.Point(12, 41);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(260, 35);
-            this.button6.TabIndex = 26;
-            this.button6.Text = "Comprar Pasaje";
-            this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.btnComprarPasaje.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnComprarPasaje.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnComprarPasaje.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnComprarPasaje.FlatAppearance.BorderSize = 0;
+            this.btnComprarPasaje.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnComprarPasaje.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightBlue;
+            this.btnComprarPasaje.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnComprarPasaje.Image = global::AerolineaFrba.Properties.Resources.ticket_large;
+            this.btnComprarPasaje.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnComprarPasaje.Location = new System.Drawing.Point(12, 41);
+            this.btnComprarPasaje.Name = "btnComprarPasaje";
+            this.btnComprarPasaje.Size = new System.Drawing.Size(260, 35);
+            this.btnComprarPasaje.TabIndex = 26;
+            this.btnComprarPasaje.Text = "Comprar Pasaje";
+            this.btnComprarPasaje.UseVisualStyleBackColor = false;
+            this.btnComprarPasaje.Click += new System.EventHandler(this.button6_Click);
             // 
-            // button4
+            // btnCanjearMillas
             // 
-            this.button4.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button4.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button4.FlatAppearance.BorderSize = 0;
-            this.button4.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightBlue;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button4.Image = global::AerolineaFrba.Properties.Resources.miles_large;
-            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.Location = new System.Drawing.Point(12, 123);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(260, 35);
-            this.button4.TabIndex = 25;
-            this.button4.Text = "Canjear Millas";
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.btnCanjearMillas.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnCanjearMillas.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCanjearMillas.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnCanjearMillas.FlatAppearance.BorderSize = 0;
+            this.btnCanjearMillas.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnCanjearMillas.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightBlue;
+            this.btnCanjearMillas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCanjearMillas.Image = global::AerolineaFrba.Properties.Resources.miles_large;
+            this.btnCanjearMillas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCanjearMillas.Location = new System.Drawing.Point(12, 123);
+            this.btnCanjearMillas.Name = "btnCanjearMillas";
+            this.btnCanjearMillas.Size = new System.Drawing.Size(260, 35);
+            this.btnCanjearMillas.TabIndex = 25;
+            this.btnCanjearMillas.Text = "Canjear Millas";
+            this.btnCanjearMillas.UseVisualStyleBackColor = false;
+            this.btnCanjearMillas.Click += new System.EventHandler(this.button4_Click);
             // 
-            // button3
+            // btnVerRutas
             // 
-            this.button3.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button3.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightBlue;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button3.Image = global::AerolineaFrba.Properties.Resources.route_large;
-            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(305, 82);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(260, 35);
-            this.button3.TabIndex = 24;
-            this.button3.Text = "Ver Rutas";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btnVerRutas.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnVerRutas.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnVerRutas.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnVerRutas.FlatAppearance.BorderSize = 0;
+            this.btnVerRutas.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnVerRutas.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightBlue;
+            this.btnVerRutas.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnVerRutas.Image = global::AerolineaFrba.Properties.Resources.route_large;
+            this.btnVerRutas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnVerRutas.Location = new System.Drawing.Point(305, 82);
+            this.btnVerRutas.Name = "btnVerRutas";
+            this.btnVerRutas.Size = new System.Drawing.Size(260, 35);
+            this.btnVerRutas.TabIndex = 24;
+            this.btnVerRutas.Text = "Ver Rutas";
+            this.btnVerRutas.UseVisualStyleBackColor = false;
+            this.btnVerRutas.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button2
+            // btnVerRoles
             // 
-            this.button2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightBlue;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button2.Image = global::AerolineaFrba.Properties.Resources.roles_large;
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(305, 164);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(260, 35);
-            this.button2.TabIndex = 23;
-            this.button2.Text = "Ver Roles";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnVerRoles.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnVerRoles.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnVerRoles.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnVerRoles.FlatAppearance.BorderSize = 0;
+            this.btnVerRoles.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnVerRoles.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightBlue;
+            this.btnVerRoles.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnVerRoles.Image = global::AerolineaFrba.Properties.Resources.roles_large;
+            this.btnVerRoles.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnVerRoles.Location = new System.Drawing.Point(305, 164);
+            this.btnVerRoles.Name = "btnVerRoles";
+            this.btnVerRoles.Size = new System.Drawing.Size(260, 35);
+            this.btnVerRoles.TabIndex = 23;
+            this.btnVerRoles.Text = "Ver Roles";
+            this.btnVerRoles.UseVisualStyleBackColor = false;
+            this.btnVerRoles.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button1
+            // btnVerAeronave
             // 
-            this.button1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightBlue;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Image = global::AerolineaFrba.Properties.Resources.airplane_large;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(305, 123);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(260, 35);
-            this.button1.TabIndex = 22;
-            this.button1.Text = "Ver Aeronaves";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnVerAeronave.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnVerAeronave.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnVerAeronave.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnVerAeronave.FlatAppearance.BorderSize = 0;
+            this.btnVerAeronave.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnVerAeronave.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightBlue;
+            this.btnVerAeronave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnVerAeronave.Image = global::AerolineaFrba.Properties.Resources.airplane_large;
+            this.btnVerAeronave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnVerAeronave.Location = new System.Drawing.Point(305, 123);
+            this.btnVerAeronave.Name = "btnVerAeronave";
+            this.btnVerAeronave.Size = new System.Drawing.Size(260, 35);
+            this.btnVerAeronave.TabIndex = 22;
+            this.btnVerAeronave.Text = "Ver Aeronaves";
+            this.btnVerAeronave.UseVisualStyleBackColor = false;
+            this.btnVerAeronave.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button5
+            // btnVerCiudades
             // 
-            this.button5.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button5.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.button5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightBlue;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button5.Image = global::AerolineaFrba.Properties.Resources.city_large;
-            this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button5.Location = new System.Drawing.Point(306, 205);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(260, 35);
-            this.button5.TabIndex = 21;
-            this.button5.Text = "Ver Ciudades";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.btnVerCiudades.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btnVerCiudades.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnVerCiudades.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.btnVerCiudades.FlatAppearance.BorderSize = 0;
+            this.btnVerCiudades.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.btnVerCiudades.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightBlue;
+            this.btnVerCiudades.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnVerCiudades.Image = global::AerolineaFrba.Properties.Resources.city_large;
+            this.btnVerCiudades.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnVerCiudades.Location = new System.Drawing.Point(306, 205);
+            this.btnVerCiudades.Name = "btnVerCiudades";
+            this.btnVerCiudades.Size = new System.Drawing.Size(260, 35);
+            this.btnVerCiudades.TabIndex = 21;
+            this.btnVerCiudades.Text = "Ver Ciudades";
+            this.btnVerCiudades.UseVisualStyleBackColor = false;
+            this.btnVerCiudades.Click += new System.EventHandler(this.button5_Click);
             // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(578, 297);
-            this.Controls.Add(this.button11);
-            this.Controls.Add(this.button10);
-            this.Controls.Add(this.button9);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.btnTop5);
+            this.Controls.Add(this.btnRegistroLlegada);
+            this.Controls.Add(this.btnGenerarViaje);
+            this.Controls.Add(this.btnDevolucion);
+            this.Controls.Add(this.btnConsultarMillas);
+            this.Controls.Add(this.btnComprarPasaje);
+            this.Controls.Add(this.btnCanjearMillas);
+            this.Controls.Add(this.btnVerRutas);
+            this.Controls.Add(this.btnVerRoles);
+            this.Controls.Add(this.btnVerAeronave);
+            this.Controls.Add(this.btnVerCiudades);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
@@ -314,16 +314,16 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deslogearToolStripMenuItem;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button btnVerCiudades;
+        private System.Windows.Forms.Button btnVerAeronave;
+        private System.Windows.Forms.Button btnVerRoles;
+        private System.Windows.Forms.Button btnVerRutas;
+        private System.Windows.Forms.Button btnCanjearMillas;
+        private System.Windows.Forms.Button btnComprarPasaje;
+        private System.Windows.Forms.Button btnConsultarMillas;
+        private System.Windows.Forms.Button btnDevolucion;
+        private System.Windows.Forms.Button btnGenerarViaje;
+        private System.Windows.Forms.Button btnRegistroLlegada;
+        private System.Windows.Forms.Button btnTop5;
     }
 }

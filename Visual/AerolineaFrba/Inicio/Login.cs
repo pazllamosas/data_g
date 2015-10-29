@@ -19,13 +19,13 @@ namespace AerolineaFrba.Inicio
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            textBox1.Enabled = !checkBox1.Checked;
-            textBox2.Enabled = !checkBox1.Checked;
+            txtUsuario.Enabled = !chkInvitado.Checked;
+            txtContasenia.Enabled = !chkInvitado.Checked;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (checkBox1.Checked)
+            if (chkInvitado.Checked)
             {
                 this.Hide();
                 FormProvider.MainMenu.Show();
@@ -38,25 +38,25 @@ namespace AerolineaFrba.Inicio
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(this.Text) && !string.IsNullOrWhiteSpace(textBox2.Text))
+            if (!string.IsNullOrWhiteSpace(this.Text) && !string.IsNullOrWhiteSpace(txtContasenia.Text))
             {
-                button1.Enabled = true;
+                btnIngresar.Enabled = true;
             }
             else
             {
-                button1.Enabled = false;
+                btnIngresar.Enabled = false;
             }
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(this.Text) && !string.IsNullOrWhiteSpace(textBox1.Text))
+            if (!string.IsNullOrWhiteSpace(this.Text) && !string.IsNullOrWhiteSpace(txtUsuario.Text))
             {
-                button1.Enabled = true;
+                btnIngresar.Enabled = true;
             }
             else
             {
-                button1.Enabled = false;
+                btnIngresar.Enabled = false;
             }
         }
 

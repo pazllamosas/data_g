@@ -30,21 +30,21 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgregarAeronave));
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtCantButacasPasillo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtEspacioEncomienda = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtFabricante = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.txtCantButacasVentana = new System.Windows.Forms.TextBox();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txtPatente = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbTipoServicio = new System.Windows.Forms.ComboBox();
+            this.cmbOrigen = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -56,12 +56,12 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Cantidad de Butacas (Pasillo):";
             // 
-            // textBox1
+            // txtCantButacasPasillo
             // 
-            this.textBox1.Location = new System.Drawing.Point(176, 6);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 7;
+            this.txtCantButacasPasillo.Location = new System.Drawing.Point(176, 6);
+            this.txtCantButacasPasillo.Name = "txtCantButacasPasillo";
+            this.txtCantButacasPasillo.Size = new System.Drawing.Size(100, 20);
+            this.txtCantButacasPasillo.TabIndex = 7;
             // 
             // label2
             // 
@@ -72,12 +72,12 @@
             this.label2.TabIndex = 8;
             this.label2.Text = "Espacio para Encomiendas (Kg):";
             // 
-            // textBox2
+            // txtEspacioEncomienda
             // 
-            this.textBox2.Location = new System.Drawing.Point(176, 32);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 9;
+            this.txtEspacioEncomienda.Location = new System.Drawing.Point(176, 32);
+            this.txtEspacioEncomienda.Name = "txtEspacioEncomienda";
+            this.txtEspacioEncomienda.Size = new System.Drawing.Size(100, 20);
+            this.txtEspacioEncomienda.TabIndex = 9;
             // 
             // label3
             // 
@@ -88,12 +88,12 @@
             this.label3.TabIndex = 10;
             this.label3.Text = "Fabricante:";
             // 
-            // textBox3
+            // txtFabricante
             // 
-            this.textBox3.Location = new System.Drawing.Point(176, 58);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 11;
+            this.txtFabricante.Location = new System.Drawing.Point(176, 58);
+            this.txtFabricante.Name = "txtFabricante";
+            this.txtFabricante.Size = new System.Drawing.Size(100, 20);
+            this.txtFabricante.TabIndex = 11;
             // 
             // label6
             // 
@@ -104,39 +104,39 @@
             this.label6.TabIndex = 17;
             this.label6.Text = "Cantidad de Butacas (Ventanilla):";
             // 
-            // textBox4
+            // txtCantButacasVentana
             // 
-            this.textBox4.Location = new System.Drawing.Point(468, 6);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 18;
+            this.txtCantButacasVentana.Location = new System.Drawing.Point(468, 6);
+            this.txtCantButacasVentana.Name = "txtCantButacasVentana";
+            this.txtCantButacasVentana.Size = new System.Drawing.Size(100, 20);
+            this.txtCantButacasVentana.TabIndex = 18;
             // 
-            // button1
+            // btnGuardar
             // 
-            this.button1.Enabled = false;
-            this.button1.Image = global::AerolineaFrba.Properties.Resources.save;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(12, 130);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Guardar";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnGuardar.Enabled = false;
+            this.btnGuardar.Image = global::AerolineaFrba.Properties.Resources.save;
+            this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGuardar.Location = new System.Drawing.Point(12, 130);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardar.TabIndex = 5;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnGuardar.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnCancelar
             // 
-            this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button2.Image = global::AerolineaFrba.Properties.Resources.cancel;
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(496, 130);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Cancelar";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelar.Image = global::AerolineaFrba.Properties.Resources.cancel;
+            this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCancelar.Location = new System.Drawing.Point(496, 130);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 4;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.button2_Click);
             // 
             // label4
             // 
@@ -147,12 +147,12 @@
             this.label4.TabIndex = 19;
             this.label4.Text = "Número de Patente:";
             // 
-            // textBox5
+            // txtPatente
             // 
-            this.textBox5.Location = new System.Drawing.Point(468, 61);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 20;
+            this.txtPatente.Location = new System.Drawing.Point(468, 61);
+            this.txtPatente.Name = "txtPatente";
+            this.txtPatente.Size = new System.Drawing.Size(100, 20);
+            this.txtPatente.TabIndex = 20;
             // 
             // label5
             // 
@@ -163,13 +163,6 @@
             this.label5.TabIndex = 21;
             this.label5.Text = "Ciudad de Origen:";
             // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(176, 84);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 22;
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -179,40 +172,49 @@
             this.label7.TabIndex = 23;
             this.label7.Text = "Servicio Brindado:";
             // 
-            // comboBox1
+            // cmbTipoServicio
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(468, 32);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(100, 21);
-            this.comboBox1.TabIndex = 24;
+            this.cmbTipoServicio.FormattingEnabled = true;
+            this.cmbTipoServicio.Location = new System.Drawing.Point(468, 32);
+            this.cmbTipoServicio.Name = "cmbTipoServicio";
+            this.cmbTipoServicio.Size = new System.Drawing.Size(100, 21);
+            this.cmbTipoServicio.TabIndex = 24;
+            // 
+            // cmbOrigen
+            // 
+            this.cmbOrigen.FormattingEnabled = true;
+            this.cmbOrigen.Location = new System.Drawing.Point(176, 84);
+            this.cmbOrigen.Name = "cmbOrigen";
+            this.cmbOrigen.Size = new System.Drawing.Size(100, 21);
+            this.cmbOrigen.TabIndex = 25;
             // 
             // AgregarAeronave
             // 
-            this.AcceptButton = this.button1;
+            this.AcceptButton = this.btnGuardar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.button2;
+            this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(580, 165);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cmbOrigen);
+            this.Controls.Add(this.cmbTipoServicio);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBox6);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.txtPatente);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.txtCantButacasVentana);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.txtFabricante);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtEspacioEncomienda);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtCantButacasPasillo);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnGuardar);
+            this.Controls.Add(this.btnCancelar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AgregarAeronave";
             this.Text = "Agregar Aeronave";
+            this.Load += new System.EventHandler(this.AgregarAeronave_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -220,21 +222,21 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtCantButacasPasillo;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtEspacioEncomienda;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtFabricante;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtCantButacasVentana;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txtPatente;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbTipoServicio;
+        private System.Windows.Forms.ComboBox cmbOrigen;
     }
 }

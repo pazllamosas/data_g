@@ -29,44 +29,44 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GenerarViaje));
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
+            this.dtmFechaSalida = new System.Windows.Forms.DateTimePicker();
+            this.dtmFechaLlegada = new System.Windows.Forms.DateTimePicker();
+            this.dtmFechaLlegadaEstimada = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deslogearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnAgregarAeronave = new System.Windows.Forms.Button();
+            this.btnAgregarRuta = new System.Windows.Forms.Button();
+            this.dgvVerViaje = new System.Windows.Forms.DataGridView();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVerViaje)).BeginInit();
             this.SuspendLayout();
             // 
-            // dateTimePicker1
+            // dtmFechaSalida
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(160, 27);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(210, 20);
-            this.dateTimePicker1.TabIndex = 0;
+            this.dtmFechaSalida.Location = new System.Drawing.Point(160, 27);
+            this.dtmFechaSalida.Name = "dtmFechaSalida";
+            this.dtmFechaSalida.Size = new System.Drawing.Size(210, 20);
+            this.dtmFechaSalida.TabIndex = 0;
             // 
-            // dateTimePicker2
+            // dtmFechaLlegada
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(160, 53);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(210, 20);
-            this.dateTimePicker2.TabIndex = 1;
+            this.dtmFechaLlegada.Location = new System.Drawing.Point(160, 53);
+            this.dtmFechaLlegada.Name = "dtmFechaLlegada";
+            this.dtmFechaLlegada.Size = new System.Drawing.Size(210, 20);
+            this.dtmFechaLlegada.TabIndex = 1;
             // 
-            // dateTimePicker3
+            // dtmFechaLlegadaEstimada
             // 
-            this.dateTimePicker3.Location = new System.Drawing.Point(160, 79);
-            this.dateTimePicker3.Name = "dateTimePicker3";
-            this.dateTimePicker3.Size = new System.Drawing.Size(210, 20);
-            this.dateTimePicker3.TabIndex = 2;
+            this.dtmFechaLlegadaEstimada.Location = new System.Drawing.Point(160, 79);
+            this.dtmFechaLlegadaEstimada.Name = "dtmFechaLlegadaEstimada";
+            this.dtmFechaLlegadaEstimada.Size = new System.Drawing.Size(210, 20);
+            this.dtmFechaLlegadaEstimada.TabIndex = 2;
             // 
             // label1
             // 
@@ -119,88 +119,88 @@
             this.deslogearToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
             this.deslogearToolStripMenuItem.Text = "Salir";
             // 
-            // button1
+            // btnAgregarAeronave
             // 
-            this.button1.Image = global::AerolineaFrba.Properties.Resources.add;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(15, 112);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(116, 23);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Agregar Aeronave";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAgregarAeronave.Image = global::AerolineaFrba.Properties.Resources.add;
+            this.btnAgregarAeronave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAgregarAeronave.Location = new System.Drawing.Point(15, 112);
+            this.btnAgregarAeronave.Name = "btnAgregarAeronave";
+            this.btnAgregarAeronave.Size = new System.Drawing.Size(116, 23);
+            this.btnAgregarAeronave.TabIndex = 10;
+            this.btnAgregarAeronave.Text = "Agregar Aeronave";
+            this.btnAgregarAeronave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAgregarAeronave.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnAgregarRuta
             // 
-            this.button2.Image = global::AerolineaFrba.Properties.Resources.add;
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(160, 112);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(124, 23);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "Agregar Ruta Aerea";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnAgregarRuta.Image = global::AerolineaFrba.Properties.Resources.add;
+            this.btnAgregarRuta.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAgregarRuta.Location = new System.Drawing.Point(160, 112);
+            this.btnAgregarRuta.Name = "btnAgregarRuta";
+            this.btnAgregarRuta.Size = new System.Drawing.Size(124, 23);
+            this.btnAgregarRuta.TabIndex = 11;
+            this.btnAgregarRuta.Text = "Agregar Ruta Aerea";
+            this.btnAgregarRuta.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAgregarRuta.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dgvVerViaje
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(15, 141);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(461, 146);
-            this.dataGridView1.TabIndex = 12;
+            this.dgvVerViaje.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvVerViaje.Location = new System.Drawing.Point(15, 141);
+            this.dgvVerViaje.Name = "dgvVerViaje";
+            this.dgvVerViaje.Size = new System.Drawing.Size(461, 146);
+            this.dgvVerViaje.TabIndex = 12;
             // 
-            // button3
+            // btnGuardar
             // 
-            this.button3.Cursor = System.Windows.Forms.Cursors.Default;
-            this.button3.Enabled = false;
-            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(15, 336);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 13;
-            this.button3.Text = "Guardar";
-            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnGuardar.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btnGuardar.Enabled = false;
+            this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
+            this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGuardar.Location = new System.Drawing.Point(15, 336);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardar.TabIndex = 13;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnGuardar.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btnCancelar
             // 
-            this.button4.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button4.Image = global::AerolineaFrba.Properties.Resources.cancel;
-            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.Location = new System.Drawing.Point(401, 336);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 14;
-            this.button4.Text = "Cancelar";
-            this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelar.Image = global::AerolineaFrba.Properties.Resources.cancel;
+            this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCancelar.Location = new System.Drawing.Point(401, 336);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 14;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCancelar.UseVisualStyleBackColor = true;
             // 
             // GenerarViaje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(488, 371);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnCancelar);
+            this.Controls.Add(this.btnGuardar);
+            this.Controls.Add(this.dgvVerViaje);
+            this.Controls.Add(this.btnAgregarRuta);
+            this.Controls.Add(this.btnAgregarAeronave);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dateTimePicker3);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dtmFechaLlegadaEstimada);
+            this.Controls.Add(this.dtmFechaLlegada);
+            this.Controls.Add(this.dtmFechaSalida);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GenerarViaje";
             this.Text = "Generar Viaje";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVerViaje)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -208,19 +208,19 @@
 
         #endregion
 
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker3;
+        private System.Windows.Forms.DateTimePicker dtmFechaSalida;
+        private System.Windows.Forms.DateTimePicker dtmFechaLlegada;
+        private System.Windows.Forms.DateTimePicker dtmFechaLlegadaEstimada;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deslogearToolStripMenuItem;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnAgregarAeronave;
+        private System.Windows.Forms.Button btnAgregarRuta;
+        private System.Windows.Forms.DataGridView dgvVerViaje;
+        private System.Windows.Forms.Button btnGuardar;
+        private System.Windows.Forms.Button btnCancelar;
     }
 }

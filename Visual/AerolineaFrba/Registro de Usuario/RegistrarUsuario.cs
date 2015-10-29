@@ -16,5 +16,10 @@ namespace AerolineaFrba.Registro_de_Usuario
         {
             InitializeComponent();
         }
+
+        private void RegistrarUsuario_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -26,5 +26,10 @@ namespace AerolineaFrba.Abm_Aeronave
         {
 
         }
+
+        private void AgregarAeronave_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

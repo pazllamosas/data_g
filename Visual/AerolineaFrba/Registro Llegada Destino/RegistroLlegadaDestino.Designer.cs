@@ -33,24 +33,24 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deslogearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtMatricula = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cmbAeropuertoOrigen = new System.Windows.Forms.ComboBox();
+            this.cmbAeropuertoDestino = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtTipoServicio = new System.Windows.Forms.TextBox();
+            this.txtFabricante = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.txtButPasillo = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.txtButVentana = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.txtCapacidadEncomienda = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -87,12 +87,12 @@
             this.deslogearToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
             this.deslogearToolStripMenuItem.Text = "Salir";
             // 
-            // textBox1
+            // txtMatricula
             // 
-            this.textBox1.Location = new System.Drawing.Point(154, 64);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(121, 20);
-            this.textBox1.TabIndex = 2;
+            this.txtMatricula.Location = new System.Drawing.Point(154, 64);
+            this.txtMatricula.Name = "txtMatricula";
+            this.txtMatricula.Size = new System.Drawing.Size(121, 20);
+            this.txtMatricula.TabIndex = 2;
             // 
             // label2
             // 
@@ -103,21 +103,21 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Aeropuerto de origen:";
             // 
-            // comboBox1
+            // cmbAeropuertoOrigen
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(154, 90);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 4;
+            this.cmbAeropuertoOrigen.FormattingEnabled = true;
+            this.cmbAeropuertoOrigen.Location = new System.Drawing.Point(154, 90);
+            this.cmbAeropuertoOrigen.Name = "cmbAeropuertoOrigen";
+            this.cmbAeropuertoOrigen.Size = new System.Drawing.Size(121, 21);
+            this.cmbAeropuertoOrigen.TabIndex = 4;
             // 
-            // comboBox2
+            // cmbAeropuertoDestino
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(154, 118);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 6;
+            this.cmbAeropuertoDestino.FormattingEnabled = true;
+            this.cmbAeropuertoDestino.Location = new System.Drawing.Point(154, 118);
+            this.cmbAeropuertoDestino.Name = "cmbAeropuertoDestino";
+            this.cmbAeropuertoDestino.Size = new System.Drawing.Size(121, 21);
+            this.cmbAeropuertoDestino.TabIndex = 6;
             // 
             // label3
             // 
@@ -126,20 +126,20 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(114, 13);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Aeropuerto de llegada:";
+            this.label3.Text = "Aeropuerto de destino:";
             // 
-            // button4
+            // btnVolver
             // 
-            this.button4.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button4.Image = global::AerolineaFrba.Properties.Resources.back;
-            this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button4.Location = new System.Drawing.Point(15, 35);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(58, 23);
-            this.button4.TabIndex = 7;
-            this.button4.Text = "Volver";
-            this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnVolver.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnVolver.Image = global::AerolineaFrba.Properties.Resources.back;
+            this.btnVolver.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnVolver.Location = new System.Drawing.Point(15, 35);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(58, 23);
+            this.btnVolver.TabIndex = 7;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnVolver.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -151,22 +151,22 @@
             this.label4.Text = "Tipo de Servicio:";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
-            // textBox2
+            // txtTipoServicio
             // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(154, 173);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(121, 20);
-            this.textBox2.TabIndex = 9;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.txtTipoServicio.Enabled = false;
+            this.txtTipoServicio.Location = new System.Drawing.Point(154, 173);
+            this.txtTipoServicio.Name = "txtTipoServicio";
+            this.txtTipoServicio.Size = new System.Drawing.Size(121, 20);
+            this.txtTipoServicio.TabIndex = 9;
+            this.txtTipoServicio.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
-            // textBox3
+            // txtFabricante
             // 
-            this.textBox3.Enabled = false;
-            this.textBox3.Location = new System.Drawing.Point(154, 200);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(121, 20);
-            this.textBox3.TabIndex = 11;
+            this.txtFabricante.Enabled = false;
+            this.txtFabricante.Location = new System.Drawing.Point(154, 200);
+            this.txtFabricante.Name = "txtFabricante";
+            this.txtFabricante.Size = new System.Drawing.Size(121, 20);
+            this.txtFabricante.TabIndex = 11;
             // 
             // label5
             // 
@@ -177,13 +177,13 @@
             this.label5.TabIndex = 10;
             this.label5.Text = "Fabricante:";
             // 
-            // textBox4
+            // txtButPasillo
             // 
-            this.textBox4.Enabled = false;
-            this.textBox4.Location = new System.Drawing.Point(457, 173);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(121, 20);
-            this.textBox4.TabIndex = 13;
+            this.txtButPasillo.Enabled = false;
+            this.txtButPasillo.Location = new System.Drawing.Point(457, 173);
+            this.txtButPasillo.Name = "txtButPasillo";
+            this.txtButPasillo.Size = new System.Drawing.Size(121, 20);
+            this.txtButPasillo.TabIndex = 13;
             // 
             // label6
             // 
@@ -194,13 +194,13 @@
             this.label6.TabIndex = 12;
             this.label6.Text = "Butacas en Pasillo:";
             // 
-            // textBox5
+            // txtButVentana
             // 
-            this.textBox5.Enabled = false;
-            this.textBox5.Location = new System.Drawing.Point(457, 201);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(121, 20);
-            this.textBox5.TabIndex = 15;
+            this.txtButVentana.Enabled = false;
+            this.txtButVentana.Location = new System.Drawing.Point(457, 201);
+            this.txtButVentana.Name = "txtButVentana";
+            this.txtButVentana.Size = new System.Drawing.Size(121, 20);
+            this.txtButVentana.TabIndex = 15;
             // 
             // label7
             // 
@@ -211,13 +211,13 @@
             this.label7.TabIndex = 14;
             this.label7.Text = "Butacas en Ventana:";
             // 
-            // textBox6
+            // txtCapacidadEncomienda
             // 
-            this.textBox6.Enabled = false;
-            this.textBox6.Location = new System.Drawing.Point(457, 229);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(121, 20);
-            this.textBox6.TabIndex = 17;
+            this.txtCapacidadEncomienda.Enabled = false;
+            this.txtCapacidadEncomienda.Location = new System.Drawing.Point(457, 229);
+            this.txtCapacidadEncomienda.Name = "txtCapacidadEncomienda";
+            this.txtCapacidadEncomienda.Size = new System.Drawing.Size(121, 20);
+            this.txtCapacidadEncomienda.TabIndex = 17;
             // 
             // label8
             // 
@@ -237,44 +237,44 @@
             this.label9.TabIndex = 18;
             this.label9.Text = "kg";
             // 
-            // button1
+            // btnGuardar
             // 
-            this.button1.Enabled = false;
-            this.button1.Image = global::AerolineaFrba.Properties.Resources.save;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(547, 327);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "Guardar";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnGuardar.Enabled = false;
+            this.btnGuardar.Image = global::AerolineaFrba.Properties.Resources.save;
+            this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGuardar.Location = new System.Drawing.Point(547, 327);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardar.TabIndex = 19;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnGuardar.UseVisualStyleBackColor = true;
             // 
             // RegistroLlegadaDestino
             // 
-            this.AcceptButton = this.button1;
+            this.AcceptButton = this.btnGuardar;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.button4;
+            this.CancelButton = this.btnVolver;
             this.ClientSize = new System.Drawing.Size(634, 362);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.txtCapacidadEncomienda);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.txtButVentana);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.txtButPasillo);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.txtFabricante);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtTipoServicio);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.btnVolver);
+            this.Controls.Add(this.cmbAeropuertoDestino);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cmbAeropuertoOrigen);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtMatricula);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -293,23 +293,23 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deslogearToolStripMenuItem;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtMatricula;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cmbAeropuertoOrigen;
+        private System.Windows.Forms.ComboBox cmbAeropuertoDestino;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtTipoServicio;
+        private System.Windows.Forms.TextBox txtFabricante;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox txtButPasillo;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox txtButVentana;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox txtCapacidadEncomienda;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnGuardar;
     }
 }
