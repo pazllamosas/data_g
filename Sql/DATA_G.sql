@@ -53,6 +53,9 @@ DROP TABLE DATA_G.BENEFICIOS
 IF OBJECT_ID('DATA_G.PRODUCTO') IS NOT NULL
 DROP TABLE DATA_G.PRODUCTO
 
+IF OBJECT_ID('DATA_G.INTENTOS_LOGIN') IS NOT NULL
+DROP TABLE DATA_G.INTENTOS_LOGIN
+
 IF OBJECT_ID('DATA_G.CLIENTE') IS NOT NULL
 DROP TABLE DATA_G.CLIENTE
 
@@ -68,6 +71,9 @@ DROP TABLE DATA_G.ROL
 IF OBJECT_ID('tempdb.dbo.#TEMPPASAJE') IS NOT NULL
 DROP TABLE #TEMPPASAJE
 
+IF OBJECT_ID('tempdb.dbo.#TEMPVIAJES') IS NOT NULL
+DROP TABLE #TEMPVIAJES
+
 IF  EXISTS (SELECT * FROM sys.schemas WHERE name = N'DATA_G')
 DROP SCHEMA [DATA_G]
 GO
@@ -76,6 +82,16 @@ GO
 
 CREATE SCHEMA [DATA_G] AUTHORIZATION [dbo]
 GO
+
+CREATE TABLE DATA_G.#TEMPVIAJES(
+NroVuelo int, codigo_ruta numeric(18,0), 
+CiudadOrigen numeric(18,0),
+CiudadDestino numeric(18,0), 
+fecha_salida datetime, 
+fecha_llegada datetime, 
+matricula_aeronave nvarchar(255)
+)
+
 
 CREATE TABLE #TEMPPASAJE(
 
@@ -148,6 +164,13 @@ CREATE TABLE DATA_G.CLIENTE (
 	
 )
 
+CREATE TABLE DATA_G.INTENTOS_LOGIN(
+	INT_ID INT IDENTITY(1,1) PRIMARY KEY,
+	CLIENTE INT FOREIGN KEY REFERENCES DATA_G.CLIENTE,
+	FECHA DATETIME,
+	ACCESO BIT -- 1 ES CORRECTO
+)
+
 
 CREATE TABLE DATA_G.PRODUCTO(
 
@@ -190,7 +213,7 @@ CREATE TABLE DATA_G.CIUDAD(
 )
 
 CREATE TABLE DATA_G.TIPODESERVICIO(
-	IdServicio int PRIMARY KEY,
+	IdServicio int PRIMARY KEY IDENTITY(1,1),
 	Descripcion nvarchar (255)
 	)
 
@@ -201,7 +224,6 @@ CREATE TABLE DATA_G.RUTA(
 	Codigo numeric(18, 0),
 	Precio_BaseKG numeric(18, 2),
 	Precio_BasePasaje numeric(18, 2),
-	Tipo_Servicio nvarchar(255),
 	--Ciudad_Origen  nvarchar(255),
 	--Ciudad_Destino nvarchar (255),
 	IdServicio int FOREIGN KEY REFERENCES DATA_G.TIPODESERVICIO,
@@ -227,7 +249,7 @@ CREATE TABLE DATA_G.AERONAVE(
 	Modelo nvarchar(255),
 	KG_Disponibles numeric(18, 0),
 	Fabricante nvarchar(255),
-	TipoDeServicio nvarchar(255),
+	IdServicio int FOREIGN KEY REFERENCES DATA_G.TIPODESERVICIO,
 	BajaPorFueraDeServicio bit DEFAULT 0, /** 0 false 1 true**/
 	BajaPorVidUtil bit DEFAULT 0,
 	FechaDeFueraDeServicio datetime,
@@ -418,10 +440,6 @@ INSERT INTO DATA_G.CLIENTE(IdRol,Nombre, Apellido,Dni,Direccion,Telefono,Mail,Fe
 SELECT distinct 1,Cli_Nombre,Cli_Apellido, Cli_Dni,Cli_Dir,Cli_Telefono,Cli_Mail,Cli_Fecha_Nac FROM gd_esquema.Maestra 
 Order by 4
 
-SELECT * FROM
-(SELECT distinct Cli_Nombre,Cli_Apellido, Cli_Dni from gd_esquema.Maestra) AS COCH
-WHERE COCH.Cli_Dni = 23718649
-
 /**SELECT top 4 ma.Cli_Apellido, ma.Cli_Nombre, ma.Cli_Dni
 FROM gd_esquema.Maestra ma
 where exists (select 1 
@@ -432,6 +450,40 @@ INSERT INTO DATA_G.CLIENTE(IdRol,Nombre, Apellido,Dni,Direccion,Telefono,Mail,Fe
 VALUES(0,'Maria','Lopez',33652149,'J.C Paz 520',47921563,'mlopez@gmail.com', '1990-05-21','mlopez','w23e')
 INSERT INTO DATA_G.CLIENTE(IdRol,Nombre, Apellido,Dni,Direccion,Telefono,Mail,Fecha_Nac,Username,Password)
 VALUES(0,'Administrador General',' ',32652149,'J.C Paz 720',47971573,'admin@gmail.com', '1990-05-11','admin','w23e')
+
+
+/*
+GO
+CREATE TRIGGER DATA_G.AFTER_LOGIN ON DATA_G.INTENTOS_LOGIN AFTER INSERT AS
+BEGIN --TRANSACTION
+	DECLARE @ACCESO INT, @IdCli INT, @ESTADO INT, @INTENTOS_FALLIDOS_ACTUAL INT
+	SELECT @ACCESO = ACCESO, @IdCli = CLIENTE FROM INSERTED
+	
+	SELECT @ESTADO = ESTADO, @INTENTOS_FALLIDOS_ACTUAL = INTENTOS_FALLIDOS FROM DATA_G.CLIENTE
+	WHERE IdCli = @IdCli
+	
+	IF @ACCESO = 1
+	BEGIN
+		UPDATE DATA_G.CLIENTE SET
+			INTENTOS_FALLIDOS = 0
+		WHERE IdCli = @IdCli
+	END
+	ELSE
+	BEGIN
+		IF @INTENTOS_FALLIDOS_ACTUAL = 2
+		UPDATE DATA_G.CLIENTE SET
+			INTENTOS_FALLIDOS = INTENTOS_FALLIDOS + 1,
+			ESTADO = 0
+		WHERE IdCli = @IdCli
+		ELSE
+		UPDATE DATA_G.CLIENTE SET
+			INTENTOS_FALLIDOS = INTENTOS_FALLIDOS + 1,
+			ESTADO = @ESTADO
+		WHERE IdCli = @IdCli
+	END
+END --COMMIT
+*/
+
 
 INSERT INTO DATA_G.PRODUCTO(Descripcion, CostoEnMillas, Cantidad)
 VALUES('Mochila',125,200)
@@ -475,41 +527,31 @@ SELECT DISTINCT Ruta_Ciudad_Destino
 FROM gd_esquema.Maestra
 ORDER BY 1
 
-INSERT INTO DATA_G.TIPODESERVICIO(IdServicio, Descripcion)
-VALUES (1, 'Primera Clase')
-INSERT INTO DATA_G.TIPODESERVICIO(IdServicio, Descripcion)
-VALUES (2, 'Semi-Cama')
-INSERT INTO DATA_G.TIPODESERVICIO(IdServicio, Descripcion)
-VALUES (3, 'Cama')
-INSERT INTO DATA_G.TIPODESERVICIO(IdServicio, Descripcion)
-VALUES (4, 'Premium')
-INSERT INTO DATA_G.TIPODESERVICIO(IdServicio, Descripcion)
-VALUES (5, 'Ejecutivo')
-INSERT INTO DATA_G.TIPODESERVICIO(IdServicio, Descripcion)
-VALUES (6, 'Común')
-INSERT INTO DATA_G.TIPODESERVICIO(IdServicio, Descripcion)
-VALUES (7, 'Turista')
+INSERT INTO DATA_G.TIPODESERVICIO( Descripcion)
+SELECT DISTINCT Tipo_Servicio
+FROM gd_esquema.Maestra
 
 
-INSERT INTO DATA_G.RUTA(Codigo, Precio_BaseKG, Precio_BasePasaje, Tipo_Servicio, Origen, Destino)
+INSERT INTO DATA_G.RUTA(Codigo, Precio_BaseKG, Precio_BasePasaje, IdServicio, Origen, Destino)
 
 SELECT   RUTAS.Ruta_Codigo,
 		 SUM(RUTAS.Ruta_Precio_BaseKG) AS 'Precio Base KG',
 		 SUM(RUTAS.Ruta_Precio_BasePasaje)AS 'Precio Base Pasaje',
-		 RUTAS.Tipo_Servicio,
+		 RUTAS.IdServicio,
 		 RUTAS.Origen,
 		 RUTAS.Destino
 FROM
 (SELECT DISTINCT M.Ruta_Codigo,
 	   M.Ruta_Precio_BaseKG ,
 	   M.Ruta_Precio_BasePasaje ,
-	   M.Tipo_Servicio,
+	   t.IdServicio,
 	   c1.CodigoCiudad AS 'Origen',
 	   c2.CodigoCiudad AS 'Destino'    
-FROM gd_esquema.Maestra M, DATA_G.CIUDAD c1, DATA_G.CIUDAD c2
+FROM gd_esquema.Maestra M, DATA_G.CIUDAD c1, DATA_G.CIUDAD c2, DATA_G.TIPODESERVICIO t
 WHERE M.Ruta_Ciudad_Origen = c1.Nombre
-	AND M.Ruta_Ciudad_Destino = c2.Nombre) RUTAS
-GROUP BY RUTAS.Ruta_Codigo,RUTAS.Tipo_Servicio,RUTAS.Origen, RUTAS.Destino
+	AND M.Ruta_Ciudad_Destino = c2.Nombre
+	AND M.Tipo_Servicio = t.Descripcion) RUTAS
+GROUP BY RUTAS.Ruta_Codigo,RUTAS.IdServicio,RUTAS.Origen, RUTAS.Destino
 ORDER BY 4, 5
  
  INSERT INTO DATA_G.ESTADO(IdEstado, Descripcion)
@@ -520,12 +562,14 @@ INSERT INTO DATA_G.ESTADO(IdEstado, Descripcion, CantDias)
 VALUES(3, 'Fuera de Servicio',0)
 INSERT INTO DATA_G.ESTADO(IdEstado, Descripcion)
 VALUES(4, 'Completo Vida Util')
- --AGREGAR LOS OTROS CAMPOS QUE PIDE EL ENUNCIADO?
-INSERT INTO DATA_G.AERONAVE(Matricula, Modelo, KG_Disponibles, Fabricante)
 
-SELECT M.Aeronave_Matricula, M.Aeronave_Modelo, M.Aeronave_KG_Disponibles, M.Aeronave_Fabricante
-FROM gd_esquema.Maestra M
-GROUP BY M.Aeronave_Matricula, M.Aeronave_Modelo, M.Aeronave_KG_Disponibles, M.Aeronave_Fabricante
+ --AGREGAR LOS OTROS CAMPOS QUE PIDE EL ENUNCIADO?
+INSERT INTO DATA_G.AERONAVE(Matricula, Modelo, KG_Disponibles, Fabricante, IdServicio)
+
+SELECT M.Aeronave_Matricula, M.Aeronave_Modelo, M.Aeronave_KG_Disponibles, M.Aeronave_Fabricante, t.IdServicio
+FROM gd_esquema.Maestra M, DATA_G.TIPODESERVICIO t
+WHERE M.Tipo_Servicio = t.Descripcion
+GROUP BY M.Aeronave_Matricula, M.Aeronave_Modelo, M.Aeronave_KG_Disponibles, M.Aeronave_Fabricante, t.IdServicio
 
 ORDER BY 1
 
@@ -543,7 +587,7 @@ WHERE
 	AND M.Ruta_Codigo = R.Codigo
 	AND C.CodigoCiudad = R.Origen
 	AND C2.CodigoCiudad = R.Destino
-	AND M.Tipo_Servicio = R.Tipo_Servicio
+	AND M.Tipo_Servicio = ( SELECT Descripcion FROM DATA_G.TIPODESERVICIO  WHERE IdServicio = R.IdServicio)
 	-- COMPROBAR QUE LA FECHA SALIENTE DE LLEGADA SEA MAYOR A LA SIG DE SALIDA  
 ORDER BY 2, 3, 4
 
@@ -591,6 +635,17 @@ SELECT distinct M.Pasaje_Codigo,
 	FROM gd_esquema.Maestra M
 	WHERE M.Pasaje_Codigo <> 0
 
+
+
+INSERT INTO #TEMPVIAJES( NroVuelo, codigo_ruta, CiudadOrigen, CiudadDestino, fecha_salida, fecha_llegada, matricula_aeronave)
+	SELECT	 tViajes.NroVuelo , tRutas.Codigo, c1.CodigoCiudad,c2.CodigoCiudad, tViajes.FechaSalida, tViajes.FechaLlegada, tViajes.IdAeronave 
+	FROM ((SELECT NroVuelo, FechaSalida, FechaLlegada, IdRuta, IdAeronave FROM DATA_G.VUELO) tViajes
+		JOIN (SELECT Codigo, Origen, Destino FROM DATA_G.RUTA) tRutas
+		ON (tViajes.IdRuta = tRutas.Codigo)
+			JOIN DATA_G.CIUDAD c1 ON (tRutas.Origen = c1.CodigoCiudad)
+			JOIN DATA_G.CIUDAD c2 ON (tRutas.Destino = c2.CodigoCiudad))
+
+	
 --VER COSTO PASAJE POR EL ENUNCIADO  TARDA MUCHO el problema esta en nro de vuelo, si valido fecha tarda años!!!
 --INSERT INTO DATA_G.PASAJE(Pasaje_Codigo,Precio,FechaCompra, CantMillas, NroVuelo, IdCli, IdButaca)
 --SELECT distinct M.Pasaje_Codigo,
@@ -633,9 +688,9 @@ SELECT distinct M.Pasaje_Codigo,
 ----	AND v.FechaEstimadaLlegada = M.Fecha_LLegada_Estimada
 
 INSERT INTO DATA_G.PASAJE (	Pasaje_Codigo, Precio, FechaCompra, CantMillas, NroVuelo, IdCli, IdButaca)
-	SELECT PJ.Pasaje_Codigo,
-		PJ.Pasaje_Precio,
-		PJ.Pasaje_FechaCompra,
+	SELECT DISTINCT PJ.Pasaje_Codigo,
+					PJ.Pasaje_Precio,
+					PJ.Pasaje_FechaCompra,
 		PJ.CantMillas,
 		v.NroVuelo,
 		c.idCli,
@@ -652,12 +707,10 @@ WHERE
 	AND   v.FechaSalida = PJ.FechaSalida
 	AND  v.FechaLlegada = PJ.FechaLLegada
 	AND  v.FechaEstimadaLlegada = PJ.Fecha_LLegada_Estimada
-	AND  r.Tipo_Servicio = PJ.Tipo_Servicio
-	AND r.Codigo = PJ.Ruta_Codigo
-	AND	 r.Origen = CI.CodigoCiudad
-	and ci.Nombre = pj.Origen
-	AND	 r.Destino = CI2.CodigoCiudad
-	and CI2.Nombre = pj.Destino
+	--AND  r.Tipo_Servicio = PJ.Tipo_Servicio
+	AND r.Codigo =  PJ.Ruta_Codigo
+	and ci.Nombre = (SELECT pj.Origen WHERE R.Origen = CI.CodigoCiudad)
+	and CI2.Nombre = (SELECT pj.Destino WHERE R.Destino = CI2.CodigoCiudad)
 	
 --	AND b.NroButaca = PJ.Butaca_Nro
 	AND b.IdAeronave = a.IdAeronave
