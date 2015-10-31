@@ -21,7 +21,14 @@ namespace AerolineaFrba.Inicio
         {
             txtUsuario.Enabled = !chkInvitado.Checked;
             txtContrasenia.Enabled = !chkInvitado.Checked;
-            btnIngresar.Enabled = chkInvitado.Checked;
+            if (!chkInvitado.Checked && !string.IsNullOrEmpty(txtUsuario.Text) && !string.IsNullOrEmpty(txtContrasenia.Text))
+            {
+                btnIngresar.Enabled = true;
+            }
+            else
+            {
+                btnIngresar.Enabled = chkInvitado.Checked;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

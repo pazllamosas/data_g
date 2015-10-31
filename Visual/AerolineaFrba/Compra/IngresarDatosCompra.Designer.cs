@@ -61,11 +61,11 @@
             // 
             this.dtmVuelo.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtmVuelo.Location = new System.Drawing.Point(126, 62);
-            this.dtmVuelo.MinDate = new System.DateTime(2015, 10, 17, 0, 0, 0, 0);
+            this.dtmVuelo.MinDate = new System.DateTime(2015, 10, 31, 0, 0, 0, 0);
             this.dtmVuelo.Name = "dtmVuelo";
             this.dtmVuelo.Size = new System.Drawing.Size(121, 20);
             this.dtmVuelo.TabIndex = 0;
-            this.dtmVuelo.Value = new System.DateTime(2015, 10, 24, 13, 33, 42, 0);
+            this.dtmVuelo.Value = new System.DateTime(2015, 10, 31, 0, 0, 0, 0);
             this.dtmVuelo.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // label1
@@ -94,6 +94,7 @@
             this.cmbCiudadOrigen.Name = "cmbCiudadOrigen";
             this.cmbCiudadOrigen.Size = new System.Drawing.Size(121, 21);
             this.cmbCiudadOrigen.TabIndex = 3;
+            this.cmbCiudadOrigen.SelectedIndexChanged += new System.EventHandler(this.cmbCiudadOrigen_SelectedIndexChanged);
             // 
             // menuStrip1
             // 
@@ -154,6 +155,7 @@
             this.txtCantPasajes.Name = "txtCantPasajes";
             this.txtCantPasajes.Size = new System.Drawing.Size(121, 20);
             this.txtCantPasajes.TabIndex = 14;
+            this.txtCantPasajes.TextChanged += new System.EventHandler(this.txtCantPasajes_TextChanged);
             // 
             // txtPesoEncomienda
             // 
@@ -161,6 +163,7 @@
             this.txtPesoEncomienda.Name = "txtPesoEncomienda";
             this.txtPesoEncomienda.Size = new System.Drawing.Size(121, 20);
             this.txtPesoEncomienda.TabIndex = 16;
+            this.txtPesoEncomienda.TextChanged += new System.EventHandler(this.txtPesoEncomienda_TextChanged);
             // 
             // label5
             // 
