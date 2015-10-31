@@ -74,6 +74,9 @@ DROP TABLE #TEMPPASAJE
 IF OBJECT_ID('tempdb.dbo.#TEMPVIAJES') IS NOT NULL
 DROP TABLE #TEMPVIAJES
 
+IF OBJECT_ID('tempdb.dbo.#TEMPCLIENTES') IS NOT NULL
+DROP TABLE #TEMPCLIENTES
+
 IF  EXISTS (SELECT * FROM sys.schemas WHERE name = N'DATA_G')
 DROP SCHEMA [DATA_G]
 GO
@@ -82,6 +85,14 @@ GO
 
 CREATE SCHEMA [DATA_G] AUTHORIZATION [dbo]
 GO
+
+CREATE TABLE DATA_G.#TEMPCLIENTES(
+IdCli int,
+CliDni numeric(18,0),
+CliApellido nvarchar (255),
+CliNombre nvarchar (255),
+CliFechaNac datetime
+)
 
 CREATE TABLE DATA_G.#TEMPVIAJES(
 NroVuelo int, codigo_ruta numeric(18,0), 
@@ -119,7 +130,7 @@ CREATE TABLE #TEMPPASAJE(
 
 CREATE TABLE DATA_G.ROL(
 
-	IdRol bit PRIMARY KEY,
+	IdRol int PRIMARY KEY IDENTITY(1,1),
 
 	Descripcion varchar(255)
 
@@ -138,7 +149,7 @@ CREATE TABLE DATA_G.FUNCIONALIDADES(
 CREATE TABLE DATA_G.ROL_POR_FUNCIONALIDADES(
 
 	IdFuncionalidad int FOREIGN KEY REFERENCES DATA_G.FUNCIONALIDADES,
-	IdRol bit FOREIGN KEY REFERENCES DATA_G.ROL
+	IdRol int FOREIGN KEY REFERENCES DATA_G.ROL
 
 )
 
@@ -147,7 +158,7 @@ CREATE TABLE DATA_G.CLIENTE (
 
 	IdCli int PRIMARY KEY IDENTITY(1,1),
 
-	IdRol bit FOREIGN KEY REFERENCES DATA_G.ROL,
+	IdRol int FOREIGN KEY REFERENCES DATA_G.ROL,
 	
 	/** PONGO NULL PARA QUE LOS USUARIOS NO TENGAN USERNAME NI PASSWORD**/
 	Username nvarchar(255) NULL, /** Validar desd c# que sea unico**/
@@ -346,7 +357,7 @@ CREATE TABLE DATA_G.DEVOLUCION(
 CREATE TABLE DATA_G.MILLAS(
 
 	IdMillas int PRIMARY KEY,
-	CantMillas int,
+	HistorialMillas int DEFAULT '0',
 	
 	IdCli int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
 	NroVuelo int FOREIGN KEY REFERENCES DATA_G.VUELO
@@ -356,10 +367,10 @@ CREATE TABLE DATA_G.MILLAS(
 
 -------------------------------------------------- MIGRACION DE DATOS ----------------------------------------------------------
 
-INSERT INTO DATA_G.ROL(IdRol, Descripcion)
-VALUES (0,'Administrador')
-INSERT INTO DATA_G.ROL(IdRol, Descripcion)
-VALUES (1, 'Cliente')
+INSERT INTO DATA_G.ROL( Descripcion)
+VALUES ('Administrador')
+INSERT INTO DATA_G.ROL( Descripcion)
+VALUES ('Cliente')
 
 SET IDENTITY_INSERT DATA_G.FUNCIONALIDADES ON
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
@@ -400,44 +411,44 @@ VALUES (16,'Consulta TOP 5')
 SET IDENTITY_INSERT DATA_G.FUNCIONALIDADES OFF
 
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
-VALUES(0,0)
+VALUES(0,1)
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
-VALUES(1,0)
+VALUES(1,1)
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
-VALUES(2,0)
+VALUES(2,1)
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
-VALUES(4,0)
+VALUES(4,1)
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
-VALUES(5,0)
+VALUES(5,1)
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
-VALUES(6,0)
+VALUES(6,1)
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
-VALUES(7,0)
+VALUES(7,1)
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
-VALUES(8,0)
+VALUES(8,1)
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
-VALUES(9,0)
+VALUES(9,1)
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
-VALUES(10,0)
-INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
-VALUES(11,0)
+VALUES(10,1)
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
 VALUES(11,1)
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
-VALUES(12,0)
+VALUES(11,2)
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
-VALUES(13,0)
+VALUES(12,1)
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
-VALUES(14,1)
+VALUES(13,1)
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
-VALUES(15,0)
+VALUES(14,2)
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
-VALUES(16,1)
+VALUES(15,1)
+INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
+VALUES(16,2)
 
 
 
 INSERT INTO DATA_G.CLIENTE(IdRol,Nombre, Apellido,Dni,Direccion,Telefono,Mail,Fecha_Nac)
-SELECT distinct 1,Cli_Nombre,Cli_Apellido, Cli_Dni,Cli_Dir,Cli_Telefono,Cli_Mail,Cli_Fecha_Nac FROM gd_esquema.Maestra 
+SELECT distinct 2,Cli_Nombre,Cli_Apellido, Cli_Dni,Cli_Dir,Cli_Telefono,Cli_Mail,Cli_Fecha_Nac FROM gd_esquema.Maestra 
 Order by 4
 
 /**SELECT top 4 ma.Cli_Apellido, ma.Cli_Nombre, ma.Cli_Dni
@@ -447,11 +458,21 @@ where exists (select 1
 **/
 
 INSERT INTO DATA_G.CLIENTE(IdRol,Nombre, Apellido,Dni,Direccion,Telefono,Mail,Fecha_Nac,Username,Password)
-VALUES(0,'Maria','Lopez',33652149,'J.C Paz 520',47921563,'mlopez@gmail.com', '1990-05-21','mlopez','w23e')
+VALUES(1,'Maria','Lopez',33652149,'J.C Paz 520',47921563,'mlopez@gmail.com', '1990-05-21','mlopez','w23e')
 INSERT INTO DATA_G.CLIENTE(IdRol,Nombre, Apellido,Dni,Direccion,Telefono,Mail,Fecha_Nac,Username,Password)
-VALUES(0,'Administrador General',' ',32652149,'J.C Paz 720',47971573,'admin@gmail.com', '1990-05-11','admin','w23e')
+VALUES(1,'Administrador General',' ',32652149,'J.C Paz 720',47971573,'admin@gmail.com', '1990-05-11','admin','w23e')
 
+INSERT INTO #TEMPCLIENTES(IdCli, CliDni, CliApellido, CliNombre, CliFechaNac)
+SELECT DISTINCT IdCli, Dni ,Apellido, Nombre, Fecha_Nac 
+FROM  DATA_G.CLIENTE C, gd_esquema.Maestra M
+WHERE C.Dni = M.Cli_Dni
+	AND C.Apellido = M.Cli_Apellido
+	AND C.Nombre = M.Cli_Nombre
+	AND C.Fecha_Nac = M.Cli_Fecha_Nac
 
+CREATE INDEX IDX_TempClientes ON #TEMPCLIENTES
+(IdCli, CliApellido, CliNombre, CliFechaNac)
+GO
 /*
 GO
 CREATE TRIGGER DATA_G.AFTER_LOGIN ON DATA_G.INTENTOS_LOGIN AFTER INSERT AS
@@ -598,19 +619,24 @@ SELECT DISTINCT M.Butaca_Nro,
 				A.IdAeronave
 				
 FROM gd_esquema.Maestra M, DATA_G.AERONAVE A 
---tipo butaca  0 es ENCOMIENDA
 WHERE M.Aeronave_Matricula = A.Matricula
 	AND  M.Aeronave_Modelo = A.Modelo
 	AND M.Aeronave_KG_Disponibles = A.KG_Disponibles
 	AND M.Aeronave_Fabricante = A.Fabricante
 	AND M.Butaca_Tipo IN ('Ventanilla', 'Pasillo')
 	AND M.Butaca_Piso <>0
-ORDER BY 1, 4
+ORDER BY 1
 
---UPDATE DATA_G.AERONAVE SET CantButacas = ()
+UPDATE DATA_G.AERONAVE 
+	SET CantButacas = joinButacaAeronave.CANTIDAD
+	FROM (SELECT B.IdAeronave, COUNT(B.NroButaca) AS 'CANTIDAD'
+										FROM DATA_G.BUTACA B, DATA_G.AERONAVE A
+										WHERE A.IdAeronave = B.IdAeronave 
+										GROUP BY B.IdAeronave ) AS joinButacaAeronave 
+										WHERE joinButacaAeronave.IdAeronave =  DATA_G.AERONAVE.IdAeronave
 
---SELECT B.IdAeronave, COUNT(*) FROM DATA_G.BUTACA B GROUP BY B.IdAeronave
 
+										
 --INSERT tabla temporal
 INSERT INTO #TEMPPASAJE(Pasaje_Codigo, Pasaje_Precio, Pasaje_FechaCompra, CantMillas, Cli_Dni, Cli_Apellido, Cli_Nombre, Ruta_Codigo, Tipo_Servicio, Aeronave_Matricula, Aeronave_Fab , Butaca_Nro, Butaca_Tipo, FechaSalida, FechaLLegada, Fecha_LLegada_Estimada, Origen, Destino)
 SELECT distinct M.Pasaje_Codigo,
@@ -638,12 +664,48 @@ SELECT distinct M.Pasaje_Codigo,
 
 
 INSERT INTO #TEMPVIAJES( NroVuelo, codigo_ruta, CiudadOrigen, CiudadDestino, fecha_salida, fecha_llegada, matricula_aeronave)
-	SELECT	 tViajes.NroVuelo , tRutas.Codigo, c1.CodigoCiudad,c2.CodigoCiudad, tViajes.FechaSalida, tViajes.FechaLlegada, tViajes.IdAeronave 
+	SELECT	 tViajes.NroVuelo , tRutas.IdRuta, c1.CodigoCiudad,c2.CodigoCiudad, tViajes.FechaSalida, tViajes.FechaLlegada, tViajes.IdAeronave 
 	FROM ((SELECT NroVuelo, FechaSalida, FechaLlegada, IdRuta, IdAeronave FROM DATA_G.VUELO) tViajes
-		JOIN (SELECT Codigo, Origen, Destino FROM DATA_G.RUTA) tRutas
-		ON (tViajes.IdRuta = tRutas.Codigo)
+		JOIN (SELECT IdRuta, Origen, Destino FROM DATA_G.RUTA) tRutas
+		ON (tViajes.IdRuta = tRutas.IdRuta)
 			JOIN DATA_G.CIUDAD c1 ON (tRutas.Origen = c1.CodigoCiudad)
 			JOIN DATA_G.CIUDAD c2 ON (tRutas.Destino = c2.CodigoCiudad))
+
+CREATE INDEX IDX_TempViajes ON #TEMPVIAJES
+(NroVuelo, codigo_ruta, CiudadOrigen, CiudadDestino, fecha_salida, fecha_llegada, matricula_aeronave)
+GO
+
+INSERT INTO DATA_G.PASAJE (	Pasaje_Codigo, Precio, FechaCompra, CantMillas, NroVuelo, IdCli/*, IdButaca*/)
+	SELECT DISTINCT PJ.Pasaje_Codigo,
+					PJ.Pasaje_Precio,
+					PJ.Pasaje_FechaCompra,
+		PJ.CantMillas,
+		VJ.NroVuelo,
+		C.idCli--,
+		--(b.IdButaca) AS 'Nro Butaca'
+	
+FROM  DATA_G.RUTA r, DATA_G.CIUDAD CI, DATA_G.CIUDAD CI2,/*DATA_G.BUTACA b,*/ DATA_G.AERONAVE a, DATA_G.CLIENTE c, #TEMPVIAJES VJ  WITH (INDEX(IDX_TempViajes)), #TEMPPASAJE AS PJ
+WHERE	
+	C.Dni = PJ.Cli_Dni
+	AND C.Apellido = PJ.Cli_Apellido
+	AND C.Nombre = PJ.Cli_Nombre
+	
+	AND	a.Matricula = PJ.Aeronave_Matricula
+	AND r.Codigo =  PJ.Ruta_Codigo
+	AND a.Fabricante = PJ.Aeronave_Fab
+	AND VJ.codigo_ruta = R.IdRuta
+	AND ci2.Nombre = ( SELECT PJ.Destino WHERE R.Destino = CI2.CodigoCiudad)
+	and ci.Nombre = ( SELECT PJ.Origen WHERE R.Origen = CI.CodigoCiudad)
+	--and CI2.CodigoCiudad = VJ.CiudadDestino
+	and VJ.matricula_aeronave = a.IdAeronave
+	AND   VJ.fecha_salida = PJ.FechaSalida
+	AND  VJ.fecha_llegada = PJ.FechaLLegada
+
+		/*
+	--AND  r.Tipo_Servicio = PJ.Tipo_Servicio
+	AND b.NroButaca = PJ.Butaca_Nro
+	AND b.IdAeronave = a.IdAeronave
+	--AND  b.Tipo = PJ.Butaca_Tipo
 
 	
 --VER COSTO PASAJE POR EL ENUNCIADO  TARDA MUCHO el problema esta en nro de vuelo, si valido fecha tarda años!!!
@@ -686,43 +748,6 @@ INSERT INTO #TEMPVIAJES( NroVuelo, codigo_ruta, CiudadOrigen, CiudadDestino, fec
 ----	AND  v.FechaSalida = M.FechaSalida
 ----	AND  v.FechaLlegada = M.FechaLLegada
 ----	AND v.FechaEstimadaLlegada = M.Fecha_LLegada_Estimada
-
-INSERT INTO DATA_G.PASAJE (	Pasaje_Codigo, Precio, FechaCompra, CantMillas, NroVuelo, IdCli, IdButaca)
-	SELECT DISTINCT PJ.Pasaje_Codigo,
-					PJ.Pasaje_Precio,
-					PJ.Pasaje_FechaCompra,
-		PJ.CantMillas,
-		v.NroVuelo,
-		c.idCli,
-		(b.IdButaca) AS 'Nro Butaca'
-	
-FROM  DATA_G.RUTA r, DATA_G.CIUDAD CI, DATA_G.CIUDAD CI2,DATA_G.BUTACA b, DATA_G.AERONAVE a, DATA_G.CLIENTE c, DATA_G.VUELO v, #TEMPPASAJE AS PJ
-WHERE	 
-	 c.Dni = PJ.Cli_Dni
-	AND  c.Apellido = PJ.Cli_Apellido
-	AND  c.Nombre = PJ.Cli_Nombre
-	and v.IdRuta = r.IdRuta
-	and v.IdAeronave = a.IdAeronave
-	AND a.Matricula = PJ.Aeronave_Matricula
-	AND   v.FechaSalida = PJ.FechaSalida
-	AND  v.FechaLlegada = PJ.FechaLLegada
-	AND  v.FechaEstimadaLlegada = PJ.Fecha_LLegada_Estimada
-	--AND  r.Tipo_Servicio = PJ.Tipo_Servicio
-	AND r.Codigo =  PJ.Ruta_Codigo
-	and ci.Nombre = (SELECT pj.Origen WHERE R.Origen = CI.CodigoCiudad)
-	and CI2.Nombre = (SELECT pj.Destino WHERE R.Destino = CI2.CodigoCiudad)
-	
---	AND b.NroButaca = PJ.Butaca_Nro
-	AND b.IdAeronave = a.IdAeronave
-	AND r.Codigo = PJ.Ruta_Codigo
-	AND	 r.Origen = CI.CodigoCiudad
-	and ci.Nombre = pj.Origen
-	AND	 r.Destino = CI2.CodigoCiudad
-	and CI2.Nombre = pj.Destino
-
-	AND a.Fabricante = PJ.Aeronave_Fab
-	--AND  b.Tipo = PJ.Butaca_Tipo
-
 	
 --MISMO COD DE PAQUETE CON DISTINTOS NROS DE VUELO tarda!!
 INSERT INTO DATA_G.PAQUETE(Codigo, FechaCompra, Precio, NroVuelo, KG)
@@ -739,35 +764,50 @@ WHERE M.Paquete_Codigo <> 0
 	AND A.Fabricante = M.Aeronave_Fabricante
 	AND R.Ciudad_Destino = M.Ruta_Ciudad_Destino
 	AND R.Ciudad_Origen = M.Ruta_Ciudad_Origen
-ORDER BY 1
+ORDER BY 1*/
 
-INSERT INTO DATA_G.COMPRADOR(IdCli,Pasaje_Codigo, IdPaquete, IdPuntoDeCompra)
-SELECT  C.IdCli,
-		PJ.Pasaje_Codigo,
+INSERT INTO DATA_G.COMPRADOR(IdCli, IdPasaje, IdPaquete, IdPuntoDeCompra)
+SELECT  TC.IdCli,
+		PJ.IdPasaje,
 		PQ.IdPaquete,
 		PC.IdPuntoDeCompra
-FROM DATA_G.CLIENTE C, DATA_G.PASAJE PJ, DATA_G.PAQUETE PQ, DATA_G.PUNTO_DE_COMPRA PC, gd_esquema.Maestra M 
+FROM #TEMPCLIENTES TC WITH (INDEX(IDX_TempClientes)), DATA_G.PASAJE PJ, DATA_G.PAQUETE PQ, DATA_G.PUNTO_DE_COMPRA PC, gd_esquema.Maestra M 
 WHERE PJ.FechaCompra = M.Pasaje_FechaCompra OR  PQ.FechaCompra = M.Paquete_FechaCompra
-	AND C.Dni = M.Cli_Dni
-
-INSERT INTO DATA_G.DEVOLUCION(Codigo_Compra, Pasaje_Codigo, IdPaquete)
-SELECT  C.Codigo_Compra,
-		PJ.Pasaje_Codigo,
-		PQ.IdPaquete
-FROM DATA_G.COMPRADOR C, DATA_G.PASAJE PJ, DATA_G.PAQUETE PQ
-
-INSERT INTO DATA_G.MILLAS (IdCli, CantMillas, NroVuelo)
-SELECT DISTINCT C.IdCli,
-				P.CantMillas,
-				V.NroVuelo
-FROM DATA_G.CLIENTE C, DATA_G.VUELO V, DATA_G.PASAJE P
-
 	
 
+INSERT INTO DATA_G.DEVOLUCION(Codigo_Compra, IdPasaje, IdPaquete)
+SELECT  CP.Codigo_Compra,
+		PJ.IdPasaje,
+		PQ.IdPaquete
+FROM DATA_G.COMPRADOR CP, DATA_G.PASAJE PJ, DATA_G.PAQUETE PQ, DATA_G.CLIENTE C, gd_esquema.Maestra M
+WHERE CP.IdCli = C.IdCli
+	AND PJ.FechaCompra = M.Pasaje_FechaCompra OR  PQ.FechaCompra = M.Paquete_FechaCompra
 
+INSERT INTO DATA_G.MILLAS (IdCli, NroVuelo)
+SELECT DISTINCT C.IdCli,
+				V.NroVuelo
+FROM  DATA_G.VUELO V, DATA_G.RUTA r, DATA_G.CIUDAD CI, DATA_G.CIUDAD CI2,/*DATA_G.BUTACA b,*/ DATA_G.AERONAVE a, DATA_G.CLIENTE c, #TEMPVIAJES VJ  WITH (INDEX(IDX_TempViajes)), #TEMPPASAJE AS PJ
+WHERE	
+	C.Dni = PJ.Cli_Dni
+	AND C.Apellido = PJ.Cli_Apellido
+	AND C.Nombre = PJ.Cli_Nombre
+	/*
+	AND V.NroVuelo = VJ.NroVuelo
 
+	AND	a.Matricula = PJ.Aeronave_Matricula
+	AND r.Codigo =  PJ.Ruta_Codigo
+	AND a.Fabricante = PJ.Aeronave_Fab
+	AND VJ.codigo_ruta = R.IdRuta
+	AND ci2.Nombre = ( SELECT PJ.Destino WHERE R.Destino = CI2.CodigoCiudad)
+	and ci.Nombre = ( SELECT PJ.Origen WHERE R.Origen = CI.CodigoCiudad)
+	--and CI2.CodigoCiudad = VJ.CiudadDestino
+	and VJ.matricula_aeronave = a.IdAeronave
+	AND   VJ.fecha_salida = PJ.FechaSalida
+	AND  VJ.fecha_llegada = PJ.FechaLLegada
+	--and CI2.CodigoCiudad = VJ.CiudadDestino
+	AND  PJ.Tipo_Servicio = (SELECT TS.Descripcion FROM DATA_G.TIPODESERVICIO TS WHERE R.IdServicio = TS.IdServicio) */
 
-
+	
 
 
  /**CREATE FUNCTION DATA_G.GetMillas( @Pasaje_Precio numeric(18,2))
