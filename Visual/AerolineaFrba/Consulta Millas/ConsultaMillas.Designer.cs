@@ -79,9 +79,11 @@
             // txtDni
             // 
             this.txtDni.Location = new System.Drawing.Point(85, 27);
+            this.txtDni.MaxLength = 8;
             this.txtDni.Name = "txtDni";
             this.txtDni.Size = new System.Drawing.Size(120, 20);
             this.txtDni.TabIndex = 8;
+            this.txtDni.TextChanged += new System.EventHandler(this.txtDni_TextChanged);
             // 
             // btnVolver
             // 
@@ -115,6 +117,7 @@
             // 
             // btnConsultar
             // 
+            this.btnConsultar.Enabled = false;
             this.btnConsultar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnConsultar.Location = new System.Drawing.Point(211, 25);
             this.btnConsultar.Name = "btnConsultar";

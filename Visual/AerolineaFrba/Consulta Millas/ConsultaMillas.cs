@@ -27,5 +27,10 @@ namespace AerolineaFrba.Consulta_Millas
             this.Hide();
             FormProvider.MainMenu.Show();
         }
+
+        private void txtDni_TextChanged(object sender, EventArgs e)
+        {
+            btnConsultar.Enabled = !string.IsNullOrEmpty(txtDni.Text);
+        }
     }
 }

@@ -18,7 +18,8 @@ namespace AerolineaFrba.Compra
         }
 
         public bool ValidateFlightSearch() {
-            if ( string.IsNullOrEmpty(cmbCiudadOrigen.Text) && string.IsNullOrEmpty(cmbCiudadDestino.Text) && ( !string.IsNullOrWhitespace(txtCantPasajes.Text) || !string.IsNullOrWhitespace(txtPesoEncomienda.Text) ) {
+            if (string.IsNullOrEmpty(cmbCiudadOrigen.Text) && string.IsNullOrEmpty(cmbCiudadDestino.Text) && (!string.IsNullOrEmpty(txtCantPasajes.Text) || !string.IsNullOrEmpty(txtPesoEncomienda.Text)))
+            {
                 return true;
             } else {
                 return false;
