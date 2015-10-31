@@ -93,6 +93,7 @@
             this.txtMatricula.Name = "txtMatricula";
             this.txtMatricula.Size = new System.Drawing.Size(121, 20);
             this.txtMatricula.TabIndex = 2;
+            this.txtMatricula.TextChanged += new System.EventHandler(this.txtMatricula_TextChanged);
             // 
             // label2
             // 
@@ -110,6 +111,7 @@
             this.cmbAeropuertoOrigen.Name = "cmbAeropuertoOrigen";
             this.cmbAeropuertoOrigen.Size = new System.Drawing.Size(121, 21);
             this.cmbAeropuertoOrigen.TabIndex = 4;
+            this.cmbAeropuertoOrigen.SelectedIndexChanged += new System.EventHandler(this.cmbAeropuertoOrigen_SelectedIndexChanged);
             // 
             // cmbAeropuertoDestino
             // 
@@ -118,6 +120,7 @@
             this.cmbAeropuertoDestino.Name = "cmbAeropuertoDestino";
             this.cmbAeropuertoDestino.Size = new System.Drawing.Size(121, 21);
             this.cmbAeropuertoDestino.TabIndex = 6;
+            this.cmbAeropuertoDestino.SelectedIndexChanged += new System.EventHandler(this.cmbAeropuertoDestino_SelectedIndexChanged);
             // 
             // label3
             // 
