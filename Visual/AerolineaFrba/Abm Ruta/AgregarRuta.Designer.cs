@@ -161,6 +161,7 @@
             this.cmbCiudadOrigen.Name = "cmbCiudadOrigen";
             this.cmbCiudadOrigen.Size = new System.Drawing.Size(100, 21);
             this.cmbCiudadOrigen.TabIndex = 13;
+            this.cmbCiudadOrigen.SelectedIndexChanged += new System.EventHandler(this.cmbCiudadOrigen_SelectedIndexChanged);
             // 
             // cmbCiudadDestino
             // 
@@ -169,6 +170,7 @@
             this.cmbCiudadDestino.Name = "cmbCiudadDestino";
             this.cmbCiudadDestino.Size = new System.Drawing.Size(100, 21);
             this.cmbCiudadDestino.TabIndex = 14;
+            this.cmbCiudadDestino.SelectedIndexChanged += new System.EventHandler(this.cmbCiudadDestino_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -186,6 +188,7 @@
             this.cmbTipoServicio.Name = "cmbTipoServicio";
             this.cmbTipoServicio.Size = new System.Drawing.Size(100, 21);
             this.cmbTipoServicio.TabIndex = 16;
+            this.cmbTipoServicio.SelectedIndexChanged += new System.EventHandler(this.cmbTipoServicio_SelectedIndexChanged);
             // 
             // AgregarRuta
             // 
