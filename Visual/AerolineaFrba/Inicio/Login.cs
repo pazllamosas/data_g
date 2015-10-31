@@ -20,7 +20,8 @@ namespace AerolineaFrba.Inicio
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             txtUsuario.Enabled = !chkInvitado.Checked;
-            txtContasenia.Enabled = !chkInvitado.Checked;
+            txtContrasenia.Enabled = !chkInvitado.Checked;
+            btnIngresar.Enabled = chkInvitado.Checked;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -38,7 +39,7 @@ namespace AerolineaFrba.Inicio
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(this.Text) && !string.IsNullOrEmpty(txtContasenia.Text))
+            if (!string.IsNullOrEmpty(txtUsuario.Text) && !string.IsNullOrEmpty(txtContrasenia.Text))
             {
                 btnIngresar.Enabled = true;
             }
@@ -50,7 +51,7 @@ namespace AerolineaFrba.Inicio
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(this.Text) && !string.IsNullOrEmpty(txtUsuario.Text))
+            if (!string.IsNullOrEmpty(txtContrasenia.Text) && !string.IsNullOrEmpty(txtUsuario.Text))
             {
                 btnIngresar.Enabled = true;
             }

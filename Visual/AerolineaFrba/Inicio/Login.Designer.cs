@@ -32,7 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtUsuario = new System.Windows.Forms.TextBox();
-            this.txtContasenia = new System.Windows.Forms.TextBox();
+            this.txtContrasenia = new System.Windows.Forms.TextBox();
             this.chkInvitado = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnIngresar = new System.Windows.Forms.Button();
@@ -66,15 +66,15 @@
             this.txtUsuario.TabIndex = 2;
             this.txtUsuario.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // txtContasenia
+            // txtContrasenia
             // 
-            this.txtContasenia.Location = new System.Drawing.Point(304, 195);
-            this.txtContasenia.Name = "txtContasenia";
-            this.txtContasenia.PasswordChar = '●';
-            this.txtContasenia.Size = new System.Drawing.Size(100, 20);
-            this.txtContasenia.TabIndex = 3;
-            this.txtContasenia.UseSystemPasswordChar = true;
-            this.txtContasenia.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.txtContrasenia.Location = new System.Drawing.Point(304, 195);
+            this.txtContrasenia.Name = "txtContrasenia";
+            this.txtContrasenia.PasswordChar = '●';
+            this.txtContrasenia.Size = new System.Drawing.Size(100, 20);
+            this.txtContrasenia.TabIndex = 3;
+            this.txtContrasenia.UseSystemPasswordChar = true;
+            this.txtContrasenia.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // chkInvitado
             // 
@@ -101,6 +101,7 @@
             // 
             // btnIngresar
             // 
+            this.btnIngresar.Enabled = false;
             this.btnIngresar.Image = global::AerolineaFrba.Properties.Resources.person;
             this.btnIngresar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnIngresar.Location = new System.Drawing.Point(286, 244);
@@ -118,11 +119,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::AerolineaFrba.Properties.Resources.airplane2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(634, 361);
+            this.ClientSize = new System.Drawing.Size(634, 362);
             this.Controls.Add(this.btnIngresar);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.chkInvitado);
-            this.Controls.Add(this.txtContasenia);
+            this.Controls.Add(this.txtContrasenia);
             this.Controls.Add(this.txtUsuario);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -142,7 +143,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtUsuario;
-        private System.Windows.Forms.TextBox txtContasenia;
+        private System.Windows.Forms.TextBox txtContrasenia;
         private System.Windows.Forms.CheckBox chkInvitado;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnIngresar;
