@@ -15,12 +15,23 @@ namespace AerolineaFrba.Abm_Aeronave
         public VerAeronaves()
         {
             InitializeComponent();
+            
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             this.Hide();
             new Inicio.Menu().Show();
+        }
+
+        private void btnDarBaja_Click(object sender, EventArgs e)
+        {
+            new BajaAeronave().Show();
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            new AgregarAeronave().Show();
         }
     }
 }

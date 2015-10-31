@@ -130,6 +130,7 @@
             this.btnAgregarAeronave.Text = "Agregar Aeronave";
             this.btnAgregarAeronave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAgregarAeronave.UseVisualStyleBackColor = true;
+            this.btnAgregarAeronave.Click += new System.EventHandler(this.btnAgregarAeronave_Click);
             // 
             // btnAgregarRuta
             // 
@@ -142,6 +143,7 @@
             this.btnAgregarRuta.Text = "Agregar Ruta Aerea";
             this.btnAgregarRuta.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAgregarRuta.UseVisualStyleBackColor = true;
+            this.btnAgregarRuta.Click += new System.EventHandler(this.btnAgregarRuta_Click);
             // 
             // dgvVerViaje
             // 

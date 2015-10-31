@@ -25,8 +25,7 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var myForm = new AgregarRuta();
-            myForm.Show();
+            new AgregarRuta().Show();
         }
 
         private void button3_Click(object sender, EventArgs e)

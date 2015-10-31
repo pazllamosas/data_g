@@ -24,7 +24,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
         }
 
         private void AgregarAeronave_Load(object sender, EventArgs e)

@@ -55,6 +55,7 @@
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // menuStrip1
             // 
@@ -111,7 +112,7 @@
             this.btnVolver.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnVolver.Image = global::AerolineaFrba.Properties.Resources.back;
             this.btnVolver.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnVolver.Location = new System.Drawing.Point(12, 27);
+            this.btnVolver.Location = new System.Drawing.Point(10, 27);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(58, 23);
             this.btnVolver.TabIndex = 10;
@@ -158,6 +159,7 @@
             this.btnDarBaja.Text = "Dar de Baja";
             this.btnDarBaja.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnDarBaja.UseVisualStyleBackColor = true;
+            this.btnDarBaja.Click += new System.EventHandler(this.btnDarBaja_Click);
             // 
             // VerAeronaves
             // 

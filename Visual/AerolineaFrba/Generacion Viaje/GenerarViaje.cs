@@ -22,5 +22,17 @@ namespace AerolineaFrba.Generacion_Viaje
             this.Hide();
             new Inicio.Menu().Show();
         }
+
+        private void btnAgregarRuta_Click(object sender, EventArgs e)
+        {
+            new Abm_Ruta.VerRutas().Show();
+            //entro desde acá puede tocar boton seleccionar
+        }
+
+        private void btnAgregarAeronave_Click(object sender, EventArgs e)
+        {
+             new Abm_Aeronave.VerAeronaves().Show();
+            //entro desde acá puede tocar boton seleccionar
+        }
     }
 }

@@ -57,5 +57,10 @@ namespace AerolineaFrba.Compra
             this.Hide();
             new Inicio.Menu().Show();
         }
+
+        private void btnSiguiente_Click(object sender, EventArgs e)
+        {
+            new Compra.ElegirButaca().Show();
+        }
     }
 }

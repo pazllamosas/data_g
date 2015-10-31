@@ -79,8 +79,7 @@ namespace AerolineaFrba.Inicio
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var abmAeronave = new Abm_Aeronave.VerAeronaves();
-            abmAeronave.Show();
+            new Abm_Aeronave.VerAeronaves().Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
