@@ -34,7 +34,8 @@ namespace AerolineaFrba.Abm_Rol
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
+            FormProvider.VerRoles.Show();
         }
     }
 }

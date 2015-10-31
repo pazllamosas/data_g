@@ -24,7 +24,8 @@ namespace AerolineaFrba.Abm_Rol
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new AgregarRol().Show();
+            this.Hide();
+            FormProvider.AgregarRol.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -20,12 +20,13 @@ namespace AerolineaFrba.Abm_Ruta
         private void button4_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new Inicio.Menu().Show();
+            FormProvider.MainMenu.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new AgregarRuta().Show();
+            this.Hide();
+            FormProvider.AgregarRuta.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)

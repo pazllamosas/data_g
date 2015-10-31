@@ -25,75 +25,67 @@ namespace AerolineaFrba.Inicio
         private void button6_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var Comprar = new Compra.IngresarDatosCompra();
-            Comprar.Show();
+            FormProvider.IngresarDatosCompra.Show();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var ConsultaMillas = new Consulta_Millas.ConsultaMillas();
-            ConsultaMillas.Show();
+            FormProvider.ConsultaMillas.Show();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var CanjearMillas = new Canje_Millas.CanjeMillas();
-            CanjearMillas.Show();
+            FormProvider.CanjeMillas.Show();
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var RegistroLlegada = new Registro_Llegada_Destino.RegistroLlegadaDestino();
-            RegistroLlegada.Show();
+            FormProvider.RegistroLlegadaDestino.Show();
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var Devolucion = new Devolucion.Devolucion();
-            Devolucion.Show();
+            FormProvider.Devolucion.Show();
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new Listado_Estadistico.ListadoEstadistico().Show();
+            FormProvider.ListadoEstadistico.Show();
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new Generacion_Viaje.GenerarViaje().Show();
+            FormProvider.GenerarViaje.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var abmRutas = new Abm_Ruta.VerRutas();
-            abmRutas.Show();
+            FormProvider.VerRutas.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new Abm_Aeronave.VerAeronaves().Show();
+            FormProvider.VerAeronaves.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var abmRoles = new Abm_Rol.VerRoles();
-            abmRoles.Show();
+            FormProvider.VerRoles.Show();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             this.Hide();
-            var abmCiudades = new Abm_Ciudad.VerCiudades();
-            abmCiudades.Show();
+            FormProvider.VerCiudades.Show();
         }
     }
 }

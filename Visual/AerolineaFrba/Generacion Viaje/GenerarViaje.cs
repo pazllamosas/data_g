@@ -20,18 +20,20 @@ namespace AerolineaFrba.Generacion_Viaje
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new Inicio.Menu().Show();
+            FormProvider.MainMenu.Show();
         }
 
         private void btnAgregarRuta_Click(object sender, EventArgs e)
         {
-            new Abm_Ruta.VerRutas().Show();
+            this.Hide();
+            FormProvider.AgregarRuta.Show();
             //entro desde acá puede tocar boton seleccionar
         }
 
         private void btnAgregarAeronave_Click(object sender, EventArgs e)
         {
-             new Abm_Aeronave.VerAeronaves().Show();
+            this.Hide();
+            FormProvider.VerAeronaves.Show();
             //entro desde acá puede tocar boton seleccionar
         }
     }

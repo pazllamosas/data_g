@@ -17,14 +17,10 @@ namespace AerolineaFrba.Abm_Aeronave
             InitializeComponent();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
+            FormProvider.VerAeronaves.Show();
         }
 
         private void AgregarAeronave_Load(object sender, EventArgs e)

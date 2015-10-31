@@ -25,7 +25,7 @@ namespace AerolineaFrba.Canje_Millas
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new Inicio.Menu().Show();
+            FormProvider.MainMenu.Show();
         }
     }
 }

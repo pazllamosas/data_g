@@ -38,7 +38,7 @@ namespace AerolineaFrba.Inicio
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(this.Text) && !string.IsNullOrWhiteSpace(txtContasenia.Text))
+            if (!string.IsNullOrEmpty(this.Text) && !string.IsNullOrEmpty(txtContasenia.Text))
             {
                 btnIngresar.Enabled = true;
             }
@@ -50,7 +50,7 @@ namespace AerolineaFrba.Inicio
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(this.Text) && !string.IsNullOrWhiteSpace(txtUsuario.Text))
+            if (!string.IsNullOrEmpty(this.Text) && !string.IsNullOrEmpty(txtUsuario.Text))
             {
                 btnIngresar.Enabled = true;
             }

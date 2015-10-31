@@ -55,12 +55,13 @@ namespace AerolineaFrba.Compra
         private void button4_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new Inicio.Menu().Show();
+            FormProvider.MainMenu.Show();
         }
 
         private void btnSiguiente_Click(object sender, EventArgs e)
         {
-            new Compra.ElegirButaca().Show();
+            this.Hide();
+            FormProvider.ElegirButaca.Show();
         }
     }
 }

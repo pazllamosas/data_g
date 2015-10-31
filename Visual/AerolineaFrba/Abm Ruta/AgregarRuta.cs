@@ -44,7 +44,8 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Hide();
+            FormProvider.VerRutas.Show();
         }
     }
 }
