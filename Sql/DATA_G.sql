@@ -671,6 +671,9 @@ INSERT INTO #TEMPVIAJES( NroVuelo, codigo_ruta, CiudadOrigen, CiudadDestino, fec
 			JOIN DATA_G.CIUDAD c1 ON (tRutas.Origen = c1.CodigoCiudad)
 			JOIN DATA_G.CIUDAD c2 ON (tRutas.Destino = c2.CodigoCiudad))
 
+	
+
+
 CREATE INDEX IDX_TempViajes ON #TEMPVIAJES
 (NroVuelo, codigo_ruta, CiudadOrigen, CiudadDestino, fecha_salida, fecha_llegada, matricula_aeronave)
 GO
@@ -680,16 +683,17 @@ INSERT INTO DATA_G.PASAJE (	Pasaje_Codigo, Precio, FechaCompra, CantMillas, NroV
 					PJ.Pasaje_Precio,
 					PJ.Pasaje_FechaCompra,
 		PJ.CantMillas,
-		VJ.NroVuelo,
+		V.NroVuelo,
 		C.idCli--,
 		--(b.IdButaca) AS 'Nro Butaca'
 	
-FROM  DATA_G.RUTA r, DATA_G.CIUDAD CI, DATA_G.CIUDAD CI2,/*DATA_G.BUTACA b,*/ DATA_G.AERONAVE a, DATA_G.CLIENTE c, #TEMPVIAJES VJ  WITH (INDEX(IDX_TempViajes)), #TEMPPASAJE AS PJ
+FROM  DATA_G.VUELO V, /* DATA_G.RUTA r, DATA_G.CIUDAD CI, DATA_G.CIUDAD CI2,DATA_G.BUTACA b, DATA_G.AERONAVE a*/, DATA_G.CLIENTE c, #TEMPVIAJES VJ  WITH (INDEX(IDX_TempViajes)), #TEMPPASAJE AS PJ
 WHERE	
 	C.Dni = PJ.Cli_Dni
 	AND C.Apellido = PJ.Cli_Apellido
 	AND C.Nombre = PJ.Cli_Nombre
 	
+
 	AND	a.Matricula = PJ.Aeronave_Matricula
 	AND r.Codigo =  PJ.Ruta_Codigo
 	AND a.Fabricante = PJ.Aeronave_Fab
@@ -766,20 +770,23 @@ WHERE M.Paquete_Codigo <> 0
 	AND R.Ciudad_Origen = M.Ruta_Ciudad_Origen
 ORDER BY 1*/
 
-INSERT INTO DATA_G.COMPRADOR(IdCli, IdPasaje, IdPaquete, IdPuntoDeCompra)
-SELECT  TC.IdCli,
+INSERT INTO DATA_G.COMPRADOR(IdCli, IdPasaje,/* IdPaquete,*/ IdPuntoDeCompra)
+SELECT  C.IdCli,
 		PJ.IdPasaje,
-		PQ.IdPaquete,
+		--PQ.IdPaquete,
 		PC.IdPuntoDeCompra
-FROM #TEMPCLIENTES TC WITH (INDEX(IDX_TempClientes)), DATA_G.PASAJE PJ, DATA_G.PAQUETE PQ, DATA_G.PUNTO_DE_COMPRA PC, gd_esquema.Maestra M 
-WHERE PJ.FechaCompra = M.Pasaje_FechaCompra OR  PQ.FechaCompra = M.Paquete_FechaCompra
+FROM DATA_G.CLIENTE C, DATA_G.PASAJE PJ/**, DATA_G.PAQUETE PQ*/, DATA_G.PUNTO_DE_COMPRA PC, gd_esquema.Maestra M 
+WHERE  C.Dni = M.Cli_Dni
+	AND C.Apellido = M.Cli_Apellido
+	AND C.Nombre = M.Cli_Nombre
+--	AND PJ.FechaCompra = M.Pasaje_FechaCompra OR  PQ.FechaCompra = M.Paquete_FechaCompra
 	
 
 INSERT INTO DATA_G.DEVOLUCION(Codigo_Compra, IdPasaje, IdPaquete)
 SELECT  CP.Codigo_Compra,
-		PJ.IdPasaje,
-		PQ.IdPaquete
-FROM DATA_G.COMPRADOR CP, DATA_G.PASAJE PJ, DATA_G.PAQUETE PQ, DATA_G.CLIENTE C, gd_esquema.Maestra M
+		PJ.IdPasaje--,
+		--PQ.IdPaquete
+FROM DATA_G.COMPRADOR CP, DATA_G.PASAJE PJ/*, DATA_G.PAQUETE PQ*/, DATA_G.CLIENTE C, gd_esquema.Maestra M
 WHERE CP.IdCli = C.IdCli
 	AND PJ.FechaCompra = M.Pasaje_FechaCompra OR  PQ.FechaCompra = M.Paquete_FechaCompra
 
