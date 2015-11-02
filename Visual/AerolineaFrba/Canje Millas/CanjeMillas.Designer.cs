@@ -176,6 +176,7 @@
             // 
             // txtCostoTotal
             // 
+            this.txtCostoTotal.Enabled = false;
             this.txtCostoTotal.Location = new System.Drawing.Point(117, 83);
             this.txtCostoTotal.Name = "txtCostoTotal";
             this.txtCostoTotal.Size = new System.Drawing.Size(108, 20);

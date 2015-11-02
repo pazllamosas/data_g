@@ -17,6 +17,17 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             InitializeComponent();
         }
 
+        public bool validateArrival()
+        {
+            if (!string.IsNullOrEmpty(txtMatricula.Text) && !string.IsNullOrEmpty(cmbAeropuertoOrigen.Text) && !string.IsNullOrEmpty(cmbAeropuertoDestino.Text))
+            {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
@@ -30,7 +41,22 @@ namespace AerolineaFrba.Registro_Llegada_Destino
         private void btnVolver_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new Inicio.Menu().Show();
+            FormProvider.MainMenu.Show();
+        }
+
+        private void txtMatricula_TextChanged(object sender, EventArgs e)
+        {
+            btnGuardar.Enabled = validateArrival();
+        }
+
+        private void cmbAeropuertoOrigen_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnGuardar.Enabled = validateArrival();
+        }
+
+        private void cmbAeropuertoDestino_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnGuardar.Enabled = validateArrival();
         }
     }
 }
