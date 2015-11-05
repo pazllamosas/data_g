@@ -719,6 +719,10 @@ FROM #TEMPPASAJE PJ
 	JOIN DATA_G.BUTACA BU ON BU.IdAeronave = AE.IdAeronave
 		AND BU.NroButaca = PJ.Butaca_Nro
 		AND BU.Tipo = PJ.Butaca_Tipo
+
+IF OBJECT_ID (N'DATA_G.FunctionParaVuelo', N'IF') IS NOT NULL
+    DROP FUNCTION DATA_G.FunctionParaVuelo;
+GO
 		
 		GO
 CREATE FUNCTION DATA_G.FunctionParaVuelo(@Destino nvarchar(255), @Origen nvarchar(255), @TipoServicio nvarchar (255), @RutaCodigo numeric (18,0), @AMatricula nvarchar (255),  @AFab nvarchar (255), @Salida datetime, @Llegada datetime)

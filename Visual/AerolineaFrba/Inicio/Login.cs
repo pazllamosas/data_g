@@ -68,5 +68,10 @@ namespace AerolineaFrba.Inicio
             }
         }
 
+        private void Login_Load(object sender, EventArgs e)
+        {
+            conexion.establecerConexionBD();
+        }
+
     }
 }
