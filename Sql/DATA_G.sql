@@ -365,7 +365,7 @@ CREATE TABLE DATA_G.DEVOLUCION(
 
 CREATE TABLE DATA_G.MILLAS(
 
-	IdMillas int PRIMARY KEY,
+	IdMillas int PRIMARY KEY IDENTITY,
 	HistorialMillas int DEFAULT '0',
 	
 	IdCli int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
@@ -615,8 +615,8 @@ WHERE
 		M.Aeronave_Matricula = A.Matricula
 	AND M.Aeronave_Fabricante = A.Fabricante
 	AND M.Ruta_Codigo = R.Codigo
-	AND C.CodigoCiudad = R.Origen
-	AND C2.CodigoCiudad = R.Destino
+	AND (SELECT C1.CodigoCiudad FROM DATA_G.CIUDAD C1 WHERE M.Ruta_Ciudad_Origen = C1.Nombre) = R.Origen
+	AND (SELECT C2.CodigoCiudad FROM DATA_G.CIUDAD C2 WHERE M.Ruta_Ciudad_Destino = C2.Nombre) = R.Destino
 	AND M.Tipo_Servicio = ( SELECT Descripcion FROM DATA_G.TIPODESERVICIO  WHERE IdServicio = R.IdServicio)
 	-- COMPROBAR QUE LA FECHA SALIENTE DE LLEGADA SEA MAYOR A LA SIG DE SALIDA  
 ORDER BY 2, 3, 4
@@ -698,9 +698,9 @@ INSERT INTO #TEMP2
 			PJ.Pasaje_Codigo,
 			PJ.Pasaje_Precio,
 			PJ.Pasaje_FechaCompra,
-		PJ.CantMillas,
-		VU.NroVuelo,
-		BU.IdButaca
+			PJ.CantMillas,
+			VU.NroVuelo,
+			BU.IdButaca
 		
 FROM #TEMPPASAJE PJ
 	JOIN DATA_G.CIUDAD c1 ON PJ.Destino = C1.Nombre
@@ -806,55 +806,40 @@ FROM gd_esquema.Maestra M
 		AND VU.IdAeronave = AE.IdAeronave
 		AND VU.IdRuta = R.IdRuta	
 WHERE M.Paquete_Codigo <> 0
-	
-	ORDER BY 1
+ORDER BY 1
 
+/*
 INSERT INTO DATA_G.COMPRADOR(IdCli, IdPasaje,/* IdPaquete,*/ IdPuntoDeCompra)
-SELECT  C.IdCli,
+SELECT  DISTINCT C.IdCli,
 		PJ.IdPasaje,
-		--PQ.IdPaquete,
+		PQ.IdPaquete,
 		PC.IdPuntoDeCompra
-FROM DATA_G.CLIENTE C, DATA_G.PASAJE PJ/**, DATA_G.PAQUETE PQ*/, DATA_G.PUNTO_DE_COMPRA PC, gd_esquema.Maestra M 
+FROM DATA_G.CLIENTE C, DATA_G.PASAJE PJ, DATA_G.PAQUETE PQ, DATA_G.PUNTO_DE_COMPRA PC, gd_esquema.Maestra M, #TEMPPASAJE 
 WHERE  C.Dni = M.Cli_Dni
 	AND C.Apellido = M.Cli_Apellido
 	AND C.Nombre = M.Cli_Nombre
---	AND PJ.FechaCompra = M.Pasaje_FechaCompra OR  PQ.FechaCompra = M.Paquete_FechaCompra
-	
+	AND C.Fecha_Nac = M.Cli_Fecha_Nac
+	AND (PJ.FechaCompra = M.Pasaje_FechaCompra OR  PQ.FechaCompra = M.Paquete_FechaCompra)
+	AND (PJ.Pasaje_Codigo = M.Paquete_Codigo OR PQ.Codigo = M.Paquete_Codigo)
+	*/
 
+
+	
+/* AHORA NO HAY DEVOLUCIONES
 INSERT INTO DATA_G.DEVOLUCION(Codigo_Compra, IdPasaje, IdPaquete)
 SELECT  CP.Codigo_Compra,
-		PJ.IdPasaje--,
-		--PQ.IdPaquete
-FROM DATA_G.COMPRADOR CP, DATA_G.PASAJE PJ/*, DATA_G.PAQUETE PQ*/, DATA_G.CLIENTE C, gd_esquema.Maestra M
-WHERE CP.IdCli = C.IdCli
-	AND PJ.FechaCompra = M.Pasaje_FechaCompra OR  PQ.FechaCompra = M.Paquete_FechaCompra
+		PJ.IdPasaje,
+		PQ.IdPaquete
+FROM DATA_G.COMPRADOR CP, DATA_G.PASAJE PJ, DATA_G.PAQUETE PQ, DATA_G.CLIENTE C, gd_esquema.Maestra M
+ */
 
 INSERT INTO DATA_G.MILLAS (IdCli, NroVuelo)
-SELECT DISTINCT C.IdCli,
-				V.NroVuelo
-FROM  DATA_G.VUELO V, DATA_G.RUTA r, DATA_G.CIUDAD CI, DATA_G.CIUDAD CI2,/*DATA_G.BUTACA b,*/ DATA_G.AERONAVE a, DATA_G.CLIENTE c, #TEMPVIAJES VJ  WITH (INDEX(IDX_TempViajes)), #TEMPPASAJE AS PJ
-WHERE	
-	C.Dni = PJ.Cli_Dni
-	AND C.Apellido = PJ.Cli_Apellido
-	AND C.Nombre = PJ.Cli_Nombre
-	/*
-	AND V.NroVuelo = VJ.NroVuelo
-
-	AND	a.Matricula = PJ.Aeronave_Matricula
-	AND r.Codigo =  PJ.Ruta_Codigo
-	AND a.Fabricante = PJ.Aeronave_Fab
-	AND VJ.codigo_ruta = R.IdRuta
-	AND ci2.Nombre = ( SELECT PJ.Destino WHERE R.Destino = CI2.CodigoCiudad)
-	and ci.Nombre = ( SELECT PJ.Origen WHERE R.Origen = CI.CodigoCiudad)
-	--and CI2.CodigoCiudad = VJ.CiudadDestino
-	and VJ.matricula_aeronave = a.IdAeronave
-	AND   VJ.fecha_salida = PJ.FechaSalida
-	AND  VJ.fecha_llegada = PJ.FechaLLegada
-	--and CI2.CodigoCiudad = VJ.CiudadDestino
-	AND  PJ.Tipo_Servicio = (SELECT TS.Descripcion FROM DATA_G.TIPODESERVICIO TS WHERE R.IdServicio = TS.IdServicio) */
-
+SELECT DISTINCT PJ.IdCli,
+				PJ.NroVuelo
+FROM  DATA_G.PASAJE PJ
 	
-
+	
+	
 
  /**CREATE FUNCTION DATA_G.GetMillas( @Pasaje_Precio numeric(18,2))
 	RETURNS int
