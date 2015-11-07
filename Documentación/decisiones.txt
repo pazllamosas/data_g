@@ -3,3 +3,6 @@ ACORDARSE!! ORDEN EN LOS WHERE PUEDE REDUCIR TIEMPO!!!
 
 
 Atributo MILLAS en BENEFICIOS es la suma de todo lo que el usuario canjeo
+
+Se decidio utilizar tablas temporales, para el pasaje y el paquete, por un tema de performance. Gracias a las mismas las cosultas se hacen en segundos.
+Se decidio utilizar indices en algunas tablas temporales, para asi mejorar el tiempo de la consulta
