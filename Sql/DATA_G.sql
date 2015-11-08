@@ -394,7 +394,7 @@ CREATE TABLE DATA_G.MILLAS(
 -------------------------------------------------- MIGRACION DE DATOS ----------------------------------------------------------
 
 INSERT INTO DATA_G.ROL( Descripcion)
-VALUES ('Administrador')
+VALUES ('Administrador General')
 INSERT INTO DATA_G.ROL( Descripcion)
 VALUES ('Cliente')
 
@@ -483,7 +483,7 @@ VALUES('admin','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7
 INSERT INTO DATA_G.USUARIOPORROL(IdUsuario, IdRol)
 SELECT U.IdUsuario, R.IdRol
 FROM DATA_G.USUARIO U, DATA_G.ROL R
-WHERE R.Descripcion = 'Administrador' and U.Username = 'admin'
+WHERE R.Descripcion = 'Administrador General' AND U.Username = 'admin'
 
 INSERT INTO #TEMPCLIENTES(IdCli, CliDni, CliApellido, CliNombre, CliFechaNac)
 SELECT DISTINCT IdCli, Dni ,Apellido, Nombre, Fecha_Nac 
@@ -496,38 +496,6 @@ WHERE C.Dni = M.Cli_Dni
 CREATE INDEX IDX_TempClientes ON #TEMPCLIENTES
 (IdCli, CliApellido, CliNombre, CliFechaNac)
 GO
-/*
-GO
-CREATE TRIGGER DATA_G.AFTER_LOGIN ON DATA_G.INTENTOS_LOGIN AFTER INSERT AS
-BEGIN --TRANSACTION
-	DECLARE @ACCESO INT, @IdCli INT, @ESTADO INT, @INTENTOS_FALLIDOS_ACTUAL INT
-	SELECT @ACCESO = ACCESO, @IdCli = CLIENTE FROM INSERTED
-	
-	SELECT @ESTADO = ESTADO, @INTENTOS_FALLIDOS_ACTUAL = INTENTOS_FALLIDOS FROM DATA_G.CLIENTE
-	WHERE IdCli = @IdCli
-	
-	IF @ACCESO = 1
-	BEGIN
-		UPDATE DATA_G.CLIENTE SET
-			INTENTOS_FALLIDOS = 0
-		WHERE IdCli = @IdCli
-	END
-	ELSE
-	BEGIN
-		IF @INTENTOS_FALLIDOS_ACTUAL = 2
-		UPDATE DATA_G.CLIENTE SET
-			INTENTOS_FALLIDOS = INTENTOS_FALLIDOS + 1,
-			ESTADO = 0
-		WHERE IdCli = @IdCli
-		ELSE
-		UPDATE DATA_G.CLIENTE SET
-			INTENTOS_FALLIDOS = INTENTOS_FALLIDOS + 1,
-			ESTADO = @ESTADO
-		WHERE IdCli = @IdCli
-	END
-END --COMMIT
-*/
-
 
 INSERT INTO DATA_G.PRODUCTO(Descripcion, CostoEnMillas, Cantidad)
 VALUES('Mochila',125,200)
@@ -910,18 +878,6 @@ DROP TABLE #TEMP2
 IF OBJECT_ID('tempdb.dbo.#TEMPPAQUETE') IS NOT NULL
 DROP TABLE #TEMPPAQUETE	
 
- /**CREATE FUNCTION DATA_G.GetMillas( @Pasaje_Precio numeric(18,2))
-	RETURNS int
-	AS BEGIN 
-	DECLARE @RETORNO int
-	BEGIN TRY 	
-		SELECT @RETORNO=Pasaje_Precio/10 FROM DATA_G.PASAJE WHERE Pasaje_Precio=@Pasaje_Precio
-		RETURN @RETORNO
-	END TRY
-	BEGIN CATCH
-		RETURN NULL
-	END CATCH
-	END **/
 
 /*
 IF OBJECT_ID (N'DATA_G.FunctionParaVuelo') IS NOT NULL
