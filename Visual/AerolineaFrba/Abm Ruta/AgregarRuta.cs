@@ -50,6 +50,7 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void cmbCiudadOrigen_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
             /*
             string Sql = "select Nombre from CIUDAD";
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Data Source=localhost\\SQLSERVER2012;Initial Catalog=GD2C2015;Persist Security Info=True;User ID=gd"].ToString());
@@ -74,6 +75,11 @@ namespace AerolineaFrba.Abm_Ruta
         private void cmbTipoServicio_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void AgregarRuta_Load(object sender, EventArgs e)
+        {
+            conexion.cargarCmb( "Nombre", "CIUDAD", cmbCiudadOrigen);
         }
     }
 }

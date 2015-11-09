@@ -39,6 +39,33 @@ namespace AerolineaFrba
             }
         }
 
+        internal static void cargarCmb(String nomColumna, String nomTabla, ComboBox cmbACargar)
+        {
+            string datosConexion = "Data Source=localHost\\SQLSERVER2012;Initial Catalog= ;Persist Security Info=True;User ID= gd;Password= gd2015";
+            SqlConnection conexion = new SqlConnection();
+            conexion.ConnectionString = datosConexion;
+            SqlCommand command;
+
+            try
+            {
+                conexion.Open();
+                conexionMaestra = conexion;
+                command = new SqlCommand("SELECT" + nomColumna + "AS atributo FROM" + nomTabla, conexion);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                   cmbACargar.Items.Add(reader["atributo"]);
+                }
+                reader.Close();
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("ERROR Al Cargar COMBO BOX");
+            }
+        }
+
+
         internal static SqlConnection getSqlInstanceConnection()
         {
             return conexionMaestra;

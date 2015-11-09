@@ -215,6 +215,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AgregarRuta";
             this.Text = "Agregar Ruta";
+            this.Load += new System.EventHandler(this.AgregarRuta_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
