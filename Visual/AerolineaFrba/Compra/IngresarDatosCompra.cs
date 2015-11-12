@@ -87,5 +87,11 @@ namespace AerolineaFrba.Compra
         {
             btnBuscarVuelos.Enabled = this.ValidateFlightSearch();
         }
+
+        private void IngresarDatosCompra_Load(object sender, EventArgs e)
+        {
+            conexion.cargarCmb("Nombre", "CIUDAD", cmbCiudadOrigen);
+            conexion.cargarCmb("Nombre", "CIUDAD", cmbCiudadOrigen);
+        }
     }
 }

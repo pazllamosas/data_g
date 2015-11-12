@@ -58,5 +58,11 @@ namespace AerolineaFrba.Registro_Llegada_Destino
         {
             btnGuardar.Enabled = validateArrival();
         }
+
+        private void RegistroLlegadaDestino_Load(object sender, EventArgs e)
+        {
+            conexion.cargarCmb("Nombre", "CIUDAD", cmbAeropuertoOrigen);
+            conexion.cargarCmb("Nombre", "CIUDAD", cmbAeropuertoOrigen);
+        }
     }
 }

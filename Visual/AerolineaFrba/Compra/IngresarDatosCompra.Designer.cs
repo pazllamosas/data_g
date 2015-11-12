@@ -317,6 +317,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "IngresarDatosCompra";
             this.Text = "Comprar";
+            this.Load += new System.EventHandler(this.IngresarDatosCompra_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVuelos)).EndInit();

@@ -25,6 +25,17 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void AgregarAeronave_Load(object sender, EventArgs e)
         {
+            conexion.cargarCmb("Nombre", "CIUDAD", cmbOrigen);
+            conexion.cargarCmb("Descripcion", "TIPODESERVICIO", cmbTipoServicio);
+        }
+
+        private void cmbOrigen_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbTipoServicio_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
     }

@@ -27,5 +27,15 @@ namespace AerolineaFrba.Canje_Millas
             this.Hide();
             FormProvider.MainMenu.Show();
         }
+
+        private void cmbProducto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CanjeMillas_Load(object sender, EventArgs e)
+        {
+            conexion.cargarCmb("Descripcion", "PRODUCTO", cmbProducto);
+        }
     }
 }

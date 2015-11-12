@@ -284,6 +284,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RegistroLlegadaDestino";
             this.Text = "Registro de Llegada a Destino";
+            this.Load += new System.EventHandler(this.RegistroLlegadaDestino_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

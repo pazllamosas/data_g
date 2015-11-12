@@ -179,6 +179,7 @@
             this.cmbTipoServicio.Name = "cmbTipoServicio";
             this.cmbTipoServicio.Size = new System.Drawing.Size(100, 21);
             this.cmbTipoServicio.TabIndex = 24;
+            this.cmbTipoServicio.SelectedIndexChanged += new System.EventHandler(this.cmbTipoServicio_SelectedIndexChanged);
             // 
             // cmbOrigen
             // 
@@ -187,6 +188,7 @@
             this.cmbOrigen.Name = "cmbOrigen";
             this.cmbOrigen.Size = new System.Drawing.Size(100, 21);
             this.cmbOrigen.TabIndex = 25;
+            this.cmbOrigen.SelectedIndexChanged += new System.EventHandler(this.cmbOrigen_SelectedIndexChanged);
             // 
             // AgregarAeronave
             // 
