@@ -8,10 +8,17 @@ using System.Windows.Forms;
 
 namespace AerolineaFrba
 {
-    class conexion
+    class Conexion
     {
               
-        static SqlConnection conexionMaestra;
+        public static SqlConnection conexionMaestra;
+
+        public static SqlDataReader ejecutarQuery(string query)
+        {
+            SqlCommand command = new SqlCommand(query, conexionMaestra);
+            SqlDataReader reader = command.ExecuteReader();
+            return reader;
+        }
 
         internal static void establecerConexionBD()
         {
@@ -20,38 +27,23 @@ namespace AerolineaFrba
             conexion.ConnectionString = datosConexion;
             SqlCommand command;
 
-            try
-            {
                 conexion.Open();
                 conexionMaestra = conexion;
                 command = new SqlCommand("select 1 from gd_esquema.Maestra", conexion);
                 SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-
-                }
                 reader.Close();
-                MessageBox.Show("hola");
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("ERROR");
-            }
+            
         }
 
         internal static void cargarCmb(String nomColumna, String nomTabla, ComboBox cmbACargar)
         {
-            string datosConexion = "Data Source=localHost\\SQLSERVER2012;Initial Catalog= ;Persist Security Info=True;User ID= gd;Password= gd2015";
-            SqlConnection conexion = new SqlConnection();
-            conexion.ConnectionString = datosConexion;
-            SqlCommand command;
+            string query = "SELECT " + nomColumna + " AS atributo FROM DATA_G." + nomTabla;
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+
 
             try
             {
-                conexion.Open();
-                conexionMaestra = conexion;
-                command = new SqlCommand("SELECT" + nomColumna + "AS atributo FROM" + nomTabla, conexion);
-                SqlDataReader reader = command.ExecuteReader();
+
                 while (reader.Read())
                 {
                    cmbACargar.Items.Add(reader["atributo"]);
@@ -71,4 +63,5 @@ namespace AerolineaFrba
             return conexionMaestra;
         }
     }
+
 }

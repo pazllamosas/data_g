@@ -61,8 +61,8 @@ namespace AerolineaFrba.Registro_Llegada_Destino
 
         private void RegistroLlegadaDestino_Load(object sender, EventArgs e)
         {
-            conexion.cargarCmb("Nombre", "CIUDAD", cmbAeropuertoOrigen);
-            conexion.cargarCmb("Nombre", "CIUDAD", cmbAeropuertoOrigen);
+            Conexion.cargarCmb("Nombre", "CIUDAD", cmbAeropuertoOrigen);
+            Conexion.cargarCmb("Nombre", "CIUDAD", cmbAeropuertoOrigen);
         }
     }
 }

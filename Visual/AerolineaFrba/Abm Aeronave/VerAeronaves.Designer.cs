@@ -40,6 +40,14 @@
             this.dgvAeronaves = new System.Windows.Forms.DataGridView();
             this.btnSeleccionar = new System.Windows.Forms.Button();
             this.btnDarBaja = new System.Windows.Forms.Button();
+            this.aeroFechaDeAlta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aeroMatricula = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aeroModelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aeroKgDisponibles = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aeroFabricante = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aeroIdServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aeroCantidadButacas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aeroCantKilogramosDisponibles = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAeronaves)).BeginInit();
             this.SuspendLayout();
@@ -66,6 +74,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(634, 24);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // archivoToolStripMenuItem
             // 
@@ -133,10 +142,20 @@
             // dgvAeronaves
             // 
             this.dgvAeronaves.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAeronaves.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.aeroFechaDeAlta,
+            this.aeroMatricula,
+            this.aeroModelo,
+            this.aeroKgDisponibles,
+            this.aeroFabricante,
+            this.aeroIdServicio,
+            this.aeroCantidadButacas,
+            this.aeroCantKilogramosDisponibles});
             this.dgvAeronaves.Location = new System.Drawing.Point(12, 85);
             this.dgvAeronaves.Name = "dgvAeronaves";
             this.dgvAeronaves.Size = new System.Drawing.Size(610, 264);
             this.dgvAeronaves.TabIndex = 12;
+            this.dgvAeronaves.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAeronaves_CellContentClick);
             // 
             // btnSeleccionar
             // 
@@ -161,6 +180,46 @@
             this.btnDarBaja.UseVisualStyleBackColor = true;
             this.btnDarBaja.Click += new System.EventHandler(this.btnDarBaja_Click);
             // 
+            // aeroFechaDeAlta
+            // 
+            this.aeroFechaDeAlta.HeaderText = "Fecha de Alta";
+            this.aeroFechaDeAlta.Name = "aeroFechaDeAlta";
+            // 
+            // aeroMatricula
+            // 
+            this.aeroMatricula.HeaderText = "Matricula";
+            this.aeroMatricula.Name = "aeroMatricula";
+            // 
+            // aeroModelo
+            // 
+            this.aeroModelo.HeaderText = "Modelo";
+            this.aeroModelo.Name = "aeroModelo";
+            // 
+            // aeroKgDisponibles
+            // 
+            this.aeroKgDisponibles.HeaderText = "Kg Disponibles";
+            this.aeroKgDisponibles.Name = "aeroKgDisponibles";
+            // 
+            // aeroFabricante
+            // 
+            this.aeroFabricante.HeaderText = "Fabricante";
+            this.aeroFabricante.Name = "aeroFabricante";
+            // 
+            // aeroIdServicio
+            // 
+            this.aeroIdServicio.HeaderText = "Servicio";
+            this.aeroIdServicio.Name = "aeroIdServicio";
+            // 
+            // aeroCantidadButacas
+            // 
+            this.aeroCantidadButacas.HeaderText = "Cantidad de Butacas";
+            this.aeroCantidadButacas.Name = "aeroCantidadButacas";
+            // 
+            // aeroCantKilogramosDisponibles
+            // 
+            this.aeroCantKilogramosDisponibles.HeaderText = "Cantidad de Kilogramos Disponibles";
+            this.aeroCantKilogramosDisponibles.Name = "aeroCantKilogramosDisponibles";
+            // 
             // VerAeronaves
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -179,6 +238,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "VerAeronaves";
             this.Text = "Aeronaves";
+            this.Load += new System.EventHandler(this.VerAeronaves_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAeronaves)).EndInit();
@@ -200,5 +260,13 @@
         private System.Windows.Forms.DataGridView dgvAeronaves;
         private System.Windows.Forms.Button btnSeleccionar;
         private System.Windows.Forms.Button btnDarBaja;
+        private System.Windows.Forms.DataGridViewTextBoxColumn aeroFechaDeAlta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn aeroMatricula;
+        private System.Windows.Forms.DataGridViewTextBoxColumn aeroModelo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn aeroKgDisponibles;
+        private System.Windows.Forms.DataGridViewTextBoxColumn aeroFabricante;
+        private System.Windows.Forms.DataGridViewTextBoxColumn aeroIdServicio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn aeroCantidadButacas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn aeroCantKilogramosDisponibles;
     }
 }

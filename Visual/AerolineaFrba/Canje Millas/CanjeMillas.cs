@@ -35,7 +35,7 @@ namespace AerolineaFrba.Canje_Millas
 
         private void CanjeMillas_Load(object sender, EventArgs e)
         {
-            conexion.cargarCmb("Descripcion", "PRODUCTO", cmbProducto);
+            Conexion.cargarCmb("Descripcion", "PRODUCTO", cmbProducto);
         }
     }
 }

@@ -79,9 +79,9 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void AgregarRuta_Load(object sender, EventArgs e)
         {
-            conexion.cargarCmb( "Nombre", "CIUDAD", cmbCiudadOrigen);
-            conexion.cargarCmb("Nombre", "CIUDAD", cmbCiudadDestino);
-            conexion.cargarCmb("Descripcion", "TIPODESERVICIO", cmbTipoServicio);
+            Conexion.cargarCmb( "Nombre", "CIUDAD", cmbCiudadOrigen);
+            Conexion.cargarCmb("Nombre", "CIUDAD", cmbCiudadDestino);
+            Conexion.cargarCmb("Descripcion", "TIPODESERVICIO", cmbTipoServicio);
         }
     }
 }
