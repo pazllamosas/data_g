@@ -56,7 +56,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
             while (reader.Read())
             {
-            dgvAeronaves.Rows.Add(reader["FechaDeAlta"], reader["matricula"].ToString(), reader["Modelo"], reader["kg_disponibles"], reader ["Fabricante"], reader ["IdServicio"], reader["cantButacas"], reader["CantKGDisponibles"]);
+            dgvAeronaves.Rows.Add(reader["FechaDeAlta"], reader["matricula"].ToString(), reader["Modelo"], reader["kg_disponibles"], reader ["Fabricante"], reader ["IdServicio"], reader["cantButacas"]);
             }
             reader.Close();
 

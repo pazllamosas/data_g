@@ -47,7 +47,6 @@
             this.aeroFabricante = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.aeroIdServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.aeroCantidadButacas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aeroCantKilogramosDisponibles = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAeronaves)).BeginInit();
             this.SuspendLayout();
@@ -56,9 +55,10 @@
             // 
             this.btnAgregar.Image = global::AerolineaFrba.Properties.Resources.add;
             this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregar.Location = new System.Drawing.Point(328, 27);
+            this.btnAgregar.Location = new System.Drawing.Point(437, 33);
+            this.btnAgregar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(66, 23);
+            this.btnAgregar.Size = new System.Drawing.Size(88, 28);
             this.btnAgregar.TabIndex = 1;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -71,7 +71,8 @@
             this.archivoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(634, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(845, 28);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -81,13 +82,13 @@
             this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deslogearToolStripMenuItem});
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(71, 24);
             this.archivoToolStripMenuItem.Text = "Archivo";
             // 
             // deslogearToolStripMenuItem
             // 
             this.deslogearToolStripMenuItem.Name = "deslogearToolStripMenuItem";
-            this.deslogearToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
+            this.deslogearToolStripMenuItem.Size = new System.Drawing.Size(107, 24);
             this.deslogearToolStripMenuItem.Text = "Salir";
             // 
             // btnEliminar
@@ -95,9 +96,10 @@
             this.btnEliminar.Enabled = false;
             this.btnEliminar.Image = global::AerolineaFrba.Properties.Resources.delete;
             this.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEliminar.Location = new System.Drawing.Point(555, 27);
+            this.btnEliminar.Location = new System.Drawing.Point(740, 33);
+            this.btnEliminar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(67, 23);
+            this.btnEliminar.Size = new System.Drawing.Size(89, 28);
             this.btnEliminar.TabIndex = 8;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -108,9 +110,10 @@
             this.btnEditar.Enabled = false;
             this.btnEditar.Image = global::AerolineaFrba.Properties.Resources.modify;
             this.btnEditar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEditar.Location = new System.Drawing.Point(492, 27);
+            this.btnEditar.Location = new System.Drawing.Point(656, 33);
+            this.btnEditar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(57, 23);
+            this.btnEditar.Size = new System.Drawing.Size(76, 28);
             this.btnEditar.TabIndex = 9;
             this.btnEditar.Text = "Editar";
             this.btnEditar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -121,9 +124,10 @@
             this.btnVolver.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnVolver.Image = global::AerolineaFrba.Properties.Resources.back;
             this.btnVolver.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnVolver.Location = new System.Drawing.Point(10, 27);
+            this.btnVolver.Location = new System.Drawing.Point(13, 33);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(58, 23);
+            this.btnVolver.Size = new System.Drawing.Size(77, 28);
             this.btnVolver.TabIndex = 10;
             this.btnVolver.Text = "Volver";
             this.btnVolver.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -133,9 +137,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 69);
+            this.label1.Location = new System.Drawing.Point(16, 85);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(177, 13);
+            this.label1.Size = new System.Drawing.Size(236, 17);
             this.label1.TabIndex = 11;
             this.label1.Text = "Aeronaves actualmente disponibles:";
             // 
@@ -149,20 +154,21 @@
             this.aeroKgDisponibles,
             this.aeroFabricante,
             this.aeroIdServicio,
-            this.aeroCantidadButacas,
-            this.aeroCantKilogramosDisponibles});
-            this.dgvAeronaves.Location = new System.Drawing.Point(12, 85);
+            this.aeroCantidadButacas});
+            this.dgvAeronaves.Location = new System.Drawing.Point(16, 105);
+            this.dgvAeronaves.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvAeronaves.Name = "dgvAeronaves";
-            this.dgvAeronaves.Size = new System.Drawing.Size(610, 264);
+            this.dgvAeronaves.Size = new System.Drawing.Size(813, 325);
             this.dgvAeronaves.TabIndex = 12;
             this.dgvAeronaves.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAeronaves_CellContentClick);
             // 
             // btnSeleccionar
             // 
             this.btnSeleccionar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSeleccionar.Location = new System.Drawing.Point(247, 27);
+            this.btnSeleccionar.Location = new System.Drawing.Point(329, 33);
+            this.btnSeleccionar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSeleccionar.Name = "btnSeleccionar";
-            this.btnSeleccionar.Size = new System.Drawing.Size(75, 23);
+            this.btnSeleccionar.Size = new System.Drawing.Size(100, 28);
             this.btnSeleccionar.TabIndex = 15;
             this.btnSeleccionar.Text = "Seleccionar";
             this.btnSeleccionar.UseVisualStyleBackColor = true;
@@ -171,9 +177,10 @@
             // 
             this.btnDarBaja.Image = global::AerolineaFrba.Properties.Resources.noplane;
             this.btnDarBaja.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDarBaja.Location = new System.Drawing.Point(400, 27);
+            this.btnDarBaja.Location = new System.Drawing.Point(533, 33);
+            this.btnDarBaja.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDarBaja.Name = "btnDarBaja";
-            this.btnDarBaja.Size = new System.Drawing.Size(86, 23);
+            this.btnDarBaja.Size = new System.Drawing.Size(115, 28);
             this.btnDarBaja.TabIndex = 16;
             this.btnDarBaja.Text = "Dar de Baja";
             this.btnDarBaja.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -215,17 +222,12 @@
             this.aeroCantidadButacas.HeaderText = "Cantidad de Butacas";
             this.aeroCantidadButacas.Name = "aeroCantidadButacas";
             // 
-            // aeroCantKilogramosDisponibles
-            // 
-            this.aeroCantKilogramosDisponibles.HeaderText = "Cantidad de Kilogramos Disponibles";
-            this.aeroCantKilogramosDisponibles.Name = "aeroCantKilogramosDisponibles";
-            // 
             // VerAeronaves
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnVolver;
-            this.ClientSize = new System.Drawing.Size(634, 361);
+            this.ClientSize = new System.Drawing.Size(845, 444);
             this.Controls.Add(this.btnDarBaja);
             this.Controls.Add(this.btnSeleccionar);
             this.Controls.Add(this.dgvAeronaves);
@@ -236,6 +238,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.btnAgregar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "VerAeronaves";
             this.Text = "Aeronaves";
             this.Load += new System.EventHandler(this.VerAeronaves_Load);
@@ -267,6 +270,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn aeroFabricante;
         private System.Windows.Forms.DataGridViewTextBoxColumn aeroIdServicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn aeroCantidadButacas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn aeroCantKilogramosDisponibles;
     }
 }
