@@ -64,8 +64,13 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void VerRutas_Load(object sender, EventArgs e)
         {
-            btnSeleccionar.Visible = false;
             
+        }
+
+        private void VerRutas_Shown(object sender, EventArgs e)
+        {
+            btnSeleccionar.Visible = false;
+
             string query = "SELECT * FROM DATA_G.RUTA";
             SqlDataReader reader = Conexion.ejecutarQuery(query);
 
