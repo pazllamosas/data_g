@@ -86,6 +86,7 @@ namespace AerolineaFrba.Abm_Ciudad
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AgregarCiudad";
+            this.Text = "Agregar Ciudad";
             this.Load += new System.EventHandler(this.AgregarCiudad_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

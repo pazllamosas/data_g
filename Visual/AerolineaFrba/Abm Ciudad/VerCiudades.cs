@@ -60,5 +60,10 @@ namespace AerolineaFrba.Abm_Ciudad
         {
 
         }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
     }
 }

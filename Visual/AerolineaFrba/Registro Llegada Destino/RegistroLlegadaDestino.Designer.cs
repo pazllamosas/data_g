@@ -100,9 +100,10 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 93);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(109, 13);
+            this.label2.Size = new System.Drawing.Size(90, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Aeropuerto de origen:";
+            this.label2.Text = "Ciudad de origen:";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // cmbAeropuertoOrigen
             // 
@@ -127,9 +128,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 121);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(114, 13);
+            this.label3.Size = new System.Drawing.Size(95, 13);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Aeropuerto de destino:";
+            this.label3.Text = "Ciudad de destino:";
             // 
             // btnVolver
             // 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -39,7 +40,29 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string codigo = txtCodigo.Text;
 
+            string precio_kg = txtPrecioEncomienda.Text;
+
+            string precio_pasaje = txtPrecioPasaje.Text;
+
+            string descripcionServicio = cmbTipoServicio.Text;
+
+            string origen = cmbCiudadOrigen.Text;
+
+            string destino = cmbCiudadDestino.Text;
+
+            string query = "SELECT DATA_G.GET_ID_SERVICIO ('" + descripcionServicio + "')";
+
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+            reader.Read();
+            string idServicio = reader["id"].ToString();
+            reader.Close();
+            query = "DATA_G.CREAR_RUTA ('" + codigo + "', " + "'" + precio_kg + "', " + precio_pasaje + ", '" +
+                                             idServicio + "', '" + origen + "', " + destino + ")";
+
+            reader = Conexion.ejecutarQuery(query);
+            reader.Close();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

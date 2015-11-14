@@ -34,11 +34,11 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvCiudades = new System.Windows.Forms.DataGridView();
+            this.ciudadNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnVolver = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ciudadNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCiudades)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -105,6 +105,11 @@
             this.dgvCiudades.TabIndex = 4;
             this.dgvCiudades.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCiudades_CellContentClick);
             // 
+            // ciudadNombre
+            // 
+            this.ciudadNombre.HeaderText = "Nombre de la Ciudad:";
+            this.ciudadNombre.Name = "ciudadNombre";
+            // 
             // btnVolver
             // 
             this.btnVolver.DialogResult = System.Windows.Forms.DialogResult.Cancel;
@@ -143,11 +148,6 @@
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
             this.salirToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
             this.salirToolStripMenuItem.Text = "Salir";
-            // 
-            // ciudadNombre
-            // 
-            this.ciudadNombre.HeaderText = "Nombre de la Ciudad:";
-            this.ciudadNombre.Name = "ciudadNombre";
             // 
             // VerCiudades
             // 

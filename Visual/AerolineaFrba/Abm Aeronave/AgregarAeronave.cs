@@ -16,7 +16,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         public AgregarAeronave()
         {
-            
+            InitializeComponent();
         }
 
         public AgregarAeronave(string matricula, string modelo) //mandar todos los parametros para completar los texbox 
@@ -79,10 +79,11 @@ namespace AerolineaFrba.Abm_Aeronave
             reader.Read();
             string idServicio = reader["id"].ToString();
             reader.Close();
-            query = "DATA_G.CREAR_AERONAVE ('" + matricula + "', " + "'" + modelo + "', " + kg_disponibles + ", '" + 
-                                             fabricante + "', '"  + descripcionServicio + "', " + cantButacas + ")";
+            query = "DATA_G.CREAR_AERONAVE ('" + matricula + "', " + "'" + modelo + "', " + kg_disponibles + ", '" +
+                                             fabricante + "', '" + idServicio + "', " + cantButacas + ")";
             
-            Conexion.ejecutarQuery(query);
+            reader = Conexion.ejecutarQuery(query);
+            reader.Close();
         }
 
         private void txtCantButacasPasillo_TextChanged(object sender, EventArgs e)
