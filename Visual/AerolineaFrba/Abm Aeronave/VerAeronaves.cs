@@ -16,7 +16,10 @@ namespace AerolineaFrba.Abm_Aeronave
         public VerAeronaves()
         {
             InitializeComponent();
-            
+        }
+
+        public void mostrarSeleccionar() {
+                btnSeleccionar.Enabled = true;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -49,6 +52,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void VerAeronaves_Load(object sender, EventArgs e)
         {
+            btnSeleccionar.Enabled = false;
             
             string query = "SELECT * FROM DATA_G.AERONAVE";
             SqlDataReader reader = Conexion.ejecutarQuery(query);
@@ -67,6 +71,11 @@ namespace AerolineaFrba.Abm_Aeronave
             DataGridViewRow d = null;
             string id = d.Cells[1].ToString();
             new AgregarAeronave(id, id).Show(); //mandar todos los parametros.
+
+        }
+
+        private void btnSeleccionar_Click(object sender, EventArgs e)
+        {
 
         }
     }

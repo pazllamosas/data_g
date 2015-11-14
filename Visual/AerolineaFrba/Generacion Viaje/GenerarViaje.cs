@@ -34,6 +34,7 @@ namespace AerolineaFrba.Generacion_Viaje
         {
             this.Hide();
             FormProvider.VerAeronaves.Show();
+            FormProvider.VerAeronaves.mostrarSeleccionar();
             //entro desde acá puede tocar boton seleccionar
         }
     }

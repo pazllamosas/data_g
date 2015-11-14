@@ -38,8 +38,6 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvAeronaves = new System.Windows.Forms.DataGridView();
-            this.btnSeleccionar = new System.Windows.Forms.Button();
-            this.btnDarBaja = new System.Windows.Forms.Button();
             this.aeroFechaDeAlta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.aeroMatricula = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.aeroModelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,6 +49,8 @@
             this.aeroBajaPorFueraServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.aeroFechaFueraDeServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.aeroFechaReinicioDeServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnSeleccionar = new System.Windows.Forms.Button();
+            this.btnDarBaja = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAeronaves)).BeginInit();
             this.SuspendLayout();
@@ -164,29 +164,6 @@
             this.dgvAeronaves.TabIndex = 12;
             this.dgvAeronaves.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAeronaves_CellContentClick);
             // 
-            // btnSeleccionar
-            // 
-            this.btnSeleccionar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSeleccionar.Location = new System.Drawing.Point(247, 27);
-            this.btnSeleccionar.Name = "btnSeleccionar";
-            this.btnSeleccionar.Size = new System.Drawing.Size(75, 23);
-            this.btnSeleccionar.TabIndex = 15;
-            this.btnSeleccionar.Text = "Seleccionar";
-            this.btnSeleccionar.UseVisualStyleBackColor = true;
-            // 
-            // btnDarBaja
-            // 
-            this.btnDarBaja.Image = global::AerolineaFrba.Properties.Resources.noplane;
-            this.btnDarBaja.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDarBaja.Location = new System.Drawing.Point(400, 27);
-            this.btnDarBaja.Name = "btnDarBaja";
-            this.btnDarBaja.Size = new System.Drawing.Size(86, 23);
-            this.btnDarBaja.TabIndex = 16;
-            this.btnDarBaja.Text = "Dar de Baja";
-            this.btnDarBaja.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnDarBaja.UseVisualStyleBackColor = true;
-            this.btnDarBaja.Click += new System.EventHandler(this.btnDarBaja_Click);
-            // 
             // aeroFechaDeAlta
             // 
             this.aeroFechaDeAlta.HeaderText = "Fecha de Alta";
@@ -241,6 +218,31 @@
             // 
             this.aeroFechaReinicioDeServicio.HeaderText = "Fecha de Reinicio de Servicio";
             this.aeroFechaReinicioDeServicio.Name = "aeroFechaReinicioDeServicio";
+            // 
+            // btnSeleccionar
+            // 
+            this.btnSeleccionar.Enabled = false;
+            this.btnSeleccionar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSeleccionar.Location = new System.Drawing.Point(247, 27);
+            this.btnSeleccionar.Name = "btnSeleccionar";
+            this.btnSeleccionar.Size = new System.Drawing.Size(75, 23);
+            this.btnSeleccionar.TabIndex = 15;
+            this.btnSeleccionar.Text = "Seleccionar";
+            this.btnSeleccionar.UseVisualStyleBackColor = true;
+            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
+            // 
+            // btnDarBaja
+            // 
+            this.btnDarBaja.Image = global::AerolineaFrba.Properties.Resources.noplane;
+            this.btnDarBaja.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDarBaja.Location = new System.Drawing.Point(400, 27);
+            this.btnDarBaja.Name = "btnDarBaja";
+            this.btnDarBaja.Size = new System.Drawing.Size(86, 23);
+            this.btnDarBaja.TabIndex = 16;
+            this.btnDarBaja.Text = "Dar de Baja";
+            this.btnDarBaja.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnDarBaja.UseVisualStyleBackColor = true;
+            this.btnDarBaja.Click += new System.EventHandler(this.btnDarBaja_Click);
             // 
             // VerAeronaves
             // 
