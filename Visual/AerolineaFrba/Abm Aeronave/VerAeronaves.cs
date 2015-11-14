@@ -19,13 +19,21 @@ namespace AerolineaFrba.Abm_Aeronave
         }
 
         public void mostrarSeleccionar() {
-                btnSeleccionar.Enabled = true;
+                btnSeleccionar.Visible = true;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FormProvider.MainMenu.Show();
+            if (btnSeleccionar.Visible)
+            {
+                FormProvider.GenerarViaje.Show();
+            }
+            else
+            {
+                FormProvider.MainMenu.Show();
+            }
+            
         }
 
         private void btnDarBaja_Click(object sender, EventArgs e)
@@ -52,7 +60,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void VerAeronaves_Load(object sender, EventArgs e)
         {
-            btnSeleccionar.Enabled = false;
+            btnSeleccionar.Visible = false;
             
             string query = "SELECT * FROM DATA_G.AERONAVE";
             SqlDataReader reader = Conexion.ejecutarQuery(query);

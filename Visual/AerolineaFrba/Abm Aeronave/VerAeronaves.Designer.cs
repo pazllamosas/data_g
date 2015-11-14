@@ -221,7 +221,6 @@
             // 
             // btnSeleccionar
             // 
-            this.btnSeleccionar.Enabled = false;
             this.btnSeleccionar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnSeleccionar.Location = new System.Drawing.Point(247, 27);
             this.btnSeleccionar.Name = "btnSeleccionar";
@@ -229,6 +228,7 @@
             this.btnSeleccionar.TabIndex = 15;
             this.btnSeleccionar.Text = "Seleccionar";
             this.btnSeleccionar.UseVisualStyleBackColor = true;
+            this.btnSeleccionar.Visible = false;
             this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
             // 
             // btnDarBaja
