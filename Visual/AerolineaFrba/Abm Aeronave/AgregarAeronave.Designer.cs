@@ -30,17 +30,17 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgregarAeronave));
             this.label1 = new System.Windows.Forms.Label();
-            this.txtCantButacasPasillo = new System.Windows.Forms.TextBox();
+            this.txtCantButacas = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtEspacioEncomienda = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtFabricante = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.txtCantButacasVentana = new System.Windows.Forms.TextBox();
+            this.txtModelo = new System.Windows.Forms.TextBox();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtPatente = new System.Windows.Forms.TextBox();
+            this.txtMatricula = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.cmbTipoServicio = new System.Windows.Forms.ComboBox();
@@ -52,16 +52,17 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(9, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(148, 13);
+            this.label1.Size = new System.Drawing.Size(109, 13);
             this.label1.TabIndex = 6;
-            this.label1.Text = "Cantidad de Butacas (Pasillo):";
+            this.label1.Text = "Cantidad de Butacas:";
             // 
-            // txtCantButacasPasillo
+            // txtCantButacas
             // 
-            this.txtCantButacasPasillo.Location = new System.Drawing.Point(176, 6);
-            this.txtCantButacasPasillo.Name = "txtCantButacasPasillo";
-            this.txtCantButacasPasillo.Size = new System.Drawing.Size(100, 20);
-            this.txtCantButacasPasillo.TabIndex = 7;
+            this.txtCantButacas.Location = new System.Drawing.Point(176, 6);
+            this.txtCantButacas.Name = "txtCantButacas";
+            this.txtCantButacas.Size = new System.Drawing.Size(100, 20);
+            this.txtCantButacas.TabIndex = 7;
+            this.txtCantButacas.TextChanged += new System.EventHandler(this.txtCantButacasPasillo_TextChanged);
             // 
             // label2
             // 
@@ -100,16 +101,17 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(298, 9);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(164, 13);
+            this.label6.Size = new System.Drawing.Size(45, 13);
             this.label6.TabIndex = 17;
-            this.label6.Text = "Cantidad de Butacas (Ventanilla):";
+            this.label6.Text = "Modelo:";
             // 
-            // txtCantButacasVentana
+            // txtModelo
             // 
-            this.txtCantButacasVentana.Location = new System.Drawing.Point(468, 6);
-            this.txtCantButacasVentana.Name = "txtCantButacasVentana";
-            this.txtCantButacasVentana.Size = new System.Drawing.Size(100, 20);
-            this.txtCantButacasVentana.TabIndex = 18;
+            this.txtModelo.Location = new System.Drawing.Point(468, 6);
+            this.txtModelo.Name = "txtModelo";
+            this.txtModelo.Size = new System.Drawing.Size(100, 20);
+            this.txtModelo.TabIndex = 18;
+            this.txtModelo.TextChanged += new System.EventHandler(this.txtModelo_TextChanged);
             // 
             // btnGuardar
             // 
@@ -123,6 +125,7 @@
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // btnCancelar
             // 
@@ -143,16 +146,17 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(298, 64);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(102, 13);
+            this.label4.Size = new System.Drawing.Size(108, 13);
             this.label4.TabIndex = 19;
-            this.label4.Text = "Número de Patente:";
+            this.label4.Text = "Número de Matricula:";
             // 
-            // txtPatente
+            // txtMatricula
             // 
-            this.txtPatente.Location = new System.Drawing.Point(468, 61);
-            this.txtPatente.Name = "txtPatente";
-            this.txtPatente.Size = new System.Drawing.Size(100, 20);
-            this.txtPatente.TabIndex = 20;
+            this.txtMatricula.Location = new System.Drawing.Point(468, 61);
+            this.txtMatricula.Name = "txtMatricula";
+            this.txtMatricula.Size = new System.Drawing.Size(100, 20);
+            this.txtMatricula.TabIndex = 20;
+            this.txtMatricula.TextChanged += new System.EventHandler(this.txtMatricula_TextChanged);
             // 
             // label5
             // 
@@ -201,15 +205,15 @@
             this.Controls.Add(this.cmbTipoServicio);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.txtPatente);
+            this.Controls.Add(this.txtMatricula);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.txtCantButacasVentana);
+            this.Controls.Add(this.txtModelo);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtFabricante);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtEspacioEncomienda);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtCantButacasPasillo);
+            this.Controls.Add(this.txtCantButacas);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnCancelar);
@@ -227,15 +231,15 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtCantButacasPasillo;
+        private System.Windows.Forms.TextBox txtCantButacas;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtEspacioEncomienda;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtFabricante;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtCantButacasVentana;
+        private System.Windows.Forms.TextBox txtModelo;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txtPatente;
+        private System.Windows.Forms.TextBox txtMatricula;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cmbTipoServicio;

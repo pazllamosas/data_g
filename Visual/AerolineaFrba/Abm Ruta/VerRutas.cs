@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -47,6 +48,18 @@ namespace AerolineaFrba.Abm_Ruta
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void VerRutas_Load(object sender, EventArgs e)
+        {
+            string query = "SELECT * FROM DATA_G.RUTA";
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+
+            while (reader.Read())
+            {
+                dgvRutas.Rows.Add(reader["Codigo"], reader["Precio_BaseKG"].ToString(), reader["Precio_BasePasaje"], reader["idServicio"], reader["Origen"], reader["Destino"]);
+            }
+            reader.Close();
         }
     }
 }

@@ -39,6 +39,12 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnSeleccionar = new System.Windows.Forms.Button();
+            this.rutaCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rutaPrecioBaseKG = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rutaPrecioBasePasaje = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rutaServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rutaOrigen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rutaDestino = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRutas)).BeginInit();
             this.SuspendLayout();
@@ -80,6 +86,13 @@
             // dgvRutas
             // 
             this.dgvRutas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvRutas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.rutaCodigo,
+            this.rutaPrecioBaseKG,
+            this.rutaPrecioBasePasaje,
+            this.rutaServicio,
+            this.rutaOrigen,
+            this.rutaDestino});
             this.dgvRutas.Location = new System.Drawing.Point(12, 86);
             this.dgvRutas.Name = "dgvRutas";
             this.dgvRutas.Size = new System.Drawing.Size(610, 264);
@@ -151,6 +164,36 @@
             this.btnSeleccionar.Text = "Seleccionar";
             this.btnSeleccionar.UseVisualStyleBackColor = true;
             // 
+            // rutaCodigo
+            // 
+            this.rutaCodigo.HeaderText = "Codigo de Ruta";
+            this.rutaCodigo.Name = "rutaCodigo";
+            // 
+            // rutaPrecioBaseKG
+            // 
+            this.rutaPrecioBaseKG.HeaderText = "Precio Base (KG)";
+            this.rutaPrecioBaseKG.Name = "rutaPrecioBaseKG";
+            // 
+            // rutaPrecioBasePasaje
+            // 
+            this.rutaPrecioBasePasaje.HeaderText = "Precio Base Pasaje";
+            this.rutaPrecioBasePasaje.Name = "rutaPrecioBasePasaje";
+            // 
+            // rutaServicio
+            // 
+            this.rutaServicio.HeaderText = "Servicio";
+            this.rutaServicio.Name = "rutaServicio";
+            // 
+            // rutaOrigen
+            // 
+            this.rutaOrigen.HeaderText = "Ciudad de Origen";
+            this.rutaOrigen.Name = "rutaOrigen";
+            // 
+            // rutaDestino
+            // 
+            this.rutaDestino.HeaderText = "Destino";
+            this.rutaDestino.Name = "rutaDestino";
+            // 
             // VerRutas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -168,6 +211,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "VerRutas";
             this.Text = "Rutas";
+            this.Load += new System.EventHandler(this.VerRutas_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRutas)).EndInit();
@@ -188,5 +232,11 @@
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnSeleccionar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rutaCodigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rutaPrecioBaseKG;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rutaPrecioBasePasaje;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rutaServicio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rutaOrigen;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rutaDestino;
     }
 }

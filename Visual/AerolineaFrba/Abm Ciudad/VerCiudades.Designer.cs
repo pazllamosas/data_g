@@ -38,6 +38,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ciudadNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCiudades)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -96,10 +97,13 @@
             // dgvCiudades
             // 
             this.dgvCiudades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCiudades.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ciudadNombre});
             this.dgvCiudades.Location = new System.Drawing.Point(12, 83);
             this.dgvCiudades.Name = "dgvCiudades";
             this.dgvCiudades.Size = new System.Drawing.Size(610, 266);
             this.dgvCiudades.TabIndex = 4;
+            this.dgvCiudades.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCiudades_CellContentClick);
             // 
             // btnVolver
             // 
@@ -140,6 +144,11 @@
             this.salirToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
             this.salirToolStripMenuItem.Text = "Salir";
             // 
+            // ciudadNombre
+            // 
+            this.ciudadNombre.HeaderText = "Nombre de la Ciudad:";
+            this.ciudadNombre.Name = "ciudadNombre";
+            // 
             // VerCiudades
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -177,5 +186,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ciudadNombre;
     }
 }

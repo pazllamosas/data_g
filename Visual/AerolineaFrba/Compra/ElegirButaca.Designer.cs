@@ -37,16 +37,26 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.butacaNro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.butacaTipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.butacaPiso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.butacaEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSeleccionButaca)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvSeleccionButaca
             // 
             this.dgvSeleccionButaca.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSeleccionButaca.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.butacaNro,
+            this.butacaTipo,
+            this.butacaPiso,
+            this.butacaEstado});
             this.dgvSeleccionButaca.Location = new System.Drawing.Point(12, 146);
             this.dgvSeleccionButaca.Name = "dgvSeleccionButaca";
             this.dgvSeleccionButaca.Size = new System.Drawing.Size(610, 177);
             this.dgvSeleccionButaca.TabIndex = 9;
+            this.dgvSeleccionButaca.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSeleccionButaca_CellContentClick);
             // 
             // label1
             // 
@@ -118,6 +128,26 @@
             this.label2.TabIndex = 17;
             this.label2.Text = "Nombre:";
             // 
+            // butacaNro
+            // 
+            this.butacaNro.HeaderText = "Numero de Butaca";
+            this.butacaNro.Name = "butacaNro";
+            // 
+            // butacaTipo
+            // 
+            this.butacaTipo.HeaderText = "Tipo de Butaca";
+            this.butacaTipo.Name = "butacaTipo";
+            // 
+            // butacaPiso
+            // 
+            this.butacaPiso.HeaderText = "Piso";
+            this.butacaPiso.Name = "butacaPiso";
+            // 
+            // butacaEstado
+            // 
+            this.butacaEstado.HeaderText = "Estado";
+            this.butacaEstado.Name = "butacaEstado";
+            // 
             // ElegirButaca
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -151,5 +181,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn butacaNro;
+        private System.Windows.Forms.DataGridViewTextBoxColumn butacaTipo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn butacaPiso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn butacaEstado;
     }
 }

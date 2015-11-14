@@ -49,17 +49,24 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void VerAeronaves_Load(object sender, EventArgs e)
         {
-
-
+            
             string query = "SELECT * FROM DATA_G.AERONAVE";
             SqlDataReader reader = Conexion.ejecutarQuery(query);
 
             while (reader.Read())
             {
-            dgvAeronaves.Rows.Add(reader["FechaDeAlta"], reader["matricula"].ToString(), reader["Modelo"], reader["kg_disponibles"], reader ["Fabricante"], reader ["IdServicio"], reader["cantButacas"]);
+            dgvAeronaves.Rows.Add(reader["FechaDeAlta"], reader["matricula"].ToString(), reader["Modelo"], reader["kg_disponibles"], reader ["Fabricante"], reader ["IdServicio"], reader["cantButacas"], reader ["idEstado"] ,reader ["BajaPorFueraDeServicio"], reader ["FechaDeFueraDeServicio"], reader ["FechaReinicioDeServicio"]);
             }
             reader.Close();
 
+
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow d = null;
+            string id = d.Cells[1].ToString();
+            new AgregarAeronave(id, id).Show(); //mandar todos los parametros.
 
         }
     }

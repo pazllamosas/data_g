@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -40,9 +41,24 @@ namespace AerolineaFrba.Abm_Ciudad
         }
         private void Form1_Load(object sender, EventArgs es)
         {
+            string query = "SELECT * FROM DATA_G.CIUDAD";
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+
+            while (reader.Read())
+            {
+                dgvCiudades.Rows.Add(reader["Nombre"]);
+            }
+            reader.Close();
+
+
         }
         private void menuStrip1_ItemClicked(object sender, EventArgs es)
         {
+        }
+
+        private void dgvCiudades_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
