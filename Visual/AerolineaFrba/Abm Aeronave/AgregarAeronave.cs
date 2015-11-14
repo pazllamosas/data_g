@@ -29,7 +29,7 @@ namespace AerolineaFrba.Abm_Aeronave
             for (i = 0; i < cantidad; i++)    
             {
                 cmbOrigen.SelectedIndex = i;
-                if (cmbOrigen.Text == nombre) //nombre es el parametro
+             //   if (cmbOrigen.Text == nombre) //nombre es el parametro
                     break;
             }
 

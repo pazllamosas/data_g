@@ -33,9 +33,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.dgvElegirRol = new System.Windows.Forms.DataGridView();
+            this.dgvElegirFuncionalidad = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvElegirRol)).BeginInit();
+            this.rolFuncionalidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvElegirFuncionalidad)).BeginInit();
             this.SuspendLayout();
             // 
             // txtNombre
@@ -83,13 +84,16 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // dgvElegirRol
+            // dgvElegirFuncionalidad
             // 
-            this.dgvElegirRol.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvElegirRol.Location = new System.Drawing.Point(12, 64);
-            this.dgvElegirRol.Name = "dgvElegirRol";
-            this.dgvElegirRol.Size = new System.Drawing.Size(610, 257);
-            this.dgvElegirRol.TabIndex = 4;
+            this.dgvElegirFuncionalidad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvElegirFuncionalidad.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.rolFuncionalidades});
+            this.dgvElegirFuncionalidad.Location = new System.Drawing.Point(12, 64);
+            this.dgvElegirFuncionalidad.Name = "dgvElegirFuncionalidad";
+            this.dgvElegirFuncionalidad.Size = new System.Drawing.Size(610, 257);
+            this.dgvElegirFuncionalidad.TabIndex = 4;
+            this.dgvElegirFuncionalidad.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElegirFuncionalidad_CellContentClick);
             // 
             // label2
             // 
@@ -101,6 +105,11 @@
             this.label2.Text = "Elige las funcionalidades que podrá utilizar este rol:";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
+            // rolFuncionalidades
+            // 
+            this.rolFuncionalidades.HeaderText = "Funcionalidades:";
+            this.rolFuncionalidades.Name = "rolFuncionalidades";
+            // 
             // AgregarRol
             // 
             this.AcceptButton = this.btnGuardar;
@@ -109,7 +118,7 @@
             this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(634, 362);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.dgvElegirRol);
+            this.Controls.Add(this.dgvElegirFuncionalidad);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.label1);
@@ -117,7 +126,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AgregarRol";
             this.Text = "Agregar Rol";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvElegirRol)).EndInit();
+            this.Load += new System.EventHandler(this.AgregarRol_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvElegirFuncionalidad)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -129,7 +139,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.DataGridView dgvElegirRol;
+        private System.Windows.Forms.DataGridView dgvElegirFuncionalidad;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rolFuncionalidades;
     }
 }
