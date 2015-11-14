@@ -16,6 +16,7 @@ namespace AerolineaFrba.Abm_Ruta
         public VerRutas()
         {
             InitializeComponent();
+            Shown += VerRutas_Shown;
         }
 
         public void mostrarSeleccionar()
