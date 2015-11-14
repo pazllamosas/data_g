@@ -34,17 +34,17 @@
             this.deslogearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvRutas = new System.Windows.Forms.DataGridView();
-            this.btnVolver = new System.Windows.Forms.Button();
-            this.btnEditar = new System.Windows.Forms.Button();
-            this.btnEliminar = new System.Windows.Forms.Button();
-            this.btnAgregar = new System.Windows.Forms.Button();
-            this.btnSeleccionar = new System.Windows.Forms.Button();
             this.rutaCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rutaPrecioBaseKG = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rutaPrecioBasePasaje = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rutaServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rutaOrigen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rutaDestino = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnVolver = new System.Windows.Forms.Button();
+            this.btnEditar = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnAgregar = new System.Windows.Forms.Button();
+            this.btnSeleccionar = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRutas)).BeginInit();
             this.SuspendLayout();
@@ -98,6 +98,36 @@
             this.dgvRutas.Size = new System.Drawing.Size(610, 264);
             this.dgvRutas.TabIndex = 10;
             this.dgvRutas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // rutaCodigo
+            // 
+            this.rutaCodigo.HeaderText = "Codigo de Ruta";
+            this.rutaCodigo.Name = "rutaCodigo";
+            // 
+            // rutaPrecioBaseKG
+            // 
+            this.rutaPrecioBaseKG.HeaderText = "Precio Base (KG)";
+            this.rutaPrecioBaseKG.Name = "rutaPrecioBaseKG";
+            // 
+            // rutaPrecioBasePasaje
+            // 
+            this.rutaPrecioBasePasaje.HeaderText = "Precio Base Pasaje";
+            this.rutaPrecioBasePasaje.Name = "rutaPrecioBasePasaje";
+            // 
+            // rutaServicio
+            // 
+            this.rutaServicio.HeaderText = "Servicio";
+            this.rutaServicio.Name = "rutaServicio";
+            // 
+            // rutaOrigen
+            // 
+            this.rutaOrigen.HeaderText = "Ciudad de Origen";
+            this.rutaOrigen.Name = "rutaOrigen";
+            // 
+            // rutaDestino
+            // 
+            this.rutaDestino.HeaderText = "Destino";
+            this.rutaDestino.Name = "rutaDestino";
             // 
             // btnVolver
             // 
@@ -163,36 +193,7 @@
             this.btnSeleccionar.TabIndex = 14;
             this.btnSeleccionar.Text = "Seleccionar";
             this.btnSeleccionar.UseVisualStyleBackColor = true;
-            // 
-            // rutaCodigo
-            // 
-            this.rutaCodigo.HeaderText = "Codigo de Ruta";
-            this.rutaCodigo.Name = "rutaCodigo";
-            // 
-            // rutaPrecioBaseKG
-            // 
-            this.rutaPrecioBaseKG.HeaderText = "Precio Base (KG)";
-            this.rutaPrecioBaseKG.Name = "rutaPrecioBaseKG";
-            // 
-            // rutaPrecioBasePasaje
-            // 
-            this.rutaPrecioBasePasaje.HeaderText = "Precio Base Pasaje";
-            this.rutaPrecioBasePasaje.Name = "rutaPrecioBasePasaje";
-            // 
-            // rutaServicio
-            // 
-            this.rutaServicio.HeaderText = "Servicio";
-            this.rutaServicio.Name = "rutaServicio";
-            // 
-            // rutaOrigen
-            // 
-            this.rutaOrigen.HeaderText = "Ciudad de Origen";
-            this.rutaOrigen.Name = "rutaOrigen";
-            // 
-            // rutaDestino
-            // 
-            this.rutaDestino.HeaderText = "Destino";
-            this.rutaDestino.Name = "rutaDestino";
+            this.btnSeleccionar.Visible = false;
             // 
             // VerRutas
             // 

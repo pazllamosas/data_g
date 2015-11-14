@@ -18,10 +18,22 @@ namespace AerolineaFrba.Abm_Ruta
             InitializeComponent();
         }
 
+        public void mostrarSeleccionar()
+        {
+            btnSeleccionar.Visible = true;
+        }
+
         private void button4_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FormProvider.MainMenu.Show();
+            if (btnSeleccionar.Visible)
+            {
+                FormProvider.GenerarViaje.Show();
+            }
+            else
+            {
+                FormProvider.MainMenu.Show();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -52,6 +64,8 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void VerRutas_Load(object sender, EventArgs e)
         {
+            btnSeleccionar.Visible = false;
+            
             string query = "SELECT * FROM DATA_G.RUTA";
             SqlDataReader reader = Conexion.ejecutarQuery(query);
 

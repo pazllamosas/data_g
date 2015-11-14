@@ -26,7 +26,8 @@ namespace AerolineaFrba.Generacion_Viaje
         private void btnAgregarRuta_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FormProvider.AgregarRuta.Show();
+            FormProvider.VerRutas.Show();
+            FormProvider.VerRutas.mostrarSeleccionar();
             //entro desde acá puede tocar boton seleccionar
         }
 
