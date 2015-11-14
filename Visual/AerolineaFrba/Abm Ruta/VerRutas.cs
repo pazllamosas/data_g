@@ -27,7 +27,7 @@ namespace AerolineaFrba.Abm_Ruta
         private void button4_Click(object sender, EventArgs e)
         {
             this.Hide();
-            if (btnSeleccionar.Visible)
+            if (btnSeleccionar.Visible == true)
             {
                 FormProvider.GenerarViaje.Show();
             }
