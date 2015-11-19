@@ -355,17 +355,13 @@ CREATE TABLE DATA_G.VUELO(
 CREATE TABLE DATA_G.COMPRA(
 	NroCompra INT PRIMARY KEY IDENTITY,	
 	PNR NVARCHAR(255),
-	NroVuelo INT FOREIGN KEY REFERENCES DATA_G.VUELO NOT NULL,
 	IdComprador INT FOREIGN KEY REFERENCES DATA_G.CLIENTE NOT NULL,
-	Monto NUMERIC(18,2),
 	FechaCompra DATETIME, 
 	MedioPago NVARCHAR(255),
 	NroTarjeta NUMERIC(18,0),
 	VencimientoTarjeta DATETIME, 
 	TipoTarjeta NVARCHAR(255),
 	Cuotas 	NUMERIC(18,0),
-	Pasaje_Codigo NUMERIC(18,0),
-	Paquete_Codigo NUMERIC(18,0),
 	IdPuntoDeCompra int FOREIGN KEY REFERENCES DATA_G.PUNTO_DE_COMPRA
 )
 
@@ -385,8 +381,7 @@ CREATE TABLE DATA_G.PASAJE(
 	IdPasaje int  PRIMARY KEY IDENTITY(1,1),
 	Pasaje_Codigo numeric(18, 0),
 	Precio numeric(18, 2),
-	FechaCompra datetime, 
-	CantMillas int,
+	NroCompra int FOREIGN KEY REFERENCES DATA_G.COMPRA,
 	NroVuelo int FOREIGN KEY REFERENCES DATA_G.VUELO,
 	IdCli int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
 	IdButaca numeric (18, 0) FOREIGN KEY REFERENCES DATA_G.BUTACA
@@ -399,8 +394,8 @@ CREATE TABLE DATA_G.PAQUETE(
 	IdPaquete numeric(18,0) PRIMARY KEY IDENTITY (1,1),
 	Codigo numeric(18,2),
 	Precio numeric(18,2),
+	NroCompra int FOREIGN KEY REFERENCES DATA_G.COMPRA,
 	KG numeric(18,0),
-	FechaCompra datetime,
 	Piso numeric(18, 0) CHECK (Piso IN ('0')),
 	IdCli int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
 	NroVuelo int FOREIGN KEY REFERENCES DATA_G.VUELO
@@ -692,8 +687,80 @@ SELECT distinct M.Pasaje_Codigo,
 	FROM gd_esquema.Maestra M
 	WHERE M.Pasaje_Codigo <> 0
 
+IF OBJECT_ID('tempdb.dbo.#TEMPPAQUETE') IS NOT NULL
+DROP TABLE #TEMPPAQUETE
 
+CREATE TABLE #TEMPPAQUETE(
 
+	ID INT IDENTITY PRIMARY KEY, 
+	Paquete_Codigo numeric (18,0),
+	Paquete_Precio numeric (18,2),
+	Paquete_FechaCompra datetime,
+	Paquete_KG numeric (18,0),
+	CantMillas int, 
+	Cli_Dni numeric (18,0),
+	Cli_Apellido nvarchar(255),
+	Cli_Nombre nvarchar (255),
+	Cli_Fecha_Nac datetime, 
+	Ruta_Codigo numeric (18,0),
+	Tipo_Servicio nvarchar(255),
+	FechaSalida datetime,
+	FechaLLegada datetime,
+	Fecha_LLegada_Estimada datetime,
+	Aeronave_Matricula nvarchar(255),
+	Aeronave_Fab nvarchar(255),
+	Origen nvarchar(255),
+	Destino nvarchar(255)
+
+	)
+
+INSERT INTO #TEMPPAQUETE(Paquete_Codigo, Paquete_Precio, Paquete_FechaCompra, Paquete_KG, CantMillas, Cli_Dni, Cli_Apellido, Cli_Nombre, Cli_Fecha_Nac ,Ruta_Codigo, Tipo_Servicio, Aeronave_Matricula, Aeronave_Fab, FechaSalida, FechaLLegada, Fecha_LLegada_Estimada, Origen, Destino)
+SELECT distinct M.Paquete_Codigo,
+				M.Paquete_Precio,
+				M.Paquete_FechaCompra,
+				M.Paquete_KG,
+				CAST(ROUND(M.Paquete_Precio/10,1) AS decimal(10,0)) AS 'CantMillas',
+				M.Cli_Dni,
+				M.Cli_Apellido,
+				M.Cli_Nombre,
+				M.Cli_Fecha_Nac,
+				M.Ruta_Codigo,
+				M.Tipo_Servicio,
+				M.Aeronave_Matricula,
+				M.Aeronave_Fabricante,
+				M.FechaSalida,
+				M.FechaLLegada,
+				M.Fecha_LLegada_Estimada,
+				M.Ruta_Ciudad_Origen,
+				M.Ruta_Ciudad_Destino
+
+	FROM gd_esquema.Maestra M
+	WHERE M.Paquete_Codigo <> 0
+
+INSERT INTO DATA_G.COMPRA (PNR, IdComprador, FechaCompra, MedioPago, NroTarjeta, VencimientoTarjeta, TipoTarjeta, Cuotas)
+SELECT 
+	NULL,
+	TC.IdCli,
+	PJ.Pasaje_FechaCompra,
+	NULL, NULL, NULL, NULL, NULL
+FROM #TEMPPASAJE PJ
+	JOIN  #TEMPCLIENTES tc WITH (INDEX(IDX_TempClientes)) ON tc.CliDni = PJ.Cli_Dni
+					AND TC.CliApellido = PJ.Cli_Apellido
+					AND TC.CliNombre = PJ.Cli_Nombre
+					AND TC.CliFechaNac = PJ.Cli_Fecha_Nac
+
+INSERT INTO DATA_G.COMPRA(PNR, IdComprador,  FechaCompra, MedioPago, NroTarjeta, VencimientoTarjeta, TipoTarjeta, Cuotas)
+SELECT 
+	NULL, 
+	TC.IdCli,
+	PQ.Paquete_FechaCompra,
+	NULL, NULL, NULL, NULL, NULL
+FROM #TEMPPAQUETE PQ 
+JOIN  #TEMPCLIENTES tc WITH (INDEX(IDX_TempClientes)) ON tc.CliDni = PQ.Cli_Dni
+					AND TC.CliApellido = PQ.Cli_Apellido
+					AND TC.CliNombre = PQ.Cli_Nombre
+					AND TC.CliFechaNac = PQ.Cli_Fecha_Nac
+	
 
 CREATE TABLE #TEMP1(
 IdCli int,
@@ -748,115 +815,32 @@ CREATE INDEX IDX_Temp2 ON #TEMP2
 GO
 
 
-IF OBJECT_ID('tempdb.dbo.#TEMPPAQUETE') IS NOT NULL
-DROP TABLE #TEMPPAQUETE
-
-CREATE TABLE #TEMPPAQUETE(
-
-	ID INT IDENTITY PRIMARY KEY, 
-	Paquete_Codigo numeric (18,0),
-	Paquete_Precio numeric (18,2),
-	Paquete_FechaCompra datetime,
-	Paquete_KG numeric (18,0),
-	CantMillas int, 
-	Cli_Dni numeric (18,0),
-	Cli_Apellido nvarchar(255),
-	Cli_Nombre nvarchar (255),
-	Cli_Fecha_Nac datetime, 
-	Ruta_Codigo numeric (18,0),
-	Tipo_Servicio nvarchar(255),
-	FechaSalida datetime,
-	FechaLLegada datetime,
-	Fecha_LLegada_Estimada datetime,
-	Aeronave_Matricula nvarchar(255),
-	Aeronave_Fab nvarchar(255),
-	Origen nvarchar(255),
-	Destino nvarchar(255)
-
-	)
-
-INSERT INTO #TEMPPAQUETE(Paquete_Codigo, Paquete_Precio, Paquete_FechaCompra, Paquete_KG, CantMillas, Cli_Dni, Cli_Apellido, Cli_Nombre, Cli_Fecha_Nac ,Ruta_Codigo, Tipo_Servicio, Aeronave_Matricula, Aeronave_Fab, FechaSalida, FechaLLegada, Fecha_LLegada_Estimada, Origen, Destino)
-SELECT distinct M.Paquete_Codigo,
-				M.Paquete_Precio,
-				M.Paquete_FechaCompra,
-				M.Paquete_KG,
-				CAST(ROUND(M.Paquete_Precio/10,1) AS decimal(10,0)) AS 'CantMillas',
-				M.Cli_Dni,
-				M.Cli_Apellido,
-				M.Cli_Nombre,
-				M.Cli_Fecha_Nac,
-				M.Ruta_Codigo,
-				M.Tipo_Servicio,
-				M.Aeronave_Matricula,
-				M.Aeronave_Fabricante,
-				M.FechaSalida,
-				M.FechaLLegada,
-				M.Fecha_LLegada_Estimada,
-				M.Ruta_Ciudad_Origen,
-				M.Ruta_Ciudad_Destino
-
-	FROM gd_esquema.Maestra M
-	WHERE M.Paquete_Codigo <> 0
 
 
-INSERT INTO DATA_G.COMPRA (PNR, NroVuelo, IdComprador, Monto, FechaCompra, MedioPago, NroTarjeta, VencimientoTarjeta, TipoTarjeta, Cuotas, Pasaje_Codigo,Paquete_Codigo)
-SELECT 
-	NULL,
-	T2.NroVuelo,
-	T1.IdCli,
-	T2.Pasaje_Precio,
-	T2.Pasaje_FechaCompra,
-	NULL, NULL, NULL, NULL, NULL, NULL, T2.Pasaje_Codigo
-FROM #TEMP1 T1
-	JOIN #TEMP2 T2 ON T2.IdPJ = T1.IdPJ
-
-INSERT INTO DATA_G.COMPRA(PNR, NroVuelo, IdComprador, Monto, FechaCompra, MedioPago, NroTarjeta, VencimientoTarjeta, TipoTarjeta, Cuotas, Pasaje_Codigo,Paquete_Codigo)
-SELECT 
-	NULL, 
-	VU.NroVuelo,
-	TC.IdCli,
-	PQ.Paquete_Precio,
-	PQ.Paquete_FechaCompra,
-	NULL, NULL, NULL, NULL, NULL, NULL, PQ.Paquete_Codigo
-FROM #TEMPPAQUETE PQ 
-JOIN  #TEMPCLIENTES tc WITH (INDEX(IDX_TempClientes)) ON tc.CliDni = PQ.Cli_Dni
-					AND TC.CliApellido = PQ.Cli_Apellido
-					AND TC.CliNombre = PQ.Cli_Nombre
-					AND TC.CliFechaNac = PQ.Cli_Fecha_Nac
-	JOIN DATA_G.CIUDAD c1 ON PQ.Destino = C1.Nombre
-	JOIN DATA_G.CIUDAD c2 ON PQ.Origen = C2.Nombre
-	JOIN DATA_G.TIPODESERVICIO TS ON TS.Descripcion = PQ.Tipo_Servicio
-	JOIN DATA_G.RUTA R ON R.IdServicio= TS.IdServicio
-		AND  r.Codigo =  PQ.Ruta_Codigo
-		AND R.Destino = C1.CodigoCiudad
-		AND R.Origen = C2.CodigoCiudad
-	JOIN DATA_G.AERONAVE AE ON AE.Matricula = PQ.Aeronave_Matricula
-		AND AE.Fabricante = PQ.Aeronave_Fab
-	JOIN DATA_G.VUELO VU ON VU.FechaLlegada = PQ.FechaLLegada
-		AND VU.FechaSalida = PQ.FechaSalida
-		AND VU.IdAeronave = AE.IdAeronave
-		AND VU.IdRuta = R.IdRuta
 
 
-INSERT INTO DATA_G.PASAJE(Pasaje_Codigo,Precio,FechaCompra, CantMillas, NroVuelo, IdCli, IdButaca)
+
+INSERT INTO DATA_G.PASAJE(Pasaje_Codigo, Precio, NroCompra, NroVuelo, IdCli, IdButaca)
 SELECT
 			T2.Pasaje_Codigo,
 			T2.Pasaje_Precio,
-			T2.Pasaje_FechaCompra,
-		T2.CantMillas,
-		T2.NroVuelo,
+			C.NroCompra,
+			T2.NroVuelo,
 		T1.IdCli,
 		T2.IdButaca	
-	FROM #TEMP1 T1
-	JOIN #TEMP2 T2 WITH (INDEX(IDX_Temp2)) ON T2.IdPJ = T1.IdPJ
+	FROM #TEMP1 T1, #TEMP2 T2 WITH (INDEX(IDX_Temp2)), DATA_G.COMPRA C
+	WHERE T2.IdPJ = T1.IdPJ
+		AND C.FechaCompra = T2.Pasaje_FechaCompra
+		AND C.IdComprador = T1.IdCli
+		
 
 
 
-INSERT INTO DATA_G.PAQUETE( IdCli, Codigo, FechaCompra, Precio, NroVuelo, KG)
+INSERT INTO DATA_G.PAQUETE( IdCli, Codigo, Precio,  NroVuelo, KG)
 SELECT DISTINCT TC.IdCli,
 		PQ.Paquete_Codigo,
-	   PQ.Paquete_FechaCompra,
-	   PQ.Paquete_Precio,
+	    PQ.Paquete_Precio,
+		
 	   VU.NroVuelo,
 	   PQ.Paquete_KG
 FROM #TEMPPAQUETE PQ 
@@ -877,6 +861,7 @@ JOIN  #TEMPCLIENTES tc WITH (INDEX(IDX_TempClientes)) ON tc.CliDni = PQ.Cli_Dni
 		AND VU.FechaSalida = PQ.FechaSalida
 		AND VU.IdAeronave = AE.IdAeronave
 		AND VU.IdRuta = R.IdRuta
+	
 
 ORDER BY 1
 
