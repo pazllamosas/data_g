@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -40,6 +41,21 @@ namespace AerolineaFrba.Inicio
             }
             else
             {
+                string usuario = txtUsuario.Text;
+
+                string contrasenia = txtContrasenia.Text;
+
+                List<String> parametros = new List<String>();
+                parametros.Add(usuario);
+                parametros.Add(contrasenia);
+
+                int respuesta = Conexion.executeProcedureWithReturnValue("PASSWORD_CORRECTA", parametros);
+
+                if (respuesta == 1) 
+                {
+                    this.Hide();
+                    FormProvider.MainMenu.Show();                
+                }
                 // TODO logear usuario contra DB
             }
         }
