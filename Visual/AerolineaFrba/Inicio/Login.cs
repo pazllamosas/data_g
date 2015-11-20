@@ -51,10 +51,14 @@ namespace AerolineaFrba.Inicio
 
                 int respuesta = Conexion.executeProcedureWithReturnValue("PASSWORD_CORRECTA", parametros);
 
-                if (respuesta == 1) 
+                if (respuesta >= 1)
                 {
                     this.Hide();
-                    FormProvider.MainMenu.Show();                
+                    FormProvider.MainMenu.Show();
+                }
+                else
+                {
+                    MessageBox.Show("El usuario es invalido");
                 }
                 // TODO logear usuario contra DB
             }
