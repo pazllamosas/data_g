@@ -42,14 +42,14 @@ namespace AerolineaFrba.Inicio
             else
             {
                 string usuario = txtUsuario.Text;
-
                 string contrasenia = txtContrasenia.Text;
 
-                List<String> parametros = new List<String>();
-                parametros.Add(usuario);
-                parametros.Add(contrasenia);
+                string query = "SELECT DATA_G.PASSWORD_CORRECTA ('" + usuario + "' ,'"+ contrasenia + "') AS id";
 
-                int respuesta = Conexion.executeProcedureWithReturnValue("PASSWORD_CORRECTA", parametros);
+                SqlDataReader reader = Conexion.ejecutarQuery(query);
+                reader.Read();
+                int respuesta = int.Parse(reader["id"].ToString());
+                reader.Close();
 
                 if (respuesta >= 1)
                 {
