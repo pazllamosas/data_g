@@ -91,7 +91,7 @@ namespace AerolineaFrba.Compra
         private void IngresarDatosCompra_Load(object sender, EventArgs e)
         {
             Conexion.cargarCmb("Nombre", "CIUDAD", cmbCiudadOrigen);
-            Conexion.cargarCmb("Nombre", "CIUDAD", cmbCiudadOrigen);
+            Conexion.cargarCmb("Nombre", "CIUDAD", cmbCiudadDestino);
         }
     }
 }

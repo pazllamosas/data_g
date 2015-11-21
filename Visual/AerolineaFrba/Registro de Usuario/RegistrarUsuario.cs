@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,17 @@ namespace AerolineaFrba.Registro_de_Usuario
         {
             this.Hide();
             new Inicio.Menu().Show();
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            string usuario = txtUsuario.Text;
+            string pass = txtPass.Text;   
+                
+            string query = "DATA_G.CREAR_USUARIO ('" + usuario + "', " + "'" + pass + "')";
+
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+            reader.Close();
         }
     }
 }
