@@ -86,5 +86,10 @@ namespace AerolineaFrba.Abm_Aeronave
         {
 
         }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
