@@ -98,6 +98,13 @@ DROP TABLE #TEMP1
 IF OBJECT_ID('tempdb.dbo.#TEMP2') IS NOT NULL
 DROP TABLE #TEMP2
 
+IF OBJECT_ID('tempdb.dbo.#TEMP3') IS NOT NULL
+DROP TABLE #TEMP3
+
+IF OBJECT_ID('tempdb.dbo.#TEMP4') IS NOT NULL
+DROP TABLE #TEMP4
+
+
 -- DROP PROCEDURES Y FUNCTIONS 
 IF OBJECT_ID('DATA_G.CREAR_BUTACAS') IS NOT NULL
 DROP PROCEDURE DATA_G.CREAR_BUTACAS
@@ -404,9 +411,11 @@ CREATE TABLE DATA_G.TARJETA(
 
 CREATE TABLE DATA_G.COMPRA(
 	NroCompra INT PRIMARY KEY IDENTITY,	
-	PNR NVARCHAR(255),
 	IdComprador INT FOREIGN KEY REFERENCES DATA_G.CLIENTE NOT NULL,
 	FechaCompra DATETIME, 
+	Monto NUMERIC (18,2) DEFAULT 0,
+	Millas INT DEFAULT 0,
+	NroVuelo INT FOREIGN KEY REFERENCES DATA_G.VUELO,
 	IdTarjeta int FOREIGN KEY REFERENCES DATA_G.TARJETA, -- null seria efectivo
 	IdPuntoDeCompra int FOREIGN KEY REFERENCES DATA_G.PUNTO_DE_COMPRA
 )
@@ -803,29 +812,28 @@ SELECT distinct M.Paquete_Codigo,
 	FROM gd_esquema.Maestra M
 	WHERE M.Paquete_Codigo <> 0
 
-INSERT INTO DATA_G.COMPRA (PNR, IdComprador, FechaCompra)
-SELECT 
-	NULL,
+INSERT INTO DATA_G.COMPRA ( IdComprador, FechaCompra, NroVuelo)
+SELECT DISTINCT
 	TC.IdCli,
-	PJ.Pasaje_FechaCompra
-FROM #TEMPPASAJE PJ
-	JOIN  #TEMPCLIENTES tc WITH (INDEX(IDX_TempClientes)) ON tc.CliDni = PJ.Cli_Dni
-					AND TC.CliApellido = PJ.Cli_Apellido
-					AND TC.CliNombre = PJ.Cli_Nombre
-					AND TC.CliFechaNac = PJ.Cli_Fecha_Nac
-
-INSERT INTO DATA_G.COMPRA(PNR, IdComprador,  FechaCompra)
-SELECT 
-	NULL, 
-	TC.IdCli,
-	PQ.Paquete_FechaCompra
-FROM #TEMPPAQUETE PQ 
-JOIN  #TEMPCLIENTES tc WITH (INDEX(IDX_TempClientes)) ON tc.CliDni = PQ.Cli_Dni
-					AND TC.CliApellido = PQ.Cli_Apellido
-					AND TC.CliNombre = PQ.Cli_Nombre
-					AND TC.CliFechaNac = PQ.Cli_Fecha_Nac
+	CASE WHEN Paquete_Codigo != 0 THEN Paquete_FechaCompra ELSE Pasaje_FechaCompra END,
+	V.NroVuelo
+FROM gd_esquema.Maestra M
+	JOIN  #TEMPCLIENTES tc WITH (INDEX(IDX_TempClientes)) ON tc.CliDni = M.Cli_Dni
+					AND TC.CliApellido = M.Cli_Apellido
+					AND TC.CliNombre = M.Cli_Nombre
+					AND TC.CliFechaNac = M.Cli_Fecha_Nac
+	JOIN DATA_G.CIUDAD c1 ON M.Ruta_Ciudad_Destino = C1.Nombre
+	JOIN DATA_G.CIUDAD c2 ON M.Ruta_Ciudad_Origen = C2.Nombre
+	JOIN DATA_G.RUTA R ON r.Codigo =  M.Ruta_Codigo
+		AND R.Destino = C1.CodigoCiudad
+		AND R.Origen = C2.CodigoCiudad
+	JOIN DATA_G.AERONAVE AE ON AE.Matricula = M.Aeronave_Matricula
+		AND AE.Fabricante = M.Aeronave_Fabricante
+	JOIN DATA_G.VUELO V ON V.FechaLlegada = M.FechaLLegada
+		AND V.FechaSalida = M.FechaSalida
+		AND V.IdAeronave = AE.IdAeronave
+		AND V.IdRuta = R.IdRuta
 	
-
 CREATE TABLE #TEMP1(
 IdCli int,
 IdPJ int 
@@ -891,27 +899,45 @@ SELECT
 	WHERE T2.IdPJ = T1.IdPJ
 		AND C.FechaCompra = T2.Pasaje_FechaCompra
 		AND C.IdComprador = T1.IdCli
+		AND C.NroVuelo = T2.NroVuelo
+		ORDER BY 1
 SET IDENTITY_INSERT DATA_G.PASAJE OFF		
 
+CREATE TABLE #TEMP3(
+IdCli int,
+IdPQ int 
+)
 
---NRO COMPRA
-INSERT INTO DATA_G.PAQUETE( IdCli, Codigo, Precio,  NroVuelo, KG)
-SELECT DISTINCT TC.IdCli,
-		PQ.Paquete_Codigo,
-	    PQ.Paquete_Precio,
-		
-	   VU.NroVuelo,
-	   PQ.Paquete_KG
-FROM #TEMPPAQUETE PQ 
-JOIN  #TEMPCLIENTES tc WITH (INDEX(IDX_TempClientes)) ON tc.CliDni = PQ.Cli_Dni
+INSERT INTO #TEMP3
+	SELECT TC.IdCli, PQ.ID FROM #TEMPPAQUETE PQ
+	JOIN  #TEMPCLIENTES tc WITH (INDEX(IDX_TempClientes)) ON tc.CliDni = PQ.Cli_Dni
 					AND TC.CliApellido = PQ.Cli_Apellido
 					AND TC.CliNombre = PQ.Cli_Nombre
 					AND TC.CliFechaNac = PQ.Cli_Fecha_Nac
+
+CREATE TABLE #TEMP4(
+IdPQ int,
+Paquete_Codigo numeric(18, 0),
+Paquete_Precio numeric(18, 2),
+Paquete_FechaCompra datetime, 
+Paquete_KG numeric (18,0),
+CantMillas int ,
+NroVuelo int,
+)
+
+INSERT INTO #TEMP4 
+	SELECT  PQ.ID,
+			PQ.Paquete_Codigo,
+			PQ.Paquete_Precio,
+			PQ.Paquete_FechaCompra,
+			PQ.Paquete_KG,
+			PQ.CantMillas,
+			VU.NroVuelo
+					
+FROM #TEMPPAQUETE PQ
 	JOIN DATA_G.CIUDAD c1 ON PQ.Destino = C1.Nombre
 	JOIN DATA_G.CIUDAD c2 ON PQ.Origen = C2.Nombre
-	JOIN DATA_G.TIPODESERVICIO TS ON TS.Descripcion = PQ.Tipo_Servicio
-	JOIN DATA_G.RUTA R ON R.IdServicio= TS.IdServicio
-		AND  r.Codigo =  PQ.Ruta_Codigo
+	JOIN DATA_G.RUTA R ON r.Codigo =  PQ.Ruta_Codigo
 		AND R.Destino = C1.CodigoCiudad
 		AND R.Origen = C2.CodigoCiudad
 	JOIN DATA_G.AERONAVE AE ON AE.Matricula = PQ.Aeronave_Matricula
@@ -920,9 +946,26 @@ JOIN  #TEMPCLIENTES tc WITH (INDEX(IDX_TempClientes)) ON tc.CliDni = PQ.Cli_Dni
 		AND VU.FechaSalida = PQ.FechaSalida
 		AND VU.IdAeronave = AE.IdAeronave
 		AND VU.IdRuta = R.IdRuta
-	
 
-ORDER BY 1
+CREATE INDEX IDX_Temp4 ON #TEMP4
+(IdPQ, Paquete_Codigo, Paquete_Precio, Paquete_FechaCompra, CantMillas, NroVuelo)
+GO
+
+
+INSERT INTO DATA_G.PAQUETE(IdCli, Codigo, Precio, NroCompra, NroVuelo, KG)
+SELECT DISTINCT T3.IdCli,
+		T4.Paquete_Codigo,
+	    T4.Paquete_Precio,
+		C.NroCompra,
+		T4.NroVuelo,
+		T4.Paquete_KG
+FROM #TEMP3 T3, #TEMP4 T4 WITH (INDEX(IDX_Temp4)), DATA_G.COMPRA C
+WHERE T4.IdPQ = T3.IdPQ
+		AND C.FechaCompra = T4.Paquete_FechaCompra
+		AND C.IdComprador = T3.IdCli
+		AND C.NroVuelo = T4.NroVuelo
+
+
 
 /* AHORA NO HAY DEVOLUCIONES
 INSERT INTO DATA_G.DEVOLUCION(Codigo_Compra, IdPasaje, IdPaquete)
@@ -937,6 +980,7 @@ SELECT DISTINCT C.IdComprador,
 				C.NroCompra
 FROM   DATA_G.COMPRA C, #TEMPPASAJE PJ
 WHERE C.FechaCompra = PJ.Pasaje_FechaCompra
+	
 /*
 
 IF OBJECT_ID('tempdb.dbo.#TEMPPASAJE') IS NOT NULL
@@ -954,6 +998,11 @@ DROP TABLE #TEMP2
 IF OBJECT_ID('tempdb.dbo.#TEMPPAQUETE') IS NOT NULL
 DROP TABLE #TEMPPAQUETE	
 
+IF OBJECT_ID('tempdb.dbo.#TEMP3') IS NOT NULL
+DROP TABLE #TEMP3
+
+IF OBJECT_ID('tempdb.dbo.#TEMP4') IS NOT NULL
+DROP TABLE #TEMP4
 */
 /*
 IF OBJECT_ID (N'DATA_G.FunctionParaVuelo') IS NOT NULL
