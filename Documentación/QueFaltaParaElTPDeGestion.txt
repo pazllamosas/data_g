@@ -1,0 +1,71 @@
+¿Qué falta de visual?
+-----------------------------------
+
+------AERONAVES-------
+1-Dar de baja una aeronave
+2-eliminar aeronave ((CREO QUE NO HACE FALTA IGUAL))
+3-Habilitacion y desHabilitacion de botones segun el acceso.
+4-Boton seleccionar lleve datos a "GenerarViaje"
+----------------------
+
+------CIUDAD----------
+1-Crear ciudad
+2-Eliminar ciudad
+----------------------
+
+-------ROL------------
+1-Poder elegir del gril muchas funcionalidades para el rol
+2-Asignarle las funcionalidades y al crear el nuevo rol
+3-eliminar un rol
+----------------------
+
+------RUTA------------
+1-Editar ruta (¿HACE FALTA?)
+2-Eliminar ruta
+3-Habilitacion y desHabilitacion de botones segun el acceso.
+4-Boton seleccionar lleve datos a "GenerarViaje".
+----------------------
+
+-----CANJE MILLAS-----
+1-cargar y mostrar las millas en el txt "millas" segun el DNI ingresado.
+2-Calcular y mostrar el precio en el txt "precio" segun el producto elegido y la cantidad ingresada.
+3-Guardar la operacion
+----------------------
+
+-----COMPRA----------- (correcciones a hablar por SKYPE) (faltan datos del comprador) (boton para cerrar operacion) (cambiar botSiguiente por BotElegirButaca)
+1-que el boton buscar vuelos te busque vuelos segun la fecha, c.Origen, c.Destino, cantPasajes y peso de encomienda y lo muestre en "dgvVuelos" (no sabria que columnas mostrar en dgvVuelos.
+2-Que el boton guardar de elegir butaca cargue en el dgvPasajes los datos del pasajero y los de la butaca
+3-Que un boton recolecte los datos del dgvPasajes y dgvVuelos para generar el Pasaje
+----------------------
+
+---CONSULTAR MILLAS---
+1-Crear las columnas necesarias en el dgvDetalle (que se necesita mostrar)
+2-Que el boton consultar cargue lo necesario en el dgvDetalle.
+----------------------
+
+---DEVOLUCION--------- (SKYPE)(verificar si esta bien planteada la ventana)
+1-Hacer que el boton devolucion "¿devuelva?"
+----------------------
+
+
+---GENERAR VIAJE------ (SKYPE)
+1-poner las columnas necesarias en el dgvVerViaje
+2-poder traer los datos de vuelo y ruta (eso lo haria seleccionar de vuelo y de ruta)
+3-Boton guardar genere el "viaje" con los datos recolectados.
+----------------------
+
+---Inicio-------------
+1-Poder controlar que como invitado solo se pueda ver consultar millas. De lo contrario se saca el acceso como invitado y se pone consultar millas 
+en el login.
+----------------------
+
+--Listado Estadistico-- (SKYPE) (poner la consulta del año en todas asi es mas facil?)
+1- poner las columnas necesarias en cada dgv
+2- cargar y mostrar en el dgv los datos de la consulta (se puede crear un boton aparte)
+-----------------------
+
+--REGISTRO DE LLEGADA DESTINO--
+1-Que guardar guarde los datos ingresados-
+-------------------------------
+
+Es mucho y seguro se encuentra alguna cosita más...
