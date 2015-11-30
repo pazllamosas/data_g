@@ -106,6 +106,12 @@ DROP TABLE #TEMP4
 
 
 -- DROP PROCEDURES Y FUNCTIONS 
+IF OBJECT_ID('DATA_G.CREAR_TIPO_SERVICIO') IS NOT NULL
+DROP PROCEDURE DATA_G.CREAR_TIPO_SERVICIO
+IF OBJECT_ID('DATA_G.ASIGNAR_SERVICIO') IS NOT NULL
+DROP PROCEDURE DATA_G.ASIGNAR_SERVICIO
+IF OBJECT_ID('DATA_G.BAJA_RUTA') IS NOT NULL
+DROP PROCEDURE DATA_G.BAJA_RUTA
 IF OBJECT_ID('DATA_G.COMPRA_TARJETA') IS NOT NULL
 DROP PROCEDURE DATA_G.COMPRA_TARJETA
 IF OBJECT_ID('DATA_G.ALTA_COMPRA') IS NOT NULL
@@ -221,9 +227,7 @@ CliNombre nvarchar (255),
 CliFechaNac datetime
 )
 
-
 CREATE TABLE #TEMPPASAJE(
-
 	ID INT IDENTITY PRIMARY KEY, 
 	Pasaje_Codigo numeric (18,0),
 	Pasaje_Precio numeric (18,2),
@@ -244,27 +248,18 @@ CREATE TABLE #TEMPPASAJE(
 	Aeronave_Fab nvarchar(255),
 	Origen nvarchar(255),
 	Destino nvarchar(255)
-
 	)
 
-
 CREATE TABLE DATA_G.ROL(
-
 	IdRol int PRIMARY KEY IDENTITY(1,1),
 	Estado bit DEFAULT 1, -- 1 activo
 	Descripcion varchar(255) UNIQUE
-	
-
-)
-
+	)
 
 CREATE TABLE DATA_G.FUNCIONALIDADES(
-
 	IdFuncionalidad int PRIMARY KEY IDENTITY (1,1),
 	DescripcionFunc varchar(255) UNIQUE
-
 )
-
 
 CREATE TABLE DATA_G.ROL_POR_FUNCIONALIDADES(
 	IdFuncionalidad int FOREIGN KEY REFERENCES DATA_G.FUNCIONALIDADES,
@@ -285,7 +280,6 @@ CREATE TABLE DATA_G.USUARIOPORROL(
 )
 
 CREATE TABLE DATA_G.CLIENTE (
-
 	IdCli int PRIMARY KEY IDENTITY(1,1),
 	Dni numeric(18, 0), 
 	Nombre nvarchar(255),
@@ -295,7 +289,6 @@ CREATE TABLE DATA_G.CLIENTE (
 	Mail nvarchar(255),
 	Fecha_Nac datetime,
 	IdUsuario int FOREIGN KEY REFERENCES DATA_G.USUARIO
-	
 )
 
 CREATE TABLE DATA_G.INTENTOS_LOGIN(
@@ -305,40 +298,28 @@ CREATE TABLE DATA_G.INTENTOS_LOGIN(
 	Acceso BIT -- 1 ES CORRECTO
 )
 
-
 CREATE TABLE DATA_G.PRODUCTO(
-
 	IdProducto int PRIMARY KEY IDENTITY (1,1),	
 	CostoEnMillas int,
 	Descripcion varchar(255),
 	Cantidad int 
-
 )
 
-
 CREATE TABLE DATA_G.BENEFICIOS(
-
 	IdBeneficio int PRIMARY KEY IDENTITY (1,1),
 	IdProducto int FOREIGN KEY REFERENCES DATA_G.PRODUCTO,
 	IdCli int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
 	Milla int
-	
 )
-
 
 CREATE TABLE DATA_G.PUNTO_DE_COMPRA(
-
 	IdPuntoDeCompra int PRIMARY KEY IDENTITY(1,1),
 	TipoDePunto varchar(255)
-
 )
 
-
 CREATE TABLE DATA_G.CIUDAD(
-	
 	CodigoCiudad numeric(18,0)  PRIMARY KEY IDENTITY(1,1),
 	Nombre nvarchar(255)
-
 )
 
 CREATE TABLE DATA_G.TIPODESERVICIO(
@@ -347,11 +328,11 @@ CREATE TABLE DATA_G.TIPODESERVICIO(
 	)
 
 CREATE TABLE DATA_G.RUTA(
-
 	IdRuta int PRIMARY KEY IDENTITY(1,1),
 	Codigo numeric(18, 0),
 	Precio_BaseKG numeric(18, 2),
 	Precio_BasePasaje numeric(18, 2),
+	Estado bit DEFAULT 1, -- 1 activo
 	IdServicio int FOREIGN KEY REFERENCES DATA_G.TIPODESERVICIO,
 	Origen numeric(18,0) FOREIGN KEY REFERENCES DATA_G.CIUDAD,
 	Destino numeric(18,0) FOREIGN KEY REFERENCES DATA_G.CIUDAD
@@ -364,15 +345,12 @@ CREATE TABLE DATA_G.RUTASPORSERVICIO(
 )
 
 CREATE TABLE DATA_G.ESTADO(
-
 	IdEstado int PRIMARY KEY,
 	Descripcion nvarchar(255),
 	CantDias int 
-
 )
 
 CREATE TABLE DATA_G.AERONAVE(
-
 	IdAeronave numeric(18,0) PRIMARY KEY IDENTITY (1,1),
 	FechaDeAlta datetime, 
 	Matricula nvarchar(255),
@@ -387,7 +365,6 @@ CREATE TABLE DATA_G.AERONAVE(
 	FechaBajaDefinitiva datetime NULL,
 	CantButacas int NULL,
 	IdEstado int FOREIGN KEY REFERENCES DATA_G.ESTADO DEFAULT 2
-
 )
 
 CREATE TABLE DATA_G.PERIODOFDS (
@@ -396,17 +373,15 @@ CREATE TABLE DATA_G.PERIODOFDS (
 		Motivo nvarchar(255) NOT NULL,
 		FechaInicio datetime NOT NULL,
 		FechaFin datetime
-	)
+)
 
 CREATE TABLE DATA_G.VUELO(
-
 	NroVuelo int PRIMARY KEY IDENTITY(1,1),
 	FechaEstimadaLlegada datetime,
 	FechaLlegada datetime NOT NULL,
 	FechaSalida datetime NOT NULL,
 	IdRuta int FOREIGN KEY REFERENCES DATA_G.RUTA,
 	IdAeronave numeric(18,0) FOREIGN KEY REFERENCES DATA_G.AERONAVE
-	
 )
 
 CREATE TABLE DATA_G.TIPODETARJETA(
@@ -437,16 +412,13 @@ CREATE TABLE DATA_G.COMPRA(
 )
 
 CREATE TABLE DATA_G.BUTACA(
-
 	IdButaca numeric (18, 0) PRIMARY KEY IDENTITY (1,1),
 	NroButaca numeric (18, 0),
 	Tipo nvarchar(255),
 	Piso numeric(18, 0),
 	Estado nvarchar(255) DEFAULT 'Libre' CHECK (ESTADO IN ('Libre', 'Ocupado')),
 	IdAeronave numeric(18,0) FOREIGN KEY REFERENCES DATA_G.AERONAVE
-
 )
-
 
 CREATE TABLE DATA_G.PASAJE(
 	--IdPasaje int  PRIMARY KEY IDENTITY(1,1),
@@ -456,40 +428,32 @@ CREATE TABLE DATA_G.PASAJE(
 	NroVuelo int FOREIGN KEY REFERENCES DATA_G.VUELO,
 	IdCli int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
 	IdButaca numeric (18, 0) FOREIGN KEY REFERENCES DATA_G.BUTACA
-
 )
 
-
 CREATE TABLE DATA_G.PAQUETE(
-		IdPaquete numeric(18,0) PRIMARY KEY IDENTITY (1,1),
+	IdPaquete numeric(18,0) PRIMARY KEY IDENTITY (1,1),
 	Codigo numeric(18,2),
 	Precio numeric(18,2),
 	NroCompra int FOREIGN KEY REFERENCES DATA_G.COMPRA,
 	KG numeric(18,0),
 	Piso numeric(18, 0) CHECK (Piso IN ('0')),
 	NroVuelo int FOREIGN KEY REFERENCES DATA_G.VUELO
-
 )
 
 CREATE TABLE DATA_G.DEVOLUCION(
-
 	IdDevolucion int PRIMARY KEY IDENTITY (1,1),
 	FechaDevolucion datetime,
 	NroCompra int FOREIGN KEY REFERENCES DATA_G.COMPRA,
 	IdPaquete numeric(18,0) FOREIGN KEY REFERENCES DATA_G.PAQUETE,
 	IdPasaje numeric (18,0)  FOREIGN KEY REFERENCES DATA_G.PASAJE
-	
 )
 
 CREATE TABLE DATA_G.MILLAS(
-
 	IdMillas int PRIMARY KEY IDENTITY,
 	HistorialMillas int DEFAULT '0',
 	IdCli int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
 	NroCompra int FOREIGN KEY REFERENCES DATA_G.COMPRA
 ) 
-
-
 
 -------------------------------------------------- MIGRACION DE DATOS ----------------------------------------------------------
 
@@ -1144,9 +1108,6 @@ AS BEGIN
 	RETURN @IDESTADO
 END
 
-
-
-
 GO
 CREATE FUNCTION DATA_G.GET_ID_FUNCIONALIDAD(@FUNCIONALIDAD VARCHAR(255)) 
 RETURNS INT
@@ -1213,7 +1174,7 @@ END
 
 
 ----------------------------------------PROCEDURES Y FUNCTIONS ------------------------------------------------
-
+--RAISERROR( '', 16, 217) WITH SETERROR 
 --USUARIO--
 
 	GO
@@ -1467,10 +1428,6 @@ BEGIN
 END
 GO
 
---RAISERROR( '', 16, 217) WITH SETERROR 
-
-
-
 --RUTAS--
  
 CREATE PROCEDURE DATA_G.CREAR_RUTA (@CODIGO NUMERIC(18,0), @PRECIO_KG NUMERIC (18,2), @PRECIO_PASAJE NUMERIC(18,2), @IDSERV INT,  @ORIGEN NVARCHAR (255), @DESTINO NVARCHAR (255)) AS
@@ -1492,6 +1449,31 @@ BEGIN
 		Origen = @ORIGEN,
 		Destino = @DESTINO
 	WHERE IdRuta = @RUTA
+END
+GO
+
+CREATE PROCEDURE DATA_G.BAJA_RUTA(@ID INT) AS
+BEGIN
+	UPDATE DATA_G.RUTA SET
+		ESTADO = 0
+	WHERE IdRuta = @ID
+END
+GO
+
+CREATE PROCEDURE DATA_G.CREAR_TIPO_SERVICIO (@SERVICIO NVARCHAR (255)) AS
+BEGIN 
+	IF (( NOT EXISTS ( SELECT * FROM DATA_G.TIPODESERVICIO WHERE Descripcion = @SERVICIO )))
+		INSERT INTO DATA_G.TIPODESERVICIO (Descripcion)
+		VALUES (@SERVICIO)
+	ELSE
+		RAISERROR ('El servicio ya existe', 16, 217) WITH SETERROR
+END
+GO
+
+CREATE PROCEDURE DATA_G.ASIGNAR_SERVICIO(@RUTA int, @SERVICIO int)
+AS BEGIN
+INSERT INTO DATA_G.RUTASPORSERVICIO(IdRuta, IdServicio)
+VALUES (@RUTA, @SERVICIO)
 END
 GO
 
@@ -1550,27 +1532,6 @@ END
 END
 GO
 
--- VUELO --
-
-CREATE PROCEDURE DATA_G.CREAR_VUELO ( @FECHALLEGADAESTIMADA DATETIME, @FECHALLEGADA DATETIME, @FECHASALIDA DATETIME, @RUTA INT, @AERONAVE NUMERIC(18,0)) AS
-BEGIN 
-	IF (( NOT EXISTS (SELECT * FROM DATA_G.VUELO WHERE FechaEstimadaLlegada = @FECHALLEGADAESTIMADA
-													AND FechaLlegada = @FECHALLEGADA
-													AND FechaSalida = @FECHASALIDA
-													AND IdRuta = @RUTA
-													AND IdAeronave = @AERONAVE
-													AND FechaLlegada > FechaSalida
-													AND FechaEstimadaLlegada < (DATEADD (DAY, 1, FechaSalida)))))
-		INSERT INTO DATA_G.VUELO(FechaEstimadaLlegada, FechaLlegada, FechaSalida, IdRuta, IdAeronave)
-		VALUES (@FECHALLEGADAESTIMADA, @FECHALLEGADA, @FECHASALIDA, @RUTA, @AERONAVE)
-	ELSE
-		RAISERROR ('El Vuelo ya existe o tiene errores',16, 217) WITH SETERROR
-END
-
-GO
-
-
--- BUTACAS --
 CREATE PROCEDURE DATA_G.CREAR_BUTACAS (@AERONAVE int, @BUTACAS int) AS
 BEGIN
 	declare @i int
@@ -1601,6 +1562,24 @@ AS BEGIN
 			WHERE B.IdAeronave = @aeronave AND B.Estado = 'Libre')
 	RETURN  @butacasLibres
 END
+GO
+-- VUELO --
+
+CREATE PROCEDURE DATA_G.CREAR_VUELO ( @FECHALLEGADAESTIMADA DATETIME, @FECHALLEGADA DATETIME, @FECHASALIDA DATETIME, @RUTA INT, @AERONAVE NUMERIC(18,0)) AS
+BEGIN 
+	IF (( NOT EXISTS (SELECT * FROM DATA_G.VUELO WHERE FechaEstimadaLlegada = @FECHALLEGADAESTIMADA
+													AND FechaLlegada = @FECHALLEGADA
+													AND FechaSalida = @FECHASALIDA
+													AND IdRuta = @RUTA
+													AND IdAeronave = @AERONAVE
+													AND FechaLlegada > FechaSalida
+													AND FechaEstimadaLlegada < (DATEADD (DAY, 1, FechaSalida)))))
+		INSERT INTO DATA_G.VUELO(FechaEstimadaLlegada, FechaLlegada, FechaSalida, IdRuta, IdAeronave)
+		VALUES (@FECHALLEGADAESTIMADA, @FECHALLEGADA, @FECHASALIDA, @RUTA, @AERONAVE)
+	ELSE
+		RAISERROR ('El Vuelo ya existe o tiene errores',16, 217) WITH SETERROR
+END
+
 GO
 
 -- PASAJE Y PAQUETES --
@@ -1640,23 +1619,50 @@ GO
 
 CREATE PROCEDURE DATA_G.ALTA_PASAJE (@idCliente int, @idButaca int, @nrocompra int, @precio numeric(18,2))
 AS BEGIN
-INSERT INTO DATA_G.PASAJE (IdCli, IdButaca, NroCompra, Precio)
+IF (( NOT EXISTS (SELECT * FROM DATA_G.PASAJE P, DATA_G.BUTACA B WHERE P.IdCli = @idCliente
+												AND P.IdButaca = @idButaca
+												AND P.NroCompra = @nrocompra
+												AND P.Precio = @precio
+												AND P.IdButaca = B.IdButaca
+												AND B.Estado = 'Libre' )))
+
+	INSERT INTO DATA_G.PASAJE (IdCli, IdButaca, NroCompra, Precio)
 	VALUES (@idCliente, @idButaca, @nrocompra, @precio)
-UPDATE DATA_G.BUTACA
-SET ESTADO = 'Ocupado'
-	WHERE IdButaca = @idButaca AND IdAeronave = (SELECT V.IdAeronave FROM DATA_G.COMPRA C, DATA_G.VUELO V
+	
+ELSE
+		RAISERROR ('El pasaje ya existe o tiene errores',16, 217) WITH SETERROR
+END
+GO
+
+CREATE TRIGGER DATA_G.AFTER_ALTA_PASAJE ON DATA_G.PASAJE AFTER INSERT AS
+BEGIN
+	DECLARE @idButaca int, @nrocompra int
+	SELECT @idButaca = IdButaca, @nrocompra = NroCompra FROM INSERTED
+		
+	BEGIN
+		UPDATE DATA_G.BUTACA
+		SET ESTADO = 'Ocupado'
+		WHERE IdButaca = @idButaca AND IdAeronave = (SELECT V.IdAeronave FROM DATA_G.COMPRA C, DATA_G.VUELO V
 														 WHERE C.NroCompra = @nrocompra
 															AND C.NroVuelo = V.NroVuelo)
+END
 END
 GO
 
 CREATE PROCEDURE DATA_G.ALTA_PAQUETE (@nrocompra int, @kg numeric(18,2), @precio numeric(18,2))
 AS BEGIN
 DECLARE @codigo numeric(18,0)
-select top 1 @codigo = Codigo from DATA_G.PAQUETE
-order by CODIGO desc
-INSERT INTO DATA_G.PAQUETE(NroCompra, KG, Precio, Codigo)
-VALUES (@nrocompra, @kg, @precio, @codigo+1)
+SELECT TOP 1 @codigo = Codigo FROM DATA_G.PAQUETE
+	ORDER BY CODIGO desc
+IF (( NOT EXISTS (SELECT * FROM DATA_G.PAQUETE WHERE NroCompra = @nrocompra
+												AND KG = @kg
+												AND Precio = @precio )))
+	
+			INSERT INTO DATA_G.PAQUETE(NroCompra, KG, Precio, Codigo)
+		VALUES (@nrocompra, @kg, @precio, @codigo+1)
+ELSE
+		RAISERROR ('El paquete ya existe o tiene errores',16, 217) WITH SETERROR
+
 END
 GO
 
