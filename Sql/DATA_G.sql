@@ -162,6 +162,12 @@ IF OBJECT_ID('DATA_G.SET_PASSWORD') IS NOT NULL
 DROP PROCEDURE DATA_G.SET_PASSWORD
 
 -------------- DROP FUNCTION ------------------------
+IF OBJECT_ID('DATA_G.ALTA_COMPRA') IS NOT NULL
+DROP FUNCTION DATA_G.ALTA_COMPRA
+IF OBJECT_ID('DATA_G.ALTA_PASAJE') IS NOT NULL
+DROP FUNCTION DATA_G.ALTA_PASAJE
+IF OBJECT_ID('DATA_G.ALTA_PAQUETE') IS NOT NULL
+DROP FUNCTION DATA_G.ALTA_PAQUETE
 IF OBJECT_ID('DATA_G.KG_LIBRES') IS NOT NULL
 DROP FUNCTION DATA_G.KG_LIBRES
 IF OBJECT_ID('DATA_G.COSTO_TOTAL') IS NOT NULL
@@ -422,6 +428,7 @@ CREATE TABLE DATA_G.COMPRA(
 	Monto NUMERIC (18,2) DEFAULT 0,
 	Millas INT DEFAULT 0,
 	NroVuelo INT FOREIGN KEY REFERENCES DATA_G.VUELO,
+	MedioPago NVARCHAR (255) CHECK (MedioPago IN ('Efectivo', 'Tarjeta')),
 	IdTarjeta int FOREIGN KEY REFERENCES DATA_G.TARJETA, -- null seria efectivo
 	IdPuntoDeCompra int FOREIGN KEY REFERENCES DATA_G.PUNTO_DE_COMPRA
 )
@@ -451,14 +458,12 @@ CREATE TABLE DATA_G.PASAJE(
 
 
 CREATE TABLE DATA_G.PAQUETE(
-	
-	IdPaquete numeric(18,0) PRIMARY KEY IDENTITY (1,1),
+		IdPaquete numeric(18,0) PRIMARY KEY IDENTITY (1,1),
 	Codigo numeric(18,2),
 	Precio numeric(18,2),
 	NroCompra int FOREIGN KEY REFERENCES DATA_G.COMPRA,
 	KG numeric(18,0),
 	Piso numeric(18, 0) CHECK (Piso IN ('0')),
-	IdCli int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
 	NroVuelo int FOREIGN KEY REFERENCES DATA_G.VUELO
 
 )
@@ -958,9 +963,8 @@ CREATE INDEX IDX_Temp4 ON #TEMP4
 GO
 
 
-INSERT INTO DATA_G.PAQUETE(IdCli, Codigo, Precio, NroCompra, NroVuelo, KG)
-SELECT DISTINCT T3.IdCli,
-		T4.Paquete_Codigo,
+INSERT INTO DATA_G.PAQUETE( Codigo, Precio, NroCompra, NroVuelo, KG)
+SELECT DISTINCT T4.Paquete_Codigo,
 	    T4.Paquete_Precio,
 		C.NroCompra,
 		T4.NroVuelo,
@@ -1573,11 +1577,11 @@ BEGIN
 			begin
 				if((@i%2) = 0)
 				begin
-					set @TIPO = 'VENTANILLA'
+					set @TIPO = 'Ventanilla'
 				end
 				else
 					begin
-						set @TIPO = 'PASILLO'
+						set @TIPO = 'Pasillo'
 					end
 				INSERT INTO DATA_G.BUTACA(IdAeronave, NroButaca, Tipo, Piso)
 				VALUES (@AERONAVE, @i, @TIPO, 1)
@@ -1626,8 +1630,37 @@ RETURNS INT
 AS BEGIN
 	DECLARE @ButacasLibres INT;
 	SET @ButacasLibres = (SELECT count(B.IdButaca) FROM DATA_G.BUTACA B 
-			WHERE B.IdAeronave = @aeronave AND B.Estado = 'LIBRE')
+			WHERE B.IdAeronave = @aeronave AND B.Estado = 'Libre')
 	RETURN  @butacasLibres
+END
+GO
+
+CREATE PROCEDURE DATA_G.ALTA_COMPRA (@monto numeric(18,2), @medio nvarchar(255), @idComprador int, @idVuelo int)
+AS BEGIN
+INSERT INTO DATA_G.COMPRA(Monto, MedioPago, IdComprador, NroVuelo, FechaCompra, Millas)
+VALUES (@monto, @medio, @idComprador, @idVuelo, GETDATE(), 0)
+END
+GO
+
+CREATE PROCEDURE DATA_G.ALTA_PASAJE (@idCliente int, @idButaca int, @nrocompra int, @precio numeric(18,2))
+AS BEGIN
+INSERT INTO DATA_G.PASAJE (IdCli, IdButaca, NroCompra, Precio)
+	VALUES (@idCliente, @idButaca, @nrocompra, @precio)
+UPDATE DATA_G.BUTACA
+SET ESTADO = 'Ocupado'
+	WHERE IdButaca = @idButaca AND IdAeronave = (SELECT V.IdAeronave FROM DATA_G.COMPRA C, DATA_G.VUELO V
+														 WHERE C.NroCompra = @nrocompra
+															AND C.NroVuelo = V.NroVuelo)
+END
+GO
+
+CREATE PROCEDURE DATA_G.ALTA_PAQUETE (@nrocompra int, @kg numeric(18,2), @precio numeric(18,2))
+AS BEGIN
+DECLARE @codigo numeric(18,0)
+select top 1 @codigo = Codigo from DATA_G.PAQUETE
+order by CODIGO desc
+INSERT INTO DATA_G.PAQUETE(NroCompra, KG, Precio, Codigo)
+VALUES (@nrocompra, @kg, @precio, @codigo+1)
 END
 GO
 
