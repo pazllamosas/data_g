@@ -93,5 +93,20 @@ namespace AerolineaFrba.Compra
             Conexion.cargarCmb("Nombre", "CIUDAD", cmbCiudadOrigen);
             Conexion.cargarCmb("Nombre", "CIUDAD", cmbCiudadDestino);
         }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvPasajes_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

@@ -60,6 +60,12 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+         
+
+        }
+
+        private void VerRutas_Load(object sender, EventArgs e)
+        {
             string query = "SELECT * FROM DATA_G.RUTA";
             SqlDataReader reader = Conexion.ejecutarQuery(query);
 
@@ -69,11 +75,6 @@ namespace AerolineaFrba.Abm_Ruta
             }
             reader.Close();
 
-        }
-
-        private void VerRutas_Load(object sender, EventArgs e)
-        {
-            
         }
 
         private void VerRutas_Shown(object sender, EventArgs e)

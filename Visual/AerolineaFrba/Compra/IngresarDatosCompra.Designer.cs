@@ -52,6 +52,11 @@
             this.label8 = new System.Windows.Forms.Label();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
+            this.campraDni = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.compraNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.campraNumButaca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.compraTipoButaca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.campraPisoButaca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVuelos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPasajes)).BeginInit();
@@ -237,10 +242,17 @@
             // dgvPasajes
             // 
             this.dgvPasajes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPasajes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.campraDni,
+            this.compraNombre,
+            this.campraNumButaca,
+            this.compraTipoButaca,
+            this.campraPisoButaca});
             this.dgvPasajes.Location = new System.Drawing.Point(322, 164);
             this.dgvPasajes.Name = "dgvPasajes";
             this.dgvPasajes.Size = new System.Drawing.Size(300, 128);
             this.dgvPasajes.TabIndex = 21;
+            this.dgvPasajes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPasajes_CellContentClick);
             // 
             // label7
             // 
@@ -272,6 +284,7 @@
             this.btnAgregar.Text = "Agregar Pasaje";
             this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // btnEditar
             // 
@@ -285,6 +298,32 @@
             this.btnEditar.Text = "Editar Pasaje";
             this.btnEditar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnEditar.UseVisualStyleBackColor = true;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
+            // 
+            // campraDni
+            // 
+            this.campraDni.HeaderText = "DNI";
+            this.campraDni.Name = "campraDni";
+            // 
+            // compraNombre
+            // 
+            this.compraNombre.HeaderText = "Nombre";
+            this.compraNombre.Name = "compraNombre";
+            // 
+            // campraNumButaca
+            // 
+            this.campraNumButaca.HeaderText = "Numero de Butaca";
+            this.campraNumButaca.Name = "campraNumButaca";
+            // 
+            // compraTipoButaca
+            // 
+            this.compraTipoButaca.HeaderText = "Tipo de Butaca";
+            this.compraTipoButaca.Name = "compraTipoButaca";
+            // 
+            // campraPisoButaca
+            // 
+            this.campraPisoButaca.HeaderText = "Piso";
+            this.campraPisoButaca.Name = "campraPisoButaca";
             // 
             // IngresarDatosCompra
             // 
@@ -352,5 +391,10 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnEditar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn campraDni;
+        private System.Windows.Forms.DataGridViewTextBoxColumn compraNombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn campraNumButaca;
+        private System.Windows.Forms.DataGridViewTextBoxColumn compraTipoButaca;
+        private System.Windows.Forms.DataGridViewTextBoxColumn campraPisoButaca;
     }
 }

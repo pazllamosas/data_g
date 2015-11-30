@@ -77,8 +77,14 @@ namespace AerolineaFrba.Abm_Aeronave
         private void btnEditar_Click(object sender, EventArgs e)
         {
             DataGridViewRow d = null;
-            string id = d.Cells[1].ToString();
-            new AgregarAeronave(id, id).Show(); //mandar todos los parametros.
+            string matricula = d.Cells[2].ToString();
+            string modelo = d.Cells[3].ToString();
+            string espacioEncomienda = d.Cells[4].ToString();
+            string fabricante = d.Cells[5].ToString();
+            string servicio = d.Cells[6].ToString();
+            string cantidadButacas = d.Cells[7].ToString();
+
+            new AgregarAeronave(matricula, modelo, espacioEncomienda, fabricante, servicio, cantidadButacas).Show(); //mandar todos los parametros.
 
         }
 

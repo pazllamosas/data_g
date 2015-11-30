@@ -32,5 +32,10 @@ namespace AerolineaFrba.Consulta_Millas
         {
             btnConsultar.Enabled = !string.IsNullOrEmpty(txtDni.Text);
         }
+
+        private void dgvDetalle_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

@@ -19,11 +19,15 @@ namespace AerolineaFrba.Abm_Aeronave
             InitializeComponent();
         }
 
-        public AgregarAeronave(string matricula, string modelo) //mandar todos los parametros para completar los texbox 
+        public AgregarAeronave(string matricula, string modelo, string espacioEncomienda, string fabricante, string servicio, string cantidadButacas) //mandar todos los parametros para completar los texbox 
         {
             InitializeComponent();
             this.txtMatricula.Text = matricula; //asignar los parametros a los text
-            
+            this.txtModelo.Text = modelo;
+            this.txtEspacioEncomienda.Text = espacioEncomienda;
+            this.txtFabricante.Text = fabricante;
+            this.txtCantButacas.Text = cantidadButacas;
+
             int i;                                 //buscar como comparar el parametro con el combo box
             int cantidad = int.Parse(cmbOrigen.Size.ToString());
             for (i = 0; i < cantidad; i++)    
@@ -33,6 +37,14 @@ namespace AerolineaFrba.Abm_Aeronave
                     break;
             }
 
+            int j;
+            int cantidad2 = int.Parse(this.cmbTipoServicio.Size.ToString());
+            for (j = 0; j < cantidad2; j++)
+            {
+                this.cmbTipoServicio.SelectedIndex = j;
+                if (cmbTipoServicio.Text == servicio)
+                    break;
+            }
 
         }
 
