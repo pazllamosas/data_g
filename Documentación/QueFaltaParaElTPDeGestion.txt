@@ -1,4 +1,4 @@
-¿Qué falta de visual?
+﻿¿Qué falta de visual?
 -----------------------------------
 
 ------AERONAVES-------
@@ -69,3 +69,14 @@ en el login.
 -------------------------------
 
 Es mucho y seguro se encuentra alguna cosita más...
+
+Validaciones:
+
+-No dar de baja un avion viajando.
+-No ir y volver al mismo lado.
+-No revender lugar.
+-No duplicar matrículas.
+-No más peso del posible.
+-No fecha llegada < fecha salida
+-No DNI duplicados.
+-No registrar millas antes que el vuelo.
