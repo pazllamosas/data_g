@@ -106,6 +106,13 @@ DROP TABLE #TEMP4
 
 
 -- DROP PROCEDURES Y FUNCTIONS 
+
+IF OBJECT_ID('DATA_G.TOP5_AERONAVE_FUERA_SERVICIO') IS NOT NULL
+DROP PROCEDURE DATA_G.TOP5_AERONAVE_FUERA_SERVICIO
+IF OBJECT_ID('DATA_G.TOP5_DESTINOS_PASAJES_CANCELADOS') IS NOT NULL
+DROP PROCEDURE DATA_G.TOP5_DESTINOS_PASAJES_CANCELADOS
+IF OBJECT_ID('DATA_G.TOP5_DESTINO_AERONAVES_VACIAS') IS NOT NULL
+DROP PROCEDURE DATA_G.TOP5_DESTINO_AERONAVES_VACIAS
 IF OBJECT_ID('DATA_G.TOP5_DESTINOS_PASAJES') IS NOT NULL
 DROP PROCEDURE DATA_G.TOP5_DESTINOS_PASAJES
 IF OBJECT_ID('DATA_G.ALTA_CANJE') IS NOT NULL
@@ -1758,19 +1765,63 @@ WHERE IdProducto = @idProducto
 END
 GO
 -- LISTADO -- 
+
 CREATE PROCEDURE DATA_G.TOP5_DESTINOS_PASAJES(@fecha datetime)
 AS BEGIN
-SELECT top 5 CI.Nombre as Destino, count(P.Pasaje_Codigo) as 'Cantidad Pasajes' 
- FROM DATA_G.PASAJE P 
-	JOIN DATA_G.COMPRA C on P.NroCompra = C.NroCompra
-	JOIN DATA_G.VUELO V on C.NroVuelo = V.NroVuelo
-	JOIN DATA_G.RUTA R on V.IdRuta = R.IdRuta
-	JOIN DATA_G.CIUDAD CI on CI.CodigoCiudad = R.Destino
-
- WHERE C.NroCompra NOT IN (select NroCompra from DATA_G.DEVOLUCION) and
-C.FechaCompra between @fecha AND  DATEADD (MONTH, 6, @fecha)
+	SELECT top 5 CI.Nombre as 'Destino', COUNT(P.Pasaje_Codigo) as 'Cantidad Pasajes' 
+		FROM DATA_G.PASAJE P 
+			JOIN DATA_G.COMPRA C on P.NroCompra = C.NroCompra
+			JOIN DATA_G.VUELO V on C.NroVuelo = V.NroVuelo
+			JOIN DATA_G.RUTA R on V.IdRuta = R.IdRuta
+			JOIN DATA_G.CIUDAD CI on CI.CodigoCiudad = R.Destino
+	WHERE C.NroCompra NOT IN (select NroCompra from DATA_G.DEVOLUCION) 
+		AND C.FechaCompra between @fecha AND  DATEADD (MONTH, 6, @fecha)
 GROUP BY  CI.Nombre 
 ORDER BY 2 desc
+END
+GO
+
+CREATE PROCEDURE DATA_G.TOP5_DESTINO_AERONAVES_VACIAS(@fecha datetime)
+AS BEGIN
+	SELECT top 5 CI.Nombre as 'Destino', COUNT (B.IdAeronave) as 'Cantidad Butacas Vacias' 
+		FROM DATA_G.BUTACA B 
+			JOIN DATA_G.AERONAVE A on B.IdAeronave = A.IdAeronave
+			JOIN DATA_G.VUELO V on A.IdAeronave = V.IdAeronave
+			JOIN DATA_G.RUTA R on V.IdRuta = R.IdRuta
+			JOIN DATA_G.CIUDAD CI on CI.CodigoCiudad = R.Destino
+	WHERE B.Estado = 'Libre' 
+		AND V.FechaSalida between @fecha AND  DATEADD (MONTH, 6, @fecha)
+		AND V.FechaLlegada between @fecha AND  DATEADD (MONTH, 6, @fecha)
+GROUP BY CI.Nombre
+ORDER BY 2 desc
+END
+GO
+
+CREATE PROCEDURE DATA_G.TOP5_DESTINOS_PASAJES_CANCELADOS(@fecha datetime)
+AS BEGIN
+	SELECT top 5 CI.Nombre as 'Destino', COUNT(P.Pasaje_Codigo) as 'Cantidad Cancelaciones'
+		FROM DATA_G.DEVOLUCION D
+			JOIN DATA_G.PASAJE P on D.IdPasaje = P.Pasaje_Codigo
+			JOIN DATA_G.COMPRA C on P.NroCompra = C.NroCompra
+			JOIN DATA_G.VUELO V on C.NroVuelo = V.NroVuelo
+			JOIN DATA_G.RUTA R on V.IdRuta = R.IdRuta
+			JOIN DATA_G.CIUDAD CI on R.Destino = CI.CodigoCiudad
+	WHERE D.IdPasaje IS NOT NULL
+		AND C.FechaCompra between @fecha AND  DATEADD (MONTH, 6, @fecha)
+GROUP BY CI.Nombre 
+ORDER BY 2 desc
+END
+GO
+
+CREATE PROCEDURE DATA_G.TOP5_AERONAVE_FUERA_SERVICIO(@fecha datetime)
+AS BEGIN
+	SELECT top 5 A.Matricula as 'Aeronave', SUM(DATEDIFF(day,PFS.FechaInicio, PFS.FechaFin)) as 'Cantidad días fuera de servicio'
+		FROM DATA_G.PERIODOFDS PFS
+			JOIN DATA_G.AERONAVE A on A.IdAeronave= PFS.IdAeronave
+	WHERE PFS.FechaInicio between @fecha AND  DATEADD (MONTH, 6, @fecha)
+		AND PFS.FechaFin  between @fecha AND  DATEADD (MONTH, 6, @fecha) 
+GROUP BY A.Matricula
+ORDER BY 2 desc 
 END
 GO
 
