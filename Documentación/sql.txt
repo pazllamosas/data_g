@@ -1,4 +1,4 @@
-USE [GD2C2015]
+ï»¿USE [GD2C2015]
 GO
 
 /****** Object:  Schema [DATA_G]    Script Date: 10/3/2015 12:50:10 PM ******/
@@ -106,8 +106,6 @@ DROP TABLE #TEMP4
 
 
 -- DROP PROCEDURES Y FUNCTIONS 
-IF OBJECT_ID('DATA_G.ALTA_CANJE') IS NOT NULL
-DROP PROCEDURE DATA_G.ALTA_CANJE
 IF OBJECT_ID('DATA_G.CREAR_TIPO_SERVICIO') IS NOT NULL
 DROP PROCEDURE DATA_G.CREAR_TIPO_SERVICIO
 IF OBJECT_ID('DATA_G.ASIGNAR_SERVICIO') IS NOT NULL
@@ -316,8 +314,7 @@ CREATE TABLE DATA_G.BENEFICIOS(
 	IdBeneficio int PRIMARY KEY IDENTITY (1,1),
 	IdProducto int FOREIGN KEY REFERENCES DATA_G.PRODUCTO,
 	IdCli int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
-	Cantidad int,
-	FechaCanje datetime
+	Milla int
 )
 
 CREATE TABLE DATA_G.PUNTO_DE_COMPRA(
@@ -567,7 +564,7 @@ VALUES('Colchon Infable',225,100)
 INSERT INTO DATA_G.PRODUCTO(Descripcion, CostoEnMillas, Cantidad)
 VALUES('Equipo Termo',125,200)
 INSERT INTO DATA_G.PRODUCTO(Descripcion, CostoEnMillas, Cantidad)
-VALUES('Guía Turistica',100,150)
+VALUES('GuÃ­a Turistica',100,150)
 INSERT INTO DATA_G.PRODUCTO(Descripcion, CostoEnMillas, Cantidad)
 VALUES('Valija',500,100)
 INSERT INTO DATA_G.PRODUCTO(Descripcion, CostoEnMillas, Cantidad)
@@ -592,6 +589,17 @@ WHERE C.Dni = M.Cli_Dni
 CREATE INDEX IDX_TempClientes ON #TEMPCLIENTES
 (IdCli, CliApellido, CliNombre, CliFechaNac)
 GO
+
+INSERT INTO DATA_G.BENEFICIOS (IdCli, IdProducto , Milla) --REVISAR
+SELECT		TC.IdCli,
+			P.IdProducto,
+			(SUM(P.CostoEnMillas)) AS 'MILLA'
+FROM DATA_G.CLIENTE C, #TEMPCLIENTES tc WITH (INDEX(IDX_TempClientes)), DATA_G.PRODUCTO P
+WHERE tc.CliDni = C.Dni
+	AND TC.CliApellido = C.Apellido
+	AND TC.CliNombre = C.Nombre 
+	AND TC.CliFechaNac = C.Fecha_Nac
+GROUP BY IdProducto, TC.IdCli 
 
 SET IDENTITY_INSERT DATA_G.PUNTO_DE_COMPRA ON
 INSERT INTO DATA_G.PUNTO_DE_COMPRA(IdPuntoDeCompra,TipoDePunto)
@@ -1076,7 +1084,7 @@ AS BEGIN
 END
 
 --DECLARE @RESULT INT
---EXEC @RESULT = DATA_G.GET_ID_CIUDAD @CIUDAD = " Boston"
+--EXEC @RESULT = DATA_G.GET_ID_CIUDAD @CIUDAD = "Â Boston"
 --SELECT @RESULT
 
 GO
@@ -1745,14 +1753,3 @@ AS BEGIN
 	RETURN 
 END
 GO
-
-CREATE PROCEDURE DATA_G.ALTA_CANJE (@idCliente int, @idProducto int, @cantidad int)
-AS BEGIN
-INSERT INTO DATA_G.BENEFICIOS(IdCli, IdProducto, Cantidad, FechaCanje)
-VALUES (@idCliente, @idProducto, @cantidad, GETDATE())
-UPDATE DATA_G.PRODUCTO
-SET Cantidad = Cantidad - @cantidad
-WHERE IdProducto = @idProducto
-END
-
-
