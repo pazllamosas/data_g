@@ -176,7 +176,10 @@ IF OBJECT_ID('DATA_G.SET_PASSWORD') IS NOT NULL
 DROP PROCEDURE DATA_G.SET_PASSWORD
 
 -------------- DROP FUNCTION ------------------------
-
+IF OBJECT_ID('DATA_G.PRECIO_PAQUETE') IS NOT NULL
+DROP FUNCTION DATA_G.PRECIO_PAQUETE
+IF OBJECT_ID('DATA_G.PRECIO_PASAJE') IS NOT NULL
+DROP FUNCTION DATA_G.PRECIO_PASAJE
 IF OBJECT_ID('DATA_G.KG_LIBRES') IS NOT NULL
 DROP FUNCTION DATA_G.KG_LIBRES
 IF OBJECT_ID('DATA_G.COSTO_TOTAL') IS NOT NULL
@@ -1600,6 +1603,42 @@ AS BEGIN
 END
 GO
 
+CREATE FUNCTION DATA_G.PRECIO_PASAJE(@codigo numeric (18,0)) 
+RETURNS numeric (18,2) 
+AS BEGIN
+	DECLARE @precio numeric (18,2) 
+	SET @precio = ( SELECT ( P.PRECIO + P.Precio/ R.Precio_BasePasaje) FROM DATA_G.PASAJE P, DATA_G.RUTA R, DATA_G.VUELO V
+						WHERE @codigo = P.Pasaje_Codigo 
+							AND P.NroVuelo = V.NroVuelo
+							AND V.IdRuta = R.IdRuta)
+							
+	
+	RETURN @precio 
+END
+GO
+
+UPDATE DATA_G.PASAJE 
+	SET Precio= DATA_G.PRECIO_PASAJE(Pasaje_Codigo)
+
+GO
+CREATE FUNCTION DATA_G.PRECIO_PAQUETE(@id numeric (18,0)) 
+RETURNS numeric (18,2) 
+AS BEGIN
+	DECLARE @precio numeric (18,2) 
+	SET @precio = ( SELECT ( P.Precio + P.Precio/ R.Precio_BaseKG) FROM DATA_G.PAQUETE P, DATA_G.RUTA R, DATA_G.VUELO V
+						WHERE @id = P.IdPaquete
+							AND P.NroVuelo = V.NroVuelo
+							AND V.IdRuta = R.IdRuta)
+							
+	
+	RETURN @precio 
+END
+GO
+
+UPDATE DATA_G.PAQUETE 
+	SET Precio= DATA_G.PRECIO_PAQUETE(IdPaquete)
+
+GO
 CREATE FUNCTION DATA_G.COSTO_TOTAL(@id int)
 RETURNS numeric(18,2)
 AS BEGIN
@@ -1615,8 +1654,9 @@ AS BEGIN
 		SET @TotalPaquete= 0
 	RETURN @TotalPasaje + @TotalPaquete
 END
-GO 
+GO
 
+GO
 CREATE PROCEDURE DATA_G.ALTA_PASAJE (@idCliente int, @idButaca int, @nrocompra int, @precio numeric(18,2))
 AS BEGIN
 IF (( NOT EXISTS (SELECT * FROM DATA_G.PASAJE P, DATA_G.BUTACA B WHERE P.IdCli = @idCliente
