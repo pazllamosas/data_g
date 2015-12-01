@@ -48,15 +48,15 @@
             this.btnSiguiente = new System.Windows.Forms.Button();
             this.btnBuscarVuelos = new System.Windows.Forms.Button();
             this.dgvPasajes = new System.Windows.Forms.DataGridView();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.btnAgregar = new System.Windows.Forms.Button();
-            this.btnEditar = new System.Windows.Forms.Button();
             this.campraDni = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.compraNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.campraNumButaca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.compraTipoButaca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.campraPisoButaca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.btnAgregar = new System.Windows.Forms.Button();
+            this.btnEditar = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVuelos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPasajes)).BeginInit();
@@ -254,52 +254,6 @@
             this.dgvPasajes.TabIndex = 21;
             this.dgvPasajes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPasajes_CellContentClick);
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 145);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(97, 13);
-            this.label7.TabIndex = 22;
-            this.label7.Text = "Vuelos disponibles:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(319, 145);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(82, 13);
-            this.label8.TabIndex = 23;
-            this.label8.Text = "Pasajes en uso:";
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Enabled = false;
-            this.btnAgregar.Image = global::AerolineaFrba.Properties.Resources.add;
-            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregar.Location = new System.Drawing.Point(521, 298);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(101, 23);
-            this.btnAgregar.TabIndex = 24;
-            this.btnAgregar.Text = "Agregar Pasaje";
-            this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
-            // 
-            // btnEditar
-            // 
-            this.btnEditar.Enabled = false;
-            this.btnEditar.Image = global::AerolineaFrba.Properties.Resources.modify;
-            this.btnEditar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEditar.Location = new System.Drawing.Point(423, 298);
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(92, 23);
-            this.btnEditar.TabIndex = 25;
-            this.btnEditar.Text = "Editar Pasaje";
-            this.btnEditar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEditar.UseVisualStyleBackColor = true;
-            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
-            // 
             // campraDni
             // 
             this.campraDni.HeaderText = "DNI";
@@ -324,6 +278,52 @@
             // 
             this.campraPisoButaca.HeaderText = "Piso";
             this.campraPisoButaca.Name = "campraPisoButaca";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 145);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(97, 13);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "Vuelos disponibles:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(319, 145);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(82, 13);
+            this.label8.TabIndex = 23;
+            this.label8.Text = "Pasajes en uso:";
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Enabled = false;
+            this.btnAgregar.Image = global::AerolineaFrba.Properties.Resources.add;
+            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAgregar.Location = new System.Drawing.Point(533, 298);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(89, 23);
+            this.btnAgregar.TabIndex = 24;
+            this.btnAgregar.Text = "Elegir Butaca";
+            this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
+            // btnEditar
+            // 
+            this.btnEditar.Enabled = false;
+            this.btnEditar.Image = global::AerolineaFrba.Properties.Resources.modify;
+            this.btnEditar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEditar.Location = new System.Drawing.Point(435, 298);
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(92, 23);
+            this.btnEditar.TabIndex = 25;
+            this.btnEditar.Text = "Editar Pasaje";
+            this.btnEditar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnEditar.UseVisualStyleBackColor = true;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // IngresarDatosCompra
             // 

@@ -2,7 +2,7 @@
 -----------------------------------
 
 ------AERONAVES-------
-1-Dar de baja una aeronave
+1-Dar de baja una aeronave *
 2-eliminar aeronave ((CREO QUE NO HACE FALTA IGUAL))
 3-Habilitacion y desHabilitacion de botones segun el acceso.
 4-Boton seleccionar lleve datos a "GenerarViaje"
@@ -20,7 +20,7 @@
 ----------------------
 
 ------RUTA------------
-1-Editar ruta (¿HACE FALTA?)
+1-Editar ruta 
 2-Eliminar ruta
 3-Habilitacion y desHabilitacion de botones segun el acceso.
 4-Boton seleccionar lleve datos a "GenerarViaje".
@@ -36,36 +36,42 @@
 1-que el boton buscar vuelos te busque vuelos segun la fecha, c.Origen, c.Destino, cantPasajes y peso de encomienda y lo muestre en "dgvVuelos" (no sabria que columnas mostrar en dgvVuelos.
 2-Que el boton guardar de elegir butaca cargue en el dgvPasajes los datos del pasajero y los de la butaca
 3-Que un boton recolecte los datos del dgvPasajes y dgvVuelos para generar el Pasaje
+4-una pantalla mas para el tipo de pago
 ----------------------
 
----CONSULTAR MILLAS---
-1-Crear las columnas necesarias en el dgvDetalle (que se necesita mostrar)
+---CONSULTAR MILLAS--- (query)
+0-agregar un txt columna
+1-Crear las columnas necesarias en el dgvDetalle (que se necesita mostrar) (fecha de compra, cantidad de millas) (fecha de canje)
 2-Que el boton consultar cargue lo necesario en el dgvDetalle.
 ----------------------
 
 ---DEVOLUCION--------- (SKYPE)(verificar si esta bien planteada la ventana)
-1-Hacer que el boton devolucion "¿devuelva?"
+1-Hacer que el boton devolucion "¿devuelva?" (falta query)
+2-agregamos un txtbox para el numero de vuelo.
 ----------------------
 
 
 ---GENERAR VIAJE------ (SKYPE)
-1-poner las columnas necesarias en el dgvVerViaje
+1-poner las columnas necesarias en el dgvVerViaje (ruta: codigo, destino y origen) (vuelo: matricula, fabricante)
 2-poder traer los datos de vuelo y ruta (eso lo haria seleccionar de vuelo y de ruta)
-3-Boton guardar genere el "viaje" con los datos recolectados.
+3-Boton guardar genere el "viaje" con los datos recolectados. (falta query)
 ----------------------
 
 ---Inicio-------------
 1-Poder controlar que como invitado solo se pueda ver consultar millas. De lo contrario se saca el acceso como invitado y se pone consultar millas 
-en el login.
+en el login. XX
+Verificar las funcionalidades de un rol al loguear y habilitar los botones segun el mismo.
+2-validar intentos de logueo.
 ----------------------
 
 --Listado Estadistico-- (SKYPE) (poner la consulta del año en todas asi es mas facil?)
-1- poner las columnas necesarias en cada dgv
+1- poner las columnas necesarias en cada dgv.
 2- cargar y mostrar en el dgv los datos de la consulta (se puede crear un boton aparte)
+(falta query).
 -----------------------
 
 --REGISTRO DE LLEGADA DESTINO--
-1-Que guardar guarde los datos ingresados-
+1-Que guardar guarde los datos ingresados- (falta query).
 -------------------------------
 
 Es mucho y seguro se encuentra alguna cosita más...
@@ -77,6 +83,6 @@ Validaciones:
 -No revender lugar.
 -No duplicar matrículas.
 -No más peso del posible.
--No fecha llegada < fecha salida
+-No fecha llegada < fecha salida.
 -No DNI duplicados.
 -No registrar millas antes que el vuelo.
