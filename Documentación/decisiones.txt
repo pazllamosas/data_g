@@ -10,3 +10,7 @@ Se decidio utilizar indices en algunas tablas temporales, para asi mejorar el ti
 En un principio se penso hacer una sola tabla de clientes, en donde con un id de rol se podia identificar que rol era si cliente o administrador. Luego se hizo una tabla de usuarios y otra de clientes, para asi simplificar los datos, mas que los clientes no tienen todos los datos que un administrador puede tener, por lo tantos muchos campos tendria NULL
 
 Funciones de GET_ID se utilizaron para poder simplificar la busqueda, utilizando las aplicaciones, desde c# se hizo una funcion que marcando el nombre por ejemplo de la ciudad, esta devuelva el id (dependiendo de que funcion se quiere) y asi se ingresara en sql
+
+En millas acumuladas se decide usar una temporal para utilizar en el top por la gran cantidad de datos y uso no tan frecuente
+En millas solo se van a mostrar las que estan validas (ganadas)
+En millas se tomo la fecha de llegada del avion como la fecha en donde se efectivizan las millas

@@ -8,6 +8,9 @@ GO
 
 /** DROP TABLAS **/
 
+IF OBJECT_ID('tempdb.dbo.#MILLASACUMULADAS') IS NOT NULL
+DROP TABLE #MILLASACUMULADAS
+
 IF OBJECT_ID('DATA_G.MILLAS') IS NOT NULL
 DROP TABLE DATA_G.MILLAS
 
@@ -106,6 +109,10 @@ DROP TABLE #TEMP4
 
 
 -- DROP PROCEDURES Y FUNCTIONS 
+IF OBJECT_ID('DATA_G.MILLAS_CANJEADAS') IS NOT NULL
+DROP PROCEDURE DATA_G.MILLAS_CANJEADAS
+IF OBJECT_ID('DATA_G.MILLAS_GANADAS') IS NOT NULL
+DROP PROCEDURE DATA_G.MILLAS_GANADAS
 IF OBJECT_ID('DATA_G.BAJA_VUELO') IS NOT NULL
 DROP PROCEDURE DATA_G.BAJA_VUELO
 IF OBJECT_ID('DATA_G.CANCELAR_PAQUETE') IS NOT NULL
@@ -196,8 +203,7 @@ IF OBJECT_ID('DATA_G.SET_PASSWORD') IS NOT NULL
 DROP PROCEDURE DATA_G.SET_PASSWORD
 
 -------------- DROP FUNCTION ------------------------
-IF OBJECT_ID('DATA_G.HISTORIAL_MILLAS') IS NOT NULL
-DROP FUNCTION DATA_G.HISTORIAL_MILLAS
+
 IF OBJECT_ID('DATA_G.PRECIO_PAQUETE') IS NOT NULL
 DROP FUNCTION DATA_G.PRECIO_PAQUETE
 IF OBJECT_ID('DATA_G.PRECIO_PASAJE') IS NOT NULL
@@ -490,11 +496,17 @@ CREATE TABLE DATA_G.PAQUETE(
 
 CREATE TABLE DATA_G.MILLAS(
 	IdMillas int PRIMARY KEY IDENTITY,
+	IdCliente int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
 	HistorialMillas int DEFAULT '0',
 	Fecha datetime NULL,
 	Descripcion nvarchar (255)CHECK (Descripcion IN ('Canje', 'Compra')) DEFAULT 'Compra', 
-	IdCli int FOREIGN KEY REFERENCES DATA_G.CLIENTE,
 	NroCompra int FOREIGN KEY REFERENCES DATA_G.COMPRA
+)
+
+CREATE TABLE #MILLASACUMULADAS(
+	IdMillas int PRIMARY KEY IDENTITY,
+	IdCli int ,
+	Millas int DEFAULT '0'
 ) 
 
 -------------------------------------------------- MIGRACION DE DATOS ----------------------------------------------------------
@@ -985,12 +997,12 @@ SELECT  C.NroCompra,
 FROM DATA_G.COMPRA C, DATA_G.PASAJE PJ, DATA_G.PAQUETE PQ*/
  
  --VALIDAR MAS?
-INSERT INTO DATA_G.MILLAS (IdCli, NroCompra)
+/*INSERT INTO DATA_G.MILLAS (IdCli, NroCompra)
 SELECT DISTINCT C.IdComprador,
 				C.NroCompra
 FROM   DATA_G.COMPRA C, #TEMPPASAJE PJ, #TEMPPAQUETE PQ
 WHERE  ( C.FechaCompra = PJ.Pasaje_FechaCompra OR C.FechaCompra = PQ.Paquete_FechaCompra)
-	
+*/	
 	
 /*
 
@@ -1877,15 +1889,53 @@ GO
 
 -- MILLAS --
 
-CREATE FUNCTION DATA_G.HISTORIAL_MILLAS(@dni numeric (18,0))
-RETURNS @MILLAS TABLE (HistorialMillas int,/* Fecha datetime,*/ IdCli int, NroCompra int)
+CREATE PROCEDURE DATA_G.MILLAS_GANADAS(@dni numeric (18,0))
 AS BEGIN
-	INSERT INTO @MILLAS 
-	SELECT CAST(ROUND(P.Precio/10,1) AS decimal(10,0)), C.IdComprador, P.NroCompra FROM DATA_G.PASAJE P, DATA_G.COMPRA C
-	INSERT INTO @MILLAS
-	SELECT CAST(ROUND(PQ.Precio/10,1) AS decimal(10,0)), C.IdComprador, PQ.NroCompra FROM DATA_G.PAQUETE PQ, DATA_G.COMPRA C
-	
+	INSERT INTO DATA_G.MILLAS (IdCliente, HistorialMillas, Fecha, NroCompra)
+	SELECT C.IdComprador, CAST(ROUND(P.Precio/10,1) AS decimal(10,0)), V.FechaLlegada, P.NroCompra FROM DATA_G.PASAJE P, DATA_G.COMPRA C, DATA_G.VUELO V, DATA_G.CLIENTE CL
+		WHERE CL.Dni = @dni
+			AND CL.IdCli = C.IdComprador
+			AND P.NroCompra = C.NroCompra
+			AND C.NroVuelo = V.NroVuelo
+			AND V.Estado = 1
+			AND DATEDIFF(day,FechaLlegada, GETDATE()) <= 365
+	INSERT INTO DATA_G.MILLAS (IdCliente, HistorialMillas, Fecha,NroCompra)
+	SELECT C.IdComprador, CAST(ROUND(PQ.Precio/10,1) AS decimal(10,0)), V.FechaLlegada, PQ.NroCompra FROM DATA_G.PAQUETE PQ, DATA_G.COMPRA C, DATA_G.VUELO V, DATA_G.CLIENTE CL
+		WHERE CL.Dni = @dni
+			AND CL.IdCli = C.IdComprador
+			AND PQ.NroCompra = C.NroCompra
+			AND C.NroVuelo = V.NroVuelo
+			AND V.Estado = 1
+			AND DATEDIFF(day,FechaLlegada, GETDATE()) <= 365
 	RETURN 
+END
+GO
+
+CREATE PROCEDURE DATA_G.MILLAS_CANJEADAS(@dni numeric (18,0))
+AS BEGIN
+	DECLARE @descripcion nvarchar(255)
+	SET @descripcion = 'Canje'
+	INSERT INTO DATA_G.MILLAS (IdCliente, HistorialMillas, Fecha, Descripcion)
+	SELECT CL.IdCli, -(P.CostoEnMillas * B.Cantidad), B.FechaCanje, @descripcion
+	 FROM DATA_G.PRODUCTO P, DATA_G.BENEFICIOS B, DATA_G.CLIENTE CL
+		WHERE CL.Dni = @dni
+			AND CL.IdCli = B.IdCli
+			AND B.IdProducto = P.IdProducto
+			AND DATEDIFF(day,FechaCanje, GETDATE()) <= 365
+	RETURN
+END
+GO
+
+CREATE PROCEDURE DATA_G.MILLAS_ACUMULADAS(@dni numeric (18,0))
+AS
+BEGIN
+	INSERT INTO #MILLASACUMULADAS
+	SELECT C.IdCli, SUM (M.HistorialMillas) 
+	FROM DATA_G.CLIENTE C, DATA_G.MILLAS M   
+	WHERE C.Dni = @dni
+			AND C.IdCli = M.IdCliente
+	GROUP BY C.IdCli
+
 END
 GO
 
@@ -1909,7 +1959,7 @@ AS BEGIN
 			JOIN DATA_G.RUTA R on V.IdRuta = R.IdRuta
 			JOIN DATA_G.CIUDAD CI on CI.CodigoCiudad = R.Destino
 	WHERE C.NroCompra NOT IN (select NroCompra from DATA_G.DEVOLUCION) 
-		AND C.FechaCompra between @fecha AND  DATEADD (MONTH, 6, @fecha)
+		AND C.FechaCompra between @fecha AND  DATEDIFF (MONTH, 6, @fecha)
 GROUP BY  CI.Nombre 
 ORDER BY 2 desc
 END
@@ -1924,8 +1974,8 @@ AS BEGIN
 			JOIN DATA_G.RUTA R on V.IdRuta = R.IdRuta
 			JOIN DATA_G.CIUDAD CI on CI.CodigoCiudad = R.Destino
 	WHERE B.Estado = 'Libre' 
-		AND V.FechaSalida between @fecha AND  DATEADD (MONTH, 6, @fecha)
-		AND V.FechaLlegada between @fecha AND  DATEADD (MONTH, 6, @fecha)
+		AND V.FechaSalida between @fecha AND  DATEDIFF (MONTH, 6, @fecha)
+		AND V.FechaLlegada between @fecha AND  DATEDIFF (MONTH, 6, @fecha)
 GROUP BY CI.Nombre
 ORDER BY 2 desc
 END
@@ -1940,7 +1990,7 @@ AS BEGIN
 			JOIN DATA_G.RUTA R on V.IdRuta = R.IdRuta
 			JOIN DATA_G.CIUDAD CI on R.Destino = CI.CodigoCiudad
 	WHERE P.IdDevolucion IS NOT NULL
-		AND C.FechaCompra between @fecha AND  DATEADD (MONTH, 6, @fecha)
+		AND C.FechaCompra between @fecha AND  DATEDIFF (MONTH, 6, @fecha)
 GROUP BY CI.Nombre 
 ORDER BY 2 desc
 END
