@@ -2,26 +2,26 @@
 -----------------------------------
 
 ------AERONAVES-------
-1-Dar de baja una aeronave *
-2-eliminar aeronave ((CREO QUE NO HACE FALTA IGUAL))
+1-Dar de baja una aeronave * (SQL LISTO)
+2-eliminar aeronave ((CREO QUE NO HACE FALTA IGUAL) SQL CAMBIA ESTADO)
 3-Habilitacion y desHabilitacion de botones segun el acceso.
 4-Boton seleccionar lleve datos a "GenerarViaje"
 ----------------------
 
 ------CIUDAD----------
-1-Crear ciudad
-2-Eliminar ciudad
+1-Crear ciudad (NO SE HACE)
+2-Eliminar ciudad (NO SE HACE)
 ----------------------
 
 -------ROL------------
 1-Poder elegir del gril muchas funcionalidades para el rol
-2-Asignarle las funcionalidades y al crear el nuevo rol
-3-eliminar un rol
+2-Asignarle las funcionalidades y al crear el nuevo rol (SQL LISTO)
+3-eliminar un rol (SQL LISTO)
 ----------------------
 
 ------RUTA------------
-1-Editar ruta 
-2-Eliminar ruta
+1-Editar ruta (SQL LISTO)
+2-Eliminar ruta (SQL LISTO)
 3-Habilitacion y desHabilitacion de botones segun el acceso.
 4-Boton seleccionar lleve datos a "GenerarViaje".
 ----------------------
@@ -46,7 +46,7 @@
 ----------------------
 
 ---DEVOLUCION--------- (SKYPE)(verificar si esta bien planteada la ventana)
-1-Hacer que el boton devolucion "¿devuelva?" (falta query)
+1-Hacer que el boton devolucion "¿devuelva?" (falta query) (SQL LISTO)
 2-agregamos un txtbox para el numero de vuelo.
 ----------------------
 
@@ -67,7 +67,7 @@ Verificar las funcionalidades de un rol al loguear y habilitar los botones segun
 --Listado Estadistico-- (SKYPE) (poner la consulta del año en todas asi es mas facil?)
 1- poner las columnas necesarias en cada dgv.
 2- cargar y mostrar en el dgv los datos de la consulta (se puede crear un boton aparte)
-(falta query).
+(falta query). (SQL LISTO, SOLO FALTA UNO)
 -----------------------
 
 --REGISTRO DE LLEGADA DESTINO--
