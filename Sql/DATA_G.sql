@@ -1262,7 +1262,7 @@ BEGIN
 END 
 GO
 
-CREATE PROCEDURE DATA_G.INTENTO_LOGIN(@USUARIO VARCHAR(255),@ACCESO INT,@FECHA DATETIME) AS
+CREATE PROCEDURE DATA_G.INTENTO_LOGIN(@USUARIO VARCHAR(255), @FECHA nvarchar(255),@ACCESO INT) AS
 BEGIN 
 	INSERT INTO DATA_G.INTENTOS_LOGIN
 	SELECT IdUsuario, GETDATE(), @ACCESO FROM DATA_G.USUARIO
@@ -1329,10 +1329,10 @@ GO
 
 -- CLIENTE -- 
 
-CREATE PROCEDURE DATA_G.ALTA_CLIENTE(@nombre nvarchar(255), @apellido nvarchar(255), @dni numeric(18,0), @direccion nvarchar(255), @telefono numeric(18,0), @mail nvarchar(255), @fechaNac datetime)
+CREATE PROCEDURE DATA_G.ALTA_CLIENTE(@nombre nvarchar(255), @apellido nvarchar(255), @dni numeric(18,0), @direccion nvarchar(255), @telefono numeric(18,0), @mail nvarchar(255), @fechaNac nvarchar(255))
 AS BEGIN
 	INSERT INTO DATA_G.CLIENTE( Nombre, Apellido, Dni, Direccion,telefono, Mail, Fecha_Nac)  
-	VALUES (@nombre, @apellido, @dni, @direccion, @telefono, @mail, @fechaNac)
+	VALUES (@nombre, @apellido, @dni, @direccion, @telefono, @mail, CONVERT(datetime, @fechaNac,109))
 END
 GO
 
@@ -1598,11 +1598,11 @@ GO
 
 -- VUELO --
 
-CREATE PROCEDURE DATA_G.CREAR_VUELO ( @FECHALLEGADAESTIMADA DATETIME, @FECHALLEGADA DATETIME, @FECHASALIDA DATETIME, @RUTA INT, @AERONAVE NUMERIC(18,0)) AS
+CREATE PROCEDURE DATA_G.CREAR_VUELO ( @FECHALLEGADAESTIMADA nvarchar (255), @FECHALLEGADA nvarchar(255), @FECHASALIDA nvarchar(255), @RUTA INT, @AERONAVE NUMERIC(18,0)) AS
 BEGIN 
-	IF (( NOT EXISTS (SELECT * FROM DATA_G.VUELO WHERE FechaEstimadaLlegada = @FECHALLEGADAESTIMADA
-													AND FechaLlegada = @FECHALLEGADA
-													AND FechaSalida = @FECHASALIDA
+	IF (( NOT EXISTS (SELECT * FROM DATA_G.VUELO WHERE FechaEstimadaLlegada = CONVERT(datetime, @FECHALLEGADAESTIMADA,109)
+													AND FechaLlegada = CONVERT(datetime, @FECHALLEGADA,109)
+													AND FechaSalida = CONVERT(datetime, @FECHASALIDA,109)
 													AND IdRuta = @RUTA
 													AND IdAeronave = @AERONAVE
 													AND FechaLlegada > FechaSalida
@@ -1645,10 +1645,10 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE DATA_G.REGISTRO_LLEGADA(@nrovuelo int, @fechallegada datetime)
+CREATE PROCEDURE DATA_G.REGISTRO_LLEGADA(@nrovuelo int, @fechallegada nvarchar(255))
 AS BEGIN
 	UPDATE DATA_G.VUELO
-	SET FechaLlegada = @fechallegada
+	SET FechaLlegada = CONVERT(datetime, @fechallegada,109)
 	WHERE NroVuelo = @nrovuelo
 	UPDATE DATA_G.COMPRA 
 	SET Millas = CAST(ROUND(Monto/10,1) AS decimal(10,0))
@@ -1657,7 +1657,7 @@ AS BEGIN
 END
 GO
 
-CREATE FUNCTION DATA_G.VUELOS_DISPONIBLES(@fecha datetime)
+CREATE FUNCTION DATA_G.VUELOS_DISPONIBLES(@fecha nvarchar(255))
 RETURNS @VUELOS TABLE (NroVuelo int, FechaSalida datetime, FechaLlegada datetime, Origen int, Destino int, CantButacas int, KgDisp numeric(18,0), Servicio int)
 AS BEGIN
 	DECLARE @aeronave int
@@ -1673,7 +1673,7 @@ AS BEGIN
 		JOIN DATA_G.TIPODESERVICIO T on T.IdServicio = R.IdRuta 
 			AND T.IdServicio = A.IdServicio
 	WHERE V.Estado = 1
-		AND V.FechaSalida >  @fecha 
+		AND V.FechaSalida >  CONVERT(datetime, @fecha,109) 
 		AND( (DATA_G.BUTACAS_LIBRES (@aeronave)  <> 0 ) OR (DATA_G.KG_LIBRES (@aeronave) <> 0 ))
 	ORDER BY 2
 RETURN
@@ -1974,7 +1974,7 @@ GO
 
 -- LISTADO -- 
 
-CREATE FUNCTION DATA_G.TOP5_DESTINOS_PASAJES(@fecha datetime)
+CREATE FUNCTION DATA_G.TOP5_DESTINOS_PASAJES(@fecha nvarchar (255))
 RETURNS @TOP5 TABLE ( Destino nvarchar(255), CantidadPasajes int)
 AS BEGIN
 	INSERT INTO @TOP5 ( Destino, CantidadPasajes)
@@ -1985,14 +1985,14 @@ AS BEGIN
 			JOIN DATA_G.RUTA R on V.IdRuta = R.IdRuta
 			JOIN DATA_G.CIUDAD CI on CI.CodigoCiudad = R.Destino
 	WHERE C.NroCompra NOT IN (select NroCompra from DATA_G.DEVOLUCION) 
-		AND C.FechaCompra between @fecha AND  DATEDIFF (MONTH, 6, @fecha)
+		AND C.FechaCompra between  CONVERT(datetime, @fecha,109) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha,109))
 GROUP BY  CI.Nombre 
 ORDER BY 2 desc
 RETURN
 END
 GO
 
-CREATE FUNCTION DATA_G.TOP5_DESTINO_AERONAVES_VACIAS(@fecha datetime)
+CREATE FUNCTION DATA_G.TOP5_DESTINO_AERONAVES_VACIAS(@fecha nvarchar (255))
 RETURNS @TOP5 TABLE ( Destino nvarchar(255), CantidadAeronaves int)
 AS BEGIN
 	INSERT INTO @TOP5 ( Destino, CantidadAeronaves)
@@ -2003,15 +2003,15 @@ AS BEGIN
 			JOIN DATA_G.RUTA R on V.IdRuta = R.IdRuta
 			JOIN DATA_G.CIUDAD CI on CI.CodigoCiudad = R.Destino
 	WHERE B.Estado = 'Libre' 
-		AND V.FechaSalida between @fecha AND  DATEDIFF (MONTH, 6, @fecha)
-		AND V.FechaLlegada between @fecha AND  DATEDIFF (MONTH, 6, @fecha)
+		AND V.FechaSalida between CONVERT(datetime, @fecha,109) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha,109))
+		AND V.FechaLlegada between CONVERT(datetime, @fecha,109) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha,109))
 GROUP BY CI.Nombre
 ORDER BY 2 desc
 RETURN
 END
 GO
 
-CREATE FUNCTION DATA_G.TOP5_DESTINOS_PASAJES_CANCELADOS(@fecha datetime)
+CREATE FUNCTION DATA_G.TOP5_DESTINOS_PASAJES_CANCELADOS(@fecha nvarchar(255))
 RETURNS TABLE
 AS RETURN
 	/*INSERT INTO @TOP5 ( Destino, CantidadCancelaciones)*/
@@ -2022,7 +2022,7 @@ AS RETURN
 			JOIN DATA_G.RUTA R on V.IdRuta = R.IdRuta
 			JOIN DATA_G.CIUDAD CI on R.Destino = CI.CodigoCiudad
 	WHERE P.IdDevolucion IS NOT NULL
-		AND C.FechaCompra between @fecha AND  DATEDIFF (MONTH, 6, @fecha)
+		AND C.FechaCompra between CONVERT(datetime, @fecha,109) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha,109))
 GROUP BY CI.Nombre
 ORDER BY cantidad desc
 /*RETURN*/
@@ -2031,15 +2031,15 @@ GO
 
 /*SELECT * FROM DATA_G.TOP5_DESTINOS_PASAJES_CANCELADOS(00/12/2007)*/
 
-CREATE FUNCTION DATA_G.TOP5_AERONAVE_FUERA_SERVICIO(@fecha datetime)
+CREATE FUNCTION DATA_G.TOP5_AERONAVE_FUERA_SERVICIO(@fecha nvarchar(255))
 RETURNS @TOP5 TABLE ( Aeronave nvarchar(255), DiasFueraDeServicio int)
 AS BEGIN
 	INSERT INTO @TOP5 ( Aeronave, DiasFueraDeServicio )
 	SELECT top 5 A.Matricula , SUM(DATEDIFF(day,PFS.FechaInicio, PFS.FechaFin))
 		FROM DATA_G.PERIODOFDS PFS
 			JOIN DATA_G.AERONAVE A on A.IdAeronave= PFS.IdAeronave
-	WHERE PFS.FechaInicio between @fecha AND  DATEDIFF (MONTH, 6, @fecha)
-		AND PFS.FechaFin  between @fecha AND  DATEDIFF (MONTH, 6, @fecha) 
+	WHERE PFS.FechaInicio between CONVERT(datetime, @fecha,109) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha,109))
+		AND PFS.FechaFin  between CONVERT(datetime, @fecha,109) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha,109)) 
 GROUP BY A.Matricula
 ORDER BY 2 desc 
 RETURN
@@ -2047,14 +2047,14 @@ END
 GO
 
 
-CREATE FUNCTION DATA_G.TOP5_CLIENTES_PUNTOS (@fecha datetime)
+CREATE FUNCTION DATA_G.TOP5_CLIENTES_PUNTOS (@fecha nvarchar (255))
 RETURNS @TOP5 TABLE (IdCliente int, Apellido nvarchar(255), Nombre nvarchar(255), Millas int) 
 AS BEGIN 
 	INSERT INTO @TOP5 (IdCliente, Apellido, Nombre, Millas) 
 	SELECT top 5 C.IdCli, C.Apellido, C.Nombre, SUM (M.HistorialMillas)
 	FROM DATA_G.CLIENTE C  
 		JOIN DATA_G.MILLAS M on C.IdCli = M.IdCliente
-		WHERE M.Fecha between @fecha AND  DATEDIFF (MONTH, 6, @fecha)
+		WHERE M.Fecha between CONVERT(datetime, @fecha,109) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha,109))
 	GROUP BY C.IdCli, C.Apellido, C.Nombre
 	ORDER BY 4 desc
 RETURN
