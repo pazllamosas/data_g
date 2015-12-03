@@ -22,5 +22,10 @@ namespace AerolineaFrba.Abm_Aeronave
             this.Hide();
             FormProvider.VerAeronaves.Show();
         }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

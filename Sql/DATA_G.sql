@@ -1999,10 +1999,10 @@ END
 GO
 
 CREATE FUNCTION DATA_G.TOP5_DESTINOS_PASAJES_CANCELADOS(@fecha datetime)
-RETURNS @TOP5 TABLE ( Destino nvarchar(255), CantidadCancelaciones int)
-AS BEGIN
-	INSERT INTO @TOP5 ( Destino, CantidadCancelaciones)
-	SELECT top 5 CI.Nombre, COUNT(P.Pasaje_Codigo)
+RETURNS TABLE
+AS RETURN
+	/*INSERT INTO @TOP5 ( Destino, CantidadCancelaciones)*/
+	SELECT top 5 CI.Nombre AS destino, COUNT(P.Pasaje_Codigo) AS cantidad
 		FROM DATA_G.PASAJE P 
 			JOIN DATA_G.COMPRA C on P.NroCompra = C.NroCompra
 			JOIN DATA_G.VUELO V on C.NroVuelo = V.NroVuelo
@@ -2010,11 +2010,13 @@ AS BEGIN
 			JOIN DATA_G.CIUDAD CI on R.Destino = CI.CodigoCiudad
 	WHERE P.IdDevolucion IS NOT NULL
 		AND C.FechaCompra between @fecha AND  DATEDIFF (MONTH, 6, @fecha)
-GROUP BY CI.Nombre 
-ORDER BY 2 desc
-RETURN
-END
+GROUP BY destino
+ORDER BY cantidad desc
+/*RETURN*/
+
 GO
+
+/*SELECT DATA_G.TOP5_DESTINOS_PASAJES_CANCELADOS(1998)*/
 
 CREATE FUNCTION DATA_G.TOP5_AERONAVE_FUERA_SERVICIO(@fecha datetime)
 RETURNS @TOP5 TABLE ( Aeronave nvarchar(255), DiasFueraDeServicio int)
@@ -2045,4 +2047,6 @@ AS BEGIN
 RETURN
 END
 GO
+
+
 
