@@ -4,7 +4,20 @@ GO
 /****** Object:  Schema [DATA_G]    Script Date: 10/3/2015 12:50:10 PM ******/
 
 
-
+  /*               DROP TABLE DATA_G.AERONAVE
+                       DROP TABLE DATA_G.BUTACA
+                       DROP TABLE DATA_G.CIUDAD
+                      DROP TABLE DATA_G.CLIENTE
+                      DROP TABLE DATA_G.COMPRADOR
+                  DROP TABLE DATA_G.ESTADO
+                      DROP TABLE DATA_G.PAQUETE
+                      DROP TABLE DATA_G.PASAJE
+                      DROP TABLE DATA_G.PUNTO_DE_COMPRA
+                     DROP TABLE DATA_G.ROL
+                     DROP TABLE DATA_G.RUTA
+                 DROP TABLE DATA_G.TIPODESERVICIO
+                    DROP TABLE DATA_G.VUELO
+*/
 
 /** DROP TABLAS **/
 
@@ -2010,13 +2023,13 @@ AS RETURN
 			JOIN DATA_G.CIUDAD CI on R.Destino = CI.CodigoCiudad
 	WHERE P.IdDevolucion IS NOT NULL
 		AND C.FechaCompra between @fecha AND  DATEDIFF (MONTH, 6, @fecha)
-GROUP BY destino
+GROUP BY CI.Nombre
 ORDER BY cantidad desc
 /*RETURN*/
 
 GO
 
-/*SELECT DATA_G.TOP5_DESTINOS_PASAJES_CANCELADOS(1998)*/
+/*SELECT * FROM DATA_G.TOP5_DESTINOS_PASAJES_CANCELADOS(00/12/2007)*/
 
 CREATE FUNCTION DATA_G.TOP5_AERONAVE_FUERA_SERVICIO(@fecha datetime)
 RETURNS @TOP5 TABLE ( Aeronave nvarchar(255), DiasFueraDeServicio int)
