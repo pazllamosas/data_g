@@ -1975,10 +1975,9 @@ GO
 -- LISTADO -- 
 
 CREATE FUNCTION DATA_G.TOP5_DESTINOS_PASAJES(@fecha nvarchar (255))
-RETURNS @TOP5 TABLE ( Destino nvarchar(255), CantidadPasajes int)
-AS BEGIN
-	INSERT INTO @TOP5 ( Destino, CantidadPasajes)
-	SELECT top 5 CI.Nombre , COUNT(P.Pasaje_Codigo) 
+RETURNS TABLE
+AS RETURN
+	SELECT top 5 CI.Nombre AS nombre, COUNT(P.Pasaje_Codigo) AS cantidad
 		FROM DATA_G.PASAJE P 
 			JOIN DATA_G.COMPRA C on P.NroCompra = C.NroCompra
 			JOIN DATA_G.VUELO V on C.NroVuelo = V.NroVuelo
@@ -1988,15 +1987,15 @@ AS BEGIN
 		AND C.FechaCompra between  CONVERT(datetime, @fecha,109) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha,109))
 GROUP BY  CI.Nombre 
 ORDER BY 2 desc
-RETURN
-END
+
 GO
 
+/*SELECT * FROM DATA_G.TOP5_DESTINOS_PASAJES(00/12/2007)*/
+
 CREATE FUNCTION DATA_G.TOP5_DESTINO_AERONAVES_VACIAS(@fecha nvarchar (255))
-RETURNS @TOP5 TABLE ( Destino nvarchar(255), CantidadAeronaves int)
-AS BEGIN
-	INSERT INTO @TOP5 ( Destino, CantidadAeronaves)
-	SELECT top 5 CI.Nombre , COUNT (B.IdAeronave) 
+RETURNS TABLE
+AS RETURN
+	SELECT top 5 CI.Nombre AS nombre , COUNT (B.IdAeronave)  AS cantidad
 		FROM DATA_G.BUTACA B 
 			JOIN DATA_G.AERONAVE A on B.IdAeronave = A.IdAeronave
 			JOIN DATA_G.VUELO V on A.IdAeronave = V.IdAeronave
@@ -2007,9 +2006,9 @@ AS BEGIN
 		AND V.FechaLlegada between CONVERT(datetime, @fecha,109) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha,109))
 GROUP BY CI.Nombre
 ORDER BY 2 desc
-RETURN
-END
 GO
+
+/*SELECT * FROM DATA_G.TOP5_DESTINO_AERONAVES_VACIAS(00/12/2007)*/
 
 CREATE FUNCTION DATA_G.TOP5_DESTINOS_PASAJES_CANCELADOS(@fecha nvarchar(255))
 RETURNS TABLE
@@ -2032,34 +2031,32 @@ GO
 /*SELECT * FROM DATA_G.TOP5_DESTINOS_PASAJES_CANCELADOS(00/12/2007)*/
 
 CREATE FUNCTION DATA_G.TOP5_AERONAVE_FUERA_SERVICIO(@fecha nvarchar(255))
-RETURNS @TOP5 TABLE ( Aeronave nvarchar(255), DiasFueraDeServicio int)
-AS BEGIN
-	INSERT INTO @TOP5 ( Aeronave, DiasFueraDeServicio )
-	SELECT top 5 A.Matricula , SUM(DATEDIFF(day,PFS.FechaInicio, PFS.FechaFin))
+RETURNS TABLE
+AS RETURN
+	SELECT top 5 A.Matricula AS matricula , SUM(DATEDIFF(day,PFS.FechaInicio, PFS.FechaFin)) AS cantidad
 		FROM DATA_G.PERIODOFDS PFS
 			JOIN DATA_G.AERONAVE A on A.IdAeronave= PFS.IdAeronave
 	WHERE PFS.FechaInicio between CONVERT(datetime, @fecha,109) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha,109))
 		AND PFS.FechaFin  between CONVERT(datetime, @fecha,109) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha,109)) 
 GROUP BY A.Matricula
 ORDER BY 2 desc 
-RETURN
-END
 GO
+
+/*select * from DATA_G.TOP5_AERONAVE_FUERA_SERVICIO (00/06/2014)*/
+
 
 
 CREATE FUNCTION DATA_G.TOP5_CLIENTES_PUNTOS (@fecha nvarchar (255))
-RETURNS @TOP5 TABLE (IdCliente int, Apellido nvarchar(255), Nombre nvarchar(255), Millas int) 
-AS BEGIN 
-	INSERT INTO @TOP5 (IdCliente, Apellido, Nombre, Millas) 
-	SELECT top 5 C.IdCli, C.Apellido, C.Nombre, SUM (M.HistorialMillas)
+RETURNS  TABLE 
+AS RETURN
+	/*INSERT INTO @TOP5 (IdCliente, Apellido, Nombre, Millas) */
+	SELECT top 5 C.IdCli AS id, C.Apellido AS apellido, C.Nombre As nombre, SUM (M.HistorialMillas) AS cantidad
 	FROM DATA_G.CLIENTE C  
 		JOIN DATA_G.MILLAS M on C.IdCli = M.IdCliente
 		WHERE M.Fecha between CONVERT(datetime, @fecha,109) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha,109))
 	GROUP BY C.IdCli, C.Apellido, C.Nombre
 	ORDER BY 4 desc
-RETURN
-END
 GO
 
 
-
+/*select * from DATA_G.TOP5_CLIENTES_PUNTOS (00/06/2014)*/

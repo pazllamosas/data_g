@@ -31,21 +31,39 @@ namespace AerolineaFrba.Listado_Estadistico
 
         private void btnConsultar_Click(object sender, EventArgs e)
         {
-            string fecha = txtAnioAConsultar.Text;
-
-            string query = " SELECT DATA_G.TOP5_AERONAVE_FUERA_SERVICIO('" + fecha + "')"; //ver si es query o procedure
-            SqlDataReader reader = Conexion.ejecutarQuery(query);
-
-            while (reader.Read())
+            if (cmbSemestre.Text == "1")
             {
-                dgvListado.Rows.Add(reader["Aeronave"], reader["Cantidad días fuera de servicio"]);
+                string fecha = txtAnioAConsultar.Text;
+
+                string query = " SELECT * FROM DATA_G.TOP5_AERONAVE_FUERA_SERVICIO(" + "00/06/" + fecha + ")"; //ver si es query o procedure
+                SqlDataReader reader = Conexion.ejecutarQuery(query);
+
+                while (reader.Read())
+                {
+                    dgvListado.Rows.Add(reader["nombre"], reader["apellido"], reader["cantidad"]);
+                }
+                reader.Close();
             }
-            reader.Close();
+            else if (cmbSemestre.Text == "2")
+            {
+                string fecha = txtAnioAConsultar.Text;
+
+                string query = " SELECT * FROM DATA_G.TOP5_AERONAVE_FUERA_SERVICIO(" + "00/12/" + fecha + ")"; //ver si es query o procedure
+                SqlDataReader reader = Conexion.ejecutarQuery(query);
+
+                while (reader.Read())
+                {
+                    dgvListado.Rows.Add(reader["matricula"], reader["cantidad"]);
+                }
+                reader.Close();
+            }
+            else MessageBox.Show("ERROR debe elegir semestre 1 o 2");
         }
 
         private void AeronavesConMayorCantidadDeDiasFueraDeServicio_Load(object sender, EventArgs e)
         {
-
+            cmbSemestre.Items.Add(1);
+            cmbSemestre.Items.Add(2);
         }
     }
 }
