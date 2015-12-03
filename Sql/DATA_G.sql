@@ -3,22 +3,6 @@ GO
 
 /****** Object:  Schema [DATA_G]    Script Date: 10/3/2015 12:50:10 PM ******/
 
-
-  /*               DROP TABLE DATA_G.AERONAVE
-                       DROP TABLE DATA_G.BUTACA
-                       DROP TABLE DATA_G.CIUDAD
-                      DROP TABLE DATA_G.CLIENTE
-                      DROP TABLE DATA_G.COMPRADOR
-                  DROP TABLE DATA_G.ESTADO
-                      DROP TABLE DATA_G.PAQUETE
-                      DROP TABLE DATA_G.PASAJE
-                      DROP TABLE DATA_G.PUNTO_DE_COMPRA
-                     DROP TABLE DATA_G.ROL
-                     DROP TABLE DATA_G.RUTA
-                 DROP TABLE DATA_G.TIPODESERVICIO
-                    DROP TABLE DATA_G.VUELO
-*/
-
 /** DROP TABLAS **/
 
 IF OBJECT_ID('tempdb.dbo.#MILLASACUMULADAS') IS NOT NULL
@@ -1974,6 +1958,10 @@ GO
 
 -- LISTADO -- 
 
+--DECLARE @t NVARCHAR(255)
+--SELECT t = '10-12-2009'
+--SELECT * FROM DATA_G.TOP5_DESTINOS_PASAJES (@t)
+
 CREATE FUNCTION DATA_G.TOP5_DESTINOS_PASAJES(@fecha nvarchar (255))
 RETURNS TABLE
 AS RETURN
@@ -1984,7 +1972,7 @@ AS RETURN
 			JOIN DATA_G.RUTA R on V.IdRuta = R.IdRuta
 			JOIN DATA_G.CIUDAD CI on CI.CodigoCiudad = R.Destino
 	WHERE C.NroCompra NOT IN (select NroCompra from DATA_G.DEVOLUCION) 
-		AND C.FechaCompra between  CONVERT(datetime, @fecha,109) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha,109))
+		AND C.FechaCompra between  CONVERT(datetime, @fecha) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha,109))
 GROUP BY  CI.Nombre 
 ORDER BY 2 desc
 
@@ -2002,8 +1990,8 @@ AS RETURN
 			JOIN DATA_G.RUTA R on V.IdRuta = R.IdRuta
 			JOIN DATA_G.CIUDAD CI on CI.CodigoCiudad = R.Destino
 	WHERE B.Estado = 'Libre' 
-		AND V.FechaSalida between CONVERT(datetime, @fecha,109) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha,109))
-		AND V.FechaLlegada between CONVERT(datetime, @fecha,109) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha,109))
+		AND V.FechaSalida between CONVERT(datetime, @fecha) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha))
+		AND V.FechaLlegada between CONVERT(datetime, @fecha) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha))
 GROUP BY CI.Nombre
 ORDER BY 2 desc
 GO
@@ -2021,7 +2009,7 @@ AS RETURN
 			JOIN DATA_G.RUTA R on V.IdRuta = R.IdRuta
 			JOIN DATA_G.CIUDAD CI on R.Destino = CI.CodigoCiudad
 	WHERE P.IdDevolucion IS NOT NULL
-		AND C.FechaCompra between CONVERT(datetime, @fecha,109) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha,109))
+		AND C.FechaCompra between CONVERT(datetime, @fecha) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha))
 GROUP BY CI.Nombre
 ORDER BY cantidad desc
 /*RETURN*/
@@ -2036,8 +2024,8 @@ AS RETURN
 	SELECT top 5 A.Matricula AS matricula , SUM(DATEDIFF(day,PFS.FechaInicio, PFS.FechaFin)) AS cantidad
 		FROM DATA_G.PERIODOFDS PFS
 			JOIN DATA_G.AERONAVE A on A.IdAeronave= PFS.IdAeronave
-	WHERE PFS.FechaInicio between CONVERT(datetime, @fecha,109) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha,109))
-		AND PFS.FechaFin  between CONVERT(datetime, @fecha,109) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha,109)) 
+	WHERE PFS.FechaInicio between CONVERT(datetime, @fecha) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha))
+		AND PFS.FechaFin  between CONVERT(datetime, @fecha) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha)) 
 GROUP BY A.Matricula
 ORDER BY 2 desc 
 GO
@@ -2053,7 +2041,7 @@ AS RETURN
 	SELECT top 5 C.IdCli AS id, C.Apellido AS apellido, C.Nombre As nombre, SUM (M.HistorialMillas) AS cantidad
 	FROM DATA_G.CLIENTE C  
 		JOIN DATA_G.MILLAS M on C.IdCli = M.IdCliente
-		WHERE M.Fecha between CONVERT(datetime, @fecha,109) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha,109))
+		WHERE M.Fecha between CONVERT(datetime, @fecha) AND  DATEDIFF (MONTH, 6, CONVERT(datetime, @fecha))
 	GROUP BY C.IdCli, C.Apellido, C.Nombre
 	ORDER BY 4 desc
 GO
