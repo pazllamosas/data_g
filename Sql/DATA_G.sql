@@ -109,7 +109,8 @@ DROP TABLE #TEMP4
 
 
 -- DROP PROCEDURES Y FUNCTIONS 
-
+IF OBJECT_ID('DATA_G.REGISTRO_LLEGADA') IS NOT NULL
+DROP PROCEDURE DATA_G.REGISTRO_LLEGADA
 IF OBJECT_ID('DATA_G.CAMBIO_AERONAVE') IS NOT NULL
 DROP PROCEDURE DATA_G.CAMBIO_AERONAVE
 IF OBJECT_ID('DATA_G.MILLAS_CANJEADAS') IS NOT NULL
@@ -198,6 +199,8 @@ IF OBJECT_ID('DATA_G.SET_PASSWORD') IS NOT NULL
 DROP PROCEDURE DATA_G.SET_PASSWORD
 
 -------------- DROP FUNCTION ------------------------
+IF OBJECT_ID('DATA_G.VUELOS_DISPONIBLES') IS NOT NULL
+DROP FUNCTION DATA_G.VUELOS_DISPONIBLES
 IF OBJECT_ID('DATA_G.TOP5_AERONAVE_FUERA_SERVICIO') IS NOT NULL
 DROP FUNCTION DATA_G.TOP5_AERONAVE_FUERA_SERVICIO
 IF OBJECT_ID('DATA_G.TOP5_CLIENTES_PUNTOS') IS NOT NULL
@@ -1561,6 +1564,25 @@ AS BEGIN
 	RETURN  @butacasLibres
 END
 GO
+
+
+CREATE FUNCTION DATA_G.KG_LIBRES(@vuelo int)
+RETURNS INT
+AS BEGIN
+	DECLARE @kgOcupados INT;
+	DECLARE @KgTotales INT
+	SET @kgOcupados=(SELECT SUM(PQ.KG) FROM DATA_G.COMPRA C 
+						JOIN DATA_G.PAQUETE PQ on PQ.NroCompra = C.NroCompra
+						WHERE C.NroVuelo = @vuelo and C.NroCompra not in (SELECT NroCompra FROM DATA_G.DEVOLUCION))
+	SET @KgTotales=(SELECT A.KG_Disponibles FROM DATA_G.VUELO V JOIN 
+						DATA_G.AERONAVE A on A.IdAeronave = V.IdAeronave
+	WHERE V.IdAeronave = @vuelo )
+	IF(@kgOcupados IS NULL)
+		RETURN @kgTotales;
+	RETURN @KgTotales - @kgOcupados
+END
+GO
+
 -- VUELO --
 
 CREATE PROCEDURE DATA_G.CREAR_VUELO ( @FECHALLEGADAESTIMADA DATETIME, @FECHALLEGADA DATETIME, @FECHASALIDA DATETIME, @RUTA INT, @AERONAVE NUMERIC(18,0)) AS
@@ -1610,17 +1632,41 @@ BEGIN
 END
 GO
 
-CREATE FUNCTION DATA_G.VUELO_CORRECTO(@aeronave int, @fechaSalida datetime, @fechaLlegada datetime)
-RETURNS int
+CREATE PROCEDURE DATA_G.REGISTRO_LLEGADA(@nrovuelo int, @fechallegada datetime)
 AS BEGIN
-	DECLARE @nroVuelo int
-	SELECT @nroVuelo = V.NroVuelo FROM DATA_G.VUELO V
-	WHERE V.IdAeronave = @aeronave
-		AND V.FechaSalida < FechaLlegada
-		AND FechaEstimadaLlegada < (DATEADD (DAY, 1, FechaSalida))
-RETURN @nroVuelo
+	UPDATE DATA_G.VUELO
+	SET FechaLlegada = @fechallegada
+	WHERE NroVuelo = @nrovuelo
+	UPDATE DATA_G.COMPRA 
+	SET Millas = CAST(ROUND(Monto/10,1) AS decimal(10,0))
+	WHERE NroVuelo = @nrovuelo 
+	AND ( NOT EXISTS (SELECT NroCompra FROM DATA_G.DEVOLUCION))
 END
 GO
+
+CREATE FUNCTION DATA_G.VUELOS_DISPONIBLES(@fecha datetime)
+RETURNS @VUELOS TABLE (NroVuelo int, FechaSalida datetime, FechaLlegada datetime, Origen int, Destino int, CantButacas int, KgDisp numeric(18,0), Servicio int)
+AS BEGIN
+	DECLARE @aeronave int
+	SELECT @aeronave = IdAeronave FROM DATA_G.AERONAVE
+	INSERT INTO @VUELOS (NroVuelo, FechaSalida, FechaLlegada, Origen, Destino, CantButacas, KgDisp, Servicio)
+	SELECT V.NroVuelo, V.FechaSalida, V.FechaEstimadaLlegada, C.Nombre, C2.Nombre, DATA_G.BUTACAS_LIBRES(@aeronave), DATA_G.KG_LIBRES(@aeronave), T.Descripcion
+	FROM DATA_G.VUELO V
+		JOIN DATA_G.RUTA R on R.IdRuta = V.IdRuta
+		JOIN DATA_G.CIUDAD C on R.Origen = C.CodigoCiudad
+		JOIN DATA_G.CIUDAD C2 on R.Destino = C2.CodigoCiudad
+		JOIN DATA_G.AERONAVE A on V.IdAeronave = A.IdAeronave
+			AND A.IdAeronave = @aeronave
+		JOIN DATA_G.TIPODESERVICIO T on T.IdServicio = R.IdRuta 
+			AND T.IdServicio = A.IdServicio
+	WHERE V.Estado = 1
+		AND V.FechaSalida >  @fecha 
+		AND( (DATA_G.BUTACAS_LIBRES (@aeronave)  <> 0 ) OR (DATA_G.KG_LIBRES (@aeronave) <> 0 ))
+	ORDER BY 2
+RETURN
+END
+GO
+
 
 CREATE PROCEDURE DATA_G.CAMBIO_AERONAVE (@nrovuelo int, @nuevaaeronave int)
 AS BEGIN
@@ -1632,22 +1678,6 @@ GO
 
 -- PASAJE Y PAQUETES --
 
-CREATE FUNCTION DATA_G.KG_LIBRES(@vuelo int)
-RETURNS INT
-AS BEGIN
-	DECLARE @kgOcupados INT;
-	DECLARE @KgTotales INT
-	SET @kgOcupados=(SELECT SUM(PQ.KG) FROM DATA_G.COMPRA C 
-						JOIN DATA_G.PAQUETE PQ on PQ.NroCompra = C.NroCompra
-						WHERE C.NroVuelo = @vuelo and C.NroCompra not in (SELECT NroCompra FROM DATA_G.DEVOLUCION))
-	SET @KgTotales=(SELECT A.KG_Disponibles FROM DATA_G.VUELO V JOIN 
-						DATA_G.AERONAVE A on A.IdAeronave = V.IdAeronave
-	WHERE V.IdAeronave = @vuelo )
-	IF(@kgOcupados IS NULL)
-		RETURN @kgTotales;
-	RETURN @KgTotales - @kgOcupados
-END
-GO
 
 CREATE FUNCTION DATA_G.PRECIO_PASAJE(@codigo numeric (18,0)) 
 RETURNS numeric (18,2) 
@@ -1900,15 +1930,35 @@ AS BEGIN
 END
 GO
 
+
+INSERT INTO #MILLASACUMULADAS
+	SELECT C.IdCli, C.Apellido, C.Nombre, SUM (M.HistorialMillas) AS 'Millas' 
+		FROM DATA_G.CLIENTE C  
+		JOIN DATA_G.MILLAS M on C.IdCli = M.IdCliente
+		GROUP BY C.IdCli, C.Apellido, C.Nombre
+
+GO
 CREATE PROCEDURE DATA_G.ALTA_CANJE (@idCliente int, @idProducto int, @cantidad int)
 AS BEGIN
-INSERT INTO DATA_G.BENEFICIOS(IdCli, IdProducto, Cantidad, FechaCanje)
-VALUES (@idCliente, @idProducto, @cantidad, GETDATE())
-UPDATE DATA_G.PRODUCTO
-SET Cantidad = Cantidad - @cantidad
-WHERE IdProducto = @idProducto
+IF (( NOT EXISTS (SELECT * FROM DATA_G.PRODUCTO P, DATA_G.BENEFICIOS B, #MILLASACUMULADAS MA WHERE P.IdProducto = @idProducto
+												AND P.IdProducto = B.IdProducto
+												AND B.IdCli = @idCliente
+												AND B.IdCli = MA.IdCli
+												AND P.Cantidad >= @cantidad 
+												AND P.CostoEnMillas <= MA.Millas)))
+	BEGIN
+		INSERT INTO DATA_G.BENEFICIOS(IdCli, IdProducto, Cantidad, FechaCanje)
+		VALUES (@idCliente, @idProducto, @cantidad, GETDATE())
+			UPDATE DATA_G.PRODUCTO
+			SET Cantidad = Cantidad - @cantidad
+			WHERE IdProducto = @idProducto
+		
+	END
+ELSE
+		RAISERROR ('Las millas no alcanzan o no hay cantidad suficiente del producto',16, 217) WITH SETERROR
 END
 GO
+
 -- LISTADO -- 
 
 CREATE FUNCTION DATA_G.TOP5_DESTINOS_PASAJES(@fecha datetime)
