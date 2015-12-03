@@ -39,7 +39,7 @@ namespace AerolineaFrba.Listado_Estadistico
             {
                 string fecha = txtAnioAConsultar.Text;
 
-                string query = " SELECT * FROM DATA_G.TOP5_DESTINOS_PASAJES_CANCELADOS(" + "00/06/" + fecha + ")"; //ver si es query o procedure
+                string query = " SELECT * FROM DATA_G.TOP5_DESTINOS_PASAJES_CANCELADOS(" + "01/06/" + fecha + ")"; //ver si es query o procedure
                 SqlDataReader reader = Conexion.ejecutarQuery(query);
 
                 while (reader.Read())
@@ -52,7 +52,7 @@ namespace AerolineaFrba.Listado_Estadistico
             {
                 string fecha = txtAnioAConsultar.Text;
 
-                string query = " SELECT * FROM DATA_G.TOP5_DESTINOS_PASAJES_CANCELADOS(" + "00/12/" + fecha + ")"; //ver si es query o procedure
+                string query = " SELECT * FROM DATA_G.TOP5_DESTINOS_PASAJES_CANCELADOS(" + "01/12/" + fecha + ")"; //ver si es query o procedure
                 SqlDataReader reader = Conexion.ejecutarQuery(query);
 
                 while (reader.Read())

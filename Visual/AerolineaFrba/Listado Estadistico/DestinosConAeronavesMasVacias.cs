@@ -36,12 +36,12 @@ namespace AerolineaFrba.Listado_Estadistico
             {
                 string fecha = txtAnioAConsultar.Text;
 
-                string query = " SELECT * FROM DATA_G.TOP5_DESTINO_AERONAVES_VACIAS(" + "00/06/" + fecha + ")"; //ver si es query o procedure
+                string query = " SELECT * FROM DATA_G.TOP5_DESTINO_AERONAVES_VACIAS(" + "01/06/" + fecha + ")"; //ver si es query o procedure
                 SqlDataReader reader = Conexion.ejecutarQuery(query);
 
                 while (reader.Read())
                 {
-                    dgvListado.Rows.Add(reader["nombre"], reader["apellido"], reader["cantidad"]);
+                    dgvListado.Rows.Add(reader["nombre"], reader["cantidad"]);
                 }
                 reader.Close();
             }
@@ -49,7 +49,7 @@ namespace AerolineaFrba.Listado_Estadistico
             {
                 string fecha = txtAnioAConsultar.Text;
 
-                string query = " SELECT * FROM DATA_G.TOP5_DESTINO_AERONAVES_VACIAS(" + "00/12/" + fecha + ")"; //ver si es query o procedure
+                string query = " SELECT * FROM DATA_G.TOP5_DESTINO_AERONAVES_VACIAS(" + "01/12/" + fecha + ")"; //ver si es query o procedure
                 SqlDataReader reader = Conexion.ejecutarQuery(query);
 
                 while (reader.Read())
