@@ -125,6 +125,8 @@ IF OBJECT_ID('DATA_G.ALTA_CLIENTE') IS NOT NULL
 DROP PROCEDURE DATA_G.ALTA_CLIENTE
 IF OBJECT_ID('DATA_G.TOP5_AERONAVE_FUERA_SERVICIO') IS NOT NULL
 DROP PROCEDURE DATA_G.TOP5_AERONAVE_FUERA_SERVICIO
+IF OBJECT_ID('DATA_G.TOP5_CLIENTES_PUNTOS') IS NOT NULL
+DROP PROCEDURE DATA_G.TOP5_CLIENTES_PUNTOS
 IF OBJECT_ID('DATA_G.TOP5_DESTINOS_PASAJES_CANCELADOS') IS NOT NULL
 DROP PROCEDURE DATA_G.TOP5_DESTINOS_PASAJES_CANCELADOS
 IF OBJECT_ID('DATA_G.TOP5_DESTINO_AERONAVES_VACIAS') IS NOT NULL
@@ -506,6 +508,8 @@ CREATE TABLE DATA_G.MILLAS(
 CREATE TABLE #MILLASACUMULADAS(
 	IdMillas int PRIMARY KEY IDENTITY,
 	IdCli int ,
+	Apellido nvarchar (255),
+	Nombre nvarchar (255),
 	Millas int DEFAULT '0'
 ) 
 
@@ -996,15 +1000,6 @@ SELECT  C.NroCompra,
 		PQ.IdPaquete
 FROM DATA_G.COMPRA C, DATA_G.PASAJE PJ, DATA_G.PAQUETE PQ*/
  
- --VALIDAR MAS?
-/*INSERT INTO DATA_G.MILLAS (IdCli, NroCompra)
-SELECT DISTINCT C.IdComprador,
-				C.NroCompra
-FROM   DATA_G.COMPRA C, #TEMPPASAJE PJ, #TEMPPAQUETE PQ
-WHERE  ( C.FechaCompra = PJ.Pasaje_FechaCompra OR C.FechaCompra = PQ.Paquete_FechaCompra)
-*/	
-	
-/*
 
 IF OBJECT_ID('tempdb.dbo.#TEMPPASAJE') IS NOT NULL
 DROP TABLE #TEMPPASAJE
@@ -1026,58 +1021,8 @@ DROP TABLE #TEMP3
 
 IF OBJECT_ID('tempdb.dbo.#TEMP4') IS NOT NULL
 DROP TABLE #TEMP4
-*/
-/*
-IF OBJECT_ID (N'DATA_G.FunctionParaVuelo') IS NOT NULL
-    DROP FUNCTION DATA_G.FunctionParaVuelo;
-GO
-		
-		GO
-CREATE FUNCTION DATA_G.FunctionParaVuelo(@Destino nvarchar(255), @Origen nvarchar(255), @TipoServicio nvarchar (255), @RutaCodigo numeric (18,0), @AMatricula nvarchar (255),  @AFab nvarchar (255), @Salida datetime, @Llegada datetime)
-	RETURNS @Tabla TABLE ( 
-		Destino nvarchar(255)
-		, Origen nvarchar(255)
-		, TipoServicio nvarchar (255)
-		, RutaCodigo numeric (18,0)
-		, AMatricula nvarchar (255)
-		, AFab nvarchar (255)
-		, Salida datetime
-		, Llegada datetime
-		, IdAeronave int
-		,NroVuelo int
-		)
-		AS
-	BEGIN
-	insert into @Tabla
-		 select M.Ruta_Ciudad_Destino
-		, M.Ruta_Ciudad_Origen
-		, M.Tipo_Servicio
-		, M.Ruta_Codigo 
-		, M.Aeronave_Matricula 
-		, M.Aeronave_Fabricante 
-		, M.FechaSalida 
-		, M.FechaLLegada
-		, ae.IdAeronave 
-		,vu.NroVuelo 
-		 from DATA_G.VUELO VU, gd_esquema.Maestra M 
-	JOIN DATA_G.CIUDAD c1 on @Destino  = C1.Nombre
-	JOIN DATA_G.CIUDAD c2 ON @Origen  = C2.Nombre
-	JOIN DATA_G.TIPODESERVICIO TS ON TS.Descripcion = @TipoServicio
-	JOIN DATA_G.RUTA R ON R.IdServicio= TS.IdServicio
-		AND  r.Codigo =  @RutaCodigo
-		AND R.Destino = C1.CodigoCiudad
-		AND R.Origen = C2.CodigoCiudad
-	JOIN DATA_G.AERONAVE AE ON AE.Matricula = @AMatricula
-		AND AE.Fabricante = @AFab
-		where VU.FechaLlegada = @Llegada 
-		AND VU.FechaSalida = @Salida
-		AND VU.IdAeronave = AE.IdAeronave
-		AND VU.IdRuta = R.IdRuta 
-	
-	RETURN;
-	END;
-	 GO
-*/	 
+
+	 
 
 
 	------------------------------------------------------------------------------------
@@ -1694,8 +1639,8 @@ AS BEGIN
 END
 GO
 
-UPDATE DATA_G.PASAJE 
-	SET Precio= DATA_G.PRECIO_PASAJE(Pasaje_Codigo)
+--UPDATE DATA_G.PASAJE 
+--	SET Precio= DATA_G.PRECIO_PASAJE(Pasaje_Codigo)
 
 GO
 CREATE FUNCTION DATA_G.PRECIO_PAQUETE(@id numeric (18,0)) 
@@ -1712,8 +1657,8 @@ AS BEGIN
 END
 GO
 
-UPDATE DATA_G.PAQUETE 
-	SET Precio= DATA_G.PRECIO_PAQUETE(IdPaquete)
+--UPDATE DATA_G.PAQUETE 
+--	SET Precio= DATA_G.PRECIO_PAQUETE(IdPaquete)
 
 GO
 CREATE FUNCTION DATA_G.COSTO_TOTAL(@id int)
@@ -1734,6 +1679,9 @@ END
 GO
 
 
+--declare @r int
+--exec @r = DATA_G.COSTO_TOTAL @id = 2
+--PRINT @r
 
 GO
 CREATE PROCEDURE DATA_G.ALTA_PASAJE (@idCliente int, @idButaca int, @nrocompra int, @precio numeric(18,2))
@@ -1891,13 +1839,16 @@ GO
 
 CREATE PROCEDURE DATA_G.MILLAS_GANADAS(@dni numeric (18,0))
 AS BEGIN
+
+	--DECLARE @resultado numeric(18,2)
+	--EXECUTE @resultado =  DATA_G.COSTO_TOTAL nrocompra 
+
 	INSERT INTO DATA_G.MILLAS (IdCliente, HistorialMillas, Fecha, NroCompra)
 	SELECT C.IdComprador, CAST(ROUND(P.Precio/10,1) AS decimal(10,0)), V.FechaLlegada, P.NroCompra FROM DATA_G.PASAJE P, DATA_G.COMPRA C, DATA_G.VUELO V, DATA_G.CLIENTE CL
 		WHERE CL.Dni = @dni
 			AND CL.IdCli = C.IdComprador
 			AND P.NroCompra = C.NroCompra
 			AND C.NroVuelo = V.NroVuelo
-			AND V.Estado = 1
 			AND DATEDIFF(day,FechaLlegada, GETDATE()) <= 365
 	INSERT INTO DATA_G.MILLAS (IdCliente, HistorialMillas, Fecha,NroCompra)
 	SELECT C.IdComprador, CAST(ROUND(PQ.Precio/10,1) AS decimal(10,0)), V.FechaLlegada, PQ.NroCompra FROM DATA_G.PAQUETE PQ, DATA_G.COMPRA C, DATA_G.VUELO V, DATA_G.CLIENTE CL
@@ -1905,7 +1856,6 @@ AS BEGIN
 			AND CL.IdCli = C.IdComprador
 			AND PQ.NroCompra = C.NroCompra
 			AND C.NroVuelo = V.NroVuelo
-			AND V.Estado = 1
 			AND DATEDIFF(day,FechaLlegada, GETDATE()) <= 365
 	RETURN 
 END
@@ -1923,19 +1873,6 @@ AS BEGIN
 			AND B.IdProducto = P.IdProducto
 			AND DATEDIFF(day,FechaCanje, GETDATE()) <= 365
 	RETURN
-END
-GO
-
-CREATE PROCEDURE DATA_G.MILLAS_ACUMULADAS(@dni numeric (18,0))
-AS
-BEGIN
-	INSERT INTO #MILLASACUMULADAS
-	SELECT C.IdCli, SUM (M.HistorialMillas) 
-	FROM DATA_G.CLIENTE C, DATA_G.MILLAS M   
-	WHERE C.Dni = @dni
-			AND C.IdCli = M.IdCliente
-	GROUP BY C.IdCli
-
 END
 GO
 
@@ -2001,10 +1938,28 @@ AS BEGIN
 	SELECT top 5 A.Matricula as 'Aeronave', SUM(DATEDIFF(day,PFS.FechaInicio, PFS.FechaFin)) as 'Cantidad días fuera de servicio'
 		FROM DATA_G.PERIODOFDS PFS
 			JOIN DATA_G.AERONAVE A on A.IdAeronave= PFS.IdAeronave
-	WHERE PFS.FechaInicio between @fecha AND  DATEADD (MONTH, 6, @fecha)
-		AND PFS.FechaFin  between @fecha AND  DATEADD (MONTH, 6, @fecha) 
+	WHERE PFS.FechaInicio between @fecha AND  DATEDIFF (MONTH, 6, @fecha)
+		AND PFS.FechaFin  between @fecha AND  DATEDIFF (MONTH, 6, @fecha) 
 GROUP BY A.Matricula
 ORDER BY 2 desc 
 END
 GO
 
+CREATE PROCEDURE DATA_G.TOP5_CLIENTES_PUNTOS (@fecha datetime)
+AS BEGIN 
+	SET IDENTITY_INSERT #MILLASACUMULADAS ON
+	INSERT INTO #MILLASACUMULADAS
+		SELECT C.IdCli, C.Apellido, C.Nombre, SUM (M.HistorialMillas) AS 'Millas' 
+			FROM DATA_G.CLIENTE C  
+			JOIN DATA_G.MILLAS M on C.IdCli = M.IdCliente
+			WHERE M.Fecha between @fecha AND  DATEDIFF (MONTH, 6, @fecha) 
+			GROUP BY C.IdCli, C.Apellido, C.Nombre
+	SET IDENTITY_INSERT #MILLASACUMULADAS OFF
+
+SELECT top 5 * from #MILLASACUMULADAS
+ORDER BY 4 desc
+
+DROP TABLE #MILLASACUMULADAS
+
+END
+GO
