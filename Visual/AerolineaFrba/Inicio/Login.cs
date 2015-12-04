@@ -46,23 +46,13 @@ namespace AerolineaFrba.Inicio
                 string usuario = txtUsuario.Text;
                 string contrasenia =  txtContrasenia.Text;
                 //string contrasenia = funciones.SHA256Encripta(this.password);
-                
-                string query = "SELECT DATA_G.EXISTE_USUARIO ('" + usuario + "' ) AS id";
-
-                SqlDataReader reader = Conexion.ejecutarQuery(query);
-                reader.Read();
-                int respuesta = int.Parse(reader["id"].ToString());
-                reader.Close();
-
-                if (respuesta >= 1)
+                if (usuarioValido(usuario) )
                 {
-                    this.Hide();
                     FormProvider.MainMenu.Show();
                 }
-                else
-                {
-                    MessageBox.Show("El usuario es invalido");
-                }
+            
+                
+
                 // TODO logear usuario contra DB
             }
         }
@@ -96,5 +86,28 @@ namespace AerolineaFrba.Inicio
             Conexion.establecerConexionBD();
         }
 
+
+        public Boolean usuarioValido(string usuario)
+        {
+            string query = "SELECT DATA_G.EXISTE_USUARIO ('" + usuario + "' ) AS id";
+
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+            reader.Read();
+            int respuesta = int.Parse(reader["id"].ToString());
+            reader.Close();
+
+            if (respuesta >= 1)
+            {
+                this.Hide();
+                
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("El usuario es invalido");
+                return false;
+            }
+        }
+    
     }
 }
