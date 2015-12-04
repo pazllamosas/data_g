@@ -47,7 +47,7 @@ namespace AerolineaFrba.Inicio
                 string contrasenia =  txtContrasenia.Text;
                 //string contrasenia = funciones.SHA256Encripta(this.password);
                 
-                string query = "SELECT DATA_G.PASSWORD_CORRECTA ('" + usuario + "' ,'"+ contrasenia + "') AS id";
+                string query = "SELECT DATA_G.EXISTE_USUARIO ('" + usuario + "' ) AS id";
 
                 SqlDataReader reader = Conexion.ejecutarQuery(query);
                 reader.Read();
