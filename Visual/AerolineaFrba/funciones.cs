@@ -9,11 +9,11 @@ namespace AerolineaFrba
 {
     class funciones
     {
-        internal static string SHA256Encripta(string contrasenia)
+        internal static string SHA256Encripta(string input)
         {
             SHA256CryptoServiceProvider provider = new SHA256CryptoServiceProvider();
            
-            byte[] inputBytes = Encoding.UTF8.GetBytes(contrasenia);
+            byte[] inputBytes = Encoding.UTF8.GetBytes(input);
             byte[] hashedBytes = provider.ComputeHash(inputBytes);
             
             StringBuilder output = new StringBuilder();

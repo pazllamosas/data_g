@@ -14,7 +14,7 @@ namespace AerolineaFrba.Inicio
 {
     public partial class Login : Form
     {
-        private string password;
+        private string password = "";
         public Login()
         {
             InitializeComponent();
@@ -44,11 +44,15 @@ namespace AerolineaFrba.Inicio
             else
             {
                 string usuario = txtUsuario.Text;
-                string contrasenia =  txtContrasenia.Text;
+                string password =  txtContrasenia.Text;
                 //string contrasenia = funciones.SHA256Encripta(this.password);
                 if (usuarioValido(usuario) )
                 {
-                    FormProvider.MainMenu.Show();
+                    if (passwordValida(usuario, password))
+                    {
+                        this.Hide();
+                        FormProvider.MainMenu.Show();
+                    }
                 }
             
                 
@@ -98,13 +102,34 @@ namespace AerolineaFrba.Inicio
 
             if (respuesta >= 1)
             {
-                this.Hide();
-                
+                               
                 return true;
             }
             else
             {
                 MessageBox.Show("El usuario es invalido");
+                return false;
+            }
+        }
+
+        public Boolean passwordValida(string usuario, string password)
+        {
+            string contrasenia = funciones.SHA256Encripta(this.password);
+            string query = "SELECT DATA_G.PASSWORD_CORRECTA ('" + usuario + "', '" + contrasenia + "') AS id";
+
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+            reader.Read();
+            int respuesta = int.Parse(reader["id"].ToString());
+            reader.Close();
+
+            if (respuesta >= 1)
+            {
+                
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("La contraseña es invalida");
                 return false;
             }
         }
