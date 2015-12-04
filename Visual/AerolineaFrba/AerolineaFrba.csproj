@@ -141,6 +141,7 @@
     <Compile Include="Devolucion\Devolucion.Designer.cs">
       <DependentUpon>Devolucion.cs</DependentUpon>
     </Compile>
+    <Compile Include="funciones.cs" />
     <Compile Include="Generacion Viaje\GenerarViaje.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -305,7 +306,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ic_save_black_24dp.png" />

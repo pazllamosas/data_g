@@ -9,10 +9,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace AerolineaFrba.Inicio
 {
     public partial class Login : Form
     {
+        private string password;
         public Login()
         {
             InitializeComponent();
@@ -42,8 +44,9 @@ namespace AerolineaFrba.Inicio
             else
             {
                 string usuario = txtUsuario.Text;
-                string contrasenia = txtContrasenia.Text;
-
+                string contrasenia =  txtContrasenia.Text;
+                //string contrasenia = funciones.SHA256Encripta(this.password);
+                
                 string query = "SELECT DATA_G.PASSWORD_CORRECTA ('" + usuario + "' ,'"+ contrasenia + "') AS id";
 
                 SqlDataReader reader = Conexion.ejecutarQuery(query);
