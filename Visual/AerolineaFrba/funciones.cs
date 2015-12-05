@@ -54,20 +54,23 @@ namespace AerolineaFrba
         //textBox solo permita numeros
         internal static void permiteNumeros(KeyPressEventArgs e)
         {
-            if (char.IsLetter(e.KeyChar) || 
-                char.IsSymbol(e.KeyChar) || 
-                char.IsWhiteSpace(e.KeyChar) || 
-                char.IsPunctuation(e.KeyChar)) 
-                e.Handled = true; 
+            if (!(char.IsNumber(e.KeyChar)) )
+            {
+                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+            }
         }
 
         //textBox solo permita letras
         internal static void permiteLetras(KeyPressEventArgs e)
         {
-            if (char.IsNumber(e.KeyChar) || 
-                char.IsSymbol(e.KeyChar) || 
-                char.IsPunctuation(e.KeyChar)) 
-                e.Handled = true; 
+            if (!(char.IsLetter(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                MessageBox.Show("Solo se permiten letras", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+            }
         }
 
         //fecha inicio sea menor a la fecha final

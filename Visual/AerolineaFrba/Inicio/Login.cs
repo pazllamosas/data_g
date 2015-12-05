@@ -154,13 +154,13 @@ namespace AerolineaFrba.Inicio
 
         private static void intentos(string usuario, int acceso)
         {
-           //Conexion.executeProcedure("INTENTO_LOGIN", usuario, acceso);
-            SqlCommand cmd = new SqlCommand("DATA_G.INTENTO_LOGIN", Conexion.getSqlInstanceConnection());
-            cmd.CommandType = CommandType.StoredProcedure;
+            Conexion.executeProcedure("DATA_G.INTENTO_LOGIN", Conexion.generarArgumentos("@usuario", "@acceso"), usuario, acceso);
+            //SqlCommand cmd = new SqlCommand("DATA_G.INTENTO_LOGIN", Conexion.getSqlInstanceConnection());
+            //cmd.CommandType = CommandType.StoredProcedure;
 
-            cmd.Parameters.AddWithValue("@usuario", usuario);
-            cmd.Parameters.AddWithValue("@acceso", acceso);
-            cmd.ExecuteNonQuery();
+            //cmd.Parameters.AddWithValue("@usuario", usuario);
+            //cmd.Parameters.AddWithValue("@acceso", acceso);
+            //cmd.ExecuteNonQuery();
         }
     
 
