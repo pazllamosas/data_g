@@ -144,6 +144,30 @@ namespace AerolineaFrba
                 return null;
             }
         }
+            
+
+        public static bool executeProcedure(string procedure, List<string> args, params object[] values)
+        {
+            try
+            {
+                SqlDataReader dr;
+                SqlConnection cn = getSqlInstanceConnection() ;
+                SqlCommand cm = new SqlCommand(procedure, cn);
+                cm.CommandType = CommandType.StoredProcedure;
+                if (_validateArgumentsAndParameters(args, values))
+                {
+                    _loadSqlCommand(args, cm, values);
+                }
+                dr = cm.ExecuteReader();
+                dr.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
 
         private static bool _validateArgumentsAndParameters(List<string> args, params object[] values)
         {
