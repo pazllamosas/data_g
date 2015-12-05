@@ -607,11 +607,15 @@ Order by 4
 
 INSERT INTO DATA_G.USUARIO(Username,Pass)
 VALUES('admin','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7')
+INSERT INTO DATA_G.USUARIO(Username,Pass)
+VALUES('ana','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7')
+INSERT INTO DATA_G.USUARIO(Username,Pass)
+VALUES('maria','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7')
 
 INSERT INTO DATA_G.USUARIOPORROL(IdUsuario, IdRol)
 SELECT U.IdUsuario, 1 
 FROM DATA_G.USUARIO U, DATA_G.ROL R
-WHERE R.Descripcion = 'Administrador General' AND U.Username = 'admin'
+WHERE R.Descripcion = 'Administrador General' 
 
 INSERT INTO DATA_G.PRODUCTO(Descripcion, CostoEnMillas, Cantidad)
 VALUES('Mochila',125,200)
