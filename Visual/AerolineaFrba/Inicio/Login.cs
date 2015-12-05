@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
+
 namespace AerolineaFrba.Inicio
 {
     public partial class Login : Form
@@ -50,6 +51,7 @@ namespace AerolineaFrba.Inicio
                 {
                     if (passwordValida(usuario, password))
                     {
+                        loginCorrecto(usuario);
                         this.Hide();
                         FormProvider.MainMenu.Show();
                     }
@@ -129,10 +131,31 @@ namespace AerolineaFrba.Inicio
             }
             else
             {
+                loginIncorrecto(usuario);
                 MessageBox.Show("La contraseña es invalida");
                 return false;
             }
         }
+
+        private static void loginCorrecto(string usuario)
+        {
+            intentos(usuario, 1);
+        }
+
+        private static void loginIncorrecto(string usuario)
+        {
+            intentos(usuario, 0);
+        }
+
+
+        private static void intentos(string usuario, int acceso)
+        {
+           Conexion.executeProcedure("INTENTO_LOGIN", usuario, acceso);
+
+        }
+
+               
+
     
     }
 }
