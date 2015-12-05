@@ -53,8 +53,8 @@ namespace AerolineaFrba.Inicio
                     {
                         loginCorrecto(usuario);
                         this.Hide();
-                        Inicio.Menu.habilitarFuncionalidadesPorRol(usuario);
                         FormProvider.MainMenu.Show();
+                        FormProvider.MainMenu.habilitarFuncionalidadesPorRol(usuario);
                         //this.Close();
                     }
                 }
