@@ -69,6 +69,46 @@ namespace AerolineaFrba
         }
 
 
+        public SqlConnection conectar()
+        {
+            try
+            {
+                conexionMaestra.Open();
+             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            return conexionMaestra;
+
+        }
+
+        public DataTable cargarTabla(SqlCommand miCommand)
+        {
+            DataTable ds = new DataTable();
+           
+            this.conectar();
+           
+            miCommand.Connection = conexionMaestra;
+            miCommand.CommandType = CommandType.Text;
+
+            
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(miCommand);
+            dataAdapter.Fill(ds);
+            conexionMaestra.Close();
+            return ds;
+        }
+
+
+
+
+
+
+
+
+
+
 
 
 

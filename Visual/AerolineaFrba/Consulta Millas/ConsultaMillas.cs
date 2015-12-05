@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -31,11 +32,19 @@ namespace AerolineaFrba.Consulta_Millas
         private void txtDni_TextChanged(object sender, EventArgs e)
         {
             btnConsultar.Enabled = !string.IsNullOrEmpty(txtDni.Text);
+
         }
 
         private void dgvDetalle_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+           // string query = " SELECT * FROM DATA_G.MILLAS ()"; //
+          //  SqlDataReader reader = Conexion.ejecutarQuery(query);
 
+           // while (reader.Read())
+           // {
+           //     dgvDetalle.Rows.Add(reader["HistorialMillas"], reader["Fecha"], reader["Descripcion"]);
+          //  }
+           // reader.Close();
         }
     }
 }
