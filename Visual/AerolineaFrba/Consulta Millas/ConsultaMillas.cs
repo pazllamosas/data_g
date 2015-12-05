@@ -22,6 +22,24 @@ namespace AerolineaFrba.Consulta_Millas
 
         private void label1_Click(object sender, EventArgs e)
         {
+            string dni = txtDni.Text;
+
+            string query = "SELECT DATA_G.GET_CLIENTE_DNI ('" + dni + "') AS id";
+
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+            reader.Read();
+            int respuesta = int.Parse(reader["id"].ToString());
+            reader.Close();
+
+            if (respuesta > 0)
+            {
+                dgvDetalle.DataSource = getMillasGanadas(dni);
+                dgvDetalle.DataSource = getMillasCanjeadas(dni);
+            }
+            else
+            {
+                MessageBox.Show("DNI incorrecto");
+            }
 
         }
 
@@ -39,10 +57,8 @@ namespace AerolineaFrba.Consulta_Millas
 
         private void dgvDetalle_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string dni = txtDni.Text;
-            dgvDetalle.DataSource = getMillasGanadas(dni);
-            dgvDetalle.DataSource = getMillasCanjeadas(dni);
-          
+           
+
             
             
         }

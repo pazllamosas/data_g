@@ -100,6 +100,27 @@ namespace AerolineaFrba
             return ds;
         }
 
+        public DataTable cargarTablaConsulta(string consulta)
+        {
+            DataTable dt = new DataTable();
+            try
+            { 
+           SqlConnection cn = getSqlInstanceConnection();
+           SqlCommand cm = new SqlCommand(consulta, cn);
+           cm.CommandTimeout = 1000;
+           SqlDataAdapter adap = new SqlDataAdapter(cm);
+           adap.Fill(dt);
+           return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+        }
+
+        
+
         public static DataTable obtenerTablaProcedure(string procedure, List<string> args, params object[] values)
         {
             DataTable dt = new DataTable();
