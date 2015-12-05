@@ -137,13 +137,23 @@ namespace AerolineaFrba
             return false;
         }
 
-                  private static void _loadSqlCommand(List<string> args, SqlCommand cm, params object[] values)
-          {
-              for (int i = 0; i < args.Count; i++)
-              {
-                  cm.Parameters.AddWithValue(args[i], values[i]);
+        private static void _loadSqlCommand(List<string> args, SqlCommand cm, params object[] values)
+        {
+            for (int i = 0; i < args.Count; i++)
+            {
+                cm.Parameters.AddWithValue(args[i], values[i]);
+            }
+        }
 
-
+         public static List<string> generarArgumentos(params Object[] parametros)
+        {
+            List<string> lista = new List<string>();
+            for (int i = 0; i < parametros.Length; i++ )
+            {
+                lista.Add(parametros[i].ToString());
+            }            
+            return lista;
+        }
 
 
 

@@ -13,6 +13,8 @@ namespace AerolineaFrba.Consulta_Millas
 {
     public partial class ConsultaMillas : Form
     {
+        
+
         public ConsultaMillas()
         {
             InitializeComponent();
@@ -37,14 +39,23 @@ namespace AerolineaFrba.Consulta_Millas
 
         private void dgvDetalle_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-           // string query = " SELECT * FROM DATA_G.MILLAS ()"; //
-          //  SqlDataReader reader = Conexion.ejecutarQuery(query);
-
-           // while (reader.Read())
-           // {
-           //     dgvDetalle.Rows.Add(reader["HistorialMillas"], reader["Fecha"], reader["Descripcion"]);
-          //  }
-           // reader.Close();
+            string dni = txtDni.Text;
+            dgvDetalle.DataSource = getMillasGanadas(dni);
+            dgvDetalle.DataSource = getMillasCanjeadas(dni);
+          
+            
+            
         }
+
+        public static DataTable getMillasGanadas(String dni)
+        {
+            return Conexion.obtenerTablaProcedure("DATA_G.MILLAS_GANADAS", Conexion.generarArgumentos("@dni"), Int32.Parse(dni));
+        }
+
+        public static DataTable getMillasCanjeadas(String dni)
+        {
+            return Conexion.obtenerTablaProcedure("DATA_G.MILLAS_CANJEADAS", Conexion.generarArgumentos("@dni"), Int32.Parse(dni));
+        }
+
     }
 }
