@@ -96,6 +96,27 @@ namespace AerolineaFrba.Abm_Aeronave
             
             reader = Conexion.ejecutarQuery(query);
             reader.Close();
+
+            if (this.validacionDatos(matricula, modelo, kg_disponibles, fabricante, descripcionServicio, cantButacas))
+            {
+                bool resultado = Conexion.executeProcedure("DATA_G.CREAR_AERONAVE", Conexion.generarArgumentos("@matricula", "@modelo", "@kg_disponibles",
+                    "@fabricante", "@descripcionServicio", "@cantButacas"), matricula, modelo, kg_disponibles, fabricante, descripcionServicio, cantButacas);
+
+                if (resultado)
+                {
+                    MessageBox.Show("Ruta creada exitosamente");
+
+                    this.txtMatricula.Clear();
+                    this.txtModelo.Clear();
+                    this.txtEspacioEncomienda.Clear();
+                    this.txtFabricante.Clear();
+                    this.txtCantButacas.Clear();
+                    this.cmbTipoServicio.SelectedIndex = -1;
+                   
+                }
+
+            }
+
         }
 
         private void txtCantButacasPasillo_TextChanged(object sender, EventArgs e)
