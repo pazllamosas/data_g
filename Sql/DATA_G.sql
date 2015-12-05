@@ -606,7 +606,7 @@ SELECT distinct Cli_Nombre,Cli_Apellido, Cli_Dni,Cli_Dir,Cli_Telefono,Cli_Mail,C
 Order by 4
 
 INSERT INTO DATA_G.USUARIO(Username,Pass)
-VALUES('admin','e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855')
+VALUES('admin','e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7')
 
 INSERT INTO DATA_G.USUARIOPORROL(IdUsuario, IdRol)
 SELECT U.IdUsuario, 1 

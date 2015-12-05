@@ -46,7 +46,7 @@ namespace AerolineaFrba.Inicio
             {
                 string usuario = txtUsuario.Text;
                 string password =  txtContrasenia.Text;
-                //string contrasenia = funciones.SHA256Encripta(this.password);
+                string contrasenia = funciones.SHA256Encripta(this.password);
                 if (usuarioValido(usuario) )
                 {
                     if (passwordValida(usuario, password))
@@ -116,7 +116,8 @@ namespace AerolineaFrba.Inicio
 
         public Boolean passwordValida(string usuario, string password)
         {
-            string contrasenia = funciones.SHA256Encripta(this.password);
+            
+            string contrasenia = funciones.SHA256Encripta(password);
             string query = "SELECT DATA_G.PASSWORD_CORRECTA ('" + usuario + "', '" + contrasenia + "') AS id";
 
             SqlDataReader reader = Conexion.ejecutarQuery(query);
@@ -131,8 +132,9 @@ namespace AerolineaFrba.Inicio
             }
             else
             {
-                loginIncorrecto(usuario);
                 MessageBox.Show("La contraseña es invalida");
+                loginIncorrecto(usuario);
+               
                 return false;
             }
         }
