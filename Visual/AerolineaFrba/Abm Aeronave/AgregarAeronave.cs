@@ -77,13 +77,13 @@ namespace AerolineaFrba.Abm_Aeronave
 
             string modelo = txtModelo.Text;
 
-            string kg_disponibles = txtEspacioEncomienda.Text;
+            double kg_disponibles = double.Parse(txtEspacioEncomienda.Text);
 
             string fabricante = txtFabricante.Text;
 
-            string descripcionServicio = cmbTipoServicio.Text;
+            Int32 descripcionServicio = (Int32)cmbTipoServicio.SelectedValue;
 
-            string cantButacas = txtCantButacas.Text;
+            double cantButacas = double.Parse(txtCantButacas.Text);
             
             string query = "SELECT DATA_G.GET_ID_SERVICIO ('" + descripcionServicio + "')";
 
@@ -112,5 +112,77 @@ namespace AerolineaFrba.Abm_Aeronave
         {
 
         }
+
+
+        private void txtEspacioEncomienda_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            funciones.permiteNumeros(e);
+        }
+
+        private void txtCantButacas_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            funciones.permiteNumeros(e);
+        }
+
+        private bool validacion()
+        {
+            if (this.txtMatricula.Text.Trim() == "")
+                return false;
+            if (this.txtModelo.Text.Trim() == "")
+                return false;
+            if (this.txtEspacioEncomienda.Text.Trim() == "")
+                return false;
+            if (this.txtFabricante.Text.Trim() == "")
+                return false;
+            if (this.txtCantButacas.Text.Trim() == "")
+                return false;
+            if (this.cmbTipoServicio.SelectedIndex == -1)
+                return false;
+            return true;
+             }
+
+        private bool validacionDatos(string matricula, string modelo, double kg_disponibles, string fabricante, int descripcionServicio, double cantButacas)
+        {
+            if (kg_disponibles == 0)
+            {
+                MessageBox.Show("El el espacio para las encomiendas no puede ser 0");
+                this.txtEspacioEncomienda.Clear();
+                return false;
+            }
+            if (cantButacas == 0)
+            {
+                MessageBox.Show("La cantidad de butacas no puede ser 0");
+                this.txtCantButacas.Clear();
+                return false;
+            }
+            if (matriculaValida(matricula))
+            {
+                this.txtMatricula.Clear();
+                return false;
+            }
+            return true;
+        }
+
+        public Boolean matriculaValida(string matricula)
+        {
+            string query = "SELECT DATA_G.EXISTE_MATRICULA ('" + matricula + "' ) AS id";
+
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+            reader.Read();
+            int respuesta = int.Parse(reader["id"].ToString());
+            reader.Close();
+
+            if (respuesta == 0)
+            {
+
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("La matricula ya existe");
+                return false;
+            }
+        }
+
     }
 }
