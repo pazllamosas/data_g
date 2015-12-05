@@ -1335,10 +1335,10 @@ GO
 
 -- CLIENTE -- 
 
-CREATE PROCEDURE DATA_G.ALTA_CLIENTE(@nombre nvarchar(255), @apellido nvarchar(255), @dni numeric(18,0), @direccion nvarchar(255), @telefono numeric(18,0), @mail nvarchar(255), @fechaNac nvarchar(255))
+CREATE PROCEDURE DATA_G.ALTA_CLIENTE(@nombre nvarchar(255), @apellido nvarchar(255), @dni numeric(18,0), @direccion nvarchar(255), @telefono numeric(18,0), @mail nvarchar(255), @fechaNac datetime)
 AS BEGIN
 	INSERT INTO DATA_G.CLIENTE( Nombre, Apellido, Dni, Direccion,telefono, Mail, Fecha_Nac)  
-	VALUES (@nombre, @apellido, @dni, @direccion, @telefono, @mail, CONVERT(datetime, @fechaNac,109))
+	VALUES (@nombre, @apellido, @dni, @direccion, @telefono, @mail, @fechaNac)
 END
 GO
 
@@ -1933,6 +1933,11 @@ AS BEGIN
 	RETURN 
 END
 GO
+
+--declare @r numeric(18,0)
+--exec @r = DATA_G.MILLAS_GANADAS @dni = 87688584
+--PRINT @r
+--select * from DATA_G.MILLAS
 
 CREATE PROCEDURE DATA_G.MILLAS_CANJEADAS(@dni numeric (18,0))
 AS BEGIN

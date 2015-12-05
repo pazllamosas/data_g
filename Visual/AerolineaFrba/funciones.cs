@@ -51,54 +51,43 @@ namespace AerolineaFrba
             return DateTime.Today;
         }
 
-        //public static SqlConnection getConexion()
-        //{
-        //    return conexion;
-        //}
+        //textBox solo permita numeros
+        internal static void permiteNumeros(KeyPressEventArgs e)
+        {
+            if (char.IsLetter(e.KeyChar) || 
+                char.IsSymbol(e.KeyChar) || 
+                char.IsWhiteSpace(e.KeyChar) || 
+                char.IsPunctuation(e.KeyChar)) 
+                e.Handled = true; 
+        }
 
-        //public static bool executeProcedure(string procedure, List<string> args, params object[] values)
-        //{
-        //    try
-        //    {
-        //        SqlDataReader dr;
-        //        SqlConnection conexion = getConexion();
-        //        SqlCommand cmd = new SqlCommand(procedure, conexion);
-        //        cmd.CommandTimeout = 1000;
-        //        cmd.CommandType = CommandType.StoredProcedure;
-        //        if (_validateArgumentsAndParameters(args, values))
-        //        {
-        //            _loadSqlCommand(args, values, cmd);
-        //        }
-        //        dr = cmd.ExecuteReader();
-        //        dr.Close();
-        //        return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //        return false;
-        //    }
-        //}
+        //textBox solo permita letras
+        internal static void permiteLetras(KeyPressEventArgs e)
+        {
+            if (char.IsNumber(e.KeyChar) || 
+                char.IsSymbol(e.KeyChar) || 
+                char.IsPunctuation(e.KeyChar)) 
+                e.Handled = true; 
+        }
 
-        //private static bool _validateArgumentsAndParameters(List<string> args, params object[] values)
-        //{
-        //    if (args != null && values != null)
-        //    {
-        //        if (args.Count != values.Length)
-        //        {
-        //            throw new ApplicationException();
-        //        }
-        //        return true;
-        //    }
-        //    return false;
-        //}
+        //fecha inicio sea menor a la fecha final
+        internal static bool validarFechas(DateTimePicker dtpFechaDesde, DateTimePicker dtpFechaHasta)
+        {
+            if (dtpFechaDesde.Value < dtpFechaHasta.Value)
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Fecha inicio debe ser menor a fecha final");
+                return false;
+            }
+        }
 
-        //private static void _loadSqlCommand(List<string> args, object[] values, SqlCommand cm)
+        //ejemplo
+        //private void fechaDeNac_ValueChanged(object sender, EventArgs e)
         //{
-        //    for (int i = 0; i < args.Count; i++)
-        //    {
-        //        cm.Parameters.AddWithValue(args[i], values[i]);
-        //    }
+        //    fechaDeNac = dateTimePickFechaNac.Value;
         //}
 
     
