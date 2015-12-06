@@ -111,7 +111,7 @@ namespace AerolineaFrba.Inicio
             }
             else
             {
-                MessageBox.Show("El usuario es invalido");
+                MessageBox.Show("El usuario es invalido", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
         }

@@ -198,8 +198,17 @@ namespace AerolineaFrba
                 lista.Add(parametros[i].ToString());
             }            
             return lista;
+
+             
+             
+              }
+              
+                 
+          }
+
         }
 
+         
 
 
 
@@ -213,10 +222,10 @@ namespace AerolineaFrba
     
         
     
-    }
+    
 	
 
-}
+
 
     
 
