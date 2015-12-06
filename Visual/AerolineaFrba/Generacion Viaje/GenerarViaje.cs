@@ -12,6 +12,8 @@ namespace AerolineaFrba.Generacion_Viaje
 {
     public partial class GenerarViaje : Form
     {
+        DataTable aeronaves;
+
         public GenerarViaje()
         {
             InitializeComponent();
@@ -38,5 +40,19 @@ namespace AerolineaFrba.Generacion_Viaje
             FormProvider.VerAeronaves.mostrarSeleccionar();
             //entro desde acá puede tocar boton seleccionar
         }
+
+        private DataTable filtrarAeronaves(string matricula)
+        {
+           
+            DataTable tablaAeronaves = aeronaves;
+            string FechaSalida = dtmFechaSalida.Text;
+            string FechaLlegada = dtmFechaLlegada.Text;
+            string query = "SELECT COUNT (*) FROM DATA_G.AERONAVE WHERE (fecha >= #" + FechaSalida + "# AND fecha <= #" + FechaLlegada + " ) AS id";
+            //DataTable tablaAeronaves = Conexion.cargarTablaConsulta(query);
+            
+            return tablaAeronaves;
+           
+        }
+
     }
 }

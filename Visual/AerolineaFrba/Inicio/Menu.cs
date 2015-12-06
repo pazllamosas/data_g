@@ -27,10 +27,13 @@ namespace AerolineaFrba.Inicio
             btnGenerarViaje.Visible = false;
             btnTop5.Visible = false;
 
+        
+
+
             SqlDataReader Roles = Conexion.ejecutarQuery("EXECUTE DATA_G.GET_ROLES_USUARIO(" + usuario + ")");
             while (Roles.Read())
             {
-                SqlDataReader Funcionalidades = Conexion.ejecutarQuery("DATA_G.GET_FUNCIONALIDADES_ROL(" + Roles..GetInt32(0) + ")");
+                SqlDataReader Funcionalidades = Conexion.ejecutarQuery("DATA_G.GET_FUNCIONALIDADES_ROL(" + Roles.GetInt32(0) + ")");
                 
                 if (Funcionalidades.HasRows)
                 {
@@ -140,6 +143,12 @@ namespace AerolineaFrba.Inicio
         private void Menu_Load(object sender, EventArgs e)
         {
             //getUserRole
+
+            // Conexion.executeProcedure("DATA_G.GET_ROL", Conexion.generarArgumentos("@usuario"), usuario);
+           
+           
+            }
+
         }
     }
 }
