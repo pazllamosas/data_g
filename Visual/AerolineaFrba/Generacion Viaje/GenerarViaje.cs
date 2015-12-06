@@ -12,7 +12,7 @@ namespace AerolineaFrba.Generacion_Viaje
 {
     public partial class GenerarViaje : Form
     {
-        DataTable aeronaves;
+        
 
         public GenerarViaje()
         {
@@ -41,18 +41,36 @@ namespace AerolineaFrba.Generacion_Viaje
             //entro desde acá puede tocar boton seleccionar
         }
 
-        private DataTable filtrarAeronaves(string matricula)
+        private DataTable filtrarAeronaves(string FechaSalida, string FechaLlegada)
         {
            
-            DataTable tablaAeronaves = aeronaves;
-            string FechaSalida = dtmFechaSalida.Text;
-            string FechaLlegada = dtmFechaLlegada.Text;
-            string query = "SELECT COUNT (*) FROM DATA_G.AERONAVE WHERE (fecha >= #" + FechaSalida + "# AND fecha <= #" + FechaLlegada + " ) AS id";
-            //DataTable tablaAeronaves = Conexion.cargarTablaConsulta(query);
+            //HAY ERROR
+            FechaSalida = dtmFechaSalida.Text;
+            FechaLlegada = dtmFechaLlegada.Text;
+            string query = "SELECT COUNT (*) FROM DATA_G.AERONAVE WHERE (fecha >= " + FechaSalida + " AND fecha <= " + FechaLlegada + " ) AS id";
+            DataTable tablaAeronaves = Conexion.cargarTablaConsulta(query);
             
             return tablaAeronaves;
            
         }
 
+        private void GenerarViaje_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvVerViaje_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+            DataTable aeronaves = filtrarAeronaves(dtmFechaSalida.Text, dtmFechaLlegada.Text);
+            this.dgvVerViaje.DataSource = aeronaves;
+        }
+        }
+
     }
-}
+

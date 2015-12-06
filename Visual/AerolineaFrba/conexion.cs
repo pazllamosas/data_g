@@ -100,7 +100,7 @@ namespace AerolineaFrba
             return ds;
         }
 
-        public DataTable cargarTablaConsulta(string consulta)
+        public static DataTable cargarTablaConsulta(string consulta)
         {
             DataTable dt = new DataTable();
             try
