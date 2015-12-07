@@ -57,6 +57,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
+            this.NroVuelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaPartida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVuelos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPasajes)).BeginInit();
@@ -191,6 +193,9 @@
             // dgvVuelos
             // 
             this.dgvVuelos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvVuelos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.NroVuelo,
+            this.FechaPartida});
             this.dgvVuelos.Location = new System.Drawing.Point(12, 164);
             this.dgvVuelos.Name = "dgvVuelos";
             this.dgvVuelos.Size = new System.Drawing.Size(300, 157);
@@ -238,6 +243,7 @@
             this.btnBuscarVuelos.Text = "Buscar Vuelos";
             this.btnBuscarVuelos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnBuscarVuelos.UseVisualStyleBackColor = true;
+            this.btnBuscarVuelos.Click += new System.EventHandler(this.btnBuscarVuelos_Click);
             // 
             // dgvPasajes
             // 
@@ -325,6 +331,20 @@
             this.btnEditar.UseVisualStyleBackColor = true;
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
+            // NroVuelo
+            // 
+            this.NroVuelo.Frozen = true;
+            this.NroVuelo.HeaderText = "Número de Vuelo";
+            this.NroVuelo.Name = "NroVuelo";
+            this.NroVuelo.ReadOnly = true;
+            // 
+            // FechaPartida
+            // 
+            this.FechaPartida.Frozen = true;
+            this.FechaPartida.HeaderText = "Fecha de Partida";
+            this.FechaPartida.Name = "FechaPartida";
+            this.FechaPartida.ReadOnly = true;
+            // 
             // IngresarDatosCompra
             // 
             this.AcceptButton = this.btnSiguiente;
@@ -396,5 +416,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn campraNumButaca;
         private System.Windows.Forms.DataGridViewTextBoxColumn compraTipoButaca;
         private System.Windows.Forms.DataGridViewTextBoxColumn campraPisoButaca;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NroVuelo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FechaPartida;
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -107,6 +108,32 @@ namespace AerolineaFrba.Compra
 
         private void dgvPasajes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+        }
+
+        private void btnBuscarVuelos_Click(object sender, EventArgs e)
+        {
+            string query = "SELECT NroVuelo, FechaSalida FROM DATA_G.VUELOS vuelos,DATA_G.RUTAS rutas, DATA_G.CIUDADES ciudades WHERE vuelos.FechaSalida <= " + dtmVuelo.Text + " AND vuelos.IdRuta = rutas.idRuta AND rutas.Origen = ciudades.CodigoCiudad AND rutas.Destino = ciudades.CodigoCiudad";
+
+
+            if (!string.IsNullOrEmpty(txtPesoEncomienda.Text))
+            {
+                query = query + " AND vuelos.KG_Disponibles > " + txtPesoEncomienda.Text;
+            }
+
+
+            if (!string.IsNullOrEmpty(txtCantPasajes.Text))
+            {
+                query = query + " AND vuelos.CantButacas > " + txtCantPasajes.Text;
+            }
+
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+
+            while (reader.Read())
+            {
+                dgvVuelos.Rows.Add(reader["NroVuelo"], reader["FechaSalida"]);
+            }
+            reader.Close();
 
         }
     }
