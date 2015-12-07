@@ -40,8 +40,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtCantidad = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtMillasDisp = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtCostoTotal = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
@@ -52,9 +50,10 @@
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelar.Image = global::AerolineaFrba.Properties.Resources.cancel;
             this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new System.Drawing.Point(337, 134);
+            this.btnCancelar.Location = new System.Drawing.Point(449, 165);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.Size = new System.Drawing.Size(100, 28);
             this.btnCancelar.TabIndex = 4;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -66,13 +65,15 @@
             this.btnGuardar.Enabled = false;
             this.btnGuardar.Image = global::AerolineaFrba.Properties.Resources.save;
             this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGuardar.Location = new System.Drawing.Point(12, 134);
+            this.btnGuardar.Location = new System.Drawing.Point(16, 165);
+            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardar.Size = new System.Drawing.Size(100, 28);
             this.btnGuardar.TabIndex = 5;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // menuStrip1
             // 
@@ -80,7 +81,8 @@
             this.archivoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(424, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(565, 28);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -89,109 +91,98 @@
             this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deslogearToolStripMenuItem});
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(71, 24);
             this.archivoToolStripMenuItem.Text = "Archivo";
             // 
             // deslogearToolStripMenuItem
             // 
             this.deslogearToolStripMenuItem.Name = "deslogearToolStripMenuItem";
-            this.deslogearToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
+            this.deslogearToolStripMenuItem.Size = new System.Drawing.Size(107, 24);
             this.deslogearToolStripMenuItem.Text = "Salir";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 33);
+            this.label1.Location = new System.Drawing.Point(16, 41);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 13);
+            this.label1.Size = new System.Drawing.Size(35, 17);
             this.label1.TabIndex = 9;
             this.label1.Text = "DNI:";
             // 
             // txtDni
             // 
-            this.txtDni.Location = new System.Drawing.Point(117, 30);
+            this.txtDni.Location = new System.Drawing.Point(156, 37);
+            this.txtDni.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtDni.Name = "txtDni";
-            this.txtDni.Size = new System.Drawing.Size(108, 20);
+            this.txtDni.Size = new System.Drawing.Size(143, 22);
             this.txtDni.TabIndex = 10;
+            this.txtDni.TextChanged += new System.EventHandler(this.txtDni_TextChanged);
             // 
             // cmbProducto
             // 
             this.cmbProducto.FormattingEnabled = true;
-            this.cmbProducto.Location = new System.Drawing.Point(117, 56);
+            this.cmbProducto.Location = new System.Drawing.Point(156, 69);
+            this.cmbProducto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbProducto.Name = "cmbProducto";
-            this.cmbProducto.Size = new System.Drawing.Size(121, 21);
+            this.cmbProducto.Size = new System.Drawing.Size(160, 24);
             this.cmbProducto.TabIndex = 11;
             this.cmbProducto.SelectedIndexChanged += new System.EventHandler(this.cmbProducto_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 59);
+            this.label2.Location = new System.Drawing.Point(16, 73);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 13);
+            this.label2.Size = new System.Drawing.Size(69, 17);
             this.label2.TabIndex = 12;
             this.label2.Text = "Producto:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(244, 59);
+            this.label3.Location = new System.Drawing.Point(325, 73);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 13);
+            this.label3.Size = new System.Drawing.Size(68, 17);
             this.label3.TabIndex = 13;
             this.label3.Text = "Cantidad:";
             // 
             // txtCantidad
             // 
-            this.txtCantidad.Location = new System.Drawing.Point(302, 56);
+            this.txtCantidad.Location = new System.Drawing.Point(403, 69);
+            this.txtCantidad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtCantidad.Name = "txtCantidad";
-            this.txtCantidad.Size = new System.Drawing.Size(35, 20);
+            this.txtCantidad.Size = new System.Drawing.Size(45, 22);
             this.txtCantidad.TabIndex = 14;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(231, 33);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(93, 13);
-            this.label5.TabIndex = 17;
-            this.label5.Text = "Millas Disponibles:";
-            // 
-            // txtMillasDisp
-            // 
-            this.txtMillasDisp.Enabled = false;
-            this.txtMillasDisp.Location = new System.Drawing.Point(330, 30);
-            this.txtMillasDisp.Name = "txtMillasDisp";
-            this.txtMillasDisp.Size = new System.Drawing.Size(77, 20);
-            this.txtMillasDisp.TabIndex = 18;
-            this.txtMillasDisp.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 86);
+            this.label6.Location = new System.Drawing.Point(16, 106);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(99, 13);
+            this.label6.Size = new System.Drawing.Size(133, 17);
             this.label6.TabIndex = 19;
             this.label6.Text = "Costo Total (Millas):";
             // 
             // txtCostoTotal
             // 
             this.txtCostoTotal.Enabled = false;
-            this.txtCostoTotal.Location = new System.Drawing.Point(117, 83);
+            this.txtCostoTotal.Location = new System.Drawing.Point(156, 102);
+            this.txtCostoTotal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtCostoTotal.Name = "txtCostoTotal";
-            this.txtCostoTotal.Size = new System.Drawing.Size(108, 20);
+            this.txtCostoTotal.Size = new System.Drawing.Size(143, 22);
             this.txtCostoTotal.TabIndex = 20;
             // 
             // CanjeMillas
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(424, 169);
+            this.ClientSize = new System.Drawing.Size(565, 208);
             this.Controls.Add(this.txtCostoTotal);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.txtMillasDisp);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.txtCantidad);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -202,6 +193,7 @@
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnCancelar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "CanjeMillas";
             this.Text = "Canje de Millas";
             this.Load += new System.EventHandler(this.CanjeMillas_Load);
@@ -225,8 +217,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtCantidad;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtMillasDisp;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtCostoTotal;
     }

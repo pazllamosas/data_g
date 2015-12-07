@@ -47,7 +47,7 @@ namespace AerolineaFrba.Generacion_Viaje
             //HAY ERROR
             FechaSalida = dtmFechaSalida.Text;
             FechaLlegada = dtmFechaLlegada.Text;
-            string query = "SELECT COUNT (*) FROM DATA_G.AERONAVE WHERE (fecha >= " + FechaSalida + " AND fecha <= " + FechaLlegada + " ) AS id";
+            string query = "SELECT  FROM DATA_G.AERONAVE WHERE (fecha >= " + FechaSalida + " AND fecha <= " + FechaLlegada + " ) AS id";
             DataTable tablaAeronaves = Conexion.cargarTablaConsulta(query);
             
             return tablaAeronaves;
