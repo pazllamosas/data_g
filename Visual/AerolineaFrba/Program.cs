@@ -210,6 +210,27 @@ namespace AerolineaFrba
         }
         private static Compra.ElegirButaca _ElegirButaca;
 
+        public static Compra.FormaDeCompra FormaDeCompra
+        {
+            get
+            {
+                if (_FormaDeCompra == null)
+                {
+                    _FormaDeCompra = new Compra.FormaDeCompra();
+                }
+                if (Login.loginMode == "invitado")
+                {
+                    _FormaDeCompra.deshabilitarEfectivo();
+                }
+                else {
+                    _FormaDeCompra.habilitarEfectivo();
+                }
+
+                return _FormaDeCompra;
+            }
+        }
+        private static Compra.FormaDeCompra _FormaDeCompra;
+
         public static Consulta_Millas.ConsultaMillas ConsultaMillas
         {
             get

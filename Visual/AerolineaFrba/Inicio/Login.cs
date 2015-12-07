@@ -15,6 +15,9 @@ namespace AerolineaFrba.Inicio
 {
     public partial class Login : Form
     {
+
+        public string loginMode = "";
+
         private string password = "";
         public Login()
         {
@@ -39,6 +42,7 @@ namespace AerolineaFrba.Inicio
         {
             if (chkInvitado.Checked)
             {
+                loginMode = "invitado";
                 this.Hide();
                 FormProvider.MainMenu.Show();
             }
@@ -52,6 +56,7 @@ namespace AerolineaFrba.Inicio
                     if (passwordValida(usuario, password))
                     {
                         loginCorrecto(usuario);
+                        loginMode = "noinvitado";
                         this.Hide();
                         FormProvider.MainMenu.Show();
                         FormProvider.MainMenu.habilitarFuncionalidadesPorRol(usuario);

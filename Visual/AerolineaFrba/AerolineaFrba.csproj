@@ -255,6 +255,9 @@
     <EmbeddedResource Include="Compra\ElegirButaca.resx">
       <DependentUpon>ElegirButaca.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Compra\FormaDeCompra.resx">
+      <DependentUpon>FormaDeCompra.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Compra\IngresarDatosCompra.resx">
       <DependentUpon>IngresarDatosCompra.cs</DependentUpon>
     </EmbeddedResource>

@@ -16,5 +16,21 @@ namespace AerolineaFrba.Compra
         {
             InitializeComponent();
         }
+
+        public void deshabilitarEfectivo()
+        {
+            radioButton2.Enabled = false;
+        }
+
+        public void habilitarEfectivo()
+        {
+            radioButton2.Enabled = true;
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormProvider.IngresarDatosCompra.Show();
+        }
     }
 }
