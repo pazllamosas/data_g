@@ -27,10 +27,13 @@ namespace AerolineaFrba.Inicio
             btnGenerarViaje.Visible = false;
             btnTop5.Visible = false;
 
-        
+            List<string> argumentos = new List<string>();
+            argumentos.Add(usuario);
 
+            object[] valores = new Object[1];
+           
 
-            SqlDataReader Roles = Conexion.ejecutarQuery("EXECUTE DATA_G.GET_ROLES_USUARIO(" + usuario + ")");
+            SqlDataReader Roles = Conexion.executeProcedureWithReader("DATA_G.GET_ROLES_USUARIO", argumentos, valores);
             while (Roles.Read())
             {
                 SqlDataReader Funcionalidades = Conexion.ejecutarQuery("DATA_G.GET_FUNCIONALIDADES_ROL(" + Roles.GetInt32(0) + ")");

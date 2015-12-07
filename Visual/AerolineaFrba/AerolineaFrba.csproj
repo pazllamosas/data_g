@@ -123,6 +123,12 @@
     <Compile Include="Compra\ElegirButaca.Designer.cs">
       <DependentUpon>ElegirButaca.cs</DependentUpon>
     </Compile>
+    <Compile Include="Compra\FormaDeCompra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\FormaDeCompra.Designer.cs">
+      <DependentUpon>FormaDeCompra.cs</DependentUpon>
+    </Compile>
     <Compile Include="Compra\IngresarDatosCompra.cs">
       <SubType>Form</SubType>
     </Compile>
