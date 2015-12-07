@@ -20,6 +20,43 @@ namespace AerolineaFrba.Abm_Ruta
             InitializeComponent();
         }
 
+                public AgregarRuta(string codigo, string precioEncomienda, string precioPasaje, string servicio, string ciudadOrigen, string ciudadDestino) //mandar todos los parametros para completar los texbox 
+        {
+            InitializeComponent();
+            this.txtCodigo.Text = codigo; //asignar los parametros a los text
+            this.txtPrecioEncomienda.Text = precioEncomienda;
+            this.txtPrecioPasaje.Text = precioPasaje;
+   
+
+            int i;                                 //buscar como comparar el parametro con el combo box
+            int cantidad = int.Parse(cmbCiudadOrigen.Size.ToString());
+            for (i = 0; i < cantidad; i++)    
+            {
+                cmbCiudadOrigen.SelectedIndex = i;
+                if (cmbCiudadOrigen.Text == ciudadOrigen) //nombre es el parametro
+                    break;
+            }
+
+            int k;                                 //buscar como comparar el parametro con el combo box
+            int cantidad3 = int.Parse(cmbCiudadDestino.Size.ToString());
+            for (k = 0; k < cantidad3; k++)
+            {
+                cmbCiudadDestino.SelectedIndex = k;
+                if (cmbCiudadDestino.Text == ciudadDestino) //nombre es el parametro
+                    break;
+            }
+
+            int j;
+            int cantidad2 = int.Parse(this.cmbTipoServicio.Size.ToString());
+            for (j = 0; j < cantidad2; j++)
+            {
+                this.cmbTipoServicio.SelectedIndex = j;
+                if (cmbTipoServicio.Text == servicio)
+                    break;
+            }
+
+        }
+
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -248,6 +285,36 @@ namespace AerolineaFrba.Abm_Ruta
             {
                return false;
             }
+        }
+
+        private void txtPrecioPasaje_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCodigo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
         }
 
     }

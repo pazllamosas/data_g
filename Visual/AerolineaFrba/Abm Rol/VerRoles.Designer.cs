@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VerRoles));
             this.dgvRoles = new System.Windows.Forms.DataGridView();
+            this.rollRoll = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.btnVolver = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -37,8 +38,6 @@
             this.deslogearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnEditar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
-            this.btnAgregar = new System.Windows.Forms.Button();
-            this.rollRoll = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRoles)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -53,6 +52,11 @@
             this.dgvRoles.Size = new System.Drawing.Size(610, 264);
             this.dgvRoles.TabIndex = 2;
             this.dgvRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // rollRoll
+            // 
+            this.rollRoll.HeaderText = "Roles:";
+            this.rollRoll.Name = "rollRoll";
             // 
             // label1
             // 
@@ -130,24 +134,6 @@
             this.btnEliminar.UseVisualStyleBackColor = true;
             this.btnEliminar.Click += new System.EventHandler(this.button2_Click);
             // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Image = global::AerolineaFrba.Properties.Resources.add;
-            this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregar.Location = new System.Drawing.Point(418, 32);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(67, 23);
-            this.btnAgregar.TabIndex = 0;
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // rollRoll
-            // 
-            this.rollRoll.HeaderText = "Roles:";
-            this.rollRoll.Name = "rollRoll";
-            // 
             // VerRoles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -160,7 +146,6 @@
             this.Controls.Add(this.btnEditar);
             this.Controls.Add(this.dgvRoles);
             this.Controls.Add(this.btnEliminar);
-            this.Controls.Add(this.btnAgregar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "VerRoles";
             this.Text = "Roles";
@@ -175,7 +160,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.DataGridView dgvRoles;
         private System.Windows.Forms.Button btnEditar;

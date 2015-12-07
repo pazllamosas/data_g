@@ -49,6 +49,8 @@ namespace AerolineaFrba.Abm_Rol
                 dgvElegirFuncionalidad.Rows.Add(reader["DescripcionFunc"]);
             }
             reader.Close();
+
+
         }
 
         private void dgvElegirFuncionalidad_CellContentClick(object sender, DataGridViewCellEventArgs e)

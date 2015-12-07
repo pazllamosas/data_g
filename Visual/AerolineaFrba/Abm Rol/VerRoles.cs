@@ -33,8 +33,7 @@ namespace AerolineaFrba.Abm_Rol
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            FormProvider.AgregarRol.Show();
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -44,7 +43,8 @@ namespace AerolineaFrba.Abm_Rol
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            FormProvider.AgregarRol.Show();
         }
 
         private void label1_Click(object sender, EventArgs e)

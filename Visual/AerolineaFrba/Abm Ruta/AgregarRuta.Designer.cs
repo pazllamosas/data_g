@@ -62,6 +62,7 @@
             this.txtCodigo.Name = "txtCodigo";
             this.txtCodigo.Size = new System.Drawing.Size(100, 20);
             this.txtCodigo.TabIndex = 1;
+            this.txtCodigo.TextChanged += new System.EventHandler(this.txtCodigo_TextChanged);
             // 
             // label2
             // 
@@ -99,6 +100,7 @@
             this.label4.Size = new System.Drawing.Size(89, 13);
             this.label4.TabIndex = 5;
             this.label4.Text = "Precio de pasaje:";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // txtPrecioPasaje
             // 
@@ -106,6 +108,7 @@
             this.txtPrecioPasaje.Name = "txtPrecioPasaje";
             this.txtPrecioPasaje.Size = new System.Drawing.Size(100, 20);
             this.txtPrecioPasaje.TabIndex = 6;
+            this.txtPrecioPasaje.TextChanged += new System.EventHandler(this.txtPrecioPasaje_TextChanged);
             // 
             // label5
             // 
@@ -115,6 +118,7 @@
             this.label5.Size = new System.Drawing.Size(95, 13);
             this.label5.TabIndex = 9;
             this.label5.Text = "Ciudad de destino:";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label6
             // 
@@ -124,6 +128,7 @@
             this.label6.Size = new System.Drawing.Size(90, 13);
             this.label6.TabIndex = 7;
             this.label6.Text = "Ciudad de origen:";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // btnCancelar
             // 
@@ -180,6 +185,7 @@
             this.label7.Size = new System.Drawing.Size(85, 13);
             this.label7.TabIndex = 15;
             this.label7.Text = "Tipo de servicio:";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // cmbTipoServicio
             // 

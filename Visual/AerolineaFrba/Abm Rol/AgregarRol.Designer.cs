@@ -31,11 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgregarRol));
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.dgvElegirFuncionalidad = new System.Windows.Forms.DataGridView();
+            this.rolFuncionalidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label2 = new System.Windows.Forms.Label();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.dgvElegirFuncionalidad = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.rolFuncionalidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvElegirFuncionalidad)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,6 +55,32 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Nombre:";
             this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // dgvElegirFuncionalidad
+            // 
+            this.dgvElegirFuncionalidad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvElegirFuncionalidad.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.rolFuncionalidades});
+            this.dgvElegirFuncionalidad.Location = new System.Drawing.Point(12, 64);
+            this.dgvElegirFuncionalidad.Name = "dgvElegirFuncionalidad";
+            this.dgvElegirFuncionalidad.Size = new System.Drawing.Size(610, 257);
+            this.dgvElegirFuncionalidad.TabIndex = 4;
+            this.dgvElegirFuncionalidad.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElegirFuncionalidad_CellContentClick);
+            // 
+            // rolFuncionalidades
+            // 
+            this.rolFuncionalidades.HeaderText = "Funcionalidades:";
+            this.rolFuncionalidades.Name = "rolFuncionalidades";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 45);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(246, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Elige las funcionalidades que podrá utilizar este rol:";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // btnGuardar
             // 
@@ -84,32 +110,6 @@
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // dgvElegirFuncionalidad
-            // 
-            this.dgvElegirFuncionalidad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvElegirFuncionalidad.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.rolFuncionalidades});
-            this.dgvElegirFuncionalidad.Location = new System.Drawing.Point(12, 64);
-            this.dgvElegirFuncionalidad.Name = "dgvElegirFuncionalidad";
-            this.dgvElegirFuncionalidad.Size = new System.Drawing.Size(610, 257);
-            this.dgvElegirFuncionalidad.TabIndex = 4;
-            this.dgvElegirFuncionalidad.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElegirFuncionalidad_CellContentClick);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 45);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(246, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Elige las funcionalidades que podrá utilizar este rol:";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
-            // 
-            // rolFuncionalidades
-            // 
-            this.rolFuncionalidades.HeaderText = "Funcionalidades:";
-            this.rolFuncionalidades.Name = "rolFuncionalidades";
-            // 
             // AgregarRol
             // 
             this.AcceptButton = this.btnGuardar;
@@ -125,7 +125,7 @@
             this.Controls.Add(this.txtNombre);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AgregarRol";
-            this.Text = "Agregar Rol";
+            this.Text = "Editar Rol";
             this.Load += new System.EventHandler(this.AgregarRol_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvElegirFuncionalidad)).EndInit();
             this.ResumeLayout(false);
