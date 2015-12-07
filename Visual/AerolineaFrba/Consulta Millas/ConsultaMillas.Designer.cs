@@ -36,8 +36,12 @@
             this.txtDni = new System.Windows.Forms.TextBox();
             this.btnVolver = new System.Windows.Forms.Button();
             this.dgvDetalle = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
             this.btnConsultar = new System.Windows.Forms.Button();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Concepto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Millas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetalle)).BeginInit();
             this.SuspendLayout();
@@ -45,7 +49,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 30);
+            this.label1.Location = new System.Drawing.Point(293, 39);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 13);
             this.label1.TabIndex = 1;
@@ -58,7 +62,7 @@
             this.archivoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(441, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(584, 24);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -78,7 +82,7 @@
             // 
             // txtDni
             // 
-            this.txtDni.Location = new System.Drawing.Point(85, 27);
+            this.txtDni.Location = new System.Drawing.Point(366, 36);
             this.txtDni.MaxLength = 8;
             this.txtDni.Name = "txtDni";
             this.txtDni.Size = new System.Drawing.Size(120, 20);
@@ -89,7 +93,7 @@
             // 
             this.btnVolver.Image = global::AerolineaFrba.Properties.Resources.back;
             this.btnVolver.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnVolver.Location = new System.Drawing.Point(12, 269);
+            this.btnVolver.Location = new System.Drawing.Point(12, 33);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(58, 23);
             this.btnVolver.TabIndex = 9;
@@ -101,40 +105,76 @@
             // dgvDetalle
             // 
             this.dgvDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDetalle.Location = new System.Drawing.Point(15, 72);
+            this.dgvDetalle.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Fecha,
+            this.Concepto,
+            this.Millas});
+            this.dgvDetalle.Location = new System.Drawing.Point(12, 63);
             this.dgvDetalle.Name = "dgvDetalle";
-            this.dgvDetalle.Size = new System.Drawing.Size(414, 191);
+            this.dgvDetalle.Size = new System.Drawing.Size(560, 312);
             this.dgvDetalle.TabIndex = 10;
             this.dgvDetalle.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalle_CellContentClick);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 56);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(43, 13);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "Detalle:";
             // 
             // btnConsultar
             // 
             this.btnConsultar.Enabled = false;
+            this.btnConsultar.Image = global::AerolineaFrba.Properties.Resources.return_large;
             this.btnConsultar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnConsultar.Location = new System.Drawing.Point(211, 25);
+            this.btnConsultar.Location = new System.Drawing.Point(492, 34);
             this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(59, 23);
+            this.btnConsultar.Size = new System.Drawing.Size(84, 23);
             this.btnConsultar.TabIndex = 12;
             this.btnConsultar.Text = "Consultar";
             this.btnConsultar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnConsultar.UseVisualStyleBackColor = true;
+            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
+            // 
+            // Fecha
+            // 
+            this.Fecha.Frozen = true;
+            this.Fecha.HeaderText = "Fecha";
+            this.Fecha.Name = "Fecha";
+            this.Fecha.ReadOnly = true;
+            // 
+            // Concepto
+            // 
+            this.Concepto.Frozen = true;
+            this.Concepto.HeaderText = "Concepto";
+            this.Concepto.Name = "Concepto";
+            this.Concepto.ReadOnly = true;
+            // 
+            // Millas
+            // 
+            this.Millas.Frozen = true;
+            this.Millas.HeaderText = "Millas";
+            this.Millas.Name = "Millas";
+            this.Millas.ReadOnly = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(452, 381);
+            this.textBox1.MaxLength = 8;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(120, 20);
+            this.textBox1.TabIndex = 13;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(412, 384);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(34, 13);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Total:";
             // 
             // ConsultaMillas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(441, 297);
-            this.Controls.Add(this.btnConsultar);
+            this.ClientSize = new System.Drawing.Size(584, 412);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.btnConsultar);
             this.Controls.Add(this.dgvDetalle);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.txtDni);
@@ -160,7 +200,11 @@
         private System.Windows.Forms.TextBox txtDni;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.DataGridView dgvDetalle;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnConsultar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Concepto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Millas;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label2;
     }
 }

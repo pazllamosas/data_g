@@ -22,25 +22,7 @@ namespace AerolineaFrba.Consulta_Millas
 
         private void label1_Click(object sender, EventArgs e)
         {
-            string dni = txtDni.Text;
-
-            string query = "SELECT DATA_G.GET_CLIENTE_DNI ('" + dni + "') AS id";
-
-            SqlDataReader reader = Conexion.ejecutarQuery(query);
-            reader.Read();
-            int respuesta = int.Parse(reader["id"].ToString());
-            reader.Close();
-
-            if (respuesta > 0)
-            {
-                dgvDetalle.DataSource = getMillasGanadas(dni);
-                dgvDetalle.DataSource = getMillasCanjeadas(dni);
-            }
-            else
-            {
-                MessageBox.Show("DNI incorrecto");
-            }
-
+            
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -63,14 +45,31 @@ namespace AerolineaFrba.Consulta_Millas
             
         }
 
-        public static DataTable getMillasGanadas(String dni)
+        private void btnConsultar_Click(object sender, EventArgs e)
         {
-            return Conexion.obtenerTablaProcedure("DATA_G.MILLAS_GANADAS", Conexion.generarArgumentos("@dni"), Int32.Parse(dni));
-        }
+            string query = "SELECT IdCli FROM DATA_G.CLIENTES WHERE DNI = '" + txtDni.Text + "'";
 
-        public static DataTable getMillasCanjeadas(String dni)
-        {
-            return Conexion.obtenerTablaProcedure("DATA_G.MILLAS_CANJEADAS", Conexion.generarArgumentos("@dni"), Int32.Parse(dni));
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+            reader.Read();
+            int idCliente = int.Parse(reader["IdCli"].ToString());
+            reader.Close();
+
+            if (idCliente > 0)
+            {
+
+                query = "SELECT * FROM DATA_G.MILLAS WHERE IdCliente = " + idCliente.ToString() ;
+                reader = Conexion.ejecutarQuery(query);
+                while(reader.Read()) {
+                    dgvDetalle.Rows.Add(reader["Fecha"].ToString(), reader["Descripcion"].ToString(), reader["HistorialMillas"].ToString());
+                }
+                
+                reader.Close();
+
+            }
+            else
+            {
+                MessageBox.Show("DNI incorrecto");
+            }
         }
 
     }
