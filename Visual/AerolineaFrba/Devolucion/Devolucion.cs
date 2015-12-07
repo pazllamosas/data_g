@@ -34,30 +34,43 @@ namespace AerolineaFrba.Devolucion
         private void Devolucion_Load(object sender, EventArgs e)
         {
             btnDevolver.Enabled = true;
+           
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
+            rdbPasaje.Checked= false;
+            rdbEncomienda.Checked = false;
+            radioButton1.Checked = false;
+            rdbPasaje.Enabled = true;
+            rdbEncomienda.Enabled = true;
+            radioButton1.Enabled = true;
             this.Hide();
             FormProvider.MainMenu.Show();
+
         }
 
         private void rdbPasaje_CheckedChanged(object sender, EventArgs e)
         {
+            rdbEncomienda.Enabled = false;
+            radioButton1.Enabled = false;
 
         }
 
         private void btnDevolver_Click(object sender, EventArgs e)
         {
-          Int32 codigo = Convert.ToInt32(txtCodItem.Text);
+        
          if (this.txtCodItem.Text.Trim() == "")
          {
              MessageBox.Show("Completar codigo");
          }
          else
          {
+             Int32 codigo = Convert.ToInt32(txtCodItem.Text);
              if (rdbPasaje.Checked)
              {
+                 rdbEncomienda.Checked = false;
+
 
                  if (pasajeValido(codigo))
                  {
@@ -66,13 +79,15 @@ namespace AerolineaFrba.Devolucion
                      {
                          MessageBox.Show("Pasaje devuelto");
                          this.txtCodItem.Clear();
+                         rdbEncomienda.Enabled = true;
+                         radioButton1.Enabled = true; 
                      }
                  }
              }
              else
              {
                  if (rdbEncomienda.Checked)
-                 {
+                 {  
                      if (paqueteValido(codigo))
                      {
                          bool resultado = Conexion.executeProcedure("DATA_G.CANCELAR_PAQUETE", Conexion.generarArgumentos("@paquete"), codigo);
@@ -80,6 +95,9 @@ namespace AerolineaFrba.Devolucion
                          {
                              MessageBox.Show("Paquete devuelto");
                              this.txtCodItem.Clear();
+                             rdbPasaje.Enabled = true;
+                             radioButton1.Enabled = true; 
+
                          }
                      }
                  }
@@ -94,6 +112,9 @@ namespace AerolineaFrba.Devolucion
                              {
                                  MessageBox.Show("Compra devuelto");
                                  this.txtCodItem.Clear();
+                                 rdbPasaje.Enabled = true;
+                                 rdbEncomienda.Enabled = true;
+
                              }
                          }
 
@@ -111,7 +132,8 @@ namespace AerolineaFrba.Devolucion
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-
+            rdbEncomienda.Enabled = false;
+            rdbPasaje.Enabled = false;
         }
 
 
@@ -171,6 +193,12 @@ namespace AerolineaFrba.Devolucion
                 MessageBox.Show("El numero de compra no existe");
                 return false;
             }
+        }
+
+        private void rdbEncomienda_CheckedChanged(object sender, EventArgs e)
+        {
+            radioButton1.Enabled = false;
+            rdbPasaje.Enabled = false;
         }
 
 

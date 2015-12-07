@@ -1888,10 +1888,8 @@ DECLARE @motivo nvarchar(255)
 	SELECT GETDATE(), @motivo, P.NroCompra  
 			FROM DATA_G.PAQUETE P WHERE P.Codigo = @paquete
 		UPDATE DATA_G.PAQUETE
-		SET IdDevolucion=SCOPE_IDENTITY(),
-			 NroVuelo = NULL
+		SET IdDevolucion=SCOPE_IDENTITY()
 		WHERE Codigo = @paquete	
-
 END
 GO
 
@@ -1964,6 +1962,9 @@ DECLARE @motivo nvarchar(255)
 		WHERE IdAeronave IN (SELECT IdButaca FROM DATA_G.PASAJE P , DATA_G.COMPRA C 
 								WHERE C.NroCompra = @nrocompra 
 									AND C.NroCompra = P.NroCompra)
+	UPDATE DATA_G.PAQUETE
+		SET IdDevolucion=SCOPE_IDENTITY()
+		WHERE NroCompra = @nrocompra
 END
 GO
 

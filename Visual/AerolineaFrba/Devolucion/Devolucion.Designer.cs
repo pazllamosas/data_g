@@ -70,7 +70,7 @@
             // txtCodItem
             // 
             this.txtCodItem.Location = new System.Drawing.Point(220, 95);
-            this.txtCodItem.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCodItem.Margin = new System.Windows.Forms.Padding(4);
             this.txtCodItem.Name = "txtCodItem";
             this.txtCodItem.Size = new System.Drawing.Size(160, 22);
             this.txtCodItem.TabIndex = 16;
@@ -93,7 +93,7 @@
             this.btnVolver.Image = global::AerolineaFrba.Properties.Resources.back;
             this.btnVolver.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnVolver.Location = new System.Drawing.Point(20, 43);
-            this.btnVolver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(4);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(76, 28);
             this.btnVolver.TabIndex = 17;
@@ -106,11 +106,10 @@
             // 
             this.rdbPasaje.AutoSize = true;
             this.rdbPasaje.Location = new System.Drawing.Point(20, 132);
-            this.rdbPasaje.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdbPasaje.Margin = new System.Windows.Forms.Padding(4);
             this.rdbPasaje.Name = "rdbPasaje";
-            this.rdbPasaje.Size = new System.Drawing.Size(72, 21);
+            this.rdbPasaje.Size = new System.Drawing.Size(73, 21);
             this.rdbPasaje.TabIndex = 18;
-            this.rdbPasaje.TabStop = true;
             this.rdbPasaje.Text = "Pasaje";
             this.rdbPasaje.UseVisualStyleBackColor = true;
             this.rdbPasaje.CheckedChanged += new System.EventHandler(this.rdbPasaje_CheckedChanged);
@@ -119,13 +118,13 @@
             // 
             this.rdbEncomienda.AutoSize = true;
             this.rdbEncomienda.Location = new System.Drawing.Point(20, 160);
-            this.rdbEncomienda.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdbEncomienda.Margin = new System.Windows.Forms.Padding(4);
             this.rdbEncomienda.Name = "rdbEncomienda";
-            this.rdbEncomienda.Size = new System.Drawing.Size(107, 21);
+            this.rdbEncomienda.Size = new System.Drawing.Size(108, 21);
             this.rdbEncomienda.TabIndex = 19;
-            this.rdbEncomienda.TabStop = true;
             this.rdbEncomienda.Text = "Encomienda";
             this.rdbEncomienda.UseVisualStyleBackColor = true;
+            this.rdbEncomienda.CheckedChanged += new System.EventHandler(this.rdbEncomienda_CheckedChanged);
             // 
             // btnDevolver
             // 
@@ -134,7 +133,7 @@
             this.btnDevolver.Image = global::AerolineaFrba.Properties.Resources.next;
             this.btnDevolver.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnDevolver.Location = new System.Drawing.Point(736, 402);
-            this.btnDevolver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDevolver.Margin = new System.Windows.Forms.Padding(4);
             this.btnDevolver.Name = "btnDevolver";
             this.btnDevolver.Size = new System.Drawing.Size(93, 28);
             this.btnDevolver.TabIndex = 20;
@@ -149,9 +148,8 @@
             this.radioButton1.Location = new System.Drawing.Point(20, 189);
             this.radioButton1.Margin = new System.Windows.Forms.Padding(4);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(78, 21);
+            this.radioButton1.Size = new System.Drawing.Size(79, 21);
             this.radioButton1.TabIndex = 21;
-            this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Compra";
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
@@ -171,7 +169,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Devolucion";
             this.Text = "Devoluciones";
             this.Load += new System.EventHandler(this.Devolucion_Load);
