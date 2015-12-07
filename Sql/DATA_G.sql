@@ -2197,3 +2197,7 @@ GO
 
 
 /*select * from DATA_G.TOP5_CLIENTES_PUNTOS (00/06/2014)*/
+
+/*SELECT * FROM DATA_G.AERONAVE*/
+
+ /*select DATA_G.GET_ID_SERVICIO ('Turista')*/

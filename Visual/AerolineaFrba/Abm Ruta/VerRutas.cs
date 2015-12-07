@@ -45,6 +45,15 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void button3_Click(object sender, EventArgs e)
         {
+            DataGridViewRow d = null;
+            string codigo = d.Cells[1].ToString();
+            string precioEncomienda = d.Cells[2].ToString();
+            string precioPasaje = d.Cells[3].ToString();
+            string servicio = d.Cells[4].ToString();
+            string ciudadOrigen = d.Cells[5].ToString();
+            string ciudadDestino = d.Cells[6].ToString();
+
+            new AgregarRuta(codigo, precioEncomienda, precioPasaje, servicio, ciudadOrigen, ciudadDestino).Show(); //mandar todos los parametros.
 
         }
 

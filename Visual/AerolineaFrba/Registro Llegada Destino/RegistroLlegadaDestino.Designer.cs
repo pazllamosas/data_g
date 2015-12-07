@@ -43,14 +43,22 @@
             this.txtTipoServicio = new System.Windows.Forms.TextBox();
             this.txtFabricante = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtButPasillo = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtButVentana = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.txtCapacidadEncomienda = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.btnGuardar = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtHora = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtMinutos = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.btnConsultar = new System.Windows.Forms.Button();
+            this.txtFecha = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtCantButacas = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -182,44 +190,10 @@
             this.label5.TabIndex = 10;
             this.label5.Text = "Fabricante:";
             // 
-            // txtButPasillo
-            // 
-            this.txtButPasillo.Enabled = false;
-            this.txtButPasillo.Location = new System.Drawing.Point(457, 173);
-            this.txtButPasillo.Name = "txtButPasillo";
-            this.txtButPasillo.Size = new System.Drawing.Size(121, 20);
-            this.txtButPasillo.TabIndex = 13;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(315, 176);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(97, 13);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "Butacas en Pasillo:";
-            // 
-            // txtButVentana
-            // 
-            this.txtButVentana.Enabled = false;
-            this.txtButVentana.Location = new System.Drawing.Point(457, 201);
-            this.txtButVentana.Name = "txtButVentana";
-            this.txtButVentana.Size = new System.Drawing.Size(121, 20);
-            this.txtButVentana.TabIndex = 15;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(315, 204);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(107, 13);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "Butacas en Ventana:";
-            // 
             // txtCapacidadEncomienda
             // 
             this.txtCapacidadEncomienda.Enabled = false;
-            this.txtCapacidadEncomienda.Location = new System.Drawing.Point(457, 229);
+            this.txtCapacidadEncomienda.Location = new System.Drawing.Point(457, 200);
             this.txtCapacidadEncomienda.Name = "txtCapacidadEncomienda";
             this.txtCapacidadEncomienda.Size = new System.Drawing.Size(121, 20);
             this.txtCapacidadEncomienda.TabIndex = 17;
@@ -227,7 +201,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(315, 232);
+            this.label8.Location = new System.Drawing.Point(308, 203);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(143, 13);
             this.label8.TabIndex = 16;
@@ -236,7 +210,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(584, 232);
+            this.label9.Location = new System.Drawing.Point(584, 203);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(19, 13);
             this.label9.TabIndex = 18;
@@ -244,7 +218,6 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Enabled = false;
             this.btnGuardar.Image = global::AerolineaFrba.Properties.Resources.save;
             this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnGuardar.Location = new System.Drawing.Point(547, 327);
@@ -254,6 +227,113 @@
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(315, 67);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(93, 13);
+            this.label10.TabIndex = 21;
+            this.label10.Text = "fecha de Llegada:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(315, 98);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(87, 13);
+            this.label11.TabIndex = 22;
+            this.label11.Text = "hora de Llegada:";
+            // 
+            // txtHora
+            // 
+            this.txtHora.Location = new System.Drawing.Point(408, 95);
+            this.txtHora.Name = "txtHora";
+            this.txtHora.Size = new System.Drawing.Size(26, 20);
+            this.txtHora.TabIndex = 23;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(481, 98);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(10, 13);
+            this.label12.TabIndex = 24;
+            this.label12.Text = ":";
+            // 
+            // txtMinutos
+            // 
+            this.txtMinutos.Location = new System.Drawing.Point(497, 95);
+            this.txtMinutos.Name = "txtMinutos";
+            this.txtMinutos.Size = new System.Drawing.Size(26, 20);
+            this.txtMinutos.TabIndex = 25;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(529, 98);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(49, 13);
+            this.label13.TabIndex = 26;
+            this.label13.Text = "(minutos)";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(440, 98);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(39, 13);
+            this.label14.TabIndex = 27;
+            this.label14.Text = "(horas)";
+            // 
+            // btnConsultar
+            // 
+            this.btnConsultar.Image = global::AerolineaFrba.Properties.Resources.return_large;
+            this.btnConsultar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnConsultar.Location = new System.Drawing.Point(318, 121);
+            this.btnConsultar.Name = "btnConsultar";
+            this.btnConsultar.Size = new System.Drawing.Size(90, 25);
+            this.btnConsultar.TabIndex = 28;
+            this.btnConsultar.Text = "Consultar";
+            this.btnConsultar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnConsultar.UseVisualStyleBackColor = true;
+            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
+            // 
+            // txtFecha
+            // 
+            this.txtFecha.Location = new System.Drawing.Point(414, 64);
+            this.txtFecha.Name = "txtFecha";
+            this.txtFecha.Size = new System.Drawing.Size(90, 20);
+            this.txtFecha.TabIndex = 29;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(510, 67);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(116, 13);
+            this.label15.TabIndex = 30;
+            this.label15.Text = "(formato: dd/mm/aaaa)";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(315, 176);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(109, 13);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Cantidad de Butacas:";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
+            // 
+            // txtCantButacas
+            // 
+            this.txtCantButacas.Enabled = false;
+            this.txtCantButacas.Location = new System.Drawing.Point(457, 173);
+            this.txtCantButacas.Name = "txtCantButacas";
+            this.txtCantButacas.Size = new System.Drawing.Size(121, 20);
+            this.txtCantButacas.TabIndex = 13;
             // 
             // RegistroLlegadaDestino
             // 
@@ -262,13 +342,21 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnVolver;
             this.ClientSize = new System.Drawing.Size(634, 362);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.txtFecha);
+            this.Controls.Add(this.btnConsultar);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.txtMinutos);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.txtHora);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.txtCapacidadEncomienda);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.txtButVentana);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.txtButPasillo);
+            this.Controls.Add(this.txtCantButacas);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtFabricante);
             this.Controls.Add(this.label5);
@@ -309,13 +397,21 @@
         private System.Windows.Forms.TextBox txtTipoServicio;
         private System.Windows.Forms.TextBox txtFabricante;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtButPasillo;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtButVentana;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtCapacidadEncomienda;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnGuardar;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtHora;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txtMinutos;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button btnConsultar;
+        private System.Windows.Forms.TextBox txtFecha;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtCantButacas;
     }
 }
