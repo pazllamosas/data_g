@@ -64,9 +64,6 @@ namespace AerolineaFrba.Inicio
                     }
                 }
             
-                
-
-                // TODO logear usuario contra DB
             }
         }
 

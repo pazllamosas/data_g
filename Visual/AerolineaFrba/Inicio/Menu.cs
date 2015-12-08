@@ -27,16 +27,12 @@ namespace AerolineaFrba.Inicio
             btnGenerarViaje.Visible = false;
             btnTop5.Visible = false;
 
-            List<string> argumentos = new List<string>();
-            argumentos.Add(usuario);
+            string query = "SELECT R.IdRol, Descripcion FROM DATA_G.USUARIO U, DATA_G.USUARIOPORROL UR, DATA_G.ROL R WHERE USERNAME = " + usuario + " AND U.IdUsuario  = UR.IdUsuario AND R.IdRol = UR.IdRol AND R.ESTADO = 1 AND U.ESTADO = 1";
 
-            object[] valores = new Object[1];
-           
-
-            SqlDataReader Roles = Conexion.executeProcedureWithReader("DATA_G.GET_ROLES_USUARIO", argumentos, valores);
+            SqlDataReader Roles = Conexion.ejecutarQuery(query);
             while (Roles.Read())
             {
-                SqlDataReader Funcionalidades = Conexion.ejecutarQuery("DATA_G.GET_FUNCIONALIDADES_ROL(" + Roles.GetInt32(0) + ")");
+                SqlDataReader Funcionalidades = Conexion.ejecutarQuery("SELECT F.IdFuncionalidad, DescripcionFunc AS Funcionalidad FROM DATA_G.ROL_POR_FUNCIONALIDADES RF, DATA_G.FUNCIONALIDADES F WHERE IdRol = " Roles[0] " AND F.IdFuncionalidad = RF.IdFuncionalidad");
                 
                 if (Funcionalidades.HasRows)
                 {
