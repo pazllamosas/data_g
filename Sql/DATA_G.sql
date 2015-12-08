@@ -435,7 +435,8 @@ CREATE TABLE DATA_G.AERONAVE(
 	FechaReinicioDeServicio datetime NULL,
 	FechaBajaDefinitiva datetime NULL,
 	CantButacas int NULL,
-	IdEstado int FOREIGN KEY REFERENCES DATA_G.ESTADO DEFAULT 2
+	IdEstado int FOREIGN KEY REFERENCES DATA_G.ESTADO DEFAULT 2,
+	Ubicacion numeric(18,0) FOREIGN KEY REFERENCES DATA_G.CIUDAD
 )
 
 CREATE TABLE DATA_G.PERIODOFDS (
@@ -740,8 +741,8 @@ SELECT M.Aeronave_Matricula, M.Aeronave_Modelo, M.Aeronave_KG_Disponibles, M.Aer
 FROM gd_esquema.Maestra M, DATA_G.TIPODESERVICIO t
 WHERE M.Tipo_Servicio = t.Descripcion
 GROUP BY M.Aeronave_Matricula, M.Aeronave_Modelo, M.Aeronave_KG_Disponibles, M.Aeronave_Fabricante, t.IdServicio
-
 ORDER BY 1
+
 
 INSERT INTO DATA_G.VUELO(IdRuta,IdAeronave,FechaSalida,FechaLlegada,FechaEstimadaLlegada)
 SELECT DISTINCT R.IdRuta,
@@ -758,7 +759,20 @@ WHERE
 	AND (SELECT C2.CodigoCiudad FROM DATA_G.CIUDAD C2 WHERE M.Ruta_Ciudad_Destino = C2.Nombre) = R.Destino
 	AND M.Tipo_Servicio = ( SELECT Descripcion FROM DATA_G.TIPODESERVICIO  WHERE IdServicio = R.IdServicio)
 	  
-ORDER BY 2, 3, 4
+ORDER BY 2, 3
+
+
+
+UPDATE DATA_G.AERONAVE 
+	SET Ubicacion = R.Origen
+	FROM  DATA_G.AERONAVE A, DATA_G.VUELO V, DATA_G.RUTA R
+	WHERE  A.IdAeronave = V.IdAeronave
+	and R.IdRuta = (SELECT V.IdRuta WHERE A.IdAeronave = V.IdAeronave)
+		
+
+	
+
+					
 
 INSERT INTO DATA_G.TIPODETARJETA (Descripcion, cuotasMax)
 VALUES ('VISA', 18)
@@ -1549,14 +1563,15 @@ GO
 
 -- AERONAVE --
 
-CREATE PROCEDURE DATA_G.CREAR_AERONAVE (@MATRICULA NVARCHAR, @MODELO NVARCHAR, @KGDISP NUMERIC(18,0), @FABRICANTE NVARCHAR (255), @IDSERV INT, @CANTBUTACAS INT) AS
+CREATE PROCEDURE DATA_G.CREAR_AERONAVE (@MATRICULA NVARCHAR, @MODELO NVARCHAR, @KGDISP NUMERIC(18,0), @FABRICANTE NVARCHAR (255), @IDSERV INT, @CANTBUTACAS INT, @UBICACION INT) AS
 BEGIN 
 	IF (( NOT EXISTS (SELECT * FROM DATA_G.AERONAVE WHERE Matricula = @MATRICULA
 														AND Modelo = @MODELO
 														AND Fabricante = @FABRICANTE
-														AND IdServicio = @IDSERV )))
-		INSERT INTO DATA_G.AERONAVE (FechaDeAlta, Matricula, Modelo, KG_Disponibles, Fabricante, IdServicio, CantButacas)
-		VALUES (CAST ( GETDATE() AS DATETIME), @MATRICULA, @MODELO, @KGDISP, @FABRICANTE, @IDSERV, @CANTBUTACAS)
+														AND IdServicio = @IDSERV
+														AND Ubicacion = @UBICACION )))
+		INSERT INTO DATA_G.AERONAVE (FechaDeAlta, Matricula, Modelo, KG_Disponibles, Fabricante, IdServicio, CantButacas, Ubicacion)
+		VALUES (CAST ( GETDATE() AS DATETIME), @MATRICULA, @MODELO, @KGDISP, @FABRICANTE, @IDSERV, @CANTBUTACAS, @UBICACION)
 	ELSE
 		RAISERROR ('La Aeronave ya existe',16, 217) WITH SETERROR
 END
@@ -1653,6 +1668,8 @@ AS BEGIN
 END
 GO
 
+
+
 CREATE FUNCTION DATA_G.EXISTE_MATRICULA(@matricula nvarchar(255)) 
 	RETURNS int
 	AS
@@ -1724,6 +1741,7 @@ AS BEGIN
 	SET Millas = CAST(ROUND(Monto/10,1) AS decimal(10,0))
 	WHERE NroVuelo = @nrovuelo 
 	AND ( NOT EXISTS (SELECT NroCompra FROM DATA_G.DEVOLUCION))
+	
 END
 GO
 
