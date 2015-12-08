@@ -76,15 +76,22 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            DataGridViewRow d = null;
-            string matricula = d.Cells[2].ToString();
-            string modelo = d.Cells[3].ToString();
-            string espacioEncomienda = d.Cells[4].ToString();
-            string fabricante = d.Cells[5].ToString();
-            string servicio = d.Cells[6].ToString();
-            string cantidadButacas = d.Cells[7].ToString();
 
-            new AgregarAeronave(matricula, modelo, espacioEncomienda, fabricante, servicio, cantidadButacas).Show(); //mandar todos los parametros.
+            Int32 selectedRowCount = dgvAeronaves.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount > 0 && selectedRowCount < 2)
+            {
+                DataGridViewRow d = dgvAeronaves.SelectedRows[0];
+                string matricula = d.Cells[2].ToString();
+                string modelo = d.Cells[3].ToString();
+                string espacioEncomienda = d.Cells[4].ToString();
+                string fabricante = d.Cells[5].ToString();
+                string servicio = d.Cells[6].ToString();
+                string cantidadButacas = d.Cells[7].ToString();
+            }
+
+
+
+            FormProvider.AgregarAeronave(matricula, modelo, espacioEncomienda, fabricante, servicio, cantidadButacas).Show(); //mandar todos los parametros.
 
         }
 

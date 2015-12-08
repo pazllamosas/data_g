@@ -233,6 +233,11 @@ namespace AerolineaFrba.Canje_Millas
 
             cmd.ExecuteNonQuery();
         }
+
+        private void txtCostoTotal_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
