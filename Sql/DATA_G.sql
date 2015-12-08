@@ -556,40 +556,39 @@ VALUES ('Cliente')
 
 SET IDENTITY_INSERT DATA_G.FUNCIONALIDADES ON
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (0,'Crear acceso usuario')
+VALUES (0,'Ver Ciudades')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (1,'Modificar acceso usuario')
+VALUES (1,'Alta ruta')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (2,'Eliminar acceso usuario')
+VALUES (2,'Modificar Ruta')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (3,'Logueo') --FUNCIONALIDAD ESPECIAL
+VALUES (3,'Baja ruta')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (4,'Crear origen y destino viaje')
+VALUES (4,'Alta aeronave')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (5,'Modificar origen y destino viaje')
+VALUES (5,'Modificar aeronave')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (6,'Dar de baja origen y destino viaje')
+VALUES (6,'Baja aeronave')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (7,'Incorporar aeronave')
+VALUES (7,'Alta Rol')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (8,'Modificar aeronave')
+VALUES (8,'Modificar Rol')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (9,'Dar de baja aeronave')
+VALUES (9,'Baja Rol')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (10,'Confeccionar ruta de viaje disponible')
+VALUES (10,'Canjear Millas')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
 VALUES (11,'Compra de pasajes/encomiendas')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
 VALUES (12,'Registro de llegada destino')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (13,'Cancelacion/Devolucion de pasaje y/o encomienda')
+VALUES (13,'Devolucion de pasaje y/o encomienda')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
 VALUES (14,'Consulta de millas de pasajero frecuente')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
-VALUES (15,'Canje de millas de pasajero frecuente')
+VALUES (15,'Generar Viaje')
 INSERT INTO DATA_G.FUNCIONALIDADES(IdFuncionalidad,DescripcionFunc)
 VALUES (16,'Consulta TOP 5')
-/**faltan mas??**/
 SET IDENTITY_INSERT DATA_G.FUNCIONALIDADES OFF
 
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
@@ -627,7 +626,7 @@ VALUES(14,2)
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
 VALUES(15,1)
 INSERT INTO DATA_G.ROL_POR_FUNCIONALIDADES
-VALUES(16,2)
+VALUES(16,1)
 
 
 
