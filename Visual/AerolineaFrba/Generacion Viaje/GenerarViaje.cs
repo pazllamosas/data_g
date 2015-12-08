@@ -19,6 +19,17 @@ namespace AerolineaFrba.Generacion_Viaje
             InitializeComponent();
         }
 
+        public void EditarGenerarViaje(string matricula, string modelo, string espacioEncomienda, string fabricante, string servicio, string cantidadButacas, string ubicacion) //mandar todos los parametros para completar los texbox 
+        {
+          // dgvAeronave txtMatricula.Text = matricula; //asignar los parametros a los text
+          // dgvAeronave txtModelo.Text = modelo;
+          // dgvAeronave txtEspacioEncomienda.Text = espacioEncomienda;
+          // dgvAeronave txtFabricante.Text = fabricante;
+           //dgvAeronave txtCantButacas.Text = cantidadButacas;
+           //dgvAeronave cmbTipoServicio.Text = servicio;
+            dgvAeronave.Rows.Add(matricula, modelo, espacioEncomienda, fabricante, servicio, cantidadButacas, ubicacion);
+        }
+
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Hide();

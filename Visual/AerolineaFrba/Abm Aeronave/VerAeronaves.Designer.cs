@@ -51,6 +51,7 @@
             this.aeroFechaReinicioDeServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSeleccionar = new System.Windows.Forms.Button();
             this.btnDarBaja = new System.Windows.Forms.Button();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAeronaves)).BeginInit();
             this.SuspendLayout();
@@ -157,7 +158,8 @@
             this.aeroEstado,
             this.aeroBajaPorFueraServicio,
             this.aeroFechaFueraDeServicio,
-            this.aeroFechaReinicioDeServicio});
+            this.aeroFechaReinicioDeServicio,
+            this.Column1});
             this.dgvAeronaves.Location = new System.Drawing.Point(12, 85);
             this.dgvAeronaves.Name = "dgvAeronaves";
             this.dgvAeronaves.Size = new System.Drawing.Size(610, 264);
@@ -244,6 +246,11 @@
             this.btnDarBaja.UseVisualStyleBackColor = true;
             this.btnDarBaja.Click += new System.EventHandler(this.btnDarBaja_Click);
             // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Ubicación";
+            this.Column1.Name = "Column1";
+            // 
             // VerAeronaves
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -295,5 +302,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn aeroBajaPorFueraServicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn aeroFechaFueraDeServicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn aeroFechaReinicioDeServicio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
     }
 }
