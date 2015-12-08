@@ -168,8 +168,11 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             string matricula = txtMatricula.Text;
             string origen = cmbAeropuertoOrigen.Text;
             string destino = cmbAeropuertoDestino.Text;
+            string fabricante = txtFabricante.Text;
+            string fechaLlegada = txtFecha.Text;
+            string[] componentesFecha = fechaLlegada.Split('/');
 
-            string query3 = "SELECT NroVuelo FROM DATA_G.VUELO AS vuelo, DATA_G.AERONAVE AS aeronave, DATA_G.RUTA AS ruta, DATA_G.CIUDAD AS ciudad, DATA_G.CIUDAD AS ciudad2 WHERE aeronave.matricula = '" + matricula + "' AND vuelo.IdAeronave = aeronave.IdAeronave AND (ciudad.Nombre = '" + origen + "' AND (ruta.Origen = ciudad.CodigoCiudad) ) AND (ciudad2.Nombre = '" + destino + "' AND (ruta.Destino = ciudad2.codigoCiudad) ) AND ruta.IdRuta = vuelo.IdRuta";
+            string query3 = "SELECT NroVuelo FROM DATA_G.VUELO AS vuelo, DATA_G.AERONAVE AS aeronave, DATA_G.RUTA AS ruta, DATA_G.CIUDAD AS ciudad, DATA_G.CIUDAD AS ciudad2 WHERE aeronave.matricula = '" + matricula + "' AND aeronave.Fabricante = '" + fabricante + "' AND vuelo.IdAeronave = aeronave.IdAeronave AND (ciudad.Nombre = ' " + origen + "' AND (ruta.Origen = ciudad.CodigoCiudad) ) AND (ciudad2.Nombre = ' " + destino + "' AND (ruta.Destino = ciudad2.codigoCiudad) ) AND ruta.IdRuta = vuelo.IdRuta AND aeronave.IdServicio = ruta.IdServicio";
             SqlDataReader reader3 = Conexion.ejecutarQuery(query3);
             reader3.Read();
             string NroVuelo = reader3["NroVuelo"].ToString();

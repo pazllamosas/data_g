@@ -86,7 +86,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
                 if (this.validacionDatos(txtMatricula.Text, txtModelo.Text, kg_disponibles, txtFabricante.Text, cmbTipoServicio.Text, cantButacas))
                 {
-                    query = "SELECT * DATA_G.AERONAVE WHERE Matricula = '" + txtMatricula.Text +"' AND Modelo = '"+ txtModelo.Text + "'AND Fabricante = '" + txtFabricante.Text + "' AND IdServicio = " + (idServicio.ToString());
+                    query = "SELECT * FROM DATA_G.AERONAVE WHERE Matricula = '" + txtMatricula.Text +"' AND Modelo = '"+ txtModelo.Text + "'AND Fabricante = '" + txtFabricante.Text + "' AND IdServicio = " + (idServicio.ToString());
                     reader = Conexion.ejecutarQuery(query);
                     if (reader.Read())
                     {
