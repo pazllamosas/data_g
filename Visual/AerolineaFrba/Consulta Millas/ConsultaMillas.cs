@@ -50,25 +50,32 @@ namespace AerolineaFrba.Consulta_Millas
             string query = "SELECT IdCli FROM DATA_G.CLIENTE WHERE DNI = '" + txtDni.Text + "'";
 
             SqlDataReader reader = Conexion.ejecutarQuery(query);
-            reader.Read();
-            int idCliente = int.Parse(reader["IdCli"].ToString());
-            reader.Close();
-
-            if (idCliente > 0)
+            if (reader.Read())
             {
-
-                query = "SELECT * FROM DATA_G.MILLAS WHERE IdCliente = " + idCliente.ToString() ;
-                reader = Conexion.ejecutarQuery(query);
-                while(reader.Read()) {
-                    dgvDetalle.Rows.Add(reader["Fecha"].ToString(), reader["Descripcion"].ToString(), reader["HistorialMillas"].ToString());
-                }
-                
+                string idCliente = reader["IdCli"].ToString();
                 reader.Close();
 
+                    query = "SELECT * FROM DATA_G.MILLAS WHERE IdCliente = " + idCliente.ToString();
+                    reader = Conexion.ejecutarQuery(query);
+
+                    if (reader.Read())
+                    {
+                        dgvDetalle.Rows.Add(reader["Fecha"].ToString(), reader["Descripcion"].ToString(), reader["HistorialMillas"].ToString());
+
+                        while (reader.Read())
+                        {
+                            dgvDetalle.Rows.Add(reader["Fecha"].ToString(), reader["Descripcion"].ToString(), reader["HistorialMillas"].ToString());
+                        }
+                    }
+                    else {
+                        MessageBox.Show("¡El cliente no tiene millas acumuladas!");
+                    }
+                    reader.Close();
             }
             else
             {
-                MessageBox.Show("DNI incorrecto");
+                reader.Close();
+                MessageBox.Show("Ese DNI no corresponde a ningún cliente. Intentá de nuevo, pero ahora tipeando bien.");
             }
         }
 
