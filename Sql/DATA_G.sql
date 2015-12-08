@@ -2198,6 +2198,38 @@ GO
 
 /*select * from DATA_G.TOP5_CLIENTES_PUNTOS (00/06/2014)*/
 
-/*SELECT * FROM DATA_G.AERONAVE*/
+/*
+SELECT * FROM DATA_G.AERONAVE
+SELECT * FROM DATA_G.RUTA
+SELECT * FROM DATA_G.VUELO
+SELECT * FROM DATA_G.CIUDAD
 
  /*select DATA_G.GET_ID_SERVICIO ('Turista')*/
+
+ SELECT NroVuelo FROM DATA_G.VUELO AS vuelo, DATA_G.AERONAVE AS aeronave, DATA_G.RUTA AS ruta, DATA_G.CIUDAD AS ciudad, DATA_G.CIUDAD AS ciudad2 WHERE aeronave.matricula = 'ASQ-169' AND aeronave.Fabricante = 'Airbus' AND vuelo.IdAeronave = aeronave.IdAeronave AND (ciudad.Nombre = ' Nueva York' AND (ruta.Origen = ciudad.CodigoCiudad) ) AND (ciudad2.Nombre = ' Toronto' AND (ruta.Destino = ciudad2.codigoCiudad) ) AND ruta.IdRuta = vuelo.IdRuta AND aeronave.IdServicio = ruta.IdServicio AND vuelo.FechaEstimadaLlegada =
+
+ SELECT IdRuta FROM DATA_G.CIUDAD AS ciudad, DATA_G.RUTA AS ruta WHERE ((ruta.Destino = ciudad.CodigoCiudad) AND  ciudad.Nombre = ' Toronto' )
+
+ select * from DATA_G.CIUDAD where Nombre = ' Nueva York'
+
+ /*Aero*/
+ matriculas:    ASQ-169 || BZD-177    || DBC-748 || DPK-412
+ fabricantes:   Airbus  || Bombardier || Airbus  || Bombardier
+ IdServicio:      3     ||     1      ||    1    ||    1
+ 
+ /*Ruta*/
+ IdRuta:         58    ||    11     ||    20    ||    17   
+ IdServicio:     3     ||    1      ||    1     ||    1                                    IDruta -> 58
+ IdOrigan:       21    ||    21     ||    29    ||    22                                   IDAeronave ->1 
+ IdDestino:      32    ||    25     ||    21    ||    21                                   matricula -> ASQ-169
+                                                                                           fabricante -> Airbus
+ /*VUELO*/   
+ NroVuelo:      1   ||   270   ||    531   ||    828                                       origen ->  Nueva York
+ IdRuta:        58  ||   11    ||    20    ||    17                                        destino -> Toronto
+ IdAeronave:    1   ||    2    ||     3    ||    4                                         NroVuelo que tira -> 1,3,73,78,98,105,133,143,167,168,199,207
+
+ /*CIUDAD*/                                                                           FechaEstimadaLlegada -> 2016-02-02 16:00:00.000
+ idciudad:   21        ||  22      ||   25          ||   29   ||   32
+ nombre:    Nueva York ||  París   || San Francisco || Sídney || Toronto
+
+ */
