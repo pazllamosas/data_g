@@ -70,6 +70,12 @@ namespace AerolineaFrba.Abm_Ruta
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
+            bool resultado = funciones.permiteNumeros(txtPrecioEncomienda.Text);
+            if (!resultado)
+            {
+                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            btnGuardar.Enabled = validacion(); 
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -298,11 +304,23 @@ namespace AerolineaFrba.Abm_Ruta
         private void txtPrecioPasaje_TextChanged(object sender, EventArgs e)
         {
 
+            bool resultado = funciones.permiteNumeros(txtPrecioPasaje.Text);
+            if (!resultado)
+            {
+                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            btnGuardar.Enabled = validacion(); 
         }
 
         private void txtCodigo_TextChanged(object sender, EventArgs e)
         {
 
+            bool resultado = funciones.permiteNumeros(txtCodigo.Text);
+            if (!resultado)
+            {
+                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            btnGuardar.Enabled = validacion(); 
         }
 
         private void label7_Click(object sender, EventArgs e)

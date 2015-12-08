@@ -28,23 +28,23 @@ namespace AerolineaFrba.Abm_Aeronave
             this.txtFabricante.Text = fabricante;
             this.txtCantButacas.Text = cantidadButacas;
 
-            int i;                                 //buscar como comparar el parametro con el combo box
-            int cantidad = int.Parse(cmbOrigen.Size.ToString());
-            for (i = 0; i < cantidad; i++)    
-            {
-                cmbOrigen.SelectedIndex = i;
-             //   if (cmbOrigen.Text == nombre) //nombre es el parametro
-                    break;
-            }
+            //int i;                                 //buscar como comparar el parametro con el combo box
+            //int cantidad = int.Parse(cmbOrigen.Size.ToString());
+            //for (i = 0; i < cantidad; i++)    
+            //{
+            //    cmbOrigen.SelectedIndex = i;
+            // //   if (cmbOrigen.Text == nombre) //nombre es el parametro
+            //        break;
+            //}
 
-            int j;
-            int cantidad2 = int.Parse(this.cmbTipoServicio.Size.ToString());
-            for (j = 0; j < cantidad2; j++)
-            {
-                this.cmbTipoServicio.SelectedIndex = j;
-                if (cmbTipoServicio.Text == servicio)
-                    break;
-            }
+            //int j;
+            //int cantidad2 = int.Parse(this.cmbTipoServicio.Size.ToString());
+            //for (j = 0; j < cantidad2; j++)
+            //{
+            //    this.cmbTipoServicio.SelectedIndex = j;
+            //    if (cmbTipoServicio.Text == servicio)
+            //        break;
+            //}
 
         }
 
@@ -56,8 +56,25 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void AgregarAeronave_Load(object sender, EventArgs e)
         {
-            Conexion.cargarCmb("Nombre", "CIUDAD", cmbOrigen);
-            Conexion.cargarCmb("Descripcion", "TIPODESERVICIO", cmbTipoServicio);
+            //Conexion.cargarCmb("Nombre", "CIUDAD", cmbOrigen);
+            //Conexion.cargarCmb("Descripcion", "TIPODESERVICIO", cmbTipoServicio);
+
+            cmbOrigen.ValueMember = "CodigoCiudad";
+            cmbOrigen.DisplayMember = "Nombre";
+            cmbOrigen.DataSource = Conexion.cargarTablaConsulta("DATA_G.GET_CIUDADES");
+
+            cmbTipoServicio.ValueMember = "IdServicio";
+            cmbTipoServicio.DisplayMember = "Descripcion";
+            cmbTipoServicio.DataSource = Conexion.cargarTablaConsulta("DATA_G.GET_SERVICIO");
+
+            this.txtEspacioEncomienda.Clear();
+            this.txtCantButacas.Clear();
+            this.txtModelo.Clear();
+            this.txtFabricante.Clear();
+            this.txtMatricula.Clear();
+            this.cmbTipoServicio.SelectedIndex = -1;
+            this.cmbOrigen.SelectedIndex = -1;
+
         }
 
         private void cmbOrigen_SelectedIndexChanged(object sender, EventArgs e)
@@ -72,48 +89,53 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+           if (this.validacion())
+           {
             double kg_disponibles = double.Parse(txtEspacioEncomienda.Text);
 
             double cantButacas = double.Parse(txtCantButacas.Text);
 
-            string query = "SELECT * FROM DATA_G.TIPODESERVICIO WHERE Descripcion = '" + cmbTipoServicio.Text + "'";
+            string modelo = txtModelo.Text;
 
-            SqlDataReader reader = Conexion.ejecutarQuery(query);
-            if (reader.Read())
+            string fabricante = txtFabricante.Text;
+
+            string matricula = txtMatricula.Text;
+
+            Int32 descripcionServicio = Convert.ToInt32(cmbTipoServicio.SelectedValue);
+
+            Int32 origen = Convert.ToInt32(cmbOrigen.SelectedValue);
+
+            if (this.validacionDatos(matricula, modelo, kg_disponibles, fabricante, descripcionServicio, cantButacas))
             {
-                int idServicio = int.Parse(reader["IdServicio"].ToString());
-                reader.Close();
 
-                if (this.validacionDatos(txtMatricula.Text, txtModelo.Text, kg_disponibles, txtFabricante.Text, cmbTipoServicio.Text, cantButacas))
+
+                bool resultado = Conexion.executeProcedure("DATA_G.CREAR_AERONAVE", Conexion.generarArgumentos("@MATRICULA", "@MODELO", "@KGDISP",
+                 "@FABRICANTE", "@IDSERV", "@CANTBUTACAS", "@UBICACION"), matricula, modelo, kg_disponibles, fabricante, descripcionServicio, cantButacas, origen);
+
+
+                if (resultado)
                 {
-                    query = "SELECT * FROM DATA_G.AERONAVE WHERE Matricula = '" + txtMatricula.Text +"' AND Modelo = '"+ txtModelo.Text + "'AND Fabricante = '" + txtFabricante.Text + "' AND IdServicio = " + (idServicio.ToString());
-                    reader = Conexion.ejecutarQuery(query);
-                    if (reader.Read())
-                    {
-                        MessageBox.Show("Ya existe una aeronave con esos datos.");
-                    }
-                    else {
-                        query = "INSERT INTO DATA_G.AERONAVE (FechaDeAlta, Matricula, Modelo, KG_Disponibles, Fabricante, IdServicio, CantButacas) VALUES (CAST ( GETDATE() AS DATETIME), '" +txtMatricula.Text+ "', '" +txtModelo.Text+ "', " +txtEspacioEncomienda.Text+ ", '"+ txtFabricante.Text+"', "+ idServicio.ToString() +", "+txtCantButacas.Text+")";
-                        int rowCount = Conexion.ejecutarNonQuery(query);
+                    MessageBox.Show("Aeronave creada exitosamente");
 
-                        if (rowCount == 1)
-                        {
-                            MessageBox.Show("Ruta creada exitosamente");
-
-                            this.txtMatricula.Clear();
-                            this.txtModelo.Clear();
-                            this.txtEspacioEncomienda.Clear();
-                            this.txtFabricante.Clear();
-                            this.txtCantButacas.Clear();
-                            this.cmbTipoServicio.SelectedIndex = -1;
-
-                        }
-                    }
-
+                    this.txtEspacioEncomienda.Clear();
+                    this.txtCantButacas.Clear();
+                    this.txtModelo.Clear();
+                    this.txtFabricante.Clear();
+                    this.txtMatricula.Clear();
+                    this.cmbTipoServicio.SelectedIndex = -1;
+                    this.cmbOrigen.SelectedIndex = -1;
                 }
             }
-
         }
+           else
+            {
+                MessageBox.Show("Completar todos los campos");
+            }
+        }
+
+
+
+          
 
         private void txtCantButacasPasillo_TextChanged(object sender, EventArgs e)
         {
@@ -150,10 +172,12 @@ namespace AerolineaFrba.Abm_Aeronave
                 return false;
             if (this.cmbTipoServicio.SelectedIndex == -1)
                 return false;
-            return true;
+            if (this.cmbOrigen.SelectedIndex == -1)
+                return false;
+           return true;
              }
 
-        private bool validacionDatos(string matricula, string modelo, double kg_disponibles, string fabricante, string descripcionServicio, double cantButacas)
+        private bool validacionDatos(string matricula, string modelo, double kg_disponibles, string fabricante, Int32 descripcionServicio, double cantButacas)
         {
             if (kg_disponibles == 0)
             {
@@ -167,7 +191,7 @@ namespace AerolineaFrba.Abm_Aeronave
                 this.txtCantButacas.Clear();
                 return false;
             }
-            if (matriculaValida(matricula))
+            if (!matriculaValida(matricula))
             {
                 this.txtMatricula.Clear();
                 return false;
