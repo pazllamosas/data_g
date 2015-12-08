@@ -120,7 +120,6 @@ namespace AerolineaFrba.Registro_Llegada_Destino
                     string query1 = "SELECT * FROM DATA_G.AERONAVE";
 
                     SqlDataReader reader1 = Conexion.ejecutarQuery(query1);
-                    reader1.Read();
 
                     string idServicio = "fallo";
                     string fabricante = "fallo";
@@ -166,7 +165,28 @@ namespace AerolineaFrba.Registro_Llegada_Destino
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            string matricula = txtMatricula.Text;
+            string origen = cmbAeropuertoOrigen.Text;
+            string destino = cmbAeropuertoDestino.Text;
 
+            string query3 = "SELECT NroVuelo FROM DATA_G.VUELO AS vuelo, DATA_G.AERONAVE AS aeronave, DATA_G.RUTA AS ruta, DATA_G.CIUDAD AS ciudad, DATA_G.CIUDAD AS ciudad2 WHERE aeronave.matricula = '" + matricula + "' AND vuelo.IdAeronave = aeronave.IdAeronave AND (ciudad.Nombre = '" + origen + "' AND (ruta.Origen = ciudad.CodigoCiudad) ) AND (ciudad2.Nombre = '" + destino + "' AND (ruta.Destino = ciudad2.codigoCiudad) ) AND ruta.IdRuta = vuelo.IdRuta";
+            SqlDataReader reader3 = Conexion.ejecutarQuery(query3);
+            reader3.Read();
+            string NroVuelo = reader3["NroVuelo"].ToString();
+            reader3.Close();
+            string fechallegada = txtFecha.Text;
+            string hora = txtHora.Text;
+            string minutos = txtMinutos.Text;
+
+            string timeofday = "am";
+            if (int.Parse(hora) > 12)
+            {
+            timeofday = "pm";
+            hora = (int.Parse(hora) - 12).ToString();
+            }
+
+            string query4 = "DATA_G.REGISTRO_LLEGADA('"+NroVuelo+"', '"+ fechallegada+" "+hora+":"+minutos+":00:000"+" "+timeofday+"')";
+        
         }
     }
 }

@@ -37,12 +37,15 @@
 2-Que el boton guardar de elegir butaca cargue en el dgvPasajes los datos del pasajero y los de la butaca
 3-Que un boton recolecte los datos del dgvPasajes y dgvVuelos para generar el Pasaje
 4-una pantalla mas para el tipo de pago
+
+(CASI COMPLETO SOLO FALTA SUPER QUERRY LOCA)
 ----------------------
 
 ---CONSULTAR MILLAS--- (query)
 0-agregar un txt columna
 1-Crear las columnas necesarias en el dgvDetalle (que se necesita mostrar) (fecha de compra, cantidad de millas) (fecha de canje)
 2-Que el boton consultar cargue lo necesario en el dgvDetalle.
+(COMPLETO SOLO FALTA TESTEAR CASO CON MILLAS)
 ----------------------
 
 ---DEVOLUCION--------- (SKYPE)(verificar si esta bien planteada la ventana)
@@ -71,7 +74,7 @@ Verificar las funcionalidades de un rol al loguear y habilitar los botones segun
 -----------------------
 
 --REGISTRO DE LLEGADA DESTINO--
-1-Que guardar guarde los datos ingresados- (falta query).
+1-Que guardar guarde los datos ingresados- (SOLO FALTA QUERY SUCIA :().
 -------------------------------
 
 Es mucho y seguro se encuentra alguna cosita más...
@@ -86,3 +89,6 @@ Validaciones:
 -No fecha llegada < fecha salida.
 -No DNI duplicados.
 -No registrar millas antes que el vuelo.
+
+
+(juli soporte)
