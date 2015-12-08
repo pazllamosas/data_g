@@ -152,6 +152,7 @@
             // 
             // textBox1
             // 
+            this.textBox1.Enabled = false;
             this.textBox1.Location = new System.Drawing.Point(452, 381);
             this.textBox1.MaxLength = 8;
             this.textBox1.Name = "textBox1";
@@ -161,6 +162,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Enabled = false;
             this.label2.Location = new System.Drawing.Point(412, 384);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 13);

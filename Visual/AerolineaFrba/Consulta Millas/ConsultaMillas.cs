@@ -47,6 +47,12 @@ namespace AerolineaFrba.Consulta_Millas
 
         private void btnConsultar_Click(object sender, EventArgs e)
         {
+            if (txtDni.Text.Length < 1) {
+                MessageBox.Show("Por favor, completá el DNI.");
+            }
+            else if (txtDni.Text.Length == 1) {
+                txtDni.Text = txtDni.Text.ToString();
+            }
             string query = "SELECT IdCli FROM DATA_G.CLIENTE WHERE DNI = '" + txtDni.Text + "'";
 
             SqlDataReader reader = Conexion.ejecutarQuery(query);
@@ -60,12 +66,16 @@ namespace AerolineaFrba.Consulta_Millas
 
                     if (reader.Read())
                     {
+                        int total = (int)reader["HistorialMillas"];
                         dgvDetalle.Rows.Add(reader["Fecha"].ToString(), reader["Descripcion"].ToString(), reader["HistorialMillas"].ToString());
 
                         while (reader.Read())
                         {
+                            total = total + (int)reader["HistorialMillas"];
                             dgvDetalle.Rows.Add(reader["Fecha"].ToString(), reader["Descripcion"].ToString(), reader["HistorialMillas"].ToString());
                         }
+
+                        textBox1.Text = total.ToString();
                     }
                     else {
                         MessageBox.Show("¡El cliente no tiene millas acumuladas!");
