@@ -51,7 +51,7 @@
             this.btnCancelar.Image = global::AerolineaFrba.Properties.Resources.cancel;
             this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCancelar.Location = new System.Drawing.Point(449, 165);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(100, 28);
             this.btnCancelar.TabIndex = 4;
@@ -66,7 +66,7 @@
             this.btnGuardar.Image = global::AerolineaFrba.Properties.Resources.save;
             this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnGuardar.Location = new System.Drawing.Point(16, 165);
-            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(100, 28);
             this.btnGuardar.TabIndex = 5;
@@ -113,7 +113,7 @@
             // txtDni
             // 
             this.txtDni.Location = new System.Drawing.Point(156, 37);
-            this.txtDni.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDni.Margin = new System.Windows.Forms.Padding(4);
             this.txtDni.Name = "txtDni";
             this.txtDni.Size = new System.Drawing.Size(143, 22);
             this.txtDni.TabIndex = 10;
@@ -123,7 +123,7 @@
             // 
             this.cmbProducto.FormattingEnabled = true;
             this.cmbProducto.Location = new System.Drawing.Point(156, 69);
-            this.cmbProducto.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbProducto.Margin = new System.Windows.Forms.Padding(4);
             this.cmbProducto.Name = "cmbProducto";
             this.cmbProducto.Size = new System.Drawing.Size(160, 24);
             this.cmbProducto.TabIndex = 11;
@@ -152,7 +152,7 @@
             // txtCantidad
             // 
             this.txtCantidad.Location = new System.Drawing.Point(403, 69);
-            this.txtCantidad.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCantidad.Margin = new System.Windows.Forms.Padding(4);
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.Size = new System.Drawing.Size(45, 22);
             this.txtCantidad.TabIndex = 14;
@@ -171,10 +171,11 @@
             // 
             this.txtCostoTotal.Enabled = false;
             this.txtCostoTotal.Location = new System.Drawing.Point(156, 102);
-            this.txtCostoTotal.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCostoTotal.Margin = new System.Windows.Forms.Padding(4);
             this.txtCostoTotal.Name = "txtCostoTotal";
             this.txtCostoTotal.Size = new System.Drawing.Size(143, 22);
             this.txtCostoTotal.TabIndex = 20;
+            this.txtCostoTotal.TextChanged += new System.EventHandler(this.txtCostoTotal_TextChanged);
             // 
             // CanjeMillas
             // 
@@ -193,7 +194,7 @@
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnCancelar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CanjeMillas";
             this.Text = "Canje de Millas";
             this.Load += new System.EventHandler(this.CanjeMillas_Load);
