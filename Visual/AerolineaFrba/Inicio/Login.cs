@@ -40,15 +40,17 @@ namespace AerolineaFrba.Inicio
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string usuario = txtUsuario.Text;
             if (chkInvitado.Checked)
             {
                 loginMode = "invitado";
                 this.Hide();
                 FormProvider.MainMenu.Show();
+                FormProvider.MainMenu.habilitarFuncionalidadesPorRol(usuario);
             }
             else
             {
-                string usuario = txtUsuario.Text;
+                
                 string password =  txtContrasenia.Text;
                 string contrasenia = funciones.SHA256Encripta(this.password);
                 if (usuarioValido(usuario) )
