@@ -72,31 +72,21 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-
-            string matricula = txtMatricula.Text;
-
-            string modelo = txtModelo.Text;
-
             double kg_disponibles = double.Parse(txtEspacioEncomienda.Text);
 
-            string fabricante = txtFabricante.Text;
-
-            Int32 descripcionServicio = int.Parse(cmbTipoServicio.Text);
-
             double cantButacas = double.Parse(txtCantButacas.Text);
-            
-            string query = "SELECT * DATA_G.TIPODESERVICIO WHERE Descripcion = '" + descripcionServicio + "'";
+
+            string query = "SELECT * DATA_G.TIPODESERVICIO WHERE Descripcion = '" + cmbTipoServicio.Text + "'";
 
             SqlDataReader reader = Conexion.ejecutarQuery(query);
             if (reader.Read())
             {
-                string idServicio = reader["IdServicio"].ToString();
+                int idServicio = int.Parse(reader["IdServicio"].ToString());
                 reader.Close();
 
-                if (this.validacionDatos(matricula, modelo, kg_disponibles, fabricante, descripcionServicio, cantButacas))
+                if (this.validacionDatos(txtMatricula.Text, txtModelo.Text, kg_disponibles, txtFabricante.Text, cmbTipoServicio.Text, cantButacas))
                 {
-                    bool resultado = Conexion.executeProcedure("DATA_G.CREAR_AERONAVE", Conexion.generarArgumentos("@matricula", "@modelo", "@kg_disponibles",
-                        "@fabricante", "@descripcionServicio", "@cantButacas"), matricula, modelo, kg_disponibles, fabricante, descripcionServicio, cantButacas);
+                    bool resultado = Conexion.executeProcedure("DATA_G.CREAR_AERONAVE", Conexion.generarArgumentos("@matricula", "@modelo", "@kg_disponibles", "@fabricante", "@descripcionServicio", "@cantButacas"), txtMatricula.Text, txtModelo.Text, kg_disponibles, txtFabricante.Text, idServicio, cantButacas);
 
                     if (resultado)
                     {
@@ -154,7 +144,7 @@ namespace AerolineaFrba.Abm_Aeronave
             return true;
              }
 
-        private bool validacionDatos(string matricula, string modelo, double kg_disponibles, string fabricante, int descripcionServicio, double cantButacas)
+        private bool validacionDatos(string matricula, string modelo, double kg_disponibles, string fabricante, string descripcionServicio, double cantButacas)
         {
             if (kg_disponibles == 0)
             {
