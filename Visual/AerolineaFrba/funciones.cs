@@ -52,14 +52,15 @@ namespace AerolineaFrba
         }
 
         //textBox solo permita numeros
-        internal static void permiteNumeros(KeyPressEventArgs e)
+        internal static bool permiteNumeros(KeyPressEventArgs e)
         {
-            if (!(char.IsNumber(e.KeyChar)) )
+            foreach (char c in s)
             {
-                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                e.Handled = true;
-                return;
+                if (!Char.IsDigit(c))
+                    MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return false;
             }
+            return true;
         }
 
         //textBox solo permita letras
