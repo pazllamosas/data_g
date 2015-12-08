@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace AerolineaFrba
 {
@@ -52,26 +53,26 @@ namespace AerolineaFrba
         }
 
         //textBox solo permita numeros
-        internal static bool permiteNumeros(KeyPressEventArgs e)
+        internal static bool permiteNumeros(string s)
         {
             foreach (char c in s)
             {
                 if (!Char.IsDigit(c))
-                    MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return false;
             }
             return true;
         }
 
         //textBox solo permita letras
-        internal static void permiteLetras(KeyPressEventArgs e)
+        internal static bool permiteLetras(string s)
         {
-            if (!(char.IsLetter(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+
+            foreach (char c in s)
             {
-                MessageBox.Show("Solo se permiten letras", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                e.Handled = true;
-                return;
+                 if (!Regex.IsMatch(s, @"^[a-zA-Z]+$"))
+                        return false;
             }
+            return true;
         }
 
         //fecha inicio sea menor a la fecha final

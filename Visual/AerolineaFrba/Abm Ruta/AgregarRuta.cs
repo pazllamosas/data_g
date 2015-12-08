@@ -213,12 +213,20 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void txtPrecioEncomienda_KeyPress(object sender, KeyPressEventArgs e)
         {
-            funciones.permiteNumeros(e);
+            bool resultado = funciones.permiteNumeros(txtPrecioEncomienda.Text);
+            if (!resultado)
+            {
+                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            };
         }
 
         private void txtPrecioPasaje_KeyPress(object sender, KeyPressEventArgs e)
         {
-            funciones.permiteNumeros(e);
+            bool resultado = funciones.permiteNumeros(txtPrecioPasaje.Text);
+            if (!resultado)
+            {
+                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private bool validacion()

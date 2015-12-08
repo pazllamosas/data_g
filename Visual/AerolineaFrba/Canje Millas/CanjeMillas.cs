@@ -20,12 +20,20 @@ namespace AerolineaFrba.Canje_Millas
 
         private void txtDni_KeyPress(object sender, KeyPressEventArgs e)
         {
-            funciones.permiteNumeros(e);
+            bool resultado = funciones.permiteNumeros(txtDni.Text);
+            if (!resultado)
+            {
+                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
         {
-            funciones.permiteNumeros(e);
+            bool resultado = funciones.permiteNumeros(txtCantidad.Text);
+            if (!resultado)
+            {
+                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)

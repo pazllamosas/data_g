@@ -137,12 +137,20 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void txtEspacioEncomienda_KeyPress(object sender, KeyPressEventArgs e)
         {
-            funciones.permiteNumeros(e);
+            bool resultado = funciones.permiteNumeros(txtEspacioEncomienda.Text);
+            if (!resultado)
+            {
+                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void txtCantButacas_KeyPress(object sender, KeyPressEventArgs e)
         {
-            funciones.permiteNumeros(e);
+            bool resultado = funciones.permiteNumeros(txtCantButacas.Text);
+            if (!resultado)
+            {
+                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private bool validacion()
