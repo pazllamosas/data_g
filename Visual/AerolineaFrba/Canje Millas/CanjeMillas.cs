@@ -114,30 +114,38 @@ namespace AerolineaFrba.Canje_Millas
                 {
                     Conexion.executeProcedure("DATA_G.MILLAS_GANADAS", Conexion.generarArgumentos("@dni"), dni);
                     Conexion.executeProcedure("DATA_G.MILLAS_CANJEADAS", Conexion.generarArgumentos("@dni"), dni);
+                    Conexion.executeProcedure("DATA_G.AFTER_MILLAS", Conexion.generarArgumentos("@dni"), dni);
                     string query = "SELECT DATA_G.GET_CLIENTE_DNI ('" + dni + "') AS id";
 
                     SqlDataReader reader = Conexion.ejecutarQuery(query);
                     reader.Read();
                     string idCliente = reader["id"].ToString();
                     reader.Close();
-
-                    bool resultado = Conexion.executeProcedure("DATA_G.ALTA_CANJE", Conexion.generarArgumentos("@idCliente", "@idProducto", "@cantidad"),
+                if( cantidadValida(cantidad, producto))
+                {
+                    if(millasValidas (idCliente, producto, cantidad))
+                    {
+                        bool resultado = Conexion.executeProcedure("DATA_G.ALTA_CANJE", Conexion.generarArgumentos("@idCliente", "@idProducto", "@cantidad"),
                         idCliente, producto, cantidad);
 
-                    if (resultado)
-                    {
-                        MessageBox.Show("Canje realizado");
-
+                        if (resultado)
+                        {
+                            MessageBox.Show("Canje realizado");
+                         deleteMillasAcum();
                         this.txtDni.Clear();
                         this.txtCantidad.Clear();
                         this.cmbProducto.SelectedIndex = -1;
 
+                        }
                     }
+                }
+
                 }
             }
             else
             {
                 MessageBox.Show("Completar todos los campos");
+                deleteMillasAcum();
             }
         }
 
@@ -174,5 +182,57 @@ namespace AerolineaFrba.Canje_Millas
             }
             return true;
         }
+
+        public Boolean cantidadValida(Int32 cantidad, Int32 producto)
+        {
+            string query = "SELECT DATA_G.MAYOR_CANTIDAD ('" + cantidad + "', '" + producto + "') AS id";
+
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+            reader.Read();
+            int respuesta = int.Parse(reader["id"].ToString());
+            reader.Close();
+
+            if (respuesta == 0)
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("No hay suficiente stock");
+                deleteMillasAcum();
+                return false;
+            }
+        }
+
+        public Boolean millasValidas(string cliente, Int32 producto, Int32 cantidad)
+        {
+            
+            string query = "SELECT DATA_G.MAS_MILLAS ('" + cliente + "', '" + producto + "', '" + cantidad + "') AS id";
+
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+            reader.Read();
+            int respuesta = int.Parse(reader["id"].ToString());
+            reader.Close();
+
+            if (respuesta == 0)
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("No tienes suficientes millas");
+                deleteMillasAcum();
+                return false;
+            }
+        }
+
+        public void deleteMillasAcum()
+        {
+            SqlCommand cmd = new SqlCommand("DATA_G.DELETE_MILLASACUMULADAS", Conexion.getSqlInstanceConnection());
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.ExecuteNonQuery();
+        }
     }
+
 }

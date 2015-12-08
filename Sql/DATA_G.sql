@@ -106,7 +106,10 @@ DROP TABLE #TEMP4
 
 
 -- DROP PROCEDURES Y FUNCTIONS 
-
+ IF OBJECT_ID('DATA_G.DELETE_MILLASACUMULADAS ') IS NOT NULL
+DROP PROCEDURE DATA_G.DELETE_MILLASACUMULADAS 
+ IF OBJECT_ID('DATA_G.AFTER_MILLAS') IS NOT NULL
+DROP PROCEDURE DATA_G.AFTER_MILLAS
 IF OBJECT_ID('DATA_G.GET_MILLASACUMULADAS') IS NOT NULL
 DROP PROCEDURE DATA_G.GET_MILLASACUMULADAS
 IF OBJECT_ID('DATA_G.GET_PRODUCTOS') IS NOT NULL
@@ -205,6 +208,10 @@ IF OBJECT_ID('DATA_G.GET_CIUDADES') IS NOT NULL
 DROP PROCEDURE DATA_G.GET_CIUDADES
 -------------- DROP FUNCTION ------------------------
 
+IF OBJECT_ID('DATA_G.MAYOR_CANTIDAD') IS NOT NULL
+DROP FUNCTION DATA_G.MAYOR_CANTIDAD
+IF OBJECT_ID('DATA_G.MAS_MILLAS') IS NOT NULL
+DROP FUNCTION DATA_G.MAS_MILLAS
 IF OBJECT_ID('DATA_G.EXISTE_COMPRA') IS NOT NULL
 DROP FUNCTION DATA_G.EXISTE_COMPRA
 IF OBJECT_ID('DATA_G.EXISTE_PASAJE') IS NOT NULL
@@ -358,7 +365,7 @@ CREATE TABLE DATA_G.CLIENTE (
 	Telefono numeric(18, 0),
 	Mail nvarchar(255),
 	Fecha_Nac datetime,
-	Rol int FOREIGN KEY REFERENCES DATA_G.ROL DEFAULT '1'
+	Rol int FOREIGN KEY REFERENCES DATA_G.ROL DEFAULT '2'
 )
 
 CREATE TABLE DATA_G.INTENTOS_LOGIN(
@@ -2077,15 +2084,17 @@ AS BEGIN
 END
 GO
 
-CREATE TRIGGER DATA_G.AFTER_MILLAS ON DATA_G.MILLAS AFTER INSERT AS
+CREATE PROCEDURE DATA_G.AFTER_MILLAS(@dni numeric (18,0)) AS
 BEGIN
 INSERT INTO DATA_G.MILLASACUMULADAS
 	SELECT C.IdCli,C.Dni, C.Apellido, C.Nombre, SUM (M.HistorialMillas) AS 'Millas' 
 		FROM DATA_G.CLIENTE C  
 		JOIN DATA_G.MILLAS M on C.IdCli = M.IdCliente
+							AND C.Dni = @dni
 		GROUP BY C.IdCli,C.Dni, C.Apellido, C.Nombre
 END
 GO
+
 
 GO
 CREATE PROCEDURE DATA_G.GET_MILLASACUMULADAS AS
@@ -2095,14 +2104,20 @@ END
 GO
 
 GO
+CREATE PROCEDURE DATA_G.DELETE_MILLASACUMULADAS AS
+BEGIN
+	DELETE DATA_G.MILLASACUMULADAS
+END
+GO
+
+GO
 CREATE PROCEDURE DATA_G.ALTA_CANJE (@idCliente int, @idProducto int, @cantidad int)
 AS BEGIN
 IF (( NOT EXISTS (SELECT * FROM DATA_G.PRODUCTO P, DATA_G.BENEFICIOS B, DATA_G.MILLASACUMULADAS MA WHERE P.IdProducto = @idProducto
 												AND P.IdProducto = B.IdProducto
 												AND B.IdCli = @idCliente
-												AND B.IdCli = MA.IdCli
-												AND P.Cantidad >= @cantidad 
-												AND P.CostoEnMillas <= MA.Millas)))
+												AND B.IdCli = MA.IdCli)))
+												
 	BEGIN
 		INSERT INTO DATA_G.BENEFICIOS(IdCli, IdProducto, Cantidad, FechaCanje)
 		VALUES (@idCliente, @idProducto, @cantidad, GETDATE())
@@ -2111,12 +2126,49 @@ IF (( NOT EXISTS (SELECT * FROM DATA_G.PRODUCTO P, DATA_G.BENEFICIOS B, DATA_G.M
 			WHERE IdProducto = @idProducto
 		
 	END
-ELSE
-		RAISERROR ('Las millas no alcanzan o no hay cantidad suficiente del producto',16, 217) WITH SETERROR
+
 END
 GO
+--DROP PROCEDURE DATA_G.ALTA_CANJE
+--declare @r numeric(18,0)
+--exec @r = DATA_G.ALTA_CANJE @idCliente = 1 , @idProducto = 2, @cantidad = 99999
+--PRINT @r
+--select * from DATA_G.BENEFICIOS
 
+CREATE FUNCTION DATA_G.MAYOR_CANTIDAD(@cantidad int, @idProducto int) 
+	RETURNS int
+	AS
+	BEGIN
+		DECLARE @resultado INT
+		
+		SELECT @resultado = COUNT(IdProducto) FROM DATA_G.PRODUCTO
+		WHERE IdProducto = @idProducto
+			AND Cantidad < @cantidad
+		RETURN @resultado
+	END
+GO
 
+--declare @r numeric(18,0)
+--exec @r = DATA_G.MAYOR_CANTIDAD @cantidad = 1, @idProducto = 1
+--PRINT @r
+
+CREATE FUNCTION DATA_G.MAS_MILLAS(@idCliente int, @idProducto int, @cantidad int) 
+	RETURNS int
+	AS
+	BEGIN
+		DECLARE @resultado INT
+		
+		SELECT @resultado = COUNT(IdCli) FROM DATA_G.PRODUCTO, DATA_G.MILLASACUMULADAS MA
+		WHERE IdProducto = @idProducto
+			AND MA.IdCli = @idCliente
+			AND (CostoEnMillas* @cantidad) > MA.Millas
+		RETURN @resultado
+	END
+GO
+
+--declare @r numeric(18,0)
+--exec @r = DATA_G.MAS_MILLAS @idCliente = 1, @idProducto = 1, @cantidad = 1
+--PRINT @r
 
 CREATE PROCEDURE DATA_G.GET_PRODUCTOS AS
 BEGIN
