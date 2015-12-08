@@ -26,53 +26,58 @@ namespace AerolineaFrba.Inicio
             btnDevolucion.Visible = false;
             btnGenerarViaje.Visible = false;
             btnTop5.Visible = false;
-            string query = "SELECT R.IdRol, Descripcion FROM DATA_G.USUARIO U, DATA_G.USUARIOPORROL UR, DATA_G.ROL R WHERE USERNAME = " + usuario + " AND U.IdUsuario  = UR.IdUsuario AND R.IdRol = UR.IdRol AND R.ESTADO = 1 AND U.ESTADO = 1";
-                SqlDataReader Roles = Conexion.ejecutarQuery(query);
             
-            while (Roles.Read())
-            {
+            
                 string idrol;
             if (loginmode != "invitado") {
+
+                string query = "SELECT R.IdRol, Descripcion FROM DATA_G.USUARIO U, DATA_G.USUARIOPORROL UR, DATA_G.ROL R WHERE USERNAME = '" + usuario + "' AND U.IdUsuario  = UR.IdUsuario AND R.IdRol = UR.IdRol AND R.ESTADO = 1 AND U.ESTADO = 1";
+                SqlDataReader Roles = Conexion.ejecutarQuery(query);
                 idrol = Roles[0].ToString();
+                while (Roles.Read())
+                {
+                    funcionalidadesParaElRol(idrol);
+                }
             }
             else {
                 idrol = "2";
+                funcionalidadesParaElRol(idrol);
             }
 
-                SqlDataReader Funcionalidades = Conexion.ejecutarQuery("SELECT F.IdFuncionalidad, DescripcionFunc AS Funcionalidad FROM DATA_G.ROL_POR_FUNCIONALIDADES RF, DATA_G.FUNCIONALIDADES F WHERE IdRol = " + idrol + " AND F.IdFuncionalidad = RF.IdFuncionalidad");
-                
-                if (Funcionalidades.HasRows)
+            
+        }
+
+        private void funcionalidadesParaElRol(string idrol)
+        {
+            SqlDataReader Funcionalidades = Conexion.ejecutarQuery("SELECT F.IdFuncionalidad, DescripcionFunc AS Funcionalidad FROM DATA_G.ROL_POR_FUNCIONALIDADES RF, DATA_G.FUNCIONALIDADES F WHERE IdRol = " + idrol + " AND F.IdFuncionalidad = RF.IdFuncionalidad");
+
+            if (Funcionalidades.HasRows)
+            {
+                while (Funcionalidades.Read())
                 {
-                    while (Funcionalidades.Read())
+                    switch (Funcionalidades.GetString(1))
                     {
-                        switch (Funcionalidades.GetString(1))
-                        {
-                            case "Consulta de millas de pasajero frecuente":
-                                btnConsultarMillas.Visible = true;
-                                break;
-                            case "Canje de millas de pasajero frecuente":
-                                btnCanjearMillas.Visible = true;
-                                break;
-                            case "Registro de llegada destino":
-                                btnRegistroLlegada.Visible = true;
-                                break;
-                            case "Cancelacion/Devolucion de pasaje y/o encomienda":
-                                btnDevolucion.Visible = true;
-                                break;
-                            case "Crear origen y destino viaje":
-                                btnGenerarViaje.Visible = true;
-                                break;
-                            case "Consulta TOP 5":
-                                btnTop5.Visible = true;
-                                break;
+                        case "Consulta de millas de pasajero frecuente":
+                            btnConsultarMillas.Visible = true;
+                            break;
+                        case "Canje de millas de pasajero frecuente":
+                            btnCanjearMillas.Visible = true;
+                            break;
+                        case "Registro de llegada destino":
+                            btnRegistroLlegada.Visible = true;
+                            break;
+                        case "Cancelacion/Devolucion de pasaje y/o encomienda":
+                            btnDevolucion.Visible = true;
+                            break;
+                        case "Crear origen y destino viaje":
+                            btnGenerarViaje.Visible = true;
+                            break;
+                        case "Consulta TOP 5":
+                            btnTop5.Visible = true;
+                            break;
                     }
                 }
             }
-            }
-
-
-            
-            
         }
 
         private void deslogearToolStripMenuItem_Click(object sender, EventArgs e)
