@@ -20,10 +20,16 @@ namespace AerolineaFrba.Inicio
 
         public void habilitarFuncionalidadesPorRol(string usuario,string loginmode) {
 
-            btnConsultarMillas.Visible = false;
+            btnVerCiudades.Visible = false;
+            btnVerRutas.Visible = false;
+            btnVerAeronave.Visible = false;
+            btnVerRoles.Visible = false;
+            btnComprarPasaje.Visible = false;
             btnCanjearMillas.Visible = false;
             btnRegistroLlegada.Visible = false;
             btnDevolucion.Visible = false;
+            btnConsultarMillas.Visible = false;
+
             btnGenerarViaje.Visible = false;
             btnTop5.Visible = false;
             
@@ -60,20 +66,53 @@ namespace AerolineaFrba.Inicio
                         case "Consulta de millas de pasajero frecuente":
                             btnConsultarMillas.Visible = true;
                             break;
-                        case "Canje de millas de pasajero frecuente":
+                        case "Canjear Millas":
                             btnCanjearMillas.Visible = true;
                             break;
                         case "Registro de llegada destino":
                             btnRegistroLlegada.Visible = true;
                             break;
-                        case "Cancelacion/Devolucion de pasaje y/o encomienda":
+                        case "Devolucion de pasaje y/o encomienda":
                             btnDevolucion.Visible = true;
                             break;
-                        case "Crear origen y destino viaje":
+                        case "Generar Viaje":
                             btnGenerarViaje.Visible = true;
                             break;
                         case "Consulta TOP 5":
                             btnTop5.Visible = true;
+                            break;
+                        case "Ver Ciudades":
+                            btnVerCiudades.Visible = true;
+                            break;
+                        case "Alta ruta":
+                            btnVerRutas.Visible = true;
+                            break;
+                        case "Modificar Ruta":
+                            btnVerRutas.Visible = true;
+                            break;
+                        case "Baja ruta":
+                            btnVerRutas.Visible = true;
+                            break;
+                        case "Alta aeronave":
+                            btnVerAeronave.Visible = true;
+                            break;
+                        case "Modificar aeronave":
+                            btnVerAeronave.Visible = true;
+                            break;
+                        case "Baja aeronave":
+                            btnVerAeronave.Visible = true;
+                            break;
+                        case "Alta Rol":
+                            btnVerRoles.Visible = true;
+                            break;
+                        case "Modificar Rol":
+                            btnVerRoles.Visible = true;
+                            break;
+                        case "Baja Rol":
+                            btnVerRoles.Visible = true;
+                            break;
+                        case "Compra de pasajes/encomiendas":
+                            btnComprarPasaje.Visible = true;
                             break;
                     }
                 }
