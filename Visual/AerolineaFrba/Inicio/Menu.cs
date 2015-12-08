@@ -39,12 +39,14 @@ namespace AerolineaFrba.Inicio
 
                 string query = "SELECT R.IdRol FROM DATA_G.USUARIO U, DATA_G.USUARIOPORROL UR, DATA_G.ROL R WHERE USERNAME = '" + usuario + "' AND U.IdUsuario  = UR.IdUsuario AND R.IdRol = UR.IdRol AND R.ESTADO = 1 AND U.ESTADO = 1";
                 SqlDataReader Roles = Conexion.ejecutarQuery(query);
-                idrol = Roles[0].ToString();
-                while (Roles.Read())
+               
+               if (Roles.Read())
                 {
+                    idrol = Roles[0].ToString();
+                    Roles.Close();
                     funcionalidadesParaElRol(idrol);
                 }
-                Roles.Close();
+               
             }
             else {
                 idrol = "2";
