@@ -62,12 +62,12 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void cmbOrigen_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            btnGuardar.Enabled = validacion();
         }
 
         private void cmbTipoServicio_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            btnGuardar.Enabled = validacion();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -118,36 +118,33 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void txtCantButacasPasillo_TextChanged(object sender, EventArgs e)
         {
-
+            btnGuardar.Enabled = validacion();
         }
 
         private void txtModelo_TextChanged(object sender, EventArgs e)
         {
-
+            btnGuardar.Enabled = validacion();
         }
 
         private void txtMatricula_TextChanged(object sender, EventArgs e)
         {
-
+            btnGuardar.Enabled = validacion();
         }
 
 
-        private void txtEspacioEncomienda_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtEspacioEncomienda_TextChanged(object sender, KeyPressEventArgs e)
         {
-            bool resultado = funciones.permiteNumeros(txtEspacioEncomienda.Text);
-            if (!resultado)
-            {
-                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
+            
         }
 
-        private void txtCantButacas_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtCantButacas_TextChanged(object sender, KeyPressEventArgs e)
         {
             bool resultado = funciones.permiteNumeros(txtCantButacas.Text);
             if (!resultado)
             {
                 MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+            btnGuardar.Enabled = validacion();
         }
 
         private bool validacion()
@@ -208,6 +205,22 @@ namespace AerolineaFrba.Abm_Aeronave
                 MessageBox.Show("La matricula ya existe");
                 return false;
             }
+        }
+
+        private void txtEspacioEncomienda_TextChanged(object sender, EventArgs e)
+        {
+            bool resultado = funciones.permiteNumeros(txtEspacioEncomienda.Text);
+            if (!resultado)
+            {
+                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+            btnGuardar.Enabled = validacion();
+        }
+
+        private void txtFabricante_TextChanged(object sender, EventArgs e)
+        {
+            btnGuardar.Enabled = validacion();
         }
 
     }

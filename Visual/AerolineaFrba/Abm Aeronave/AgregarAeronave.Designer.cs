@@ -79,6 +79,7 @@
             this.txtEspacioEncomienda.Name = "txtEspacioEncomienda";
             this.txtEspacioEncomienda.Size = new System.Drawing.Size(100, 20);
             this.txtEspacioEncomienda.TabIndex = 9;
+            this.txtEspacioEncomienda.TextChanged += new System.EventHandler(this.txtEspacioEncomienda_TextChanged);
             // 
             // label3
             // 
@@ -95,6 +96,7 @@
             this.txtFabricante.Name = "txtFabricante";
             this.txtFabricante.Size = new System.Drawing.Size(100, 20);
             this.txtFabricante.TabIndex = 11;
+            this.txtFabricante.TextChanged += new System.EventHandler(this.txtFabricante_TextChanged);
             // 
             // label6
             // 
