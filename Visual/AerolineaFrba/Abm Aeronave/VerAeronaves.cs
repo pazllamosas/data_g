@@ -81,13 +81,13 @@ namespace AerolineaFrba.Abm_Aeronave
             if (selectedRowCount > 0 && selectedRowCount < 2)
             {
                 DataGridViewRow d = dgvAeronaves.SelectedRows[0];
-                string matricula = d.Cells[2].ToString();
-                string modelo = d.Cells[3].ToString();
-                string espacioEncomienda = d.Cells[4].ToString();
-                string fabricante = d.Cells[5].ToString();
-                string servicio = d.Cells[6].ToString();
-                string cantidadButacas = d.Cells[7].ToString();
-                string ubicacion = d.Cells[8].ToString();
+                string matricula = d.Cells[2].Value.ToString();
+                string modelo = d.Cells[3].Value.ToString();
+                string espacioEncomienda = d.Cells[4].Value.ToString();
+                string fabricante = d.Cells[5].Value.ToString();
+                string servicio = d.Cells[6].Value.ToString();
+                string cantidadButacas = d.Cells[7].Value.ToString();
+                string ubicacion = d.Cells[8].Value.ToString();
                 FormProvider.AgregarAeronave.Show(); //mandar todos los parametros.
                 FormProvider.AgregarAeronave.EditarAeronave(matricula, modelo, espacioEncomienda, fabricante, servicio, cantidadButacas, ubicacion);
             }
@@ -103,13 +103,13 @@ namespace AerolineaFrba.Abm_Aeronave
             if (selectedRowCount > 0 && selectedRowCount < 2)
             {
                 DataGridViewRow d = dgvAeronaves.SelectedRows[0];
-                string matricula = d.Cells[2].ToString();
-                string modelo = d.Cells[3].ToString();
-                string espacioEncomienda = d.Cells[4].ToString();
-                string fabricante = d.Cells[5].ToString();
-                string servicio = d.Cells[6].ToString();
-                string cantidadButacas = d.Cells[7].ToString();
-                string ubicacion = d.Cells[8].ToString();
+                string matricula = d.Cells[2].Value.ToString();
+                string modelo = d.Cells[3].Value.ToString();
+                string espacioEncomienda = d.Cells[4].Value.ToString();
+                string fabricante = d.Cells[5].Value.ToString();
+                string servicio = d.Cells[6].Value.ToString();
+                string cantidadButacas = d.Cells[7].Value.ToString();
+                string ubicacion = d.Cells[8].Value.ToString();
                 FormProvider.GenerarViaje.Show(); //mandar todos los parametros.
                 FormProvider.GenerarViaje.EditarGenerarViaje(matricula, modelo, espacioEncomienda, fabricante, servicio, cantidadButacas, ubicacion);
             }
