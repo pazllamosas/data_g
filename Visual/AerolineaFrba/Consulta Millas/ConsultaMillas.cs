@@ -47,7 +47,7 @@ namespace AerolineaFrba.Consulta_Millas
 
         private void btnConsultar_Click(object sender, EventArgs e)
         {
-            string query = "SELECT IdCli FROM DATA_G.CLIENTES WHERE DNI = '" + txtDni.Text + "'";
+            string query = "SELECT IdCli FROM DATA_G.CLIENTE WHERE DNI = '" + txtDni.Text + "'";
 
             SqlDataReader reader = Conexion.ejecutarQuery(query);
             reader.Read();
