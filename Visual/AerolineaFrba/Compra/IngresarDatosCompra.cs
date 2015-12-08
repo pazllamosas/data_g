@@ -113,7 +113,10 @@ namespace AerolineaFrba.Compra
 
         private void btnBuscarVuelos_Click(object sender, EventArgs e)
         {
-            string query = "SELECT aeronave.IdAeronave as IdAeronave, aeronave.KG_Disponibles as Kg_Disponibles, aeronave.CantButacas as CantButacas, vuelos.NroVuelo as NroVuelo, vuelos.FechaSalida as FechaSalida FROM DATA_G.VUELO vuelos,DATA_G.RUTA rutas, DATA_G.CIUDAD ciudades1, DATA_G.CIUDAD ciudades2, DATA_G.AERONAVE aeronave WHERE vuelos.IdRuta = rutas.idRuta AND vuelos.IdAeronave = aeronave.IdAeronave AND rutas.Origen = ciudades1.CodigoCiudad AND ciudades1.Nombre = ' " + cmbCiudadOrigen.Text + "' AND rutas.Destino = ciudades2.CodigoCiudad AND ciudades2.Nombre = ' " + cmbCiudadOrigen.Text + "'";
+            string origen = cmbCiudadOrigen.Text;
+            string destino = cmbCiudadOrigen.Text;
+
+            string query = "SELECT aeronave.IdAeronave as IdAeronave, aeronave.KG_Disponibles as Kg_Disponibles, aeronave.CantButacas as CantButacas, vuelos.NroVuelo as NroVuelo, vuelos.FechaSalida as FechaSalida FROM DATA_G.VUELO vuelos,DATA_G.RUTA rutas, DATA_G.CIUDAD ciudades1, DATA_G.CIUDAD ciudades2, DATA_G.AERONAVE aeronave WHERE vuelos.IdRuta = rutas.idRuta AND vuelos.IdAeronave = aeronave.IdAeronave AND rutas.Origen = ciudades1.CodigoCiudad AND ciudades1.Nombre = ' " + origen + "' AND rutas.Destino = ciudades2.CodigoCiudad AND ciudades2.Nombre = ' " + destino + "'";
 
             SqlDataReader reader = Conexion.ejecutarQuery(query);
 
