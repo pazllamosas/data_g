@@ -40,65 +40,73 @@
             this.deslogearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnAgregarAeronave = new System.Windows.Forms.Button();
             this.btnAgregarRuta = new System.Windows.Forms.Button();
-            this.dgvVerViaje = new System.Windows.Forms.DataGridView();
+            this.dgvAeronave = new System.Windows.Forms.DataGridView();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.dgvRuta = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvVerViaje)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAeronave)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRuta)).BeginInit();
             this.SuspendLayout();
             // 
             // dtmFechaSalida
             // 
-            this.dtmFechaSalida.Location = new System.Drawing.Point(213, 33);
-            this.dtmFechaSalida.Margin = new System.Windows.Forms.Padding(4);
+            this.dtmFechaSalida.Location = new System.Drawing.Point(160, 27);
             this.dtmFechaSalida.Name = "dtmFechaSalida";
-            this.dtmFechaSalida.Size = new System.Drawing.Size(279, 22);
+            this.dtmFechaSalida.Size = new System.Drawing.Size(210, 20);
             this.dtmFechaSalida.TabIndex = 0;
             // 
             // dtmFechaLlegada
             // 
-            this.dtmFechaLlegada.Location = new System.Drawing.Point(213, 65);
-            this.dtmFechaLlegada.Margin = new System.Windows.Forms.Padding(4);
+            this.dtmFechaLlegada.Location = new System.Drawing.Point(160, 53);
             this.dtmFechaLlegada.Name = "dtmFechaLlegada";
-            this.dtmFechaLlegada.Size = new System.Drawing.Size(279, 22);
+            this.dtmFechaLlegada.Size = new System.Drawing.Size(210, 20);
             this.dtmFechaLlegada.TabIndex = 1;
             // 
             // dtmFechaLlegadaEstimada
             // 
-            this.dtmFechaLlegadaEstimada.Location = new System.Drawing.Point(213, 97);
-            this.dtmFechaLlegadaEstimada.Margin = new System.Windows.Forms.Padding(4);
+            this.dtmFechaLlegadaEstimada.Location = new System.Drawing.Point(160, 79);
             this.dtmFechaLlegadaEstimada.Name = "dtmFechaLlegadaEstimada";
-            this.dtmFechaLlegadaEstimada.Size = new System.Drawing.Size(279, 22);
+            this.dtmFechaLlegadaEstimada.Size = new System.Drawing.Size(210, 20);
             this.dtmFechaLlegadaEstimada.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 73);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(12, 59);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(126, 17);
+            this.label1.Size = new System.Drawing.Size(96, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Fecha de Llegada:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 41);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(12, 33);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(114, 17);
+            this.label2.Size = new System.Drawing.Size(87, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "Fecha de Salida:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 105);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(12, 85);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(188, 17);
+            this.label3.Size = new System.Drawing.Size(142, 13);
             this.label3.TabIndex = 5;
             this.label3.Text = "Fecha de Llegada Estimada:";
             // 
@@ -108,8 +116,7 @@
             this.archivoToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(651, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(588, 24);
             this.menuStrip1.TabIndex = 8;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -118,23 +125,22 @@
             this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.deslogearToolStripMenuItem});
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(71, 24);
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.archivoToolStripMenuItem.Text = "Archivo";
             // 
             // deslogearToolStripMenuItem
             // 
             this.deslogearToolStripMenuItem.Name = "deslogearToolStripMenuItem";
-            this.deslogearToolStripMenuItem.Size = new System.Drawing.Size(107, 24);
+            this.deslogearToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
             this.deslogearToolStripMenuItem.Text = "Salir";
             // 
             // btnAgregarAeronave
             // 
             this.btnAgregarAeronave.Image = global::AerolineaFrba.Properties.Resources.add;
             this.btnAgregarAeronave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregarAeronave.Location = new System.Drawing.Point(20, 138);
-            this.btnAgregarAeronave.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAgregarAeronave.Location = new System.Drawing.Point(94, 112);
             this.btnAgregarAeronave.Name = "btnAgregarAeronave";
-            this.btnAgregarAeronave.Size = new System.Drawing.Size(155, 28);
+            this.btnAgregarAeronave.Size = new System.Drawing.Size(116, 23);
             this.btnAgregarAeronave.TabIndex = 10;
             this.btnAgregarAeronave.Text = "Agregar Aeronave";
             this.btnAgregarAeronave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -145,25 +151,31 @@
             // 
             this.btnAgregarRuta.Image = global::AerolineaFrba.Properties.Resources.add;
             this.btnAgregarRuta.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregarRuta.Location = new System.Drawing.Point(213, 138);
-            this.btnAgregarRuta.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAgregarRuta.Location = new System.Drawing.Point(387, 112);
             this.btnAgregarRuta.Name = "btnAgregarRuta";
-            this.btnAgregarRuta.Size = new System.Drawing.Size(165, 28);
+            this.btnAgregarRuta.Size = new System.Drawing.Size(124, 23);
             this.btnAgregarRuta.TabIndex = 11;
             this.btnAgregarRuta.Text = "Agregar Ruta Aerea";
             this.btnAgregarRuta.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAgregarRuta.UseVisualStyleBackColor = true;
             this.btnAgregarRuta.Click += new System.EventHandler(this.btnAgregarRuta_Click);
             // 
-            // dgvVerViaje
+            // dgvAeronave
             // 
-            this.dgvVerViaje.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvVerViaje.Location = new System.Drawing.Point(20, 174);
-            this.dgvVerViaje.Margin = new System.Windows.Forms.Padding(4);
-            this.dgvVerViaje.Name = "dgvVerViaje";
-            this.dgvVerViaje.Size = new System.Drawing.Size(615, 180);
-            this.dgvVerViaje.TabIndex = 12;
-            this.dgvVerViaje.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVerViaje_CellContentClick);
+            this.dgvAeronave.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAeronave.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4,
+            this.Column5,
+            this.Column6});
+            this.dgvAeronave.Location = new System.Drawing.Point(15, 141);
+            this.dgvAeronave.Name = "dgvAeronave";
+            this.dgvAeronave.ShowRowErrors = false;
+            this.dgvAeronave.Size = new System.Drawing.Size(288, 200);
+            this.dgvAeronave.TabIndex = 12;
+            this.dgvAeronave.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVerViaje_CellContentClick);
             // 
             // btnGuardar
             // 
@@ -171,10 +183,9 @@
             this.btnGuardar.Enabled = false;
             this.btnGuardar.Image = ((System.Drawing.Image)(resources.GetObject("btnGuardar.Image")));
             this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGuardar.Location = new System.Drawing.Point(20, 414);
-            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnGuardar.Location = new System.Drawing.Point(12, 360);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(100, 28);
+            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
             this.btnGuardar.TabIndex = 13;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -185,10 +196,9 @@
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelar.Image = global::AerolineaFrba.Properties.Resources.cancel;
             this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new System.Drawing.Point(535, 414);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCancelar.Location = new System.Drawing.Point(501, 360);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(100, 28);
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 14;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -198,26 +208,101 @@
             // button1
             // 
             this.button1.Cursor = System.Windows.Forms.Cursors.Default;
-           // this.button1.Enabled = false;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(535, 67);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Location = new System.Drawing.Point(401, 54);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 28);
+            this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 15;
             this.button1.Text = "Buscar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // dgvRuta
+            // 
+            this.dgvRuta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvRuta.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column7,
+            this.Column8,
+            this.Column9,
+            this.Column10,
+            this.Column11,
+            this.Column12});
+            this.dgvRuta.Location = new System.Drawing.Point(309, 141);
+            this.dgvRuta.Name = "dgvRuta";
+            this.dgvRuta.ShowRowErrors = false;
+            this.dgvRuta.Size = new System.Drawing.Size(267, 200);
+            this.dgvRuta.TabIndex = 16;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Matricula";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Modelo";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "KG Disponibles";
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Fabricante";
+            this.Column4.Name = "Column4";
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Servicio";
+            this.Column5.Name = "Column5";
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "Cantidad de butacas";
+            this.Column6.Name = "Column6";
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "Codigo";
+            this.Column7.Name = "Column7";
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "Precio base (kg)";
+            this.Column8.Name = "Column8";
+            // 
+            // Column9
+            // 
+            this.Column9.HeaderText = "Precio base pasaje";
+            this.Column9.Name = "Column9";
+            // 
+            // Column10
+            // 
+            this.Column10.HeaderText = "Servicio";
+            this.Column10.Name = "Column10";
+            // 
+            // Column11
+            // 
+            this.Column11.HeaderText = "Origen";
+            this.Column11.Name = "Column11";
+            // 
+            // Column12
+            // 
+            this.Column12.HeaderText = "Destino";
+            this.Column12.Name = "Column12";
+            // 
             // GenerarViaje
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(651, 457);
+            this.ClientSize = new System.Drawing.Size(588, 395);
+            this.Controls.Add(this.dgvRuta);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnGuardar);
-            this.Controls.Add(this.dgvVerViaje);
+            this.Controls.Add(this.dgvAeronave);
             this.Controls.Add(this.btnAgregarRuta);
             this.Controls.Add(this.btnAgregarAeronave);
             this.Controls.Add(this.menuStrip1);
@@ -228,13 +313,13 @@
             this.Controls.Add(this.dtmFechaLlegada);
             this.Controls.Add(this.dtmFechaSalida);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "GenerarViaje";
             this.Text = "Generar Viaje";
             this.Load += new System.EventHandler(this.GenerarViaje_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvVerViaje)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAeronave)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRuta)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -253,9 +338,22 @@
         private System.Windows.Forms.ToolStripMenuItem deslogearToolStripMenuItem;
         private System.Windows.Forms.Button btnAgregarAeronave;
         private System.Windows.Forms.Button btnAgregarRuta;
-        private System.Windows.Forms.DataGridView dgvVerViaje;
+        private System.Windows.Forms.DataGridView dgvAeronave;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridView dgvRuta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
     }
 }

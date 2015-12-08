@@ -68,7 +68,7 @@ namespace AerolineaFrba.Generacion_Viaje
         {
             
             DataTable aeronaves = filtrarAeronaves(dtmFechaSalida.Text, dtmFechaLlegada.Text);
-            this.dgvVerViaje.DataSource = aeronaves;
+            this.dgvAeronave.DataSource = aeronaves;
         }
         }
 
