@@ -46,7 +46,7 @@ namespace AerolineaFrba.Inicio
                 loginMode = "invitado";
                 this.Hide();
                 FormProvider.MainMenu.Show();
-                FormProvider.MainMenu.habilitarFuncionalidadesPorRol(usuario);
+                FormProvider.MainMenu.habilitarFuncionalidadesPorRol(usuario, loginMode);
             }
             else
             {
@@ -61,7 +61,7 @@ namespace AerolineaFrba.Inicio
                         loginMode = "noinvitado";
                         this.Hide();
                         FormProvider.MainMenu.Show();
-                        FormProvider.MainMenu.habilitarFuncionalidadesPorRol(usuario);
+                        FormProvider.MainMenu.habilitarFuncionalidadesPorRol(usuario, loginMode);
                         //this.Close();
                     }
                 }

@@ -18,7 +18,7 @@ namespace AerolineaFrba.Inicio
             InitializeComponent();
         }
 
-        public void habilitarFuncionalidadesPorRol(string usuario) {
+        public void habilitarFuncionalidadesPorRol(string usuario,string loginmode) {
 
             btnConsultarMillas.Visible = false;
             btnCanjearMillas.Visible = false;
@@ -26,13 +26,20 @@ namespace AerolineaFrba.Inicio
             btnDevolucion.Visible = false;
             btnGenerarViaje.Visible = false;
             btnTop5.Visible = false;
-
             string query = "SELECT R.IdRol, Descripcion FROM DATA_G.USUARIO U, DATA_G.USUARIOPORROL UR, DATA_G.ROL R WHERE USERNAME = " + usuario + " AND U.IdUsuario  = UR.IdUsuario AND R.IdRol = UR.IdRol AND R.ESTADO = 1 AND U.ESTADO = 1";
-
-            SqlDataReader Roles = Conexion.ejecutarQuery(query);
+                SqlDataReader Roles = Conexion.ejecutarQuery(query);
+            
             while (Roles.Read())
             {
-                SqlDataReader Funcionalidades = Conexion.ejecutarQuery("SELECT F.IdFuncionalidad, DescripcionFunc AS Funcionalidad FROM DATA_G.ROL_POR_FUNCIONALIDADES RF, DATA_G.FUNCIONALIDADES F WHERE IdRol = " Roles[0] " AND F.IdFuncionalidad = RF.IdFuncionalidad");
+                string idrol;
+            if (loginmode != "invitado") {
+                idrol = Roles[0].ToString();
+            }
+            else {
+                idrol = "2";
+            }
+
+                SqlDataReader Funcionalidades = Conexion.ejecutarQuery("SELECT F.IdFuncionalidad, DescripcionFunc AS Funcionalidad FROM DATA_G.ROL_POR_FUNCIONALIDADES RF, DATA_G.FUNCIONALIDADES F WHERE IdRol = " + idrol + " AND F.IdFuncionalidad = RF.IdFuncionalidad");
                 
                 if (Funcionalidades.HasRows)
                 {
