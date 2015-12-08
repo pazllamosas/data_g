@@ -182,7 +182,7 @@ namespace AerolineaFrba.Compra
 
                 if (seAgregaElVuelo)
                 {
-                    dgvVuelos.Rows.Add(reader["NroVuelo"], reader["FechaSalida"]);
+                    dgvVuelos.Rows.Add(reader["NroVuelo"]);
                 }
                 
             }
