@@ -18,7 +18,9 @@ namespace AerolineaFrba
 
         public static SqlDataReader ejecutarQuery(string query)
         {
-            SqlCommand command = new SqlCommand(query, conexionMaestra);
+            SqlCommand command = new SqlCommand();
+            command.Connection = conexionMaestra;
+            command.CommandText = query;
             SqlDataReader reader = command.ExecuteReader();
             return reader;
         }
