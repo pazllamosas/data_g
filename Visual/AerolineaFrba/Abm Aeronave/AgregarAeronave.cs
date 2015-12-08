@@ -76,7 +76,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
             double cantButacas = double.Parse(txtCantButacas.Text);
 
-            string query = "SELECT * DATA_G.TIPODESERVICIO WHERE Descripcion = '" + cmbTipoServicio.Text + "'";
+            string query = "SELECT * FROM DATA_G.TIPODESERVICIO WHERE Descripcion = '" + cmbTipoServicio.Text + "'";
 
             SqlDataReader reader = Conexion.ejecutarQuery(query);
             if (reader.Read())
@@ -86,19 +86,28 @@ namespace AerolineaFrba.Abm_Aeronave
 
                 if (this.validacionDatos(txtMatricula.Text, txtModelo.Text, kg_disponibles, txtFabricante.Text, cmbTipoServicio.Text, cantButacas))
                 {
-                    bool resultado = Conexion.executeProcedure("DATA_G.CREAR_AERONAVE", Conexion.generarArgumentos("@matricula", "@modelo", "@kg_disponibles", "@fabricante", "@descripcionServicio", "@cantButacas"), txtMatricula.Text, txtModelo.Text, kg_disponibles, txtFabricante.Text, idServicio, cantButacas);
-
-                    if (resultado)
+                    query = "SELECT * DATA_G.AERONAVE WHERE Matricula = '" + txtMatricula.Text +"' AND Modelo = '"+ txtModelo.Text + "'AND Fabricante = '" + txtFabricante.Text + "' AND IdServicio = " + (idServicio.ToString());
+                    reader = Conexion.ejecutarQuery(query);
+                    if (reader.Read())
                     {
-                        MessageBox.Show("Ruta creada exitosamente");
+                        MessageBox.Show("Ya existe una aeronave con esos datos.");
+                    }
+                    else {
+                        query = "INSERT INTO DATA_G.AERONAVE (FechaDeAlta, Matricula, Modelo, KG_Disponibles, Fabricante, IdServicio, CantButacas) VALUES (CAST ( GETDATE() AS DATETIME), '" +txtMatricula.Text+ "', '" +txtModelo.Text+ "', " +txtEspacioEncomienda.Text+ ", '"+ txtFabricante.Text+"', "+ idServicio.ToString() +", "+txtCantButacas.Text+")";
+                        int rowCount = Conexion.ejecutarNonQuery(query);
 
-                        this.txtMatricula.Clear();
-                        this.txtModelo.Clear();
-                        this.txtEspacioEncomienda.Clear();
-                        this.txtFabricante.Clear();
-                        this.txtCantButacas.Clear();
-                        this.cmbTipoServicio.SelectedIndex = -1;
+                        if (rowCount == 1)
+                        {
+                            MessageBox.Show("Ruta creada exitosamente");
 
+                            this.txtMatricula.Clear();
+                            this.txtModelo.Clear();
+                            this.txtEspacioEncomienda.Clear();
+                            this.txtFabricante.Clear();
+                            this.txtCantButacas.Clear();
+                            this.cmbTipoServicio.SelectedIndex = -1;
+
+                        }
                     }
 
                 }

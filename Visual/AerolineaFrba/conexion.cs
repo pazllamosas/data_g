@@ -23,6 +23,13 @@ namespace AerolineaFrba
             return reader;
         }
 
+        public static int ejecutarNonQuery(string query)
+        {
+            SqlCommand command = new SqlCommand(query, conexionMaestra);
+            int rowCount = command.ExecuteNonQuery();
+            return rowCount;
+        }
+
         internal static void establecerConexionBD()
         {
 
