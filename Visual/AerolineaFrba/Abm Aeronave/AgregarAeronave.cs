@@ -81,7 +81,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
             string fabricante = txtFabricante.Text;
 
-            Int32 descripcionServicio = (Int32)cmbTipoServicio.SelectedValue;
+            Int32 descripcionServicio = int.Parse(cmbTipoServicio.Text);
 
             double cantButacas = double.Parse(txtCantButacas.Text);
             
@@ -118,7 +118,12 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void txtCantButacasPasillo_TextChanged(object sender, EventArgs e)
         {
-            btnGuardar.Enabled = validacion();
+            bool resultado = funciones.permiteNumeros(txtCantButacas.Text);
+            if (!resultado)
+            {
+                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            btnGuardar.Enabled = validacion(); 
         }
 
         private void txtModelo_TextChanged(object sender, EventArgs e)
@@ -131,21 +136,6 @@ namespace AerolineaFrba.Abm_Aeronave
             btnGuardar.Enabled = validacion();
         }
 
-
-        private void txtEspacioEncomienda_TextChanged(object sender, KeyPressEventArgs e)
-        {
-            
-        }
-
-        private void txtCantButacas_TextChanged(object sender, KeyPressEventArgs e)
-        {
-            bool resultado = funciones.permiteNumeros(txtCantButacas.Text);
-            if (!resultado)
-            {
-                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            btnGuardar.Enabled = validacion();
-        }
 
         private bool validacion()
         {
