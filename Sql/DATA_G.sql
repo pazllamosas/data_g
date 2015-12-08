@@ -695,7 +695,7 @@ VALUES(2, 'Oficina Comercial o Aeropuerto')
 SET IDENTITY_INSERT DATA_G.PUNTO_DE_COMPRA OFF
 
 INSERT INTO DATA_G.CIUDAD(Nombre)
-SELECT DISTINCT Ruta_Ciudad_Destino 
+SELECT DISTINCT Ruta_Ciudad_Destino
 FROM gd_esquema.Maestra
 ORDER BY 1
 
