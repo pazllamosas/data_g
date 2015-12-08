@@ -28,23 +28,23 @@ namespace AerolineaFrba.Inicio
             btnTop5.Visible = false;
             
             
-                string idrol;
+            string idrol;
             if (loginmode != "invitado") {
 
-                string query = "SELECT R.IdRol, Descripcion FROM DATA_G.USUARIO U, DATA_G.USUARIOPORROL UR, DATA_G.ROL R WHERE USERNAME = '" + usuario + "' AND U.IdUsuario  = UR.IdUsuario AND R.IdRol = UR.IdRol AND R.ESTADO = 1 AND U.ESTADO = 1";
+                string query = "SELECT R.IdRol FROM DATA_G.USUARIO U, DATA_G.USUARIOPORROL UR, DATA_G.ROL R WHERE USERNAME = '" + usuario + "' AND U.IdUsuario  = UR.IdUsuario AND R.IdRol = UR.IdRol AND R.ESTADO = 1 AND U.ESTADO = 1";
                 SqlDataReader Roles = Conexion.ejecutarQuery(query);
                 idrol = Roles[0].ToString();
                 while (Roles.Read())
                 {
                     funcionalidadesParaElRol(idrol);
                 }
+                Roles.Close();
             }
             else {
                 idrol = "2";
                 funcionalidadesParaElRol(idrol);
             }
 
-            
         }
 
         private void funcionalidadesParaElRol(string idrol)
@@ -78,6 +78,7 @@ namespace AerolineaFrba.Inicio
                     }
                 }
             }
+            Funcionalidades.Close();
         }
 
         private void deslogearToolStripMenuItem_Click(object sender, EventArgs e)
