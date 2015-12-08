@@ -113,25 +113,78 @@ namespace AerolineaFrba.Compra
 
         private void btnBuscarVuelos_Click(object sender, EventArgs e)
         {
-            string query = "SELECT NroVuelo, FechaSalida FROM DATA_G.VUELOS vuelos,DATA_G.RUTAS rutas, DATA_G.CIUDADES ciudades WHERE vuelos.FechaSalida <= " + dtmVuelo.Text + " AND vuelos.IdRuta = rutas.idRuta AND rutas.Origen = ciudades.CodigoCiudad AND rutas.Destino = ciudades.CodigoCiudad";
-
-
-            if (!string.IsNullOrEmpty(txtPesoEncomienda.Text))
-            {
-                query = query + " AND vuelos.KG_Disponibles > " + txtPesoEncomienda.Text;
-            }
-
-
-            if (!string.IsNullOrEmpty(txtCantPasajes.Text))
-            {
-                query = query + " AND vuelos.CantButacas > " + txtCantPasajes.Text;
-            }
+            string query = "SELECT aeronave.IdAeronave as IdAeronave, aeronave.KG_Disponibles as Kg_Disponibles, aeronave.CantButacas as CantButacas, vuelos.NroVuelo as NroVuelo, vuelos.FechaSalida as FechaSalida FROM DATA_G.VUELOS vuelos,DATA_G.RUTAS rutas, DATA_G.CIUDADES ciudades1, DATA_G.CIUDADES ciudades2, DATA_G.AERONAVE aeronave WHERE vuelos.FechaSalida <= " + dtmVuelo.Text + " AND vuelos.IdRuta = rutas.idRuta AND vuelos.IdAeronave = aeronave.IdAeronave AND rutas.Origen = ciudades1.CodigoCiudad AND ciudades1.Nombre = '" + cmbCiudadOrigen.Text + "' AND rutas.Destino = ciudades2.CodigoCiudad AND ciudades2.Nombre = '" + cmbCiudadOrigen.Text + "'";
 
             SqlDataReader reader = Conexion.ejecutarQuery(query);
 
             while (reader.Read())
             {
-                dgvVuelos.Rows.Add(reader["NroVuelo"], reader["FechaSalida"]);
+                bool seAgregaElVuelo = true;
+                //si se pide enviar alguna encomienda en el vuelo
+                if (!string.IsNullOrEmpty(txtPesoEncomienda.Text))
+                {
+                    string query2 = "SELECT SUM(PQ.KG) AS KgLibres FROM DATA_G.COMPRA C JOIN DATA_G.PAQUETE PQ on PQ.NroCompra = C.NroCompra WHERE C.NroVuelo = " + reader["NroVuelo"].ToString() +" and C.NroCompra not in (SELECT NroCompra FROM DATA_G.DEVOLUCION)";
+                    SqlDataReader reader2 = Conexion.ejecutarQuery(query2);
+
+                    // si hay encomiendas para el vuelo
+                    if (reader2.Read())
+                    {
+                        //ver si hay espacio
+                        if (int.Parse(reader2["KgLibres"].ToString()) >= int.Parse(txtPesoEncomienda.Text))
+                        {
+                            seAgregaElVuelo = true;
+                        }
+                        else
+                        {
+                            seAgregaElVuelo = false;
+                        }
+                    }
+                    else if (int.Parse(reader["Kg_Disponibles"].ToString()) >= int.Parse(txtPesoEncomienda.Text))
+                    {
+                        seAgregaElVuelo = true;
+                    }
+                    else
+                    {
+                        seAgregaElVuelo = false;
+                    }
+
+                }
+
+                //si se pide enviar alguna butaca en el vuelo
+                if (!string.IsNullOrEmpty(txtCantPasajes.Text) && seAgregaElVuelo)
+                {
+                    string query3 = "SELECT count(B.IdButaca) as ButacasLibres FROM DATA_G.BUTACA B WHERE B.IdAeronave = " + reader["IdAeronave"].ToString() +" AND B.Estado = 'Libre'";
+                    SqlDataReader reader3 = Conexion.ejecutarQuery(query3);
+
+                    // si hay butacas para el vuelo
+                    if (reader3.Read())
+                    {
+                        //ver si hay espacio
+                        if (int.Parse(reader3["ButacasLibres"].ToString()) >= int.Parse(txtCantPasajes.Text))
+                        {
+                            seAgregaElVuelo = true;
+                        }
+                        else
+                        {
+                            seAgregaElVuelo = false;
+                        }
+                    }
+                    else if (int.Parse(reader["CantButacas"].ToString()) >= int.Parse(txtCantPasajes.Text))
+                    {
+                        seAgregaElVuelo = true;
+                    }
+                    else
+                    {
+                        seAgregaElVuelo = false;
+                    }
+
+                }
+
+                if (seAgregaElVuelo)
+                {
+                    dgvVuelos.Rows.Add(reader["NroVuelo"], reader["FechaSalida"]);
+                }
+                
             }
             reader.Close();
 
