@@ -87,8 +87,9 @@ namespace AerolineaFrba.Abm_Aeronave
                 string fabricante = d.Cells[5].ToString();
                 string servicio = d.Cells[6].ToString();
                 string cantidadButacas = d.Cells[7].ToString();
+                string ubicacion = d.Cells[8].ToString();
                 FormProvider.AgregarAeronave.Show(); //mandar todos los parametros.
-                FormProvider.AgregarAeronave.EditarAeronave(matricula, modelo, espacioEncomienda, fabricante, servicio, cantidadButacas);
+                FormProvider.AgregarAeronave.EditarAeronave(matricula, modelo, espacioEncomienda, fabricante, servicio, cantidadButacas, ubicacion);
             }
             else {
                 MessageBox.Show("No podés editar si no elegís una aeronave y sólo una aeronave.");
@@ -98,7 +99,24 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void btnSeleccionar_Click(object sender, EventArgs e)
         {
-
+            Int32 selectedRowCount = dgvAeronaves.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount > 0 && selectedRowCount < 2)
+            {
+                DataGridViewRow d = dgvAeronaves.SelectedRows[0];
+                string matricula = d.Cells[2].ToString();
+                string modelo = d.Cells[3].ToString();
+                string espacioEncomienda = d.Cells[4].ToString();
+                string fabricante = d.Cells[5].ToString();
+                string servicio = d.Cells[6].ToString();
+                string cantidadButacas = d.Cells[7].ToString();
+                string ubicacion = d.Cells[8].ToString();
+                FormProvider.GenerarViaje.Show(); //mandar todos los parametros.
+                FormProvider.GenerarViaje.EditarGenerarViaje(matricula, modelo, espacioEncomienda, fabricante, servicio, cantidadButacas, ubicacion);
+            }
+            else
+            {
+                MessageBox.Show("No podés editar si no elegís una aeronave y sólo una aeronave.");
+            }
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)

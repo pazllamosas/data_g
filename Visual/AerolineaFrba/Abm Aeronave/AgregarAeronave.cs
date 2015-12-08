@@ -19,7 +19,7 @@ namespace AerolineaFrba.Abm_Aeronave
             InitializeComponent();
         }
 
-        public void EditarAeronave(string matricula, string modelo, string espacioEncomienda, string fabricante, string servicio, string cantidadButacas) //mandar todos los parametros para completar los texbox 
+        public void EditarAeronave(string matricula, string modelo, string espacioEncomienda, string fabricante, string servicio, string cantidadButacas, string ubicacion) //mandar todos los parametros para completar los texbox 
         {
             txtMatricula.Text = matricula; //asignar los parametros a los text
             txtModelo.Text = modelo;
@@ -27,6 +27,7 @@ namespace AerolineaFrba.Abm_Aeronave
             txtFabricante.Text = fabricante;
             txtCantButacas.Text = cantidadButacas;
             cmbTipoServicio.Text = servicio;
+            cmbOrigen.Text = ubicacion;
         }
 
         private void button2_Click(object sender, EventArgs e)
