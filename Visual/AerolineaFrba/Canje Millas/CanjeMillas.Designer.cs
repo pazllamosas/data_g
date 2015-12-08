@@ -156,6 +156,7 @@
             this.txtCantidad.Name = "txtCantidad";
             this.txtCantidad.Size = new System.Drawing.Size(45, 22);
             this.txtCantidad.TabIndex = 14;
+            this.txtCantidad.TextChanged += new System.EventHandler(this.txtCantidad_TextChanged);
             // 
             // label6
             // 

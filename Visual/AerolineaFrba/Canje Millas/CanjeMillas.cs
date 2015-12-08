@@ -40,7 +40,7 @@ namespace AerolineaFrba.Canje_Millas
         {
             Int32 dni = Convert.ToInt32(txtDni.Text);
             getMillas(dni);
-           
+
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -56,7 +56,7 @@ namespace AerolineaFrba.Canje_Millas
 
         private void CanjeMillas_Load(object sender, EventArgs e)
         {
-           // Conexion.cargarCmb("Descripcion", "PRODUCTO", cmbProducto);
+            // Conexion.cargarCmb("Descripcion", "PRODUCTO", cmbProducto);
             cmbProducto.ValueMember = "IdProducto";
             cmbProducto.DisplayMember = "Descripcion";
             cmbProducto.DataSource = Conexion.cargarTablaConsulta("DATA_G.GET_PRODUCTOS");
@@ -64,7 +64,7 @@ namespace AerolineaFrba.Canje_Millas
             this.txtDni.Clear();
             this.txtCantidad.Clear();
             this.cmbProducto.SelectedIndex = -1;
-            
+
 
         }
 
@@ -121,24 +121,24 @@ namespace AerolineaFrba.Canje_Millas
                     reader.Read();
                     string idCliente = reader["id"].ToString();
                     reader.Close();
-                if( cantidadValida(cantidad, producto))
-                {
-                    if(millasValidas (idCliente, producto, cantidad))
+                    if (cantidadValida(cantidad, producto))
                     {
-                        bool resultado = Conexion.executeProcedure("DATA_G.ALTA_CANJE", Conexion.generarArgumentos("@idCliente", "@idProducto", "@cantidad"),
-                        idCliente, producto, cantidad);
-
-                        if (resultado)
+                        if (millasValidas(idCliente, producto, cantidad))
                         {
-                            MessageBox.Show("Canje realizado");
-                         deleteMillasAcum();
-                        this.txtDni.Clear();
-                        this.txtCantidad.Clear();
-                        this.cmbProducto.SelectedIndex = -1;
+                            bool resultado = Conexion.executeProcedure("DATA_G.ALTA_CANJE", Conexion.generarArgumentos("@idCliente", "@idProducto", "@cantidad"),
+                            idCliente, producto, cantidad);
 
+                            if (resultado)
+                            {
+                                MessageBox.Show("Canje realizado");
+                                deleteMillasAcum();
+                                this.txtDni.Clear();
+                                this.txtCantidad.Clear();
+                                this.cmbProducto.SelectedIndex = -1;
+
+                            }
                         }
                     }
-                }
 
                 }
             }
@@ -151,9 +151,9 @@ namespace AerolineaFrba.Canje_Millas
 
         public static object getMillas(Int32 dni)
         {
-            DataTable tablaMillas = Conexion.cargarTablaConsulta("DATA_G.GET_MILLASACUMULADAS m WHERE m.Dni=" + dni );
+            DataTable tablaMillas = Conexion.cargarTablaConsulta("DATA_G.GET_MILLASACUMULADAS m WHERE m.Dni=" + dni);
             return tablaMillas;
-         }
+        }
 
         private void txtDni_TextChanged(object sender, EventArgs e)
         {
@@ -162,7 +162,7 @@ namespace AerolineaFrba.Canje_Millas
 
         private bool validacionDatos(int dni, int cantidad)
         {
-           if (dni == 0)
+            if (dni == 0)
             {
                 MessageBox.Show("El dni no puede ser 0");
                 this.txtDni.Clear();
@@ -206,7 +206,7 @@ namespace AerolineaFrba.Canje_Millas
 
         public Boolean millasValidas(string cliente, Int32 producto, Int32 cantidad)
         {
-            
+
             string query = "SELECT DATA_G.MAS_MILLAS ('" + cliente + "', '" + producto + "', '" + cantidad + "') AS id";
 
             SqlDataReader reader = Conexion.ejecutarQuery(query);
@@ -238,6 +238,20 @@ namespace AerolineaFrba.Canje_Millas
         {
 
         }
-    }
 
+        private void txtCantidad_TextChanged(object sender, EventArgs e)
+        {
+            txtCostoTotal.Enabled = true;
+            string query = "SELECT DATA_G.COSTO_MILLAS ('" + txtCantidad.Text + "', '" + cmbProducto.SelectedValue + "') AS id";
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+            if (reader.Read())
+            {
+                txtCostoTotal.Text = reader["id"].ToString();
+                reader.Close();
+            }
+
+            txtCostoTotal.ReadOnly = true;
+        }
+
+    }
 }

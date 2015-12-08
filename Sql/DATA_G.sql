@@ -210,7 +210,8 @@ DROP PROCEDURE DATA_G.GET_SERVICIO
 IF OBJECT_ID('DATA_G.GET_CIUDADES') IS NOT NULL
 DROP PROCEDURE DATA_G.GET_CIUDADES
 -------------- DROP FUNCTION ------------------------
-
+IF OBJECT_ID('DATA_G.COSTO_MILLAS') IS NOT NULL
+DROP FUNCTION DATA_G.COSTO_MILLAS
 IF OBJECT_ID('DATA_G.TARJETA_VENCIDA') IS NOT NULL
 DROP FUNCTION DATA_G.TARJETA_VENCIDA
 IF OBJECT_ID('DATA_G.MAYOR_CANTIDAD') IS NOT NULL
@@ -2182,9 +2183,24 @@ CREATE FUNCTION DATA_G.MAYOR_CANTIDAD(@cantidad int, @idProducto int)
 	END
 GO
 
+CREATE FUNCTION DATA_G.COSTO_MILLAS(@cantidad int, @idProducto int) 
+	RETURNS int
+	AS
+	BEGIN
+		DECLARE @resultado INT
+		
+		SELECT @resultado = CostoEnMillas * @cantidad FROM DATA_G.PRODUCTO
+		WHERE IdProducto = @idProducto
+			
+		RETURN @resultado
+	END
+GO
+
 --declare @r numeric(18,0)
---exec @r = DATA_G.MAYOR_CANTIDAD @cantidad = 1, @idProducto = 1
+--exec @r = DATA_G.COSTO_MILLAS @cantidad = 1, @idProducto = 1
 --PRINT @r
+
+--SELECT aeronave.IdAeronave as IdAeronave, aeronave.KG_Disponibles as Kg_Disponibles, aeronave.CantButacas as CantButacas, vuelos.NroVuelo as NroVuelo, vuelos.FechaSalida as FechaSalida FROM DATA_G.VUELO vuelos,DATA_G.RUTA rutas, DATA_G.CIUDAD ciudades1, DATA_G.CIUDAD ciudades2, DATA_G.AERONAVE aeronave WHERE vuelos.IdRuta = rutas.idRuta AND vuelos.IdAeronave = aeronave.IdAeronave AND rutas.Origen = ciudades1.CodigoCiudad AND ciudades1.Nombre = ' Buenos Aires' AND rutas.Destino = ciudades2.CodigoCiudad AND ciudades2.Nombre = ' Nueva York'
 
 CREATE FUNCTION DATA_G.MAS_MILLAS(@idCliente int, @idProducto int, @cantidad int) 
 	RETURNS int
@@ -2337,3 +2353,5 @@ SELECT * FROM DATA_G.CIUDAD
  nombre:    Nueva York ||  París   || San Francisco || Sídney || Toronto
 
  */
+
+
