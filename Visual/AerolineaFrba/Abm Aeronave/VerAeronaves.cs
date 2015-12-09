@@ -87,7 +87,7 @@ namespace AerolineaFrba.Abm_Aeronave
                 string fabricante = d.Cells[4].Value.ToString();
                 string servicio = d.Cells[5].Value.ToString();
                 string cantidadButacas = d.Cells[6].Value.ToString();
-                string ubicacion = d.Cells[7].Value.ToString();
+                string ubicacion = d.Cells[11].Value.ToString();
                 FormProvider.AgregarAeronave.Show(); //mandar todos los parametros.
                 FormProvider.AgregarAeronave.EditarAeronave(matricula, modelo, espacioEncomienda, fabricante, servicio, cantidadButacas, ubicacion);
             }
@@ -109,7 +109,7 @@ namespace AerolineaFrba.Abm_Aeronave
                 string fabricante = d.Cells[4].Value.ToString();
                 string servicio = d.Cells[5].Value.ToString();
                 string cantidadButacas = d.Cells[6].Value.ToString();
-                string ubicacion = d.Cells[7].Value.ToString();
+                string ubicacion = d.Cells[11].Value.ToString();
                 FormProvider.GenerarViaje.Show(); //mandar todos los parametros.
                 FormProvider.GenerarViaje.EditarGenerarViaje(matricula, modelo, espacioEncomienda, fabricante, servicio, cantidadButacas, ubicacion);
             }
