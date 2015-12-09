@@ -60,8 +60,8 @@ namespace AerolineaFrba.Generacion_Viaje
         {
            
             //HAY ERROR
-            FechaSalida = dtmFechaSalida.Text;
-            FechaLlegada = dtmFechaLlegada.Text;
+            FechaSalida = txtFechaSalida.Text;
+            FechaLlegada = txtFechaLlegada.Text;
             string query = "SELECT  FROM DATA_G.AERONAVE WHERE (fecha >= " + FechaSalida + " AND fecha <= " + FechaLlegada + " ) AS id";
             DataTable tablaAeronaves = Conexion.cargarTablaConsulta(query);
             
@@ -82,7 +82,7 @@ namespace AerolineaFrba.Generacion_Viaje
         private void button1_Click(object sender, EventArgs e)
         {
             
-            DataTable aeronaves = filtrarAeronaves(dtmFechaSalida.Text, dtmFechaLlegada.Text);
+            DataTable aeronaves = filtrarAeronaves(txtFechaSalida.Text, txtFechaLlegada.Text);
             this.dgvAeronave.DataSource = aeronaves;
         }
 
