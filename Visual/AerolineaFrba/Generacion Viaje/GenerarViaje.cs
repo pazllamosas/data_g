@@ -85,6 +85,35 @@ namespace AerolineaFrba.Generacion_Viaje
             DataTable aeronaves = filtrarAeronaves(dtmFechaSalida.Text, dtmFechaLlegada.Text);
             this.dgvAeronave.DataSource = aeronaves;
         }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            string fechaSalida = txtFechaSalida.Text;
+
+            string[] componentesFecha = fechaSalida.Split('-');
+
+            if (componentesFecha.Length > 3) { MessageBox.Show("coloco mal la fecha de salida, tiene más de dos -"); }
+
+            if (1 > int.Parse(componentesFecha[2]) || int.Parse(componentesFecha[2]) > 31) { MessageBox.Show("coloco mal la fecha de salida, coloco mal el día"); }
+
+            if (1 > int.Parse(componentesFecha[1]) || int.Parse(componentesFecha[1]) > 12) { MessageBox.Show("coloco mal la fecha de salida, coloco mal el mes"); }
+
+            if (1950 > int.Parse(componentesFecha[0]) || int.Parse(componentesFecha[0]) > DateTime.Today.Year) { MessageBox.Show("coloco mal la fecha de salida, coloco mal el año"); }
+
+            string fechaLlegada = txtFechaLlegada.Text;
+
+            string[] componentesFecha2 = fechaLlegada.Split('-');
+
+            if (componentesFecha2.Length > 3) { MessageBox.Show("coloco mal la fecha de Llegada, tiene más de dos -"); }
+
+            if (1 > int.Parse(componentesFecha2[2]) || int.Parse(componentesFecha2[2]) > 31) { MessageBox.Show("coloco mal la fecha de Llegada, coloco mal el día"); }
+
+            if (1 > int.Parse(componentesFecha2[1]) || int.Parse(componentesFecha2[1]) > 12) { MessageBox.Show("coloco mal la fecha de Llegada, coloco mal el mes"); }
+
+            if (1950 > int.Parse(componentesFecha2[0]) || int.Parse(componentesFecha2[0]) > DateTime.Today.Year) { MessageBox.Show("coloco mal la fecha de Llegada, coloco mal el año"); }
+
+
+        }
         }
 
     }
