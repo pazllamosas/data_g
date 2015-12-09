@@ -1683,11 +1683,13 @@ GO
 CREATE FUNCTION DATA_G.KG_LIBRES(@vuelo int)
 RETURNS INT
 AS BEGIN
+	
 	DECLARE @kgOcupados INT;
 	DECLARE @KgTotales INT
 	SET @kgOcupados=(SELECT SUM(PQ.KG) FROM DATA_G.COMPRA C 
 						JOIN DATA_G.PAQUETE PQ on PQ.NroCompra = C.NroCompra
 						WHERE C.NroVuelo = @vuelo and C.NroCompra not in (SELECT NroCompra FROM DATA_G.DEVOLUCION))
+		
 	SET @KgTotales=(SELECT A.KG_Disponibles FROM DATA_G.VUELO V JOIN 
 						DATA_G.AERONAVE A on A.IdAeronave = V.IdAeronave
 	WHERE V.IdAeronave = @vuelo )
@@ -1697,6 +1699,9 @@ AS BEGIN
 END
 GO
 
+declare @r int
+exec @r = DATA_G.KG_LIBRES @vuelo = 2
+PRINT @r
 
 
 CREATE FUNCTION DATA_G.EXISTE_MATRICULA(@matricula nvarchar(255)) 
