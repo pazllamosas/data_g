@@ -210,6 +210,9 @@ DROP PROCEDURE DATA_G.GET_SERVICIO
 IF OBJECT_ID('DATA_G.GET_CIUDADES') IS NOT NULL
 DROP PROCEDURE DATA_G.GET_CIUDADES
 -------------- DROP FUNCTION ------------------------
+
+IF OBJECT_ID('DATA_G.HAY_VUELO') IS NOT NULL
+DROP FUNCTION DATA_G.HAY_VUELO
 IF OBJECT_ID('DATA_G.COSTO_MILLAS') IS NOT NULL
 DROP FUNCTION DATA_G.COSTO_MILLAS
 IF OBJECT_ID('DATA_G.TARJETA_VENCIDA') IS NOT NULL
@@ -1699,9 +1702,7 @@ AS BEGIN
 END
 GO
 
-declare @r int
-exec @r = DATA_G.KG_LIBRES @vuelo = 2
-PRINT @r
+
 
 
 CREATE FUNCTION DATA_G.EXISTE_MATRICULA(@matricula nvarchar(255)) 
@@ -1803,12 +1804,33 @@ END
 GO
 
 
+
+
 CREATE PROCEDURE DATA_G.CAMBIO_AERONAVE (@nrovuelo int, @nuevaaeronave int)
 AS BEGIN
 	UPDATE DATA_G.VUELO
 		SET IdAeronave = @nuevaaeronave
 		WHERE NroVuelo = @nrovuelo
 END
+GO
+
+CREATE FUNCTION DATA_G.HAY_VUELO(@matricula nvarchar(255), @origen int, @destino int, @fabricante nvarchar(255), @fechaLlegada datetime) 
+	RETURNS int
+	AS
+	BEGIN
+		DECLARE @CANTIDAD INT
+		
+		SELECT @CANTIDAD = COUNT(NroVuelo) FROM DATA_G.AERONAVE A, DATA_G.VUELO V, DATA_G.RUTA R, DATA_G.CIUDAD C, DATA_G.CIUDAD C2
+		WHERE Matricula = @matricula
+			AND Origen = @origen
+			AND Destino = @destino
+			AND Fabricante = @fabricante
+			AND FechaLlegada = @fechaLlegada
+			AND V.IdAeronave = A.IdAeronave
+			AND R.IdRuta = V.IdRuta
+			AND A.IdServicio = R.IdServicio
+	RETURN @CANTIDAD
+	END
 GO
 
 -- PASAJE Y PAQUETES --
@@ -2206,6 +2228,7 @@ GO
 --PRINT @r
 
 --SELECT aeronave.IdAeronave as IdAeronave, aeronave.KG_Disponibles as Kg_Disponibles, aeronave.CantButacas as CantButacas, vuelos.NroVuelo as NroVuelo, vuelos.FechaSalida as FechaSalida FROM DATA_G.VUELO vuelos,DATA_G.RUTA rutas, DATA_G.CIUDAD ciudades1, DATA_G.CIUDAD ciudades2, DATA_G.AERONAVE aeronave WHERE vuelos.IdRuta = rutas.idRuta AND vuelos.IdAeronave = aeronave.IdAeronave AND rutas.Origen = ciudades1.CodigoCiudad AND ciudades1.Nombre = ' Buenos Aires' AND rutas.Destino = ciudades2.CodigoCiudad AND ciudades2.Nombre = ' Nueva York'
+--SELECT SUM(PQ.KG) AS KgLibres FROM DATA_G.COMPRA C JOIN DATA_G.PAQUETE PQ on PQ.NroCompra = C.NroCompra WHERE C.NroVuelo = " + reader["NroVuelo"].ToString() +" and C.NroCompra not in (SELECT NroCompra FROM DATA_G.DEVOLUCION)
 
 CREATE FUNCTION DATA_G.MAS_MILLAS(@idCliente int, @idProducto int, @cantidad int) 
 	RETURNS int
@@ -2359,4 +2382,4 @@ SELECT * FROM DATA_G.CIUDAD
 
  */
 
-
+ --SELECT aeronave.IdAeronave as IdAeronave, aeronave.KG_Disponibles as Kg_Disponibles, aeronave.CantButacas as CantButacas, vuelos.NroVuelo as NroVuelo, vuelos.FechaSalida as FechaSalida FROM DATA_G.VUELO vuelos,DATA_G.RUTA rutas, DATA_G.CIUDAD ciudades1, DATA_G.CIUDAD ciudades2, DATA_G.AERONAVE aeronave WHERE vuelos.FechaSalida <= '2016-02-02 16:00:00.000' AND vuelos.IdRuta = rutas.idRuta AND vuelos.IdAeronave = aeronave.IdAeronave AND rutas.Origen = ciudades1.CodigoCiudad AND ciudades1.Nombre = ' Nueva York' AND rutas.Destino = ciudades2.CodigoCiudad AND ciudades2.Nombre = ' Toronto'

@@ -166,8 +166,8 @@ namespace AerolineaFrba.Registro_Llegada_Destino
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             string matricula = txtMatricula.Text;
-            string origen = cmbAeropuertoOrigen.Text;
-            string destino = cmbAeropuertoDestino.Text;
+            Int32 origen = Convert.ToInt32(cmbAeropuertoOrigen.SelectedValue);
+            Int32 destino = Convert.ToInt32(cmbAeropuertoDestino.SelectedValue);
             string fabricante = txtFabricante.Text;
             string fechaLlegada = txtFecha.Text;
             string[] componentesFecha = fechaLlegada.Split('/');
@@ -188,7 +188,7 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             hora = (int.Parse(hora) - 12).ToString();
             }
 
-            string query4 = "DATA_G.REGISTRO_LLEGADA('"+NroVuelo+"', '"+ fechallegada+" "+hora+":"+minutos+":00:000"+" "+timeofday+"')";
+            string query4 = "DATA_G.REGISTRO_LLEGADA('"+NroVuelo+"', '"+ fechallegada+" "+hora+":"+minutos+":00:000"+" "+timeofday+"', '" + destino +"')";
         
         }
     }
