@@ -61,13 +61,13 @@ namespace AerolineaFrba.Abm_Aeronave
         private void VerAeronaves_Load(object sender, EventArgs e)
         {
             btnSeleccionar.Visible = false;
-            
-            string query = "SELECT * FROM DATA_G.AERONAVE";
+
+            string query = " SELECT FechaDeAlta, matricula, Modelo, kg_disponibles, Fabricante, servicio.Descripcion AS servi, cantButacas, estado.Descripcion AS estadi, BajaPorFueraDeServicio, FechaDeFueraDeServicio, FechaReinicioDeServicio, ciudad.Nombre AS Ubicacion FROM	DATA_G.AERONAVE AS aeronave, DATA_G.TIPODESERVICIO AS servicio, DATA_G.ESTADO AS estado, DATA_G.CIUDAD AS ciudad WHERE aeronave.IdServicio = servicio.IdServicio AND aeronave.IdEstado = estado.IdEstado AND aeronave.Ubicacion = ciudad.CodigoCiudad";
             SqlDataReader reader = Conexion.ejecutarQuery(query);
 
             while (reader.Read())
             {
-            dgvAeronaves.Rows.Add(reader["FechaDeAlta"], reader["matricula"].ToString(), reader["Modelo"], reader["kg_disponibles"], reader ["Fabricante"], reader ["IdServicio"], reader["cantButacas"], reader ["idEstado"] ,reader ["BajaPorFueraDeServicio"], reader ["FechaDeFueraDeServicio"], reader ["FechaReinicioDeServicio"]);
+            dgvAeronaves.Rows.Add(reader["FechaDeAlta"], reader["matricula"].ToString(), reader["Modelo"], reader["kg_disponibles"], reader ["Fabricante"], reader ["servi"], reader["cantButacas"], reader ["estadi"] ,reader ["BajaPorFueraDeServicio"], reader ["FechaDeFueraDeServicio"], reader ["FechaReinicioDeServicio"], reader["Ubicacion"]);
             }
             reader.Close();
 
