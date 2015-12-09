@@ -30,6 +30,10 @@ namespace AerolineaFrba.Generacion_Viaje
             dgvAeronave.Rows.Add(matricula, modelo, espacioEncomienda, fabricante, servicio, cantidadButacas, ubicacion);
         }
 
+        public void EditarGenerarViaje2(string codigo, string precioEncomienda, string precioPasaje, string servicio, string ciudadOrigen, string ciudadDestino)
+        { 
+            dgvRuta.Rows.Add(codigo, precioEncomienda, precioPasaje, servicio, ciudadOrigen, ciudadDestino);
+        }
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Hide();
