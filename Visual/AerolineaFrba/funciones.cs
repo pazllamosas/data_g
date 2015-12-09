@@ -47,6 +47,9 @@ namespace AerolineaFrba
             return Convert.ToDateTime(ConfigurationManager.AppSettings["fecha"]);
         }
 
+   
+
+
         public static DateTime getFechaSistemaEnTipoDate()
         {
             return DateTime.Today;

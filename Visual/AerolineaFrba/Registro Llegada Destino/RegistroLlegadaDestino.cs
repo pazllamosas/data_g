@@ -211,7 +211,7 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             hora = (int.Parse(hora) - 12).ToString();
             }
 
-            string query4 = "DATA_G.REGISTRO_LLEGADA('"+NroVuelo+"', '"+ fechallegada+" "+hora+":"+minutos+":00:000"+" "+timeofday+"', '" + destino +"')";
+            string query4 = "DATA_G.REGISTRO_LLEGADA('" + NroVuelo + "', '" + Convert.ToDateTime(fechallegada) + " " + hora + ":" + minutos + ":00:000" + " " + timeofday + "', '" + destino + "')";
             this.txtMatricula.Clear();
             this.txtFecha.Clear();
             this.txtTipoServicio.Clear();

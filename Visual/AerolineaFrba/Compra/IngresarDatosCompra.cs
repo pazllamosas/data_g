@@ -115,8 +115,11 @@ namespace AerolineaFrba.Compra
         {
             string origen = cmbCiudadOrigen.Text;
             string destino = cmbCiudadDestino.Text;
+            string fecha = dtmVuelo.Value.ToString("yyyy-MM-dd");
+           // DateTime dt = DateTime.ParseExact(dateString, "ddMMyyyy", CultureInfo.InvariantCulture);
+            //dt.ToString("yyyyMMdd");
 
-            string query = "SELECT aeronave.IdAeronave as IdAeronave, aeronave.KG_Disponibles as Kg_Disponibles, aeronave.CantButacas as CantButacas, vuelos.NroVuelo as NroVuelo, vuelos.FechaSalida as FechaSalida FROM DATA_G.VUELO vuelos,DATA_G.RUTA rutas, DATA_G.CIUDAD ciudades1, DATA_G.CIUDAD ciudades2, DATA_G.AERONAVE aeronave WHERE vuelos.FechaSalida <= CAST('"+ dtmVuelo.Text +"' as datetime) AND vuelos.IdRuta = rutas.idRuta AND vuelos.IdAeronave = aeronave.IdAeronave AND rutas.Origen = ciudades1.CodigoCiudad AND ciudades1.Nombre = '" + origen + "' AND rutas.Destino = ciudades2.CodigoCiudad AND ciudades2.Nombre = '" + destino + "'";
+            string query = "SELECT aeronave.IdAeronave as IdAeronave, aeronave.KG_Disponibles as Kg_Disponibles, aeronave.CantButacas as CantButacas, vuelos.NroVuelo as NroVuelo, vuelos.FechaSalida as FechaSalida FROM DATA_G.VUELO vuelos,DATA_G.RUTA rutas, DATA_G.CIUDAD ciudades1, DATA_G.CIUDAD ciudades2, DATA_G.AERONAVE aeronave WHERE vuelos.FechaSalida <= '" + fecha + "' AND vuelos.IdRuta = rutas.idRuta AND vuelos.IdAeronave = aeronave.IdAeronave AND rutas.Origen = ciudades1.CodigoCiudad AND ciudades1.Nombre = '" + origen + "' AND rutas.Destino = ciudades2.CodigoCiudad AND ciudades2.Nombre = '" + destino + "' ";
 
             SqlDataReader reader = Conexion.ejecutarQuery(query);
 
