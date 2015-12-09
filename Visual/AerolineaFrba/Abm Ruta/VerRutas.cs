@@ -45,15 +45,24 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void button3_Click(object sender, EventArgs e)
         {
-            DataGridViewRow d = null;
-            string codigo = d.Cells[1].ToString();
-            string precioEncomienda = d.Cells[2].ToString();
-            string precioPasaje = d.Cells[3].ToString();
-            string servicio = d.Cells[4].ToString();
-            string ciudadOrigen = d.Cells[5].ToString();
-            string ciudadDestino = d.Cells[6].ToString();
+            Int32 selectedRowCount = dgvRutas.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount > 0 && selectedRowCount < 2)
+            {
+            DataGridViewRow d = dgvRutas.SelectedRows[0];
+            string codigo = d.Cells[0].Value.ToString();
+            string precioEncomienda = d.Cells[1].Value.ToString();
+            string precioPasaje = d.Cells[2].Value.ToString();
+            string servicio = d.Cells[3].Value.ToString();
+            string ciudadOrigen = d.Cells[4].Value.ToString();
+            string ciudadDestino = d.Cells[5].Value.ToString();
+            FormProvider.AgregarRuta.Show(); //mandar todos los parametros.
+            FormProvider.AgregarRuta.EditarAeronave(codigo, precioEncomienda, precioPasaje, servicio, ciudadOrigen, ciudadDestino);
 
-            new AgregarRuta(codigo, precioEncomienda, precioPasaje, servicio, ciudadOrigen, ciudadDestino).Show(); //mandar todos los parametros.
+            }
+            else
+            {
+                MessageBox.Show("No podés editar si no elegís una ruta y sólo una ruta.");
+            }
 
         }
 
@@ -75,12 +84,12 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void VerRutas_Load(object sender, EventArgs e)
         {
-            string query = "SELECT * FROM DATA_G.RUTA";
+            string query = "SELECT Codigo, Precio_BaseKG, Precio_BasePasaje, servicio.Descripcion AS servi, ciudad1.Nombre AS origen, ciudad2.Nombre AS destino FROM DATA_G.RUTA AS ruta, DATA_G.TIPODESERVICIO AS servicio, DATA_G.CIUDAD AS ciudad1, DATA_G.CIUDAD AS ciudad2 WHERE ruta.IdServicio = servicio.IdServicio AND ruta.Origen = ciudad1.CodigoCiudad AND ruta.Destino = ciudad2.CodigoCiudad ";
             SqlDataReader reader = Conexion.ejecutarQuery(query);
 
             while (reader.Read())
             {
-                dgvRutas.Rows.Add(reader["Codigo"], reader["Precio_BaseKG"].ToString(), reader["Precio_BasePasaje"], reader["IdServicio"], reader["Origen"], reader["Destino"]);
+                dgvRutas.Rows.Add(reader["Codigo"], reader["Precio_BaseKG"].ToString(), reader["Precio_BasePasaje"], reader["servi"], reader["origen"], reader["destino"]);
             }
             reader.Close();
 
@@ -90,14 +99,35 @@ namespace AerolineaFrba.Abm_Ruta
         {
             btnSeleccionar.Visible = false;
 
-            string query = "SELECT * FROM DATA_G.RUTA";
-            SqlDataReader reader = Conexion.ejecutarQuery(query);
+            //string query = "SELECT * FROM DATA_G.RUTA";
+            //SqlDataReader reader = Conexion.ejecutarQuery(query);
 
-            while (reader.Read())
+            //while (reader.Read())
+            //{
+             //   dgvRutas.Rows.Add(reader["Codigo"], reader["Precio_BaseKG"].ToString(), reader["Precio_BasePasaje"], reader["idServicio"], reader["Origen"], reader["Destino"]);
+            //}
+            //reader.Close();
+        }
+
+        private void btnSeleccionar_Click(object sender, EventArgs e)
+        {
+            Int32 selectedRowCount = dgvRutas.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount > 0 && selectedRowCount < 2)
             {
-                dgvRutas.Rows.Add(reader["Codigo"], reader["Precio_BaseKG"].ToString(), reader["Precio_BasePasaje"], reader["idServicio"], reader["Origen"], reader["Destino"]);
+                DataGridViewRow d = dgvRutas.SelectedRows[0];
+                string codigo = d.Cells[0].Value.ToString();
+                string precioEncomienda = d.Cells[1].Value.ToString();
+                string precioPasaje = d.Cells[2].Value.ToString();
+                string servicio = d.Cells[3].Value.ToString();
+                string ciudadOrigen = d.Cells[4].Value.ToString();
+                string ciudadDestino = d.Cells[5].Value.ToString();
+                FormProvider.GenerarViaje.Show(); //mandar todos los parametros.
+                FormProvider.GenerarViaje.EditarGenerarViaje2(codigo, precioEncomienda, precioPasaje, servicio, ciudadOrigen, ciudadDestino);
             }
-            reader.Close();
+            else
+            {
+                MessageBox.Show("No podés editar si no elegís una Ruta y sólo una ruta.");
+            }
         }
     }
 }

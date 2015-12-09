@@ -20,42 +20,17 @@ namespace AerolineaFrba.Abm_Ruta
             InitializeComponent();
         }
 
-                public AgregarRuta(string codigo, string precioEncomienda, string precioPasaje, string servicio, string ciudadOrigen, string ciudadDestino) //mandar todos los parametros para completar los texbox 
+        public void EditarAeronave(string codigo, string precioEncomienda, string precioPasaje, string servicio, string ciudadOrigen, string ciudadDestino) //mandar todos los parametros para completar los texbox 
         {
-            InitializeComponent();
-            this.txtCodigo.Text = codigo; //asignar los parametros a los text
-            this.txtPrecioEncomienda.Text = precioEncomienda;
-            this.txtPrecioPasaje.Text = precioPasaje;
-   
-
-            int i;                                 //buscar como comparar el parametro con el combo box
-            int cantidad = int.Parse(cmbCiudadOrigen.Size.ToString());
-            for (i = 0; i < cantidad; i++)    
-            {
-                cmbCiudadOrigen.SelectedIndex = i;
-                if (cmbCiudadOrigen.Text == ciudadOrigen) //nombre es el parametro
-                    break;
-            }
-
-            int k;                                 //buscar como comparar el parametro con el combo box
-            int cantidad3 = int.Parse(cmbCiudadDestino.Size.ToString());
-            for (k = 0; k < cantidad3; k++)
-            {
-                cmbCiudadDestino.SelectedIndex = k;
-                if (cmbCiudadDestino.Text == ciudadDestino) //nombre es el parametro
-                    break;
-            }
-
-            int j;
-            int cantidad2 = int.Parse(this.cmbTipoServicio.Size.ToString());
-            for (j = 0; j < cantidad2; j++)
-            {
-                this.cmbTipoServicio.SelectedIndex = j;
-                if (cmbTipoServicio.Text == servicio)
-                    break;
-            }
-
+            txtCodigo.Text = codigo; //asignar los parametros a los text
+            txtPrecioEncomienda.Text = precioEncomienda;
+            txtPrecioPasaje.Text = precioPasaje;
+            cmbTipoServicio.Text = servicio;
+            cmbCiudadOrigen.Text = ciudadOrigen;
+            cmbCiudadDestino.Text = ciudadDestino;
+            
         }
+
 
         private void label1_Click(object sender, EventArgs e)
         {
