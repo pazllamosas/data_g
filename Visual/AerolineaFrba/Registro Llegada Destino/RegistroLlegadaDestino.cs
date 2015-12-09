@@ -234,6 +234,10 @@ namespace AerolineaFrba.Registro_Llegada_Destino
         
         public Boolean existeVuelo(string matricula, Int32 origen, Int32 destino, string fabricante, string fechallegada )
         {
+            //fechallegada= row["fecha"].ToString();
+            //DateTime dtFecha = Convert.ToDateTime(fechallegada);
+            //dtpFecha.Value = dtFecha;
+
             string query = "SELECT DATA_G.HAY_VUELO ('" + matricula + "', '" + origen + "', '" + destino + "', '" + fabricante + "', '" + fechallegada + "' ) AS id";
             SqlDataReader reader = Conexion.ejecutarQuery(query);
             reader.Read();
