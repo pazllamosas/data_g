@@ -1825,7 +1825,6 @@ CREATE FUNCTION DATA_G.HAY_VUELO(@matricula nvarchar(255), @origen int, @destino
 			AND Origen = @origen
 			AND Destino = @destino
 			AND Fabricante = @fabricante
-			AND FechaLlegada = @fechaLlegada
 			AND V.IdAeronave = A.IdAeronave
 			AND R.IdRuta = V.IdRuta
 			AND A.IdServicio = R.IdServicio
