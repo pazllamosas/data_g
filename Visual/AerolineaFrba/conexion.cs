@@ -36,7 +36,7 @@ namespace AerolineaFrba
         {
 
 
-            string datosConexion = "Data Source=localHost\\SQLSERVER2012;Initial Catalog= ;Persist Security Info=True;User ID= gd;Password= gd2015";
+            string datosConexion = "Data Source=localHost\\SQLSERVER2012;Initial Catalog= ;Persist Security Info=True;User ID= gd;Password= gd2015; MultipleActiveResultSets=True";
             SqlConnection conexion = new SqlConnection();
             conexion.ConnectionString = datosConexion;
             SqlCommand command;
