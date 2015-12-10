@@ -38,6 +38,8 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvAeronaves = new System.Windows.Forms.DataGridView();
+            this.btnSeleccionar = new System.Windows.Forms.Button();
+            this.btnDarBaja = new System.Windows.Forms.Button();
             this.aeroFechaDeAlta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.aeroMatricula = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.aeroModelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,8 +52,7 @@
             this.aeroFechaFueraDeServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.aeroFechaReinicioDeServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnSeleccionar = new System.Windows.Forms.Button();
-            this.btnDarBaja = new System.Windows.Forms.Button();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAeronaves)).BeginInit();
             this.SuspendLayout();
@@ -160,12 +161,38 @@
             this.aeroBajaPorFueraServicio,
             this.aeroFechaFueraDeServicio,
             this.aeroFechaReinicioDeServicio,
-            this.Column1});
+            this.Column1,
+            this.Column2});
             this.dgvAeronaves.Location = new System.Drawing.Point(12, 85);
             this.dgvAeronaves.Name = "dgvAeronaves";
             this.dgvAeronaves.Size = new System.Drawing.Size(610, 264);
             this.dgvAeronaves.TabIndex = 12;
             this.dgvAeronaves.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAeronaves_CellContentClick);
+            // 
+            // btnSeleccionar
+            // 
+            this.btnSeleccionar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSeleccionar.Location = new System.Drawing.Point(247, 27);
+            this.btnSeleccionar.Name = "btnSeleccionar";
+            this.btnSeleccionar.Size = new System.Drawing.Size(75, 23);
+            this.btnSeleccionar.TabIndex = 15;
+            this.btnSeleccionar.Text = "Seleccionar";
+            this.btnSeleccionar.UseVisualStyleBackColor = true;
+            this.btnSeleccionar.Visible = false;
+            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
+            // 
+            // btnDarBaja
+            // 
+            this.btnDarBaja.Image = global::AerolineaFrba.Properties.Resources.noplane;
+            this.btnDarBaja.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDarBaja.Location = new System.Drawing.Point(400, 27);
+            this.btnDarBaja.Name = "btnDarBaja";
+            this.btnDarBaja.Size = new System.Drawing.Size(86, 23);
+            this.btnDarBaja.TabIndex = 16;
+            this.btnDarBaja.Text = "Dar de Baja";
+            this.btnDarBaja.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnDarBaja.UseVisualStyleBackColor = true;
+            this.btnDarBaja.Click += new System.EventHandler(this.btnDarBaja_Click);
             // 
             // aeroFechaDeAlta
             // 
@@ -227,30 +254,10 @@
             this.Column1.HeaderText = "Ubicación";
             this.Column1.Name = "Column1";
             // 
-            // btnSeleccionar
+            // Column2
             // 
-            this.btnSeleccionar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSeleccionar.Location = new System.Drawing.Point(247, 27);
-            this.btnSeleccionar.Name = "btnSeleccionar";
-            this.btnSeleccionar.Size = new System.Drawing.Size(75, 23);
-            this.btnSeleccionar.TabIndex = 15;
-            this.btnSeleccionar.Text = "Seleccionar";
-            this.btnSeleccionar.UseVisualStyleBackColor = true;
-            this.btnSeleccionar.Visible = false;
-            this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
-            // 
-            // btnDarBaja
-            // 
-            this.btnDarBaja.Image = global::AerolineaFrba.Properties.Resources.noplane;
-            this.btnDarBaja.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDarBaja.Location = new System.Drawing.Point(400, 27);
-            this.btnDarBaja.Name = "btnDarBaja";
-            this.btnDarBaja.Size = new System.Drawing.Size(86, 23);
-            this.btnDarBaja.TabIndex = 16;
-            this.btnDarBaja.Text = "Dar de Baja";
-            this.btnDarBaja.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnDarBaja.UseVisualStyleBackColor = true;
-            this.btnDarBaja.Click += new System.EventHandler(this.btnDarBaja_Click);
+            this.Column2.HeaderText = "Baja por vida útil";
+            this.Column2.Name = "Column2";
             // 
             // VerAeronaves
             // 
@@ -304,5 +311,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn aeroFechaFueraDeServicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn aeroFechaReinicioDeServicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
     }
 }

@@ -100,15 +100,16 @@ namespace AerolineaFrba.Registro_Llegada_Destino
 
                 string fechaLlegada = txtFecha.Text;
 
-                string[] componentesFecha = fechaLlegada.Split('/');
+                string[] componentesFecha = fechaLlegada.Split('-');
 
-                if (componentesFecha.Length > 3) { MessageBox.Show("coloco mal la fecha, tiene más de dos /"); fallo = 1; }
+                if (componentesFecha.Length > 3) { MessageBox.Show("coloco mal la fecha, tiene más de dos -"); fallo = 1; }
+                if (componentesFecha.Length < 3) { MessageBox.Show("coloco mal la fecha, tiene menos de dos -"); fallo = 1; }
 
-                if (1 > int.Parse(componentesFecha[0]) || int.Parse(componentesFecha[0]) > 31) { MessageBox.Show("coloco mal la fecha, coloco mal el día"); fallo = 1; }
+                if (1 > int.Parse(componentesFecha[2]) || int.Parse(componentesFecha[2]) > 31) { MessageBox.Show("coloco mal la fecha, coloco mal el día"); fallo = 1; }
 
                 if (1 > int.Parse(componentesFecha[1]) || int.Parse(componentesFecha[1]) > 12) { MessageBox.Show("coloco mal la fecha, coloco mal el mes"); fallo = 1; }
 
-                if (1950 > int.Parse(componentesFecha[2]) || int.Parse(componentesFecha[2]) > DateTime.Today.Year) { MessageBox.Show("coloco mal la fecha, coloco mal el año"); fallo = 1; }
+                if (1950 > int.Parse(componentesFecha[0]) || int.Parse(componentesFecha[0]) > DateTime.Today.Year) { MessageBox.Show("coloco mal la fecha, coloco mal el año"); fallo = 1; }
 
                 string hora = txtHora.Text;
                 string minutos = txtMinutos.Text;
@@ -196,7 +197,7 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             Int32 destino = Convert.ToInt32(cmbAeropuertoDestino.SelectedValue);
             string fabricante = txtFabricante.Text;
             string fechaLlegada = txtFecha.Text;
-            string[] componentesFecha = fechaLlegada.Split('/');
+            string[] componentesFecha = fechaLlegada.Split('-');
 
             if(existeVuelo(matricula, origen, destino, fabricante, fechaLlegada))
             {

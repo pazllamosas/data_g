@@ -58,6 +58,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtFechaSalida = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAeronave)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRuta)).BeginInit();
@@ -142,7 +144,9 @@
             this.Column4,
             this.Column5,
             this.Column6,
-            this.Column13});
+            this.Column13,
+            this.Column14,
+            this.Column15});
             this.dgvAeronave.Location = new System.Drawing.Point(15, 141);
             this.dgvAeronave.Name = "dgvAeronave";
             this.dgvAeronave.ShowRowErrors = false;
@@ -305,6 +309,16 @@
             this.label4.TabIndex = 35;
             this.label4.Text = "(formato: aaaa-mm-dd)";
             // 
+            // Column14
+            // 
+            this.Column14.HeaderText = "Baja por fuera de servicio";
+            this.Column14.Name = "Column14";
+            // 
+            // Column15
+            // 
+            this.Column15.HeaderText = "Fecha reinicio de servicio";
+            this.Column15.Name = "Column15";
+            // 
             // GenerarViaje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -368,5 +382,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtFechaSalida;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
     }
 }

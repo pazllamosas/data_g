@@ -9,6 +9,11 @@
   
   CON CADA DIA QUE PASA HABRIA QUE FIJARSE EN TODAS LAS AERONAVE SI TIENE
   QUE IR A OTRA CIUDAD PARA PODER REALIZAR UN VUELO EN 2 DIAS.
+
+boton guardar: //Validar que entre el último viaje que recorra esa aeronave y la fecha seleccionada hayan 2 días de diferencia.
+               /*&& fechaReinicioSerrv >= fechaSalida */
+		
+	       //generar query para agregar el vuelo
  }
 
 editar ruta y aeronave que sea un editar si se toca guardar en "agregaraeronave/ruta"
