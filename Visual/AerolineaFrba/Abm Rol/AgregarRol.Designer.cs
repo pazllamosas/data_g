@@ -32,6 +32,7 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvElegirFuncionalidad = new System.Windows.Forms.DataGridView();
+            this.nroFunc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rolFuncionalidades = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.btnGuardar = new System.Windows.Forms.Button();
@@ -40,6 +41,9 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.txtidRol = new System.Windows.Forms.TextBox();
+            this.labelUsuario = new System.Windows.Forms.Label();
+            this.cmbUsuario = new System.Windows.Forms.ComboBox();
+            this.btnAsignar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvElegirFuncionalidad)).BeginInit();
             this.SuspendLayout();
             // 
@@ -66,24 +70,37 @@
             // 
             // dgvElegirFuncionalidad
             // 
-            this.dgvElegirFuncionalidad.BackgroundColor = System.Drawing.Color.DarkRed;
+            this.dgvElegirFuncionalidad.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvElegirFuncionalidad.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
+            this.dgvElegirFuncionalidad.BackgroundColor = System.Drawing.Color.White;
             this.dgvElegirFuncionalidad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvElegirFuncionalidad.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nroFunc,
             this.rolFuncionalidades});
             this.dgvElegirFuncionalidad.GridColor = System.Drawing.SystemColors.Menu;
-            this.dgvElegirFuncionalidad.Location = new System.Drawing.Point(16, 79);
+            this.dgvElegirFuncionalidad.Location = new System.Drawing.Point(19, 78);
             this.dgvElegirFuncionalidad.Margin = new System.Windows.Forms.Padding(4);
             this.dgvElegirFuncionalidad.Name = "dgvElegirFuncionalidad";
             this.dgvElegirFuncionalidad.RowHeadersWidth = 90;
-            this.dgvElegirFuncionalidad.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.dgvElegirFuncionalidad.Size = new System.Drawing.Size(813, 316);
+            this.dgvElegirFuncionalidad.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgvElegirFuncionalidad.Size = new System.Drawing.Size(493, 297);
             this.dgvElegirFuncionalidad.TabIndex = 4;
             this.dgvElegirFuncionalidad.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvElegirFuncionalidad_CellContentClick);
             // 
+            // nroFunc
+            // 
+            this.nroFunc.FillWeight = 70F;
+            this.nroFunc.HeaderText = "Numero";
+            this.nroFunc.Name = "nroFunc";
+            this.nroFunc.ReadOnly = true;
+            this.nroFunc.Width = 83;
+            // 
             // rolFuncionalidades
             // 
-            this.rolFuncionalidades.HeaderText = "Funcionalidades:";
+            this.rolFuncionalidades.FillWeight = 70F;
+            this.rolFuncionalidades.HeaderText = "Funcionalidad";
             this.rolFuncionalidades.Name = "rolFuncionalidades";
+            this.rolFuncionalidades.Width = 121;
             // 
             // label2
             // 
@@ -130,7 +147,7 @@
             // 
             this.button1.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button1.Location = new System.Drawing.Point(612, 154);
+            this.button1.Location = new System.Drawing.Point(520, 222);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(150, 50);
@@ -157,7 +174,7 @@
             // 
             this.button3.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.button3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button3.Location = new System.Drawing.Point(612, 233);
+            this.button3.Location = new System.Drawing.Point(520, 291);
             this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(150, 50);
@@ -165,14 +182,45 @@
             this.button3.Text = "Eliminar Funcionalidad";
             this.button3.UseVisualStyleBackColor = false;
             // 
-            // idRol
+            // txtidRol
             // 
             this.txtidRol.Location = new System.Drawing.Point(19, 5);
             this.txtidRol.Margin = new System.Windows.Forms.Padding(4);
-            this.txtidRol.Name = "idRol";
+            this.txtidRol.Name = "txtidRol";
             this.txtidRol.ReadOnly = true;
             this.txtidRol.Size = new System.Drawing.Size(56, 22);
             this.txtidRol.TabIndex = 9;
+            // 
+            // labelUsuario
+            // 
+            this.labelUsuario.Location = new System.Drawing.Point(552, 96);
+            this.labelUsuario.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelUsuario.Name = "labelUsuario";
+            this.labelUsuario.Size = new System.Drawing.Size(70, 24);
+            this.labelUsuario.TabIndex = 22;
+            this.labelUsuario.Text = "Usuario:";
+            this.labelUsuario.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cmbUsuario
+            // 
+            this.cmbUsuario.FormattingEnabled = true;
+            this.cmbUsuario.Location = new System.Drawing.Point(642, 96);
+            this.cmbUsuario.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbUsuario.Name = "cmbUsuario";
+            this.cmbUsuario.Size = new System.Drawing.Size(132, 24);
+            this.cmbUsuario.TabIndex = 26;
+            // 
+            // btnAsignar
+            // 
+            this.btnAsignar.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnAsignar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnAsignar.Location = new System.Drawing.Point(594, 137);
+            this.btnAsignar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAsignar.Name = "btnAsignar";
+            this.btnAsignar.Size = new System.Drawing.Size(132, 40);
+            this.btnAsignar.TabIndex = 27;
+            this.btnAsignar.Text = "Asignar Usuario";
+            this.btnAsignar.UseVisualStyleBackColor = false;
             // 
             // AgregarRol
             // 
@@ -181,6 +229,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(845, 446);
+            this.Controls.Add(this.btnAsignar);
+            this.Controls.Add(this.cmbUsuario);
+            this.Controls.Add(this.labelUsuario);
             this.Controls.Add(this.txtidRol);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -194,7 +245,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AgregarRol";
-            this.Text = "Editar Rol";
+            this.Text = "Agregar Rol";
             this.Load += new System.EventHandler(this.AgregarRol_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvElegirFuncionalidad)).EndInit();
             this.ResumeLayout(false);
@@ -210,10 +261,14 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.DataGridView dgvElegirFuncionalidad;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rolFuncionalidades;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox txtidRol;
+        private System.Windows.Forms.Label labelUsuario;
+        private System.Windows.Forms.ComboBox cmbUsuario;
+        private System.Windows.Forms.Button btnAsignar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nroFunc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rolFuncionalidades;
     }
 }

@@ -16,12 +16,12 @@ namespace AerolineaFrba.Abm_Rol
         public AgregarRol()
         {
             InitializeComponent();
-            string query = "SELECT * FROM DATA_G.FUNCIONALIDADES";
+            string query = "SELECT * FROM DATA_G.FUNCIONALIDADES order by IdFuncionalidad";
             SqlDataReader reader = Conexion.ejecutarQuery(query);
 
             while (reader.Read())
             {
-                dgvElegirFuncionalidad.Rows.Add(reader["DescripcionFunc"]);
+                dgvElegirFuncionalidad.Rows.Add(reader["IdFuncionalidad"], reader["DescripcionFunc"]);
             }
             reader.Close();
         }
@@ -38,24 +38,33 @@ namespace AerolineaFrba.Abm_Rol
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string nombre = txtNombre.Text;
-            string idRol = txtidRol.Text;
-
-            if (existeRol(nombre))
+            if (this.validacion())
             {
+                string nombre = txtNombre.Text;
+                string idRol = txtidRol.Text;
 
-
-                bool resultado = Conexion.executeProcedure("DATA_G.MODIFICAR_NOMBRE_ROL", Conexion.generarArgumentos("@NOMBRE", "@ROL "), nombre, idRol);
-
+                bool resultado = Conexion.executeProcedure("DATA_G.CREAR_ROL", Conexion.generarArgumentos("@NOMBRE"), nombre);
                 if (resultado)
                 {
-                    MessageBox.Show("Rol modificado");
+                    MessageBox.Show("Rol creado");
                 }
 
+                //if (existeRol(nombre))
+                //{
+                //bool resultado = Conexion.executeProcedure("DATA_G.MODIFICAR_NOMBRE_ROL", Conexion.generarArgumentos("@NOMBRE", "@ROL "), nombre, idRol);
+                //if (resultado)
+                //{
+                //    MessageBox.Show("Rol modificado");
+                //}
+                // }
+                //else
+                // {
+                //    MessageBox.Show("Ese nombre de rol ya existe");
+                // }
             }
             else
             {
-                MessageBox.Show("Ese nombre de rol ya existe");
+                MessageBox.Show("Completar todos los campos");
             }
         }
 
@@ -75,6 +84,14 @@ namespace AerolineaFrba.Abm_Rol
             //    dgvElegirFuncionalidad.Rows.Add(reader["DescripcionFunc"]);
             //}
             //reader.Close();
+
+            cmbUsuario.ValueMember = "IdUsuario";
+            cmbUsuario.DisplayMember = "Username";
+            cmbUsuario.DataSource = Conexion.cargarTablaConsulta("DATA_G.GET_USUARIOS");
+
+            this.txtNombre.Clear();
+            this.txtidRol.Clear();
+            this.cmbUsuario.SelectedIndex = -1;
 
 
         }
@@ -137,6 +154,15 @@ namespace AerolineaFrba.Abm_Rol
         {
             btnGuardar.Enabled = true;
         }
-        
+
+        private bool validacion()
+        {
+            if (this.txtNombre.Text.Trim() == "")
+                return false;
+           if (this.cmbUsuario.SelectedIndex == -1)
+                return false;
+            return true;
+        }
+
     }
 }
