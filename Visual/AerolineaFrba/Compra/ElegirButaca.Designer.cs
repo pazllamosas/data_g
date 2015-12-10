@@ -46,6 +46,7 @@
             // 
             // dgvSeleccionButaca
             // 
+            this.dgvSeleccionButaca.AllowUserToAddRows = false;
             this.dgvSeleccionButaca.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSeleccionButaca.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.butacaNro,

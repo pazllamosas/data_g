@@ -28,13 +28,28 @@ namespace AerolineaFrba.Compra
 
         }
 
-        public void CargarButacas() {
-            string query = "SELECT * FROM DATA_G.BUTACA WHERE Estado = 'Libre'";
+        public void CargarButacas(string IdAeronave) {
+            dgvSeleccionButaca.Rows.Clear();
+            string query = "SELECT * FROM DATA_G.BUTACA WHERE Estado = 'Libre' and IdAeronave = " + IdAeronave;
             SqlDataReader reader = Conexion.ejecutarQuery(query);
 
             while (reader.Read())
             {
-                dgvSeleccionButaca.Rows.Add(reader["NroButaca"], reader["Tipo"].ToString(), reader["Piso"], reader["Estado"]); //hacerlo sobre la aeronave seleccionada de antemano.
+                dgvSeleccionButaca.Rows.Add(reader["NroButaca"], reader["Tipo"].ToString(), reader["Piso"], reader["Estado"]);
+            }
+            reader.Close();
+        }
+
+        public void CargarButacas(string IdAeronave, string ButacasOcupadas)
+        {
+            dgvSeleccionButaca.Rows.Clear();
+
+            string query = "SELECT * FROM DATA_G.BUTACA WHERE Estado = 'Libre' and IdAeronave = " + IdAeronave + " AND IdButaca NOT IN(" + ButacasOcupadas+ ")";
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+
+            while (reader.Read())
+            {
+                dgvSeleccionButaca.Rows.Add(reader["NroButaca"], reader["Tipo"].ToString(), reader["Piso"], reader["Estado"]);
             }
             reader.Close();
         }
@@ -47,15 +62,17 @@ namespace AerolineaFrba.Compra
 
         private void dgvSeleccionButaca_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.validarBotonGuardar();
+            this.ValidarBotonGuardar();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            FormProvider.IngresarDatosCompra.Show();
+            FormProvider.IngresarDatosCompra.AgregarButacaADgv(txtDni.Text, txtNombre.Text, dgvSeleccionButaca.SelectedRows[0].Cells[0].Value.ToString(), dgvSeleccionButaca.SelectedRows[0].Cells[1].Value.ToString(), dgvSeleccionButaca.SelectedRows[0].Cells[2].Value.ToString());
         }
 
-        private void validarBotonGuardar()
+        private void ValidarBotonGuardar()
         {
 
             if (!string.IsNullOrEmpty(txtDni.Text) && !string.IsNullOrEmpty(txtNombre.Text) && dgvSeleccionButaca.Rows.GetRowCount(DataGridViewElementStates.Selected) > 0 && dgvSeleccionButaca.Rows.GetRowCount(DataGridViewElementStates.Selected) < 2)
@@ -71,12 +88,12 @@ namespace AerolineaFrba.Compra
 
         private void txtDni_TextChanged(object sender, EventArgs e)
         {
-            this.validarBotonGuardar();
+            this.ValidarBotonGuardar();
         }
 
         private void txtNombre_TextChanged(object sender, EventArgs e)
         {
-            this.validarBotonGuardar();
+            this.ValidarBotonGuardar();
         }
     }
 }

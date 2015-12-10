@@ -99,8 +99,39 @@ namespace AerolineaFrba.Compra
         {
             this.Hide();
             FormProvider.ElegirButaca.Show();
-            FormProvider.ElegirButaca.CargarButacas();
+
+            DataGridViewRow d = dgvVuelos.SelectedRows[0];
+            
+            int cantidadDePasajes = dgvPasajes.Rows.Count;
+            if (cantidadDePasajes == 0)
+            {
+                FormProvider.ElegirButaca.CargarButacas(d.Cells[2].Value.ToString());
+            }
+            else
+            {
+                string idButacasOcupadas = "";
+                for (int i = 0; i < cantidadDePasajes; i++ )
+                {
+                    if (i < (cantidadDePasajes - 1))
+                    {
+                        idButacasOcupadas = idButacasOcupadas + dgvPasajes.Rows[i].Cells[2].Value.ToString() + ", ";
+                    }
+                    else
+                    {
+                        idButacasOcupadas = idButacasOcupadas + dgvPasajes.Rows[i].Cells[2].Value.ToString();
+                    }
+                }
+
+                FormProvider.ElegirButaca.CargarButacas(d.Cells[2].Value.ToString(), idButacasOcupadas);
+            }
+            
+            
         }
+
+        public void AgregarButacaADgv(string dni, string nombre, string numerobutaca, string tipobutaca, string piso) { 
+            
+        }
+
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
@@ -193,7 +224,7 @@ namespace AerolineaFrba.Compra
                 
                 if (seAgregaElVuelo)
                 {
-                    dgvVuelos.Rows.Add(reader["NroVuelo"], reader["FechaSalida"]);
+                    dgvVuelos.Rows.Add(reader["NroVuelo"], reader["FechaSalida"], reader["IdAeronave"]);
                 }
                 
             }
@@ -203,7 +234,7 @@ namespace AerolineaFrba.Compra
 
         private void dgvVuelos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            Int32 selectedRowCount = dgvPasajes.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            Int32 selectedRowCount = dgvVuelos.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount > 0 && selectedRowCount < 2)
             {
                 if (int.Parse(txtCantPasajes.Text) > 0)

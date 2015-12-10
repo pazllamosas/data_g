@@ -59,6 +59,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
+            this.IdAeronave = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVuelos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPasajes)).BeginInit();
@@ -192,10 +193,12 @@
             // 
             // dgvVuelos
             // 
+            this.dgvVuelos.AllowUserToAddRows = false;
             this.dgvVuelos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvVuelos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NroVuelo,
-            this.FechaPartida});
+            this.FechaPartida,
+            this.IdAeronave});
             this.dgvVuelos.Location = new System.Drawing.Point(12, 164);
             this.dgvVuelos.Name = "dgvVuelos";
             this.dgvVuelos.Size = new System.Drawing.Size(300, 157);
@@ -262,6 +265,7 @@
             // 
             // dgvPasajes
             // 
+            this.dgvPasajes.AllowUserToAddRows = false;
             this.dgvPasajes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPasajes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.campraDni,
@@ -347,6 +351,13 @@
             this.btnEditar.UseVisualStyleBackColor = true;
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
+            // IdAeronave
+            // 
+            this.IdAeronave.Frozen = true;
+            this.IdAeronave.HeaderText = "Aeronave";
+            this.IdAeronave.Name = "IdAeronave";
+            this.IdAeronave.ReadOnly = true;
+            // 
             // IngresarDatosCompra
             // 
             this.AcceptButton = this.btnSiguiente;
@@ -420,5 +431,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn campraPisoButaca;
         private System.Windows.Forms.DataGridViewTextBoxColumn NroVuelo;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaPartida;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdAeronave;
     }
 }
