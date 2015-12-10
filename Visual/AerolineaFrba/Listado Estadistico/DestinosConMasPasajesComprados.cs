@@ -34,6 +34,7 @@ namespace AerolineaFrba.Listado_Estadistico
         {
             if (cmbSemestre.Text == "1")
             {
+                dgvListado.Rows.Clear();
                 string fecha = txtAnioAConsultar.Text;
 
                 string query = " SELECT * FROM DATA_G.TOP5_DESTINOS_PASAJES(" + "01/06/" + fecha + ")"; //ver si es query o procedure
@@ -59,6 +60,11 @@ namespace AerolineaFrba.Listado_Estadistico
                 reader.Close();
             }
             else MessageBox.Show("ERROR debe elegir semestre 1 o 2");
+        }
+
+        private void dgvListado_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

@@ -32,13 +32,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cmbSemestre = new System.Windows.Forms.ComboBox();
             this.dgvListado = new System.Windows.Forms.DataGridView();
+            this.top5Destino = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnVolver = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnConsultar = new System.Windows.Forms.Button();
             this.txtAnioAConsultar = new System.Windows.Forms.TextBox();
-            this.top5Destino = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListado)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,6 +61,7 @@
             // 
             // dgvListado
             // 
+            this.dgvListado.AllowUserToAddRows = false;
             this.dgvListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvListado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.top5Destino,
@@ -70,6 +71,16 @@
             this.dgvListado.Size = new System.Drawing.Size(610, 260);
             this.dgvListado.TabIndex = 26;
             this.dgvListado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListado_CellContentClick);
+            // 
+            // top5Destino
+            // 
+            this.top5Destino.HeaderText = "Destino";
+            this.top5Destino.Name = "top5Destino";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Cantidad";
+            this.Column2.Name = "Column2";
             // 
             // btnVolver
             // 
@@ -121,16 +132,6 @@
             this.txtAnioAConsultar.Name = "txtAnioAConsultar";
             this.txtAnioAConsultar.Size = new System.Drawing.Size(100, 20);
             this.txtAnioAConsultar.TabIndex = 33;
-            // 
-            // top5Destino
-            // 
-            this.top5Destino.HeaderText = "Destino";
-            this.top5Destino.Name = "top5Destino";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Cantidad";
-            this.Column2.Name = "Column2";
             // 
             // DestinosConPasajesCancelados
             // 

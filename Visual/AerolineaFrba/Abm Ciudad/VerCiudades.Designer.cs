@@ -96,6 +96,7 @@
             // 
             // dgvCiudades
             // 
+            this.dgvCiudades.AllowUserToAddRows = false;
             this.dgvCiudades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCiudades.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ciudadNombre});

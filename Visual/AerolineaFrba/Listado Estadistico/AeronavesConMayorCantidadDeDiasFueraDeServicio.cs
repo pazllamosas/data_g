@@ -35,7 +35,7 @@ namespace AerolineaFrba.Listado_Estadistico
             {
                // string date = "01/08/2008";
               //  DateTime dt = Convert.ToDateTime(date);
-
+                dgvListado.Rows.Clear();
                 string fecha = txtAnioAConsultar.Text;
 
                 string query = " SELECT * FROM DATA_G.TOP5_AERONAVE_FUERA_SERVICIO(" + "01-06-" + fecha + ")"; //ver si es query o procedure

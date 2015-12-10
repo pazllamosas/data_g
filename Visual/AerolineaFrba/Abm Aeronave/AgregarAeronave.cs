@@ -113,6 +113,9 @@ namespace AerolineaFrba.Abm_Aeronave
             {
                 MessageBox.Show("Completar todos los campos");
             }
+
+           FormProvider.VerAeronaves.CargarAeronave();
+
         }
 
 

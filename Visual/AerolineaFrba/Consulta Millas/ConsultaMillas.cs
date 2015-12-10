@@ -47,6 +47,8 @@ namespace AerolineaFrba.Consulta_Millas
 
         private void btnConsultar_Click(object sender, EventArgs e)
         {
+            dgvDetalle.Rows.Clear();
+
             if (txtDni.Text.Length < 1) {
                 MessageBox.Show("Por favor, completá el DNI.");
             }

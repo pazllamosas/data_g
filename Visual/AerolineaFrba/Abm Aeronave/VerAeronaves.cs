@@ -50,14 +50,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void dgvAeronaves_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string query = " SELECT FechaDeAlta, matricula, Modelo, kg_disponibles, Fabricante, servicio.Descripcion AS servi, cantButacas, estado.Descripcion AS estadi, BajaPorFueraDeServicio, FechaDeFueraDeServicio, FechaReinicioDeServicio, ciudad.Nombre AS Ubicacion FROM	DATA_G.AERONAVE AS aeronave, DATA_G.TIPODESERVICIO AS servicio, DATA_G.ESTADO AS estado, DATA_G.CIUDAD AS ciudad WHERE aeronave.IdServicio = servicio.IdServicio AND aeronave.IdEstado = estado.IdEstado AND aeronave.Ubicacion = ciudad.CodigoCiudad";
-            SqlDataReader reader = Conexion.ejecutarQuery(query);
 
-            while (reader.Read())
-            {
-                dgvAeronaves.Rows.Add(reader["FechaDeAlta"], reader["matricula"].ToString(), reader["Modelo"], reader["kg_disponibles"], reader["Fabricante"], reader["servi"], reader["cantButacas"], reader["estadi"], reader["BajaPorFueraDeServicio"], reader["FechaDeFueraDeServicio"], reader["FechaReinicioDeServicio"], reader["Ubicacion"]);
-            }
-            reader.Close();
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -69,6 +62,19 @@ namespace AerolineaFrba.Abm_Aeronave
         {
             btnSeleccionar.Visible = false;
 
+        }
+
+        public void CargarAeronave()
+        {
+            dgvAeronaves.Rows.Clear();
+            string query = " SELECT FechaDeAlta, matricula, Modelo, kg_disponibles, Fabricante, servicio.Descripcion AS servi, cantButacas, estado.Descripcion AS estadi, BajaPorFueraDeServicio, FechaDeFueraDeServicio, FechaReinicioDeServicio, ciudad.Nombre AS Ubicacion FROM	DATA_G.AERONAVE AS aeronave, DATA_G.TIPODESERVICIO AS servicio, DATA_G.ESTADO AS estado, DATA_G.CIUDAD AS ciudad WHERE aeronave.IdServicio = servicio.IdServicio AND aeronave.IdEstado = estado.IdEstado AND aeronave.Ubicacion = ciudad.CodigoCiudad";
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+
+            while (reader.Read())
+            {
+                dgvAeronaves.Rows.Add(reader["FechaDeAlta"], reader["matricula"].ToString(), reader["Modelo"], reader["kg_disponibles"], reader["Fabricante"], reader["servi"], reader["cantButacas"], reader["estadi"], reader["BajaPorFueraDeServicio"], reader["FechaDeFueraDeServicio"], reader["FechaReinicioDeServicio"], reader["Ubicacion"]);
+            }
+            reader.Close();
         }
 
         private void btnEditar_Click(object sender, EventArgs e)

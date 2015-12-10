@@ -44,6 +44,7 @@ namespace AerolineaFrba.Generacion_Viaje
         {
             this.Hide();
             FormProvider.VerRutas.Show();
+            FormProvider.VerRutas.CargarRutas();
             FormProvider.VerRutas.mostrarSeleccionar();
             //entro desde acá puede tocar boton seleccionar
         }
@@ -51,7 +52,9 @@ namespace AerolineaFrba.Generacion_Viaje
         private void btnAgregarAeronave_Click(object sender, EventArgs e)
         {
             this.Hide();
+
             FormProvider.VerAeronaves.Show();
+            FormProvider.VerAeronaves.CargarAeronave();
             FormProvider.VerAeronaves.mostrarSeleccionar();
             //entro desde acá puede tocar boton seleccionar
         }

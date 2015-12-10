@@ -18,9 +18,9 @@ namespace AerolineaFrba.Abm_Rol
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        public void CargarRoles()
         {
-
+            dgvRoles.Rows.Clear();
             string query = "SELECT IdRol, Descripcion FROM DATA_G.ROL";
             SqlDataReader reader = Conexion.ejecutarQuery(query);
 
@@ -29,6 +29,11 @@ namespace AerolineaFrba.Abm_Rol
                 dgvRoles.Rows.Add(reader["IdRol"], reader["Descripcion"]);
             }
             reader.Close();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
             btnEditar.Enabled = true;
         }
 
@@ -90,6 +95,11 @@ namespace AerolineaFrba.Abm_Rol
             //    }
             //    reader.Close();
             //    btnEditar.Enabled = true;
+        }
+
+        private void dgvRoles_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

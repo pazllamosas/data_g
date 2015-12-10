@@ -173,24 +173,28 @@ namespace AerolineaFrba.Inicio
         {
             this.Hide();
             FormProvider.VerRutas.Show();
+            FormProvider.VerRutas.CargarRutas();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
             FormProvider.VerAeronaves.Show();
+            FormProvider.VerAeronaves.CargarAeronave();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             this.Hide();
             FormProvider.VerRoles.Show();
+            FormProvider.VerRoles.CargarRoles();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             this.Hide();
             FormProvider.VerCiudades.Show();
+            FormProvider.VerCiudades.CargarCiudades();
         }
 
         private void Menu_Load(object sender, EventArgs e)

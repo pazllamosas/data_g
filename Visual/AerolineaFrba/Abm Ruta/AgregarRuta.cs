@@ -122,6 +122,8 @@ namespace AerolineaFrba.Abm_Ruta
             {
                 MessageBox.Show("Completar todos los campos");
             }
+
+            FormProvider.VerRutas.CargarRutas();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

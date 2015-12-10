@@ -49,9 +49,9 @@
             this.aeroBajaPorFueraServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.aeroFechaFueraDeServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.aeroFechaReinicioDeServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSeleccionar = new System.Windows.Forms.Button();
             this.btnDarBaja = new System.Windows.Forms.Button();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAeronaves)).BeginInit();
             this.SuspendLayout();
@@ -146,6 +146,7 @@
             // 
             // dgvAeronaves
             // 
+            this.dgvAeronaves.AllowUserToAddRows = false;
             this.dgvAeronaves.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAeronaves.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.aeroFechaDeAlta,
@@ -221,6 +222,11 @@
             this.aeroFechaReinicioDeServicio.HeaderText = "Fecha de Reinicio de Servicio";
             this.aeroFechaReinicioDeServicio.Name = "aeroFechaReinicioDeServicio";
             // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Ubicación";
+            this.Column1.Name = "Column1";
+            // 
             // btnSeleccionar
             // 
             this.btnSeleccionar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -245,11 +251,6 @@
             this.btnDarBaja.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnDarBaja.UseVisualStyleBackColor = true;
             this.btnDarBaja.Click += new System.EventHandler(this.btnDarBaja_Click);
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Ubicación";
-            this.Column1.Name = "Column1";
             // 
             // VerAeronaves
             // 

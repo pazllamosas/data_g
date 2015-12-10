@@ -133,6 +133,7 @@
             // 
             // dgvAeronave
             // 
+            this.dgvAeronave.AllowUserToAddRows = false;
             this.dgvAeronave.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvAeronave.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -227,6 +228,7 @@
             // 
             // dgvRuta
             // 
+            this.dgvRuta.AllowUserToAddRows = false;
             this.dgvRuta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRuta.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column7,

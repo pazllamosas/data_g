@@ -28,6 +28,7 @@ namespace AerolineaFrba.Listado_Estadistico
         {
             if (cmbSemestre.Text == "1")
             {
+                dgvListado.Rows.Clear();
                 string fecha = txtAnioAConsultar.Text;
 
                 string query = " SELECT * FROM DATA_G.TOP5_CLIENTES_PUNTOS(" + "01/06/" + fecha + ")"; //ver si es query o procedure

@@ -32,13 +32,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cmbSemestre = new System.Windows.Forms.ComboBox();
             this.dgvListado = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.btnVolver = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtAnioAConsultar = new System.Windows.Forms.TextBox();
             this.btnConsultar = new System.Windows.Forms.Button();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListado)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,6 +61,7 @@
             // 
             // dgvListado
             // 
+            this.dgvListado.AllowUserToAddRows = false;
             this.dgvListado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvListado.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -69,6 +70,17 @@
             this.dgvListado.Name = "dgvListado";
             this.dgvListado.Size = new System.Drawing.Size(610, 260);
             this.dgvListado.TabIndex = 25;
+            this.dgvListado.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListado_CellContentClick);
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Nombre";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Cantidad";
+            this.Column2.Name = "Column2";
             // 
             // label1
             // 
@@ -120,16 +132,6 @@
             this.btnConsultar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnConsultar.UseVisualStyleBackColor = true;
             this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Nombre";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Cantidad";
-            this.Column2.Name = "Column2";
             // 
             // DestinosConMasPasajesComprados
             // 

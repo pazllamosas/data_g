@@ -85,6 +85,7 @@
             // 
             // dgvRutas
             // 
+            this.dgvRutas.AllowUserToAddRows = false;
             this.dgvRutas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRutas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.rutaCodigo,

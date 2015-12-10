@@ -26,6 +26,8 @@ namespace AerolineaFrba.Abm_Aeronave
         private void btnGuardar_Click(object sender, EventArgs e)
         {
 
+
+            FormProvider.VerAeronaves.CargarAeronave();
         }
     }
 }

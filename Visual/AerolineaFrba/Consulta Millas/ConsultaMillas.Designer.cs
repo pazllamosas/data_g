@@ -36,10 +36,10 @@
             this.txtDni = new System.Windows.Forms.TextBox();
             this.btnVolver = new System.Windows.Forms.Button();
             this.dgvDetalle = new System.Windows.Forms.DataGridView();
-            this.btnConsultar = new System.Windows.Forms.Button();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Concepto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Millas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnConsultar = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
@@ -104,6 +104,7 @@
             // 
             // dgvDetalle
             // 
+            this.dgvDetalle.AllowUserToAddRows = false;
             this.dgvDetalle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDetalle.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Fecha,
@@ -114,20 +115,6 @@
             this.dgvDetalle.Size = new System.Drawing.Size(560, 312);
             this.dgvDetalle.TabIndex = 10;
             this.dgvDetalle.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetalle_CellContentClick);
-            // 
-            // btnConsultar
-            // 
-            this.btnConsultar.Enabled = false;
-            this.btnConsultar.Image = global::AerolineaFrba.Properties.Resources.return_large;
-            this.btnConsultar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnConsultar.Location = new System.Drawing.Point(492, 34);
-            this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(84, 23);
-            this.btnConsultar.TabIndex = 12;
-            this.btnConsultar.Text = "Consultar";
-            this.btnConsultar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnConsultar.UseVisualStyleBackColor = true;
-            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
             // 
             // Fecha
             // 
@@ -149,6 +136,20 @@
             this.Millas.HeaderText = "Millas";
             this.Millas.Name = "Millas";
             this.Millas.ReadOnly = true;
+            // 
+            // btnConsultar
+            // 
+            this.btnConsultar.Enabled = false;
+            this.btnConsultar.Image = global::AerolineaFrba.Properties.Resources.return_large;
+            this.btnConsultar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnConsultar.Location = new System.Drawing.Point(492, 34);
+            this.btnConsultar.Name = "btnConsultar";
+            this.btnConsultar.Size = new System.Drawing.Size(84, 23);
+            this.btnConsultar.TabIndex = 12;
+            this.btnConsultar.Text = "Consultar";
+            this.btnConsultar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnConsultar.UseVisualStyleBackColor = true;
+            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
             // 
             // textBox1
             // 

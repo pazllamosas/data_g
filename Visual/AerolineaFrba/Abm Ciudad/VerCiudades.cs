@@ -24,6 +24,19 @@ namespace AerolineaFrba.Abm_Ciudad
             FormProvider.AgregarCiudad.Show();
         }
 
+        public void CargarCiudades()
+        {
+            dgvCiudades.Rows.Clear();
+            string query = "SELECT * FROM DATA_G.CIUDAD";
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+
+            while (reader.Read())
+            {
+                dgvCiudades.Rows.Add(reader["Nombre"]);
+            }
+            reader.Close();
+        }
+
         private void Botton4_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -49,14 +62,7 @@ namespace AerolineaFrba.Abm_Ciudad
 
         private void dgvCiudades_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string query = "SELECT * FROM DATA_G.CIUDAD";
-            SqlDataReader reader = Conexion.ejecutarQuery(query);
 
-            while (reader.Read())
-            {
-                dgvCiudades.Rows.Add(reader["Nombre"]);
-            }
-            reader.Close();
 
         }
 
