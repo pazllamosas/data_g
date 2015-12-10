@@ -124,8 +124,6 @@ namespace AerolineaFrba.Compra
 
                 FormProvider.ElegirButaca.CargarButacas(d.Cells[2].Value.ToString(), idButacasOcupadas);
             }
-            
-            
         }
 
         public void AgregarButacaADgv(string dni, string nombre, string numerobutaca, string tipobutaca, string piso) {
@@ -134,18 +132,71 @@ namespace AerolineaFrba.Compra
             if (cantidadDePasajes == int.Parse(txtCantPasajes.Text))
             {
                 btnAgregar.Enabled = false;
+                btnSiguiente.Enabled = true;
             }
         }
+
+        public void EditarButacaEnDgv(string dni, string nombre, string numerobutaca, string tipobutaca, string piso)
+        {
+            dgvPasajes.Rows[editandoPasaje].Cells[0].Value = dni;
+            dgvPasajes.Rows[editandoPasaje].Cells[1].Value = nombre;
+            dgvPasajes.Rows[editandoPasaje].Cells[2].Value = numerobutaca;
+            dgvPasajes.Rows[editandoPasaje].Cells[3].Value = tipobutaca;
+            dgvPasajes.Rows[editandoPasaje].Cells[4].Value = piso;
+
+            int cantidadDePasajes = dgvPasajes.Rows.Count;
+            if (cantidadDePasajes == int.Parse(txtCantPasajes.Text))
+            {
+                btnAgregar.Enabled = false;
+                btnSiguiente.Enabled = true;
+            }
+
+            editandoPasaje = -1;
+        }
+
+        private static int editandoPasaje = -1;
 
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
 
+            //me guarda local los datos de la linea seleccionada para estar segura de que lo tengo a mano
+            DataGridViewRow pasajes = dgvPasajes.SelectedRows[0];
+            editandoPasaje = dgvPasajes.CurrentCell.RowIndex;
+
+            this.Hide();
+            
+            //busco las butacas que ya fueron ocupadas en esta compra para evitarlas
+            int cantidadDePasajes = dgvPasajes.Rows.Count;
+            
+                string idButacasOcupadas = "";
+                for (int i = 0; i < cantidadDePasajes; i++)
+                {
+                    if (i < (cantidadDePasajes - 1))
+                    {
+                        idButacasOcupadas = idButacasOcupadas + dgvPasajes.Rows[i].Cells[2].Value.ToString() + ", ";
+                    }
+                    else
+                    {
+                        idButacasOcupadas = idButacasOcupadas + dgvPasajes.Rows[i].Cells[2].Value.ToString();
+                    }
+                }
+
+            // muestro la otra pantalla
+                DataGridViewRow vuelos = dgvVuelos.SelectedRows[0];
+                FormProvider.ElegirButaca.CargarButacas(vuelos.Cells[2].Value.ToString(), idButacasOcupadas);
+                FormProvider.ElegirButaca.EditarButaca(pasajes.Cells[1].Value.ToString(), pasajes.Cells[0].Value.ToString());
+                FormProvider.ElegirButaca.Show();
+
         }
 
         private void dgvPasajes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            Int32 selectedRowCount = dgvPasajes.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount > 0 && selectedRowCount < 2)
+            {
+                btnEditar.Enabled = true;
+            }
         }
 
         private void btnBuscarVuelos_Click(object sender, EventArgs e)

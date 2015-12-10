@@ -54,6 +54,15 @@ namespace AerolineaFrba.Compra
             reader.Close();
         }
 
+        public void EditarButaca(string nombre, string dni)
+        {
+            txtNombre.Text = nombre;
+            txtDni.Text = dni;
+            editando = true;
+        }
+
+        private static bool editando = false;
+
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -67,9 +76,20 @@ namespace AerolineaFrba.Compra
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            if (editando)
+            {
+                FormProvider.IngresarDatosCompra.EditarButacaEnDgv(txtDni.Text, txtNombre.Text, dgvSeleccionButaca.SelectedRows[0].Cells[0].Value.ToString(), dgvSeleccionButaca.SelectedRows[0].Cells[1].Value.ToString(), dgvSeleccionButaca.SelectedRows[0].Cells[2].Value.ToString());
+            }
+            else
+            {
+                FormProvider.IngresarDatosCompra.AgregarButacaADgv(txtDni.Text, txtNombre.Text, dgvSeleccionButaca.SelectedRows[0].Cells[0].Value.ToString(), dgvSeleccionButaca.SelectedRows[0].Cells[1].Value.ToString(), dgvSeleccionButaca.SelectedRows[0].Cells[2].Value.ToString());
+            }
+
+            txtDni.Clear();
+            txtNombre.Clear();
+            editando = false;
             this.Hide();
             FormProvider.IngresarDatosCompra.Show();
-            FormProvider.IngresarDatosCompra.AgregarButacaADgv(txtDni.Text, txtNombre.Text, dgvSeleccionButaca.SelectedRows[0].Cells[0].Value.ToString(), dgvSeleccionButaca.SelectedRows[0].Cells[1].Value.ToString(), dgvSeleccionButaca.SelectedRows[0].Cells[2].Value.ToString());
         }
 
         private void ValidarBotonGuardar()
