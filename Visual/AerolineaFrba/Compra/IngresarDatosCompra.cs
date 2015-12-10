@@ -128,8 +128,13 @@ namespace AerolineaFrba.Compra
             
         }
 
-        public void AgregarButacaADgv(string dni, string nombre, string numerobutaca, string tipobutaca, string piso) { 
-            
+        public void AgregarButacaADgv(string dni, string nombre, string numerobutaca, string tipobutaca, string piso) {
+            dgvVuelos.Rows.Add(dni, nombre, numerobutaca, tipobutaca, piso);
+            int cantidadDePasajes = dgvPasajes.Rows.Count;
+            if (cantidadDePasajes == int.Parse(txtCantPasajes.Text))
+            {
+                btnAgregar.Enabled = false;
+            }
         }
 
 
