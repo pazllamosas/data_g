@@ -207,6 +207,7 @@ namespace AerolineaFrba
                 }
                 return _ElegirButaca;
             }
+
         }
         private static Compra.ElegirButaca _ElegirButaca;
 

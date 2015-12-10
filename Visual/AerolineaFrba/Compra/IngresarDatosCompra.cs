@@ -99,6 +99,7 @@ namespace AerolineaFrba.Compra
         {
             this.Hide();
             FormProvider.ElegirButaca.Show();
+            FormProvider.ElegirButaca.CargarButacas();
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
@@ -198,6 +199,24 @@ namespace AerolineaFrba.Compra
             }
             reader.Close();
 
+        }
+
+        private void dgvVuelos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Int32 selectedRowCount = dgvPasajes.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount > 0 && selectedRowCount < 2)
+            {
+                if (int.Parse(txtCantPasajes.Text) > 0)
+                {
+                    btnAgregar.Enabled = true;
+                    dgvPasajes.Enabled = true;
+                }
+                else
+                {
+                    btnSiguiente.Enabled = true;
+                }
+            }
+            
         }
     }
 }

@@ -30,6 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ElegirButaca));
             this.dgvSeleccionButaca = new System.Windows.Forms.DataGridView();
+            this.butacaNro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.butacaTipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.butacaPiso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.butacaEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
@@ -37,10 +41,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.butacaNro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.butacaTipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.butacaPiso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.butacaEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSeleccionButaca)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,6 +57,26 @@
             this.dgvSeleccionButaca.Size = new System.Drawing.Size(610, 177);
             this.dgvSeleccionButaca.TabIndex = 9;
             this.dgvSeleccionButaca.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSeleccionButaca_CellContentClick);
+            // 
+            // butacaNro
+            // 
+            this.butacaNro.HeaderText = "Numero de Butaca";
+            this.butacaNro.Name = "butacaNro";
+            // 
+            // butacaTipo
+            // 
+            this.butacaTipo.HeaderText = "Tipo de Butaca";
+            this.butacaTipo.Name = "butacaTipo";
+            // 
+            // butacaPiso
+            // 
+            this.butacaPiso.HeaderText = "Piso";
+            this.butacaPiso.Name = "butacaPiso";
+            // 
+            // butacaEstado
+            // 
+            this.butacaEstado.HeaderText = "Estado";
+            this.butacaEstado.Name = "butacaEstado";
             // 
             // label1
             // 
@@ -95,6 +115,7 @@
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // txtDni
             // 
@@ -102,6 +123,7 @@
             this.txtDni.Name = "txtDni";
             this.txtDni.Size = new System.Drawing.Size(121, 20);
             this.txtDni.TabIndex = 16;
+            this.txtDni.TextChanged += new System.EventHandler(this.txtDni_TextChanged);
             // 
             // label4
             // 
@@ -118,6 +140,7 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(121, 20);
             this.txtNombre.TabIndex = 18;
+            this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
             // 
             // label2
             // 
@@ -127,26 +150,6 @@
             this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 17;
             this.label2.Text = "Nombre:";
-            // 
-            // butacaNro
-            // 
-            this.butacaNro.HeaderText = "Numero de Butaca";
-            this.butacaNro.Name = "butacaNro";
-            // 
-            // butacaTipo
-            // 
-            this.butacaTipo.HeaderText = "Tipo de Butaca";
-            this.butacaTipo.Name = "butacaTipo";
-            // 
-            // butacaPiso
-            // 
-            this.butacaPiso.HeaderText = "Piso";
-            this.butacaPiso.Name = "butacaPiso";
-            // 
-            // butacaEstado
-            // 
-            this.butacaEstado.HeaderText = "Estado";
-            this.butacaEstado.Name = "butacaEstado";
             // 
             // ElegirButaca
             // 

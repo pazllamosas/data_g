@@ -44,6 +44,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dgvVuelos = new System.Windows.Forms.DataGridView();
+            this.NroVuelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FechaPartida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnSiguiente = new System.Windows.Forms.Button();
             this.btnBuscarVuelos = new System.Windows.Forms.Button();
@@ -57,8 +59,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
-            this.NroVuelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FechaPartida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVuelos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPasajes)).BeginInit();
@@ -200,6 +200,21 @@
             this.dgvVuelos.Name = "dgvVuelos";
             this.dgvVuelos.Size = new System.Drawing.Size(300, 157);
             this.dgvVuelos.TabIndex = 18;
+            this.dgvVuelos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVuelos_CellContentClick);
+            // 
+            // NroVuelo
+            // 
+            this.NroVuelo.Frozen = true;
+            this.NroVuelo.HeaderText = "Número de Vuelo";
+            this.NroVuelo.Name = "NroVuelo";
+            this.NroVuelo.ReadOnly = true;
+            // 
+            // FechaPartida
+            // 
+            this.FechaPartida.Frozen = true;
+            this.FechaPartida.HeaderText = "Fecha de Partida";
+            this.FechaPartida.Name = "FechaPartida";
+            this.FechaPartida.ReadOnly = true;
             // 
             // btnVolver
             // 
@@ -254,6 +269,7 @@
             this.campraNumButaca,
             this.compraTipoButaca,
             this.campraPisoButaca});
+            this.dgvPasajes.Enabled = false;
             this.dgvPasajes.Location = new System.Drawing.Point(322, 164);
             this.dgvPasajes.Name = "dgvPasajes";
             this.dgvPasajes.Size = new System.Drawing.Size(300, 128);
@@ -290,18 +306,18 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(12, 145);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(97, 13);
+            this.label7.Size = new System.Drawing.Size(107, 13);
             this.label7.TabIndex = 22;
-            this.label7.Text = "Vuelos disponibles:";
+            this.label7.Text = "Seleccione un vuelo:";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(319, 145);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(82, 13);
+            this.label8.Size = new System.Drawing.Size(89, 13);
             this.label8.TabIndex = 23;
-            this.label8.Text = "Pasajes en uso:";
+            this.label8.Text = "Elija sus butacas:";
             // 
             // btnAgregar
             // 
@@ -330,20 +346,6 @@
             this.btnEditar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnEditar.UseVisualStyleBackColor = true;
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
-            // 
-            // NroVuelo
-            // 
-            this.NroVuelo.Frozen = true;
-            this.NroVuelo.HeaderText = "Número de Vuelo";
-            this.NroVuelo.Name = "NroVuelo";
-            this.NroVuelo.ReadOnly = true;
-            // 
-            // FechaPartida
-            // 
-            this.FechaPartida.Frozen = true;
-            this.FechaPartida.HeaderText = "Fecha de Partida";
-            this.FechaPartida.Name = "FechaPartida";
-            this.FechaPartida.ReadOnly = true;
             // 
             // IngresarDatosCompra
             // 
