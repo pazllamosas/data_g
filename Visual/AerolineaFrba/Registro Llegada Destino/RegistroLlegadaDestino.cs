@@ -153,20 +153,26 @@ namespace AerolineaFrba.Registro_Llegada_Destino
                         }
                         reader1.Close();
 
-                        string query2 = "SELECT Descripcion FROM DATA_G.TIPODESERVICIO WHERE idServicio = " + idServicio + "";
+                        if (!(idServicio == "fallo"))
+                        {
+                            string query2 = "SELECT Descripcion FROM DATA_G.TIPODESERVICIO WHERE idServicio = " + idServicio + "";
 
-                        SqlDataReader reader2 = Conexion.ejecutarQuery(query2);
-                        reader2.Read();
-                        string tipoServicio = reader2["Descripcion"].ToString();
-                        reader2.Close();
+                            SqlDataReader reader2 = Conexion.ejecutarQuery(query2);
+                            reader2.Read();
+                            string tipoServicio = reader2["Descripcion"].ToString();
+                            reader2.Close();
 
-                        txtTipoServicio.Text = tipoServicio;
-                        txtFabricante.Text = fabricante;
-                        txtCantButacas.Text = cantidadButacas;
-                        txtCapacidadEncomienda.Text = kgDisponibles;
+                            txtTipoServicio.Text = tipoServicio;
+                            txtFabricante.Text = fabricante;
+                            txtCantButacas.Text = cantidadButacas;
+                            txtCapacidadEncomienda.Text = kgDisponibles;
 
-                        btnGuardar.Enabled = true;
-
+                            btnGuardar.Enabled = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Completar los campos obligatorios");
+                        }
                     }
 
                 }
