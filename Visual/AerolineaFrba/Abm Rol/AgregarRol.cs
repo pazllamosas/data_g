@@ -55,7 +55,18 @@ namespace AerolineaFrba.Abm_Rol
 
         private void dgvElegirFuncionalidad_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+           
+       }
 
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        public void EditarRol(string rol) 
+        {
+            txtNombre.Text = rol; 
+            
         }
     }
 }

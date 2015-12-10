@@ -28,6 +28,7 @@ namespace AerolineaFrba.Abm_Rol
                 dgvRoles.Rows.Add(reader["Descripcion"]);
             }
             reader.Close();
+            btnEditar.Enabled = true;
 
         }
 
@@ -43,8 +44,22 @@ namespace AerolineaFrba.Abm_Rol
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            FormProvider.AgregarRol.Show();
+            
+           
+            Int32 selectedRowCount = dgvRoles.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount > 0 && selectedRowCount < 2)
+            {
+                DataGridViewRow d = dgvRoles.SelectedRows[0];
+                string rol = d.Cells[0].Value.ToString();
+                FormProvider.AgregarRol.Show(); //mandar todos los parametros.
+                FormProvider.AgregarRol.EditarRol(rol);
+
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("No podés editar si no elegís un rol y sólo un rol");
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)
