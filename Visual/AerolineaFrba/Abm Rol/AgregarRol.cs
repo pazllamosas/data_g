@@ -68,5 +68,16 @@ namespace AerolineaFrba.Abm_Rol
             txtNombre.Text = rol; 
             
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            txtNombre.ReadOnly = false;
+            txtNombre.Clear();
+        }
+
+        private void txtNombre_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
