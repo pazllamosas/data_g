@@ -153,7 +153,7 @@ namespace AerolineaFrba.Registro_Llegada_Destino
                         }
                         reader1.Close();
 
-                        string query2 = "SELECT Descripcion FROM DATA_G.TIPODESERVICIO WHERE idServicio = '" + idServicio + "'";
+                        string query2 = "SELECT Descripcion FROM DATA_G.TIPODESERVICIO WHERE idServicio = " + idServicio + "";
 
                         SqlDataReader reader2 = Conexion.ejecutarQuery(query2);
                         reader2.Read();
