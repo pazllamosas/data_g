@@ -78,12 +78,6 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-         
-
-        }
-
-        private void VerRutas_Load(object sender, EventArgs e)
-        {
             string query = "SELECT Codigo, Precio_BaseKG, Precio_BasePasaje, servicio.Descripcion AS servi, ciudad1.Nombre AS origen, ciudad2.Nombre AS destino FROM DATA_G.RUTA AS ruta, DATA_G.TIPODESERVICIO AS servicio, DATA_G.CIUDAD AS ciudad1, DATA_G.CIUDAD AS ciudad2 WHERE ruta.IdServicio = servicio.IdServicio AND ruta.Origen = ciudad1.CodigoCiudad AND ruta.Destino = ciudad2.CodigoCiudad ";
             SqlDataReader reader = Conexion.ejecutarQuery(query);
 
@@ -92,6 +86,11 @@ namespace AerolineaFrba.Abm_Ruta
                 dgvRutas.Rows.Add(reader["Codigo"], reader["Precio_BaseKG"].ToString(), reader["Precio_BasePasaje"], reader["servi"], reader["origen"], reader["destino"]);
             }
             reader.Close();
+        }
+
+        private void VerRutas_Load(object sender, EventArgs e)
+        {
+
 
         }
 

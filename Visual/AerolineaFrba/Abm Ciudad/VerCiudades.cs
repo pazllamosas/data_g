@@ -41,6 +41,14 @@ namespace AerolineaFrba.Abm_Ciudad
         }
         private void Form1_Load(object sender, EventArgs es)
         {
+           
+        }
+        private void menuStrip1_ItemClicked(object sender, EventArgs es)
+        {
+        }
+
+        private void dgvCiudades_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
             string query = "SELECT * FROM DATA_G.CIUDAD";
             SqlDataReader reader = Conexion.ejecutarQuery(query);
 
@@ -49,15 +57,6 @@ namespace AerolineaFrba.Abm_Ciudad
                 dgvCiudades.Rows.Add(reader["Nombre"]);
             }
             reader.Close();
-
-
-        }
-        private void menuStrip1_ItemClicked(object sender, EventArgs es)
-        {
-        }
-
-        private void dgvCiudades_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
         }
 
