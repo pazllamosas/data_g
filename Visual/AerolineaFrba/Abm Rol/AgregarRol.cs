@@ -16,6 +16,14 @@ namespace AerolineaFrba.Abm_Rol
         public AgregarRol()
         {
             InitializeComponent();
+            string query = "SELECT * FROM DATA_G.FUNCIONALIDADES";
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+
+            while (reader.Read())
+            {
+                dgvElegirFuncionalidad.Rows.Add(reader["DescripcionFunc"]);
+            }
+            reader.Close();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -30,7 +38,25 @@ namespace AerolineaFrba.Abm_Rol
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string nombre = txtNombre.Text;
+            string idRol = txtidRol.Text;
 
+            if (existeRol(nombre))
+            {
+
+
+                bool resultado = Conexion.executeProcedure("DATA_G.MODIFICAR_NOMBRE_ROL", Conexion.generarArgumentos("@NOMBRE", "@ROL "), nombre, idRol);
+
+                if (resultado)
+                {
+                    MessageBox.Show("Rol modificado");
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Ese nombre de rol ya existe");
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -41,14 +67,14 @@ namespace AerolineaFrba.Abm_Rol
 
         private void AgregarRol_Load(object sender, EventArgs e)
         {
-            string query = "SELECT * FROM DATA_G.FUNCIONALIDADES";
-            SqlDataReader reader = Conexion.ejecutarQuery(query);
+            //string query = "SELECT * FROM DATA_G.FUNCIONALIDADES";
+            //SqlDataReader reader = Conexion.ejecutarQuery(query);
 
-            while (reader.Read())
-            {
-                dgvElegirFuncionalidad.Rows.Add(reader["DescripcionFunc"]);
-            }
-            reader.Close();
+            //while (reader.Read())
+            //{
+            //    dgvElegirFuncionalidad.Rows.Add(reader["DescripcionFunc"]);
+            //}
+            //reader.Close();
 
 
         }
@@ -60,12 +86,13 @@ namespace AerolineaFrba.Abm_Rol
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-
         }
 
-        public void EditarRol(string rol) 
+
+        public void EditarRol(string rol, string rolDesc) 
         {
-            txtNombre.Text = rol; 
+            txtidRol.Text = rol;
+            txtNombre.Text = rolDesc; 
             
         }
 
@@ -77,7 +104,39 @@ namespace AerolineaFrba.Abm_Rol
 
         private void txtNombre_TextChanged(object sender, EventArgs e)
         {
+            btnGuardar.Enabled = true;
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            txtNombre.ReadOnly = false;
+            txtNombre.Clear();
 
         }
+
+        public Boolean existeRol(string nombre)
+        {
+            string query = "SELECT DATA_G.EXISTE_ROL ('" + nombre + "' ) AS id";
+
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+            reader.Read();
+            int respuesta = int.Parse(reader["id"].ToString());
+            reader.Close();
+
+            if (respuesta == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void txtNombre_TextChanged_1(object sender, EventArgs e)
+        {
+            btnGuardar.Enabled = true;
+        }
+        
     }
 }

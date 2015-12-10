@@ -20,16 +20,16 @@ namespace AerolineaFrba.Abm_Rol
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string query = "SELECT * FROM DATA_G.ROL";
+
+            string query = "SELECT IdRol, Descripcion FROM DATA_G.ROL";
             SqlDataReader reader = Conexion.ejecutarQuery(query);
 
             while (reader.Read())
             {
-                dgvRoles.Rows.Add(reader["Descripcion"]);
+                dgvRoles.Rows.Add(reader["IdRol"], reader["Descripcion"]);
             }
             reader.Close();
             btnEditar.Enabled = true;
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -44,15 +44,16 @@ namespace AerolineaFrba.Abm_Rol
 
         private void button3_Click(object sender, EventArgs e)
         {
-            
-           
+
+
             Int32 selectedRowCount = dgvRoles.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount > 0 && selectedRowCount < 2)
             {
                 DataGridViewRow d = dgvRoles.SelectedRows[0];
                 string rol = d.Cells[0].Value.ToString();
+                string rolDesc = d.Cells[1].Value.ToString();
                 FormProvider.AgregarRol.Show(); //mandar todos los parametros.
-                FormProvider.AgregarRol.EditarRol(rol);
+                FormProvider.AgregarRol.EditarRol(rol, rolDesc);
 
                 this.Hide();
             }
@@ -80,7 +81,16 @@ namespace AerolineaFrba.Abm_Rol
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            //    string query = "SELECT * FROM DATA_G.ROL";
+            //    SqlDataReader reader = Conexion.ejecutarQuery(query);
 
+            //    while (reader.Read())
+            //    {
+            //        dgvRoles.Rows.Add(reader["IdRol"], reader["Descripcion"]);
+            //    }
+            //    reader.Close();
+            //    btnEditar.Enabled = true;
         }
     }
 }
+
