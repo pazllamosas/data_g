@@ -46,6 +46,7 @@
             this.dgvVuelos = new System.Windows.Forms.DataGridView();
             this.NroVuelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FechaPartida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdAeronave = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnSiguiente = new System.Windows.Forms.Button();
             this.btnBuscarVuelos = new System.Windows.Forms.Button();
@@ -59,7 +60,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
-            this.IdAeronave = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVuelos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPasajes)).BeginInit();
@@ -201,6 +201,7 @@
             this.IdAeronave});
             this.dgvVuelos.Location = new System.Drawing.Point(12, 164);
             this.dgvVuelos.Name = "dgvVuelos";
+            this.dgvVuelos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvVuelos.Size = new System.Drawing.Size(300, 157);
             this.dgvVuelos.TabIndex = 18;
             this.dgvVuelos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVuelos_CellContentClick);
@@ -218,6 +219,13 @@
             this.FechaPartida.HeaderText = "Fecha de Partida";
             this.FechaPartida.Name = "FechaPartida";
             this.FechaPartida.ReadOnly = true;
+            // 
+            // IdAeronave
+            // 
+            this.IdAeronave.Frozen = true;
+            this.IdAeronave.HeaderText = "Aeronave";
+            this.IdAeronave.Name = "IdAeronave";
+            this.IdAeronave.ReadOnly = true;
             // 
             // btnVolver
             // 
@@ -276,6 +284,7 @@
             this.dgvPasajes.Enabled = false;
             this.dgvPasajes.Location = new System.Drawing.Point(322, 164);
             this.dgvPasajes.Name = "dgvPasajes";
+            this.dgvPasajes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPasajes.Size = new System.Drawing.Size(300, 128);
             this.dgvPasajes.TabIndex = 21;
             this.dgvPasajes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPasajes_CellContentClick);
@@ -350,13 +359,6 @@
             this.btnEditar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnEditar.UseVisualStyleBackColor = true;
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
-            // 
-            // IdAeronave
-            // 
-            this.IdAeronave.Frozen = true;
-            this.IdAeronave.HeaderText = "Aeronave";
-            this.IdAeronave.Name = "IdAeronave";
-            this.IdAeronave.ReadOnly = true;
             // 
             // IngresarDatosCompra
             // 

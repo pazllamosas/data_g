@@ -192,11 +192,6 @@ namespace AerolineaFrba.Compra
 
         private void dgvPasajes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
-        }
-
-        protected void dvgPasajes_OnSelectedIndexChanged(object sender, EventArgs e)
-        {
             Int32 selectedRowCount = dgvPasajes.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount > 0 && selectedRowCount < 2)
             {
@@ -293,7 +288,7 @@ namespace AerolineaFrba.Compra
 
         }
 
-        protected void dvgVuelos_OnSelectedIndexChanged(object sender, EventArgs e)
+        private void dgvVuelos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             Int32 selectedRowCount = dgvVuelos.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount > 0 && selectedRowCount < 2)
@@ -308,11 +303,7 @@ namespace AerolineaFrba.Compra
                     btnSiguiente.Enabled = true;
                 }
             }
-        }
-
-        private void dgvVuelos_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-             
+            
         }
     }
 }

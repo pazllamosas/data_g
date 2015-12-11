@@ -54,7 +54,9 @@
             this.butacaPiso,
             this.butacaEstado});
             this.dgvSeleccionButaca.Location = new System.Drawing.Point(12, 146);
+            this.dgvSeleccionButaca.MultiSelect = false;
             this.dgvSeleccionButaca.Name = "dgvSeleccionButaca";
+            this.dgvSeleccionButaca.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSeleccionButaca.Size = new System.Drawing.Size(610, 177);
             this.dgvSeleccionButaca.TabIndex = 9;
             this.dgvSeleccionButaca.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSeleccionButaca_CellContentClick);
