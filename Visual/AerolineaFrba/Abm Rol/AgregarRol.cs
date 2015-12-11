@@ -277,6 +277,7 @@ namespace AerolineaFrba.Abm_Rol
                     this.txtidRol.Clear();
                     this.cmbUsuario.SelectedIndex = -1;
                     this.Hide();
+                    FormProvider.VerRoles.CargarRoles();
                     FormProvider.VerRoles.Show();
                 }
                 else

@@ -21,7 +21,7 @@ namespace AerolineaFrba.Abm_Rol
         public void CargarRoles()
         {
             dgvRoles.Rows.Clear();
-            string query = "SELECT IdRol, Descripcion FROM DATA_G.ROL";
+            string query = "SELECT IdRol, Descripcion FROM DATA_G.ROL order by IdRol";
             SqlDataReader reader = Conexion.ejecutarQuery(query);
 
             while (reader.Read())
@@ -53,7 +53,7 @@ namespace AerolineaFrba.Abm_Rol
                 string rolDesc = d.Cells[1].Value.ToString();
                 if (rolHabilitado(rolDesc))
                 {
-                    bool resultado = Conexion.executeProcedure("DATA_G.BAJA_ROL", Conexion.generarArgumentos("@NOMBRE"), rolDesc);
+                    bool resultado = Conexion.executeProcedure("DATA_G.BAJA_ROL", Conexion.generarArgumentos("@ROL"), rol);
                     if (resultado)
                     {
                         MessageBox.Show("Rol Inhabilitado");

@@ -1427,14 +1427,29 @@ AS BEGIN
 END
 GO
 
+CREATE PROCEDURE DATA_G.MODIFICACION_CLIENTE(@nombre nvarchar(255), @apellido nvarchar(255), @dni numeric(18,0), @direccion nvarchar(255), @telefono numeric(18,0), @mail nvarchar(255), @fechaNac datetime)
+AS BEGIN
+	UPDATE DATA_G.CLIENTE
+	SET @nombre = Nombre, 
+		@apellido = Apellido, 
+		@dni = Dni,
+		@direccion = Direccion,
+		@telefono = Telefono,
+		@mail = Mail,
+		@fechaNac =Fecha_Nac
+END
+GO
+
 
 --ROLES Y FUNCIONALIDADES--
 
-CREATE PROCEDURE DATA_G.BAJA_ROL(@NOMBRE VARCHAR(50)) AS
+CREATE PROCEDURE DATA_G.BAJA_ROL(@ROL  INT) AS
 BEGIN 
 	UPDATE DATA_G.ROL SET
 		ESTADO = 0
-	WHERE Descripcion = @NOMBRE
+	WHERE IdRol = @ROL
+	DELETE FROM DATA_G.USUARIOPORROL
+		WHERE IdRol = @ROL
 END 
 GO
 
