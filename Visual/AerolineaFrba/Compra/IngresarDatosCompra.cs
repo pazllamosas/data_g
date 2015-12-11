@@ -192,6 +192,15 @@ namespace AerolineaFrba.Compra
 
         private void dgvPasajes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+            if (e.RowIndex < 0)
+            {
+                return;
+            }
+
+            int index = e.RowIndex;
+            dgvPasajes.Rows[index].Selected = true;
+
             Int32 selectedRowCount = dgvPasajes.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount > 0 && selectedRowCount < 2)
             {
@@ -290,6 +299,15 @@ namespace AerolineaFrba.Compra
 
         private void dgvVuelos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
+            if (e.RowIndex < 0)
+            {
+                return;
+            }
+
+            int index = e.RowIndex;
+            dgvVuelos.Rows[index].Selected = true;
+
             Int32 selectedRowCount = dgvVuelos.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount > 0 && selectedRowCount < 2)
             {
