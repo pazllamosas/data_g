@@ -44,15 +44,15 @@
             this.labelUsuario = new System.Windows.Forms.Label();
             this.cmbUsuario = new System.Windows.Forms.ComboBox();
             this.btnAsignar = new System.Windows.Forms.Button();
+            this.btnVolver = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvElegirFuncionalidad)).BeginInit();
             this.SuspendLayout();
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(108, 26);
+            this.txtNombre.Location = new System.Drawing.Point(230, 23);
             this.txtNombre.Margin = new System.Windows.Forms.Padding(4);
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.ReadOnly = true;
             this.txtNombre.Size = new System.Drawing.Size(200, 22);
             this.txtNombre.TabIndex = 0;
             this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged_1);
@@ -60,7 +60,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 31);
+            this.label1.Location = new System.Drawing.Point(150, 26);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 17);
@@ -77,8 +77,9 @@
             this.dgvElegirFuncionalidad.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nroFunc,
             this.rolFuncionalidades});
+            this.dgvElegirFuncionalidad.Enabled = false;
             this.dgvElegirFuncionalidad.GridColor = System.Drawing.SystemColors.Menu;
-            this.dgvElegirFuncionalidad.Location = new System.Drawing.Point(19, 78);
+            this.dgvElegirFuncionalidad.Location = new System.Drawing.Point(13, 133);
             this.dgvElegirFuncionalidad.Margin = new System.Windows.Forms.Padding(4);
             this.dgvElegirFuncionalidad.Name = "dgvElegirFuncionalidad";
             this.dgvElegirFuncionalidad.RowHeadersWidth = 90;
@@ -105,7 +106,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 55);
+            this.label2.Location = new System.Drawing.Point(10, 112);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(393, 17);
@@ -118,13 +119,12 @@
             this.btnGuardar.Enabled = false;
             this.btnGuardar.Image = global::AerolineaFrba.Properties.Resources.save;
             this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGuardar.Location = new System.Drawing.Point(16, 402);
+            this.btnGuardar.Location = new System.Drawing.Point(230, 65);
             this.btnGuardar.Margin = new System.Windows.Forms.Padding(4);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(100, 28);
             this.btnGuardar.TabIndex = 2;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnGuardar.Text = "Crear";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -133,7 +133,7 @@
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelar.Image = global::AerolineaFrba.Properties.Resources.cancel;
             this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new System.Drawing.Point(729, 402);
+            this.btnCancelar.Location = new System.Drawing.Point(357, 65);
             this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(100, 28);
@@ -146,8 +146,9 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.button1.Enabled = false;
             this.button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button1.Location = new System.Drawing.Point(520, 222);
+            this.button1.Location = new System.Drawing.Point(520, 306);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(150, 50);
@@ -160,7 +161,7 @@
             // 
             this.button2.Image = global::AerolineaFrba.Properties.Resources.modify;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(465, 25);
+            this.button2.Location = new System.Drawing.Point(613, 23);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(125, 28);
@@ -168,23 +169,26 @@
             this.button2.Text = "Editar Nombre";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // button3
             // 
             this.button3.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.button3.Enabled = false;
             this.button3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button3.Location = new System.Drawing.Point(520, 291);
+            this.button3.Location = new System.Drawing.Point(520, 364);
             this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(150, 50);
             this.button3.TabIndex = 8;
             this.button3.Text = "Eliminar Funcionalidad";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // txtidRol
             // 
-            this.txtidRol.Location = new System.Drawing.Point(19, 5);
+            this.txtidRol.Location = new System.Drawing.Point(13, 26);
             this.txtidRol.Margin = new System.Windows.Forms.Padding(4);
             this.txtidRol.Name = "txtidRol";
             this.txtidRol.ReadOnly = true;
@@ -193,7 +197,8 @@
             // 
             // labelUsuario
             // 
-            this.labelUsuario.Location = new System.Drawing.Point(552, 96);
+            this.labelUsuario.Enabled = false;
+            this.labelUsuario.Location = new System.Drawing.Point(545, 171);
             this.labelUsuario.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelUsuario.Name = "labelUsuario";
             this.labelUsuario.Size = new System.Drawing.Size(70, 24);
@@ -203,8 +208,9 @@
             // 
             // cmbUsuario
             // 
+            this.cmbUsuario.Enabled = false;
             this.cmbUsuario.FormattingEnabled = true;
-            this.cmbUsuario.Location = new System.Drawing.Point(642, 96);
+            this.cmbUsuario.Location = new System.Drawing.Point(642, 172);
             this.cmbUsuario.Margin = new System.Windows.Forms.Padding(4);
             this.cmbUsuario.Name = "cmbUsuario";
             this.cmbUsuario.Size = new System.Drawing.Size(132, 24);
@@ -213,14 +219,31 @@
             // btnAsignar
             // 
             this.btnAsignar.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnAsignar.Enabled = false;
             this.btnAsignar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnAsignar.Location = new System.Drawing.Point(594, 137);
+            this.btnAsignar.Location = new System.Drawing.Point(588, 231);
             this.btnAsignar.Margin = new System.Windows.Forms.Padding(4);
             this.btnAsignar.Name = "btnAsignar";
             this.btnAsignar.Size = new System.Drawing.Size(132, 40);
             this.btnAsignar.TabIndex = 27;
             this.btnAsignar.Text = "Asignar Usuario";
             this.btnAsignar.UseVisualStyleBackColor = false;
+            this.btnAsignar.Click += new System.EventHandler(this.btnAsignar_Click);
+            // 
+            // btnVolver
+            // 
+            this.btnVolver.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnVolver.Image = global::AerolineaFrba.Properties.Resources.back;
+            this.btnVolver.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnVolver.Location = new System.Drawing.Point(732, 386);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(4);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(80, 28);
+            this.btnVolver.TabIndex = 28;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // AgregarRol
             // 
@@ -229,6 +252,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(845, 446);
+            this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnAsignar);
             this.Controls.Add(this.cmbUsuario);
             this.Controls.Add(this.labelUsuario);
@@ -270,5 +294,6 @@
         private System.Windows.Forms.Button btnAsignar;
         private System.Windows.Forms.DataGridViewTextBoxColumn nroFunc;
         private System.Windows.Forms.DataGridViewTextBoxColumn rolFuncionalidades;
+        private System.Windows.Forms.Button btnVolver;
     }
 }

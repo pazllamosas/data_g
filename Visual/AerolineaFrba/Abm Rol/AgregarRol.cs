@@ -38,15 +38,31 @@ namespace AerolineaFrba.Abm_Rol
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (this.validacion())
-            {
-                string nombre = txtNombre.Text;
-                string idRol = txtidRol.Text;
+                 string nombre = txtNombre.Text;
+                //string idRol = txtidRol.Text;
 
                 bool resultado = Conexion.executeProcedure("DATA_G.CREAR_ROL", Conexion.generarArgumentos("@NOMBRE"), nombre);
                 if (resultado)
                 {
+
+                    string query = "SELECT DATA_G.GET_ID_ROL ('" + nombre + "' ) AS id";
+
+                    SqlDataReader reader = Conexion.ejecutarQuery(query);
+                    reader.Read();
+                    string respuesta = (reader["id"].ToString());
+                    reader.Close();
+                    txtidRol.Text = respuesta;
+
+
                     MessageBox.Show("Rol creado");
+
+                    dgvElegirFuncionalidad.Enabled = true;
+                    labelUsuario.Enabled = true;
+                    cmbUsuario.Enabled = true;
+                    btnAsignar.Enabled = true;
+                    button1.Enabled = true;
+                    button3.Enabled = true;
+
                 }
 
                 //if (existeRol(nombre))
@@ -61,11 +77,8 @@ namespace AerolineaFrba.Abm_Rol
                 // {
                 //    MessageBox.Show("Ese nombre de rol ya existe");
                 // }
-            }
-            else
-            {
-                MessageBox.Show("Completar todos los campos");
-            }
+            
+            
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -103,7 +116,37 @@ namespace AerolineaFrba.Abm_Rol
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+             Int32 selectedRowCount = dgvElegirFuncionalidad.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount > 0 && selectedRowCount < 2)
+            {
+                DataGridViewRow d = dgvElegirFuncionalidad.SelectedRows[0];
+                Int32 func =  Convert.ToInt32(d.Cells[0].Value);
+                string funcDesc = d.Cells[1].Value.ToString();
+                Int32 idRol = Convert.ToInt32(txtidRol.Text);
+
+                if(existeFuncionalidad(func, idRol))
+            {
+                bool resultado = Conexion.executeProcedure("DATA_G.ASIGNAR_FUNCIONALIDAD", Conexion.generarArgumentos("@FUNC", "@ROL"), func, idRol); 
+               if (resultado)
+                {
+                    MessageBox.Show("Funcionalidad Asignada");
+                }
+                }
+
+                 else
+                 {
+                    MessageBox.Show("Esa funcionalidad ya esta asignada al rol", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                 }       
+          }
+            else
+            {
+                MessageBox.Show("Elegir una y solo una funcionalidad para agregar");
+            }
         }
+
+            
+
+       
 
 
         public void EditarRol(string rol, string rolDesc) 
@@ -153,6 +196,7 @@ namespace AerolineaFrba.Abm_Rol
         private void txtNombre_TextChanged_1(object sender, EventArgs e)
         {
             btnGuardar.Enabled = true;
+
         }
 
         private bool validacion()
@@ -162,6 +206,120 @@ namespace AerolineaFrba.Abm_Rol
            if (this.cmbUsuario.SelectedIndex == -1)
                 return false;
             return true;
+        }
+
+        public Boolean existeFuncionalidad(Int32 funcionalidad, Int32 rol)
+        {
+            string query = "SELECT DATA_G.EXISTE_FUNCIONALIDAD_ROL ('" + funcionalidad + "', '" + rol + "' ) AS id";
+
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+            reader.Read();
+            int respuesta = int.Parse(reader["id"].ToString());
+            reader.Close();
+
+            if (respuesta == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            if (!(this.cmbUsuario.SelectedIndex == -1))
+            {
+                this.Hide();
+                FormProvider.VerRoles.Show();
+            }
+            else
+            {
+                MessageBox.Show("Asignar un usuario");
+            }  
+                }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+            Int32 selectedRowCount = dgvElegirFuncionalidad.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount > 0 && selectedRowCount < 2)
+            {
+                DataGridViewRow d = dgvElegirFuncionalidad.SelectedRows[0];
+                Int32 func = Convert.ToInt32(d.Cells[0].Value);
+                string funcDesc = d.Cells[1].Value.ToString();
+                Int32 idRol = Convert.ToInt32(txtidRol.Text);
+
+                if (!existeFuncionalidad(func, idRol))
+                {
+                    bool resultado = Conexion.executeProcedure("DATA_G.ELIMINAR_FUNCIONALIDAD", Conexion.generarArgumentos("@FUNC", "@ROL"), func, idRol);
+                    if (resultado)
+                    {
+                        MessageBox.Show("Funcionalidad Eliminada");
+                    }
+                }
+
+                else
+                {
+                    MessageBox.Show("Esa funcionalidad no esta asignada al rol", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Elegir una y solo una funcionalidad para eliminar");
+            }
+        }
+
+        private void btnAsignar_Click(object sender, EventArgs e)
+        {
+            Int32 idRol = Convert.ToInt32(txtidRol.Text);
+            Int32 usuario = Convert.ToInt32(cmbUsuario.SelectedValue);
+
+            if (!(this.cmbUsuario.SelectedIndex == -1))
+            {
+                if (existeUsrenRol(usuario, idRol))
+                {
+                    string query = "SELECT DATA_G.GET_ID_USUARIO ('" + cmbUsuario.Text + "') AS id";
+
+                    SqlDataReader reader = Conexion.ejecutarQuery(query);
+                    reader.Read();
+                    string idUsuario = reader["id"].ToString();
+                    reader.Close();
+
+                    bool resultado = Conexion.executeProcedure("DATA_G.ASIGNAR_ROL", Conexion.generarArgumentos("@USUARIO", "@ROL"), idUsuario, idRol);
+                    if (resultado)
+                    {
+                        MessageBox.Show("Rol asignado");
+                    }
+                }
+                else {
+                    MessageBox.Show("El usuario ya esta asignado al rol", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Seleccionar un usuario");
+            }
+         }
+
+        public Boolean existeUsrenRol(Int32 usuario, Int32 rol)
+        {
+            string query = "SELECT DATA_G.EXISTE_USUARIO_ROL ('" + usuario + "', '" + rol + "' ) AS id";
+
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+            reader.Read();
+            int respuesta = int.Parse(reader["id"].ToString());
+            reader.Close();
+
+            if (respuesta == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
     }
