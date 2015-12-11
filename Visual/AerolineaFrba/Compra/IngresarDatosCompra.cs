@@ -293,7 +293,7 @@ namespace AerolineaFrba.Compra
 
         }
 
-        protected void dvgPasajes_OnSelectedIndexChanged(object sender, EventArgs e)
+        protected void dvgVuelos_OnSelectedIndexChanged(object sender, EventArgs e)
         {
             Int32 selectedRowCount = dgvVuelos.Rows.GetRowCount(DataGridViewElementStates.Selected);
             if (selectedRowCount > 0 && selectedRowCount < 2)
