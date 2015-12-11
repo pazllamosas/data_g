@@ -16,6 +16,7 @@ namespace AerolineaFrba.Abm_Rol
         public AgregarRol()
         {
             InitializeComponent();
+            dgvElegirFuncionalidad.Rows.Clear();
 
             string query = "SELECT * FROM DATA_G.FUNCIONALIDADES order by IdFuncionalidad";
             SqlDataReader reader = Conexion.ejecutarQuery(query);
@@ -25,9 +26,21 @@ namespace AerolineaFrba.Abm_Rol
                 dgvElegirFuncionalidad.Rows.Add(reader["IdFuncionalidad"], reader["DescripcionFunc"]);
             }
             reader.Close();
+              }
 
-            
-        }
+        //public void CargarFunci()
+        //{
+        //    dgvElegirFuncionalidad.Rows.Clear();
+
+        //    string query = "SELECT * FROM DATA_G.FUNCIONALIDADES order by IdFuncionalidad";
+        //    SqlDataReader reader = Conexion.ejecutarQuery(query);
+
+        //    while (reader.Read())
+        //    {
+        //        dgvElegirFuncionalidad.Rows.Add(reader["IdFuncionalidad"], reader["DescripcionFunc"]);
+        //    }
+        //    reader.Close();
+        //}
 
         private void label1_Click(object sender, EventArgs e)
         {

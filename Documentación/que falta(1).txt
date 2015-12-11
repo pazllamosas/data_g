@@ -1,4 +1,5 @@
-
+-VER TEMA CARGA DATAGRIDVIEW
+- COMPRAS BUSCAR FECHA MUCHOS MESES, Y SI APRETAS MUCHO BUSCAR BUSCA SIEMPRE
 -terminar a bob y la querry faltante de registro llegada destino
 
 -genenrar viaje
@@ -18,12 +19,10 @@ boton guardar: //Validar que entre el último viaje que recorra esa aeronave y la
 
 editar ruta y aeronave que sea un editar si se toca guardar en "agregaraeronave/ruta"
 poner lo de fuera de servicio
-editar roles, darlos de baja, habilitar roles
+
 .hide en las ventanas
 validacions para los botones
 FECHASSSSSSSSSS
-borrar agregar ciudades
-compras fecha
 testeo de TOP5
 procedimiento de viajes, y cuando se da de baja una aeronave
 
