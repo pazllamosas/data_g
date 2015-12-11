@@ -299,26 +299,22 @@ namespace AerolineaFrba.Compra
 
         private void dgvVuelos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
-            if (e.RowIndex < 0)
+            DataGridView dgv = dgvVuelos;
+            
+            if (dgv.CurrentRow.Selected)
             {
-                return;
-            }
-
-            int index = e.RowIndex;
-            dgvVuelos.Rows[index].Selected = true;
-
-            Int32 selectedRowCount = dgvVuelos.Rows.GetRowCount(DataGridViewElementStates.Selected);
-            if (selectedRowCount > 0 && selectedRowCount < 2)
-            {
-                if (int.Parse(txtCantPasajes.Text) > 0)
+                Int32 selectedRowCount = dgvVuelos.Rows.GetRowCount(DataGridViewElementStates.Selected);
+                if (selectedRowCount > 0 && selectedRowCount < 2)
                 {
-                    btnAgregar.Enabled = true;
-                    dgvPasajes.Enabled = true;
-                }
-                else
-                {
-                    btnSiguiente.Enabled = true;
+                    if (int.Parse(txtCantPasajes.Text) > 0)
+                    {
+                        btnAgregar.Enabled = true;
+                        dgvPasajes.Enabled = true;
+                    }
+                    else
+                    {
+                        btnSiguiente.Enabled = true;
+                    }
                 }
             }
             
