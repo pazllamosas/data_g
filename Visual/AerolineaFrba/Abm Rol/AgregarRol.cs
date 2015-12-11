@@ -16,6 +16,7 @@ namespace AerolineaFrba.Abm_Rol
         public AgregarRol()
         {
             InitializeComponent();
+
             string query = "SELECT * FROM DATA_G.FUNCIONALIDADES order by IdFuncionalidad";
             SqlDataReader reader = Conexion.ejecutarQuery(query);
 
@@ -24,6 +25,8 @@ namespace AerolineaFrba.Abm_Rol
                 dgvElegirFuncionalidad.Rows.Add(reader["IdFuncionalidad"], reader["DescripcionFunc"]);
             }
             reader.Close();
+
+            
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -38,7 +41,9 @@ namespace AerolineaFrba.Abm_Rol
 
         private void button1_Click(object sender, EventArgs e)
         {
-                 string nombre = txtNombre.Text;
+            if (txtidRol.Text.Trim() == "")
+            {
+                string nombre = txtNombre.Text;
                 //string idRol = txtidRol.Text;
 
                 bool resultado = Conexion.executeProcedure("DATA_G.CREAR_ROL", Conexion.generarArgumentos("@NOMBRE"), nombre);
@@ -62,27 +67,35 @@ namespace AerolineaFrba.Abm_Rol
                     btnAsignar.Enabled = true;
                     button1.Enabled = true;
                     button3.Enabled = true;
+                    btnVolver.Enabled = true;
 
                 }
+            }
+            else
+            {
+                if (txtidRol.Text.Trim() != "")
+                {
+                    string nombre = txtNombre.Text;
+                    string idRol = txtidRol.Text;
 
-                //if (existeRol(nombre))
-                //{
-                //bool resultado = Conexion.executeProcedure("DATA_G.MODIFICAR_NOMBRE_ROL", Conexion.generarArgumentos("@NOMBRE", "@ROL "), nombre, idRol);
-                //if (resultado)
-                //{
-                //    MessageBox.Show("Rol modificado");
-                //}
-                // }
-                //else
-                // {
-                //    MessageBox.Show("Ese nombre de rol ya existe");
-                // }
-            
-            
+                    bool resultado = Conexion.executeProcedure("DATA_G.MODIFICAR_NOMBRE_ROL", Conexion.generarArgumentos("@NOMBRE", "@ROL "), nombre, idRol);
+                    if (resultado)
+                    {
+                        MessageBox.Show("Rol modificado");
+                    }
+                }
+
+            }
+                     
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            string nombre = txtNombre.Text;
+            Conexion.executeProcedure("DATA_G.ELIMINAR_ROL", Conexion.generarArgumentos("@ROL"), nombre);
+            this.txtNombre.Clear();
+            this.txtidRol.Clear();
+            this.cmbUsuario.SelectedIndex = -1;
             this.Hide();
             FormProvider.VerRoles.Show();
         }
@@ -105,6 +118,7 @@ namespace AerolineaFrba.Abm_Rol
             this.txtNombre.Clear();
             this.txtidRol.Clear();
             this.cmbUsuario.SelectedIndex = -1;
+            editando = false;
 
 
         }
@@ -152,9 +166,22 @@ namespace AerolineaFrba.Abm_Rol
         public void EditarRol(string rol, string rolDesc) 
         {
             txtidRol.Text = rol;
-            txtNombre.Text = rolDesc; 
+            txtNombre.Text = rolDesc;
+            button2.Visible = true;
+            txtNombre.ReadOnly = true;
+            editando = true;
+            btnVolver.Enabled = true;
+            dgvElegirFuncionalidad.Enabled = true;
+            labelUsuario.Enabled = true;
+            cmbUsuario.Enabled = true;
+            btnAsignar.Enabled = true;
+            button1.Enabled = true;
+            button3.Enabled = true;
+            AgregarRol.ActiveForm.Text = "Editar Rol";
+
             
         }
+        private static bool editando = false;
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -229,16 +256,30 @@ namespace AerolineaFrba.Abm_Rol
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
-            if (!(this.cmbUsuario.SelectedIndex == -1))
+            if (!editando)
             {
-                this.Hide();
-                FormProvider.VerRoles.Show();
+                if (!(this.cmbUsuario.SelectedIndex == -1))
+                {
+                    this.txtNombre.Clear();
+                    this.txtidRol.Clear();
+                    this.cmbUsuario.SelectedIndex = -1;
+                    this.Hide();
+                    FormProvider.VerRoles.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Asignar un usuario");
+                }
             }
             else
             {
-                MessageBox.Show("Asignar un usuario");
-            }  
-                }
+                this.txtNombre.Clear();
+                this.txtidRol.Clear();
+                this.cmbUsuario.SelectedIndex = -1;
+                this.Hide();
+                FormProvider.VerRoles.Show();
+            }
+        }
 
         private void button3_Click(object sender, EventArgs e)
         {

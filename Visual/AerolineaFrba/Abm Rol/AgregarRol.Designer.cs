@@ -233,6 +233,7 @@
             // btnVolver
             // 
             this.btnVolver.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnVolver.Enabled = false;
             this.btnVolver.Image = global::AerolineaFrba.Properties.Resources.back;
             this.btnVolver.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnVolver.Location = new System.Drawing.Point(732, 386);

@@ -44,8 +44,32 @@ namespace AerolineaFrba.Abm_Rol
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            Int32 selectedRowCount = dgvRoles.Rows.GetRowCount(DataGridViewElementStates.Selected);
+           if (selectedRowCount > 0 && selectedRowCount < 2)
+           {
+                DataGridViewRow d = dgvRoles.SelectedRows[0];
+                string rol = d.Cells[0].Value.ToString();
+                string rolDesc = d.Cells[1].Value.ToString();
+                if (rolHabilitado(rolDesc))
+                {
+                    bool resultado = Conexion.executeProcedure("DATA_G.BAJA_ROL", Conexion.generarArgumentos("@NOMBRE"), rolDesc);
+                    if (resultado)
+                    {
+                        MessageBox.Show("Rol Inhabilitado");
+                    }
+                }
+                else {
+                    MessageBox.Show("El rol ya esta inhabilitado", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+                else
+                {
+                    MessageBox.Show("No podés inhabilitar si no elegís un rol y sólo un rol");
+                }
+            
         }
+
+       
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -59,7 +83,7 @@ namespace AerolineaFrba.Abm_Rol
                 string rolDesc = d.Cells[1].Value.ToString();
                 FormProvider.AgregarRol.Show(); //mandar todos los parametros.
                 FormProvider.AgregarRol.EditarRol(rol, rolDesc);
-
+                
                 this.Hide();
             }
             else
@@ -104,8 +128,57 @@ namespace AerolineaFrba.Abm_Rol
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+           
             this.Hide();
             FormProvider.AgregarRol.Show();
+        }
+
+        private void buttonHab_Click(object sender, EventArgs e)
+        {
+           Int32 selectedRowCount = dgvRoles.Rows.GetRowCount(DataGridViewElementStates.Selected);
+           if (selectedRowCount > 0 && selectedRowCount < 2)
+           {
+                DataGridViewRow d = dgvRoles.SelectedRows[0];
+                string rol = d.Cells[0].Value.ToString();
+                string rolDesc = d.Cells[1].Value.ToString();
+                if (!rolHabilitado(rolDesc))
+                {
+                    bool resultado = Conexion.executeProcedure("DATA_G.ACTIVAR_ROL", Conexion.generarArgumentos("@NOMBRE"), rolDesc);
+                    if (resultado)
+                    {
+                        MessageBox.Show("Rol Habilitado");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("El rol ya esta habilitado", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+                else
+                {
+                    MessageBox.Show("No podés habilitar si no elegís un rol y sólo un rol");
+                }
+            
+        }
+
+        public Boolean rolHabilitado(string rol)
+        {
+            string query = "SELECT DATA_G.ROL_HABILITADO ('" + rol + "') AS id"; 
+                
+
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+            reader.Read();
+            int respuesta = int.Parse(reader["id"].ToString());
+            reader.Close();
+
+            if (respuesta == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

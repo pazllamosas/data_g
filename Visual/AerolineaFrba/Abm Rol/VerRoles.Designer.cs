@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VerRoles));
             this.dgvRoles = new System.Windows.Forms.DataGridView();
+            this.rollRoll = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RolDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.btnVolver = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -39,8 +41,6 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.buttonHab = new System.Windows.Forms.Button();
-            this.rollRoll = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RolDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRoles)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -58,6 +58,19 @@
             this.dgvRoles.Size = new System.Drawing.Size(816, 195);
             this.dgvRoles.TabIndex = 2;
             this.dgvRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRoles_CellContentClick);
+            // 
+            // rollRoll
+            // 
+            this.rollRoll.HeaderText = "Roles";
+            this.rollRoll.Name = "rollRoll";
+            this.rollRoll.ReadOnly = true;
+            this.rollRoll.Width = 50;
+            // 
+            // RolDesc
+            // 
+            this.RolDesc.HeaderText = "Descripcion";
+            this.RolDesc.Name = "RolDesc";
+            this.RolDesc.Width = 150;
             // 
             // label1
             // 
@@ -164,19 +177,7 @@
             this.buttonHab.TabIndex = 8;
             this.buttonHab.Text = "Habilitar";
             this.buttonHab.UseVisualStyleBackColor = false;
-            // 
-            // rollRoll
-            // 
-            this.rollRoll.HeaderText = "Roles";
-            this.rollRoll.Name = "rollRoll";
-            this.rollRoll.ReadOnly = true;
-            this.rollRoll.Width = 50;
-            // 
-            // RolDesc
-            // 
-            this.RolDesc.HeaderText = "Descripcion";
-            this.RolDesc.Name = "RolDesc";
-            this.RolDesc.Width = 150;
+            this.buttonHab.Click += new System.EventHandler(this.buttonHab_Click);
             // 
             // VerRoles
             // 
