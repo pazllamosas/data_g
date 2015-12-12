@@ -85,7 +85,9 @@ namespace AerolineaFrba.Compra
 
             }
 
-            FormProvider.FormaDeCompra.MostrarFormaDeCompra(txtPesoEncomienda, idButacasOcupadas);
+            DataGridViewRow d = dgvVuelos.SelectedRows[0];
+
+            FormProvider.FormaDeCompra.MostrarFormaDeCompra(txtPesoEncomienda.Text, idButacasOcupadas, d.Cells[2].Value.ToString());
         }
 
         private void txtCantPasajes_TextChanged(object sender, EventArgs e)
