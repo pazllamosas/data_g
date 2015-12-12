@@ -60,6 +60,8 @@
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.textBox7 = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.textBox11 = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -145,6 +147,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.textBox11);
             this.groupBox1.Controls.Add(this.dateTimePicker1);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label6);
@@ -359,6 +363,23 @@
             this.textBox7.Size = new System.Drawing.Size(100, 20);
             this.textBox7.TabIndex = 27;
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(346, 104);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(69, 13);
+            this.label12.TabIndex = 28;
+            this.label12.Text = "Id de Cliente:";
+            // 
+            // textBox11
+            // 
+            this.textBox11.Enabled = false;
+            this.textBox11.Location = new System.Drawing.Point(461, 101);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(100, 20);
+            this.textBox11.TabIndex = 27;
+            // 
             // FormaDeCompra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -418,5 +439,7 @@
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox textBox11;
     }
 }

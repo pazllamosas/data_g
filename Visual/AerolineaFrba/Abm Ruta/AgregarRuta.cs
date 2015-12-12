@@ -19,18 +19,9 @@ namespace AerolineaFrba.Abm_Ruta
         {
             InitializeComponent();
         }
+        private static bool editando = false;
 
-        public void EditarAeronave(string codigo, string precioEncomienda, string precioPasaje, string servicio, string ciudadOrigen, string ciudadDestino) //mandar todos los parametros para completar los texbox 
-        {
-            txtCodigo.Text = codigo; //asignar los parametros a los text
-            txtPrecioEncomienda.Text = precioEncomienda;
-            txtPrecioPasaje.Text = precioPasaje;
-            cmbTipoServicio.Text = servicio;
-            cmbCiudadOrigen.Text = ciudadOrigen;
-            cmbCiudadDestino.Text = ciudadDestino;
-            
-        }
-
+        
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -44,15 +35,32 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-
-            bool resultado = funciones.permiteNumeros(txtPrecioEncomienda.Text);
-            if (!resultado)
+            if (!editando)
             {
-                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                bool resultado = funciones.permiteNumeros(txtPrecioEncomienda.Text);
+                if (!resultado)
+                {
+                    MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                btnGuardar.Enabled = validacion();
             }
-            btnGuardar.Enabled = validacion(); 
         }
+        public void EditarRuta(string codigo, string precioEncomienda, string precioPasaje, string servicio, string ciudadOrigen, string ciudadDestino) //mandar todos los parametros para completar los texbox 
+        {
+            
+            AgregarRuta.ActiveForm.Text = "Editar Ruta";
+            editando = true;
+            txtCodigo.Text = codigo;
+            txtPrecioEncomienda.Text = precioEncomienda;
+            txtPrecioPasaje.Text = precioPasaje;
+            cmbTipoServicio.Text = servicio;
+            cmbCiudadOrigen.Text = ciudadOrigen;
+            cmbCiudadDestino.Text = ciudadDestino;
+            
 
+            btnGuardar.Enabled = true;
+
+        }
         private void label2_Click(object sender, EventArgs e)
         {
 
@@ -60,8 +68,8 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (this.validacion())
-            {
+           
+           
                 Int32 codigo = Convert.ToInt32(txtCodigo.Text);
 
                 string precio_kg = txtPrecioEncomienda.Text;
@@ -74,34 +82,15 @@ namespace AerolineaFrba.Abm_Ruta
 
                 Int32 destino = Convert.ToInt32(cmbCiudadDestino.SelectedValue);
 
-                //string query = "SELECT DATA_G.GET_ID_SERVICIO ('" + descripcionServicio + "')";
-
-                //SqlDataReader reader = Conexion.ejecutarQuery(query);
-                //reader.Read();
-                //string idServicio = reader["id"].ToString();
-                //reader.Close();
-                //query = "DATA_G.CREAR_RUTA ('" + codigo + "', " + "'" + precio_kg + "', " + precio_pasaje + ", '" +
-                //                                 idServicio + "', '" + origen + "', " + destino + ")";
-
-                //reader = Conexion.ejecutarQuery(query);
-                //reader.Close();
-
-                if (this.validacionDatos( codigo, precio_kg, precio_pasaje, origen, destino))
+                
+                if (this.validacionDatos(codigo, precio_kg, precio_pasaje, origen, destino))
                 {
-
-                    bool resultado = Conexion.executeProcedure("DATA_G.CREAR_RUTA", Conexion.generarArgumentos( "@Codigo", "@PRECIO_KG", "@PRECIO_PASAJE",
+                    if (this.validacion())
+                    {
+                    if (!editando)
+                    {
+                    bool resultado = Conexion.executeProcedure("DATA_G.CREAR_RUTA", Conexion.generarArgumentos("@Codigo", "@PRECIO_KG", "@PRECIO_PASAJE",
                      "@IDSERV", "@ORIGEN", "@DESTINO"), codigo, precio_kg, precio_pasaje, descripcionServicio, origen, destino);
-                   
-                    //SqlCommand cmd = new SqlCommand("DATA_G.CREAR_RUTA", Conexion.getSqlInstanceConnection());
-                    //cmd.CommandType = CommandType.StoredProcedure;
-
-                    //cmd.Parameters.AddWithValue("@Codigo", codigo);
-                    //cmd.Parameters.AddWithValue("@PRECIO_KG", precio_kg);
-                    //cmd.Parameters.AddWithValue("@PRECIO_PASAJE", precio_pasaje);
-                    //cmd.Parameters.AddWithValue("@IDSERV", descripcionServicio);
-                    //cmd.Parameters.AddWithValue("@ORIGEN", origen);
-                    //cmd.Parameters.AddWithValue("@DESTINO", destino);
-                    //cmd.ExecuteNonQuery();
 
                     if (resultado)
                     {
@@ -113,10 +102,30 @@ namespace AerolineaFrba.Abm_Ruta
                         this.cmbTipoServicio.SelectedIndex = -1;
                         this.cmbCiudadOrigen.SelectedIndex = -1;
                         this.cmbCiudadDestino.SelectedIndex = -1;
-
                     }
-
                 }
+
+            }
+            else
+            {
+                if (editando) {
+
+                    bool resultado = Conexion.executeProcedure("DATA_G.MODIFICAR_RUTA", Conexion.generarArgumentos("@Codigo", "@PRECIO_KG", "@PRECIO_PASAJE",
+                    "@IDSERV", "@ORIGEN", "@DESTINO"), codigo, precio_kg, precio_pasaje, descripcionServicio, origen, destino);
+                    if (resultado)
+                    {
+                        MessageBox.Show("Ruta modificada exitosamente");
+
+                        this.txtCodigo.Clear();
+                        this.txtPrecioEncomienda.Clear();
+                        this.txtPrecioPasaje.Clear();
+                        this.cmbTipoServicio.SelectedIndex = -1;
+                        this.cmbCiudadOrigen.SelectedIndex = -1;
+                        this.cmbCiudadDestino.SelectedIndex = -1;
+                    }
+                
+                }
+            }
             }
             else
             {
@@ -134,21 +143,7 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void cmbCiudadOrigen_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            /*
-            string Sql = "select Nombre from CIUDAD";
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Data Source=localhost\\SQLSERVER2012;Initial Catalog=GD2C2015;Persist Security Info=True;User ID=gd"].ToString());
-            conn.Open();
-            SqlCommand cmd = new SqlCommand(Sql, conn);
-            SqlDataReader DR = cmd.ExecuteReader();
-
-            while (DR.Read())
-            {
-                cmbCiudadOrigen.Items.Add(DR[0]);
-
-            }
-            conn.Close();
- */
+          
         }
 
         private void cmbCiudadDestino_SelectedIndexChanged(object sender, EventArgs e)
@@ -163,12 +158,6 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void AgregarRuta_Load(object sender, EventArgs e)
         {
-
-         
-            //Conexion.cargarCmb("Nombre", "CIUDAD", cmbCiudadOrigen);
-            //Conexion.cargarCmb("Nombre", "CIUDAD", cmbCiudadDestino);
-            //Conexion.cargarCmb("Descripcion", "TIPODESERVICIO", cmbTipoServicio);
-
 
             cmbTipoServicio.ValueMember = "IdServicio";
             cmbTipoServicio.DisplayMember = "Descripcion";
@@ -189,28 +178,10 @@ namespace AerolineaFrba.Abm_Ruta
             this.cmbCiudadOrigen.SelectedIndex = -1;
             this.cmbCiudadDestino.SelectedIndex = -1;
                
-            btnGuardar.Enabled = true;
             
-
-        }
-
-        private void txtPrecioEncomienda_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            bool resultado = funciones.permiteNumeros(txtPrecioEncomienda.Text);
-            if (!resultado)
-            {
-                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            };
-        }
-
-        private void txtPrecioPasaje_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            bool resultado = funciones.permiteNumeros(txtPrecioPasaje.Text);
-            if (!resultado)
-            {
-                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-        }
+
+      
 
         private bool validacion()
         {
@@ -280,24 +251,30 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void txtPrecioPasaje_TextChanged(object sender, EventArgs e)
         {
-
-            bool resultado = funciones.permiteNumeros(txtPrecioPasaje.Text);
-            if (!resultado)
+            if (!editando)
             {
-                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                bool resultado = funciones.permiteNumeros(txtPrecioPasaje.Text);
+                if (!resultado)
+                {
+                    MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                btnGuardar.Enabled = validacion();
             }
-            btnGuardar.Enabled = validacion(); 
         }
 
         private void txtCodigo_TextChanged(object sender, EventArgs e)
         {
-
-            bool resultado = funciones.permiteNumeros(txtCodigo.Text);
-            if (!resultado)
+            if (!editando)
             {
-                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                bool resultado = funciones.permiteNumeros(txtCodigo.Text);
+                if (!resultado)
+                {
+                    MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                btnGuardar.Enabled = validacion();
             }
-            btnGuardar.Enabled = validacion(); 
         }
 
         private void label7_Click(object sender, EventArgs e)

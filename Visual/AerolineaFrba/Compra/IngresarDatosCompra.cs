@@ -72,6 +72,22 @@ namespace AerolineaFrba.Compra
         {
             this.Hide();
             FormProvider.FormaDeCompra.Show();
+
+            List<string> idButacasOcupadas = new List<string>();
+            if (int.Parse(txtCantPasajes.Text) > 0 && !string.IsNullOrEmpty(txtCantPasajes.Text)) {
+                
+                int cantidadDePasajes = dgvPasajes.Rows.Count;
+
+                for (int i = 0; i < cantidadDePasajes; i++ )
+                {
+                    idButacasOcupadas.Add(dgvPasajes.Rows[i].Cells[5].Value.ToString());
+                }
+
+            }
+
+            DataGridViewRow d = dgvVuelos.SelectedRows[0];
+
+            FormProvider.FormaDeCompra.MostrarFormaDeCompra(txtPesoEncomienda.Text, idButacasOcupadas, d.Cells[2].Value.ToString());
         }
 
         private void txtCantPasajes_TextChanged(object sender, EventArgs e)
@@ -290,13 +306,20 @@ namespace AerolineaFrba.Compra
                 Int32 selectedRowCount = dgvVuelos.Rows.GetRowCount(DataGridViewElementStates.Selected);
                 if (selectedRowCount > 0 && selectedRowCount < 2)
                 {
+                    if (txtCantPasajes.Text == "") txtCantPasajes.Text = "0";
+                    Int32 pasajesRowCount = dgvPasajes.Rows.GetRowCount(DataGridViewElementStates.Selected);
+                    if (pasajesRowCount > 0) dgvPasajes.Rows.Clear();
+
                     if (int.Parse(txtCantPasajes.Text) > 0)
                     {
                         btnAgregar.Enabled = true;
                         dgvPasajes.Enabled = true;
+                        btnSiguiente.Enabled = false;
                     }
                     else
                     {
+                        btnAgregar.Enabled = false;
+                        dgvPasajes.Enabled = false;
                         btnSiguiente.Enabled = true;
                     }
                 }
