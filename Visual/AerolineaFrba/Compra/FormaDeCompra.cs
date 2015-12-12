@@ -88,5 +88,18 @@ namespace AerolineaFrba.Compra
             this.Hide();
             FormProvider.MainMenu.Show();
         }
+
+        public void MostrarFormaDeCompra()
+        {
+            if (FormProvider.Login.loginMode == "invitado")
+            {
+                this.deshabilitarEfectivo();
+            }
+            else
+            {
+                this.habilitarEfectivo();
+            }
+
+        }
     }
 }

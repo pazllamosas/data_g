@@ -219,14 +219,7 @@ namespace AerolineaFrba
                 {
                     _FormaDeCompra = new Compra.FormaDeCompra();
                 }
-                if (Login.loginMode == "invitado")
-                {
-                    _FormaDeCompra.deshabilitarEfectivo();
-                }
-                else {
-                    _FormaDeCompra.habilitarEfectivo();
-                }
-
+                
                 return _FormaDeCompra;
             }
         }

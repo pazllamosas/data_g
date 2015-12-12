@@ -72,6 +72,7 @@ namespace AerolineaFrba.Compra
         {
             this.Hide();
             FormProvider.FormaDeCompra.Show();
+            FormProvider.FormaDeCompra.MostrarFormaDeCompra();
         }
 
         private void txtCantPasajes_TextChanged(object sender, EventArgs e)
