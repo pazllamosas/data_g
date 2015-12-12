@@ -202,8 +202,8 @@ namespace AerolineaFrba.Compra
             textBox6.Clear();
             textBox7.Clear();
             textBox8.Clear();
-            dateTimePicker1.Text = (DateTime.Today).ToString();
-            dateTimePicker2.Text = (DateTime.Today).ToString();
+            dateTimePicker1.Value = DateTime.Today;
+            dateTimePicker2.Value = DateTime.Today;
         }
 
         private void button1_Click(object sender, EventArgs e)
