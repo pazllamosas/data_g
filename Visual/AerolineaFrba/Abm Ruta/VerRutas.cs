@@ -68,9 +68,10 @@ namespace AerolineaFrba.Abm_Ruta
             string servicio = d.Cells[3].Value.ToString();
             string ciudadOrigen = d.Cells[4].Value.ToString();
             string ciudadDestino = d.Cells[5].Value.ToString();
-            FormProvider.AgregarRuta.Show(); //mandar todos los parametros.
-            FormProvider.AgregarRuta.EditarAeronave(codigo, precioEncomienda, precioPasaje, servicio, ciudadOrigen, ciudadDestino);
-
+            FormProvider.AgregarRuta.Show();
+           
+            FormProvider.AgregarRuta.EditarRuta(codigo, precioEncomienda, precioPasaje, servicio, ciudadOrigen, ciudadDestino);
+            this.Hide();
             }
             else
             {

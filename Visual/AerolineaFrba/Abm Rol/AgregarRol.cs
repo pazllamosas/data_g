@@ -26,21 +26,9 @@ namespace AerolineaFrba.Abm_Rol
                 dgvElegirFuncionalidad.Rows.Add(reader["IdFuncionalidad"], reader["DescripcionFunc"]);
             }
             reader.Close();
+            editando = false;
               }
 
-        //public void CargarFunci()
-        //{
-        //    dgvElegirFuncionalidad.Rows.Clear();
-
-        //    string query = "SELECT * FROM DATA_G.FUNCIONALIDADES order by IdFuncionalidad";
-        //    SqlDataReader reader = Conexion.ejecutarQuery(query);
-
-        //    while (reader.Read())
-        //    {
-        //        dgvElegirFuncionalidad.Rows.Add(reader["IdFuncionalidad"], reader["DescripcionFunc"]);
-        //    }
-        //    reader.Close();
-        //}
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -115,14 +103,7 @@ namespace AerolineaFrba.Abm_Rol
 
         private void AgregarRol_Load(object sender, EventArgs e)
         {
-            //string query = "SELECT * FROM DATA_G.FUNCIONALIDADES";
-            //SqlDataReader reader = Conexion.ejecutarQuery(query);
-
-            //while (reader.Read())
-            //{
-            //    dgvElegirFuncionalidad.Rows.Add(reader["DescripcionFunc"]);
-            //}
-            //reader.Close();
+           
 
             cmbUsuario.ValueMember = "IdUsuario";
             cmbUsuario.DisplayMember = "Username";
@@ -131,7 +112,7 @@ namespace AerolineaFrba.Abm_Rol
             this.txtNombre.Clear();
             this.txtidRol.Clear();
             this.cmbUsuario.SelectedIndex = -1;
-            editando = false;
+           
 
 
         }
