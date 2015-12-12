@@ -45,9 +45,17 @@ namespace AerolineaFrba.Abm_Aeronave
                     bool resultado = Conexion.executeProcedure("DATA_G.CAMBIO_ESTADO", Conexion.generarArgumentos("@IDAERONAVE", "@IDESTADO"), idAeronave, estado);
                     if (resultado)
                     {
-                        this.cmbFueraServicio.SelectedIndex = -1;
                         MessageBox.Show("Estado Cambiado");
-                        FormProvider.VerAeronaves.CargarAeronave();
+                        string query2 = "SELECT DATA_G.GET_ESTADO_AERONAVE('" + idAeronave + "', '" + estado + "') AS id";
+                        SqlDataReader reader2 = Conexion.ejecutarQuery(query2);
+                        reader2.Read();
+                        int respuesta = int.Parse(reader2["id"].ToString());
+                        reader2.Close();
+
+                        if (respuesta == 3 || respuesta == 4)
+                        {
+                            btnReemplazar.Visible = true;
+                        }
                     }
                 }
                 else 
@@ -59,6 +67,10 @@ namespace AerolineaFrba.Abm_Aeronave
             {
                 MessageBox.Show("Seleccionar un estado", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
+
+
+           
+
         }
 
         private void cmbFueraServicio_SelectedIndexChanged(object sender, EventArgs e)
@@ -106,6 +118,20 @@ namespace AerolineaFrba.Abm_Aeronave
             cmbFueraServicio.DisplayMember = "Descripcion";
             cmbFueraServicio.DataSource = Conexion.cargarTablaConsulta("DATA_G.GET_ESTADOS");
             this.cmbFueraServicio.SelectedIndex = -1;
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            this.cmbFueraServicio.SelectedIndex = -1;
+            this.Hide();
+            FormProvider.VerAeronaves.Show();
+            FormProvider.VerAeronaves.CargarAeronave();
+        }
+
+        private void btnReemplazar_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormProvider.ReemplazarAeronave.Show();
         }
 
     }
