@@ -190,24 +190,6 @@ namespace AerolineaFrba.Compra
 
         }
 
-        private void dgvPasajes_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-            if (e.RowIndex < 0)
-            {
-                return;
-            }
-
-            int index = e.RowIndex;
-            dgvPasajes.Rows[index].Selected = true;
-
-            Int32 selectedRowCount = dgvPasajes.Rows.GetRowCount(DataGridViewElementStates.Selected);
-            if (selectedRowCount > 0 && selectedRowCount < 2)
-            {
-                btnEditar.Enabled = true;
-            }
-        }
-
         private void btnBuscarVuelos_Click(object sender, EventArgs e)
         {
             string origen = cmbCiudadOrigen.Text;
@@ -296,11 +278,11 @@ namespace AerolineaFrba.Compra
             reader.Close();
 
         }
-
-        private void dgvVuelos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        
+        private void dgvVuelos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView dgv = dgvVuelos;
-            
+
             if (dgv.CurrentRow.Selected)
             {
                 Int32 selectedRowCount = dgvVuelos.Rows.GetRowCount(DataGridViewElementStates.Selected);
@@ -317,7 +299,23 @@ namespace AerolineaFrba.Compra
                     }
                 }
             }
-            
+        }
+
+        private void dgvPasajes_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+            {
+                return;
+            }
+
+            int index = e.RowIndex;
+            dgvPasajes.Rows[index].Selected = true;
+
+            Int32 selectedRowCount = dgvPasajes.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount > 0 && selectedRowCount < 2)
+            {
+                btnEditar.Enabled = true;
+            }
         }
     }
 }

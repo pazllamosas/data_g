@@ -59,7 +59,7 @@
             this.dgvSeleccionButaca.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSeleccionButaca.Size = new System.Drawing.Size(610, 177);
             this.dgvSeleccionButaca.TabIndex = 9;
-            this.dgvSeleccionButaca.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSeleccionButaca_CellContentClick);
+            this.dgvSeleccionButaca.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSeleccionButaca_CellClick);
             // 
             // butacaNro
             // 

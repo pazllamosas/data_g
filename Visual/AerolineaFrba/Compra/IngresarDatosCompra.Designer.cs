@@ -204,7 +204,7 @@
             this.dgvVuelos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvVuelos.Size = new System.Drawing.Size(300, 157);
             this.dgvVuelos.TabIndex = 18;
-            this.dgvVuelos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVuelos_CellContentClick);
+            this.dgvVuelos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvVuelos_CellClick);
             // 
             // NroVuelo
             // 
@@ -287,7 +287,7 @@
             this.dgvPasajes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPasajes.Size = new System.Drawing.Size(300, 128);
             this.dgvPasajes.TabIndex = 21;
-            this.dgvPasajes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPasajes_CellContentClick);
+            this.dgvPasajes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPasajes_CellClick);
             // 
             // campraDni
             // 

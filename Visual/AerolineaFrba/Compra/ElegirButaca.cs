@@ -69,11 +69,6 @@ namespace AerolineaFrba.Compra
             FormProvider.MainMenu.Show();
         }
 
-        private void dgvSeleccionButaca_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            this.ValidarBotonGuardar();
-        }
-
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             if (editando)
@@ -112,6 +107,11 @@ namespace AerolineaFrba.Compra
         }
 
         private void txtNombre_TextChanged(object sender, EventArgs e)
+        {
+            this.ValidarBotonGuardar();
+        }
+
+        private void dgvSeleccionButaca_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             this.ValidarBotonGuardar();
         }
