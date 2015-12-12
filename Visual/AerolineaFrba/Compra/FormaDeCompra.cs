@@ -40,23 +40,19 @@ namespace AerolineaFrba.Compra
             {
                 textBox7.Enabled = true;
                 textBox8.Enabled = true;
-                textBox9.Enabled = true;
-                textBox10.Enabled = true;
                 label11.Enabled = true;
                 label8.Enabled = true;
                 label9.Enabled = true;
-                label10.Enabled = true;
+                dateTimePicker2.Enabled = true;
             }
             else
             {
                 textBox7.Enabled = false;
                 textBox8.Enabled = false;
-                textBox9.Enabled = false;
-                textBox10.Enabled = false;
+                dateTimePicker2.Enabled = false;
                 label11.Enabled = false;
                 label8.Enabled = false;
                 label9.Enabled = false;
-                label10.Enabled = false;
             }
         }
 
@@ -66,6 +62,7 @@ namespace AerolineaFrba.Compra
         }
 
         private static bool ElClienteExistia = false;
+        private static bool LaTarjetaExistia = false;
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -208,12 +205,18 @@ namespace AerolineaFrba.Compra
             {
                 this.generarCompra(int.Parse(textBox11.Text));
             }
+
+            if (!LaTarjetaExistia)
+            {
+                bool resultado = Conexion.executeProcedure("DATA_G.ALTA_CLIENTE", Conexion.generarArgumentos("@nombre", "@apellido", "@dni", "@direccion", "@telefono", "@mail", "@fechaNac"), textBox2.Text, textBox3.Text, int.Parse(textBox1.Text), textBox4.Text, int.Parse(textBox5.Text), textBox6.Text, DateTime.Parse(dateTimePicker1.Text));
+            }
             
             //limpiar variables de clase
             pesoEncomienda = "";
             idButacasOcupadas = null;
             idVuelo = "";
             ElClienteExistia = false;
+            LaTarjetaExistia = false;
             this.Hide();
             FormProvider.MainMenu.Show();
         }
@@ -230,11 +233,57 @@ namespace AerolineaFrba.Compra
 
             if (FormProvider.Login.loginMode == "invitado")
             {
-                this.deshabilitarEfectivo();
+                radioButton2.Enabled = false;
             }
             else
             {
-                this.habilitarEfectivo();
+                radioButton2.Enabled = true;
+            }
+
+        }
+
+        private void textBox7_TextChanged(object sender, EventArgs e)
+        {
+            string query = "SELECT * FROM DATA_G.TARJETA WHERE NroTarjeta = " + textBox7.Text;
+            SqlDataReader tarjeta = Conexion.ejecutarQuery(query);
+
+            if (tarjeta.Read())
+            {
+                textBox8.Text = tarjeta["CodSeguridad"].ToString();
+                dateTimePicker2.Text = tarjeta["VencimientoTarjeta"].ToString();
+                LaTarjetaExistia = true;
+            }
+            tarjeta.Close();
+        }
+
+        private void validarCamposCompra() { 
+        
+            DateTime fechaNac = DateTime.Parse(dateTimePicker1.Text);
+
+            if (!string.IsNullOrEmpty(textBox1.Text) && !string.IsNullOrEmpty(textBox2.Text) && !string.IsNullOrEmpty(textBox3.Text) && !string.IsNullOrEmpty(textBox4.Text) && !string.IsNullOrEmpty(textBox5.Text) && !string.IsNullOrEmpty(textBox6.Text) && !string.IsNullOrEmpty(textBox11.Text) && !string.IsNullOrEmpty(dateTimePicker1.Text) && fechaNac < new DateTime())
+            {
+
+                if (radioButton1.Checked == true)
+                {
+                    DateTime fechaVenc = DateTime.Parse(dateTimePicker2.Text);
+                    if (!string.IsNullOrEmpty(textBox7.Text) && !string.IsNullOrEmpty(textBox8.Text) && !string.IsNullOrEmpty(dateTimePicker2.Text) && fechaVenc > new DateTime())
+                    {
+                        button1.Enabled = true;
+                    }
+                    else
+                    {
+                        button1.Enabled = false;
+                    }
+                }
+                else
+                {
+                    button1.Enabled = true;
+                }
+
+            }
+            else
+            {
+                button1.Enabled = false;
             }
 
         }
