@@ -116,7 +116,7 @@ namespace AerolineaFrba.Generacion_Viaje
 
             if (1 > int.Parse(componentesFecha[1]) || int.Parse(componentesFecha[1]) > 12) { MessageBox.Show("coloco mal la fecha de salida, coloco mal el mes"); fallo = 1;}
 
-            if (1950 > int.Parse(componentesFecha[0]) || int.Parse(componentesFecha[0]) > DateTime.Today.Year) { MessageBox.Show("coloco mal la fecha de salida, coloco mal el año"); fallo = 1;}
+            if (1950 > int.Parse(componentesFecha[0]) || int.Parse(componentesFecha[0]) < DateTime.Today.Year) { MessageBox.Show("coloco mal la fecha de salida, coloco mal el año"); fallo = 1;}
 
             string fechaLlegada = txtFechaLlegada.Text;
 
@@ -125,15 +125,15 @@ namespace AerolineaFrba.Generacion_Viaje
             if (componentesFecha2.Length > 3) { MessageBox.Show("coloco mal la fecha de Llegada, tiene más de dos -"); fallo = 1;}
             if (componentesFecha.Length < 3) { MessageBox.Show("coloco mal la fecha de salida, tiene menos de dos -"); fallo = 1;}
 
-            if (1 > int.Parse(componentesFecha2[2]) || int.Parse(componentesFecha2[2]) > 31) { MessageBox.Show("coloco mal la fecha de Llegada, coloco mal el día"); fallo = 1;}
+            if (1 > int.Parse(componentesFecha2[2]) || int.Parse(componentesFecha2[2]) > 31 || int.Parse(componentesFecha2[2]) <= int.Parse(componentesFecha[2]) || (int.Parse(componentesFecha2[2]) - int.Parse(componentesFecha[2])) != 1 ) { MessageBox.Show("coloco mal la fecha de Llegada, coloco mal el día"); fallo = 1; }
 
-            if (1 > int.Parse(componentesFecha2[1]) || int.Parse(componentesFecha2[1]) > 12) { MessageBox.Show("coloco mal la fecha de Llegada, coloco mal el mes"); fallo = 1;}
+            if (1 > int.Parse(componentesFecha2[1]) || int.Parse(componentesFecha2[1]) > 12 || int.Parse(componentesFecha2[1]) < int.Parse(componentesFecha[1]) || int.Parse(componentesFecha2[1]) < int.Parse(componentesFecha[1]) || int.Parse(componentesFecha2[1]) > int.Parse(componentesFecha[1])) { MessageBox.Show("coloco mal la fecha de Llegada, coloco mal el mes"); fallo = 1; }
 
-            if (1950 > int.Parse(componentesFecha2[0]) || int.Parse(componentesFecha2[0]) > DateTime.Today.Year) { MessageBox.Show("coloco mal la fecha de Llegada, coloco mal el año"); fallo = 1;}
+            if (1950 > int.Parse(componentesFecha2[0]) || int.Parse(componentesFecha2[0]) < DateTime.Today.Year || int.Parse(componentesFecha2[0]) < int.Parse(componentesFecha[0]) || int.Parse(componentesFecha2[0]) > int.Parse(componentesFecha[0])) { MessageBox.Show("coloco mal la fecha de Llegada, coloco mal el año"); fallo = 1; }
 
             string servicioAeronave = "fallo";
             string servicioRuta = "fallo2";
-            string bajaFueraServ = "1";
+            string bajaFueraServ = "True";
             string fechaReinicioServ = "fallo";
 
             Int32 selectedRowCount = dgvAeronave.Rows.GetRowCount(DataGridViewElementStates.Selected);
@@ -163,7 +163,7 @@ namespace AerolineaFrba.Generacion_Viaje
 
             if (!(servicioRuta == servicioAeronave)) { MessageBox.Show("El servicio de ruta y de aeronave deben ser iguales"); fallo = 1; }
 
-            if (bajaFueraServ == "1" /*&& fechaReinicioSerrv >= fechaSalida */) { MessageBox.Show("la aeronave se encuentra fuera de servicio en esa fecha"); fallo = 1; }
+            if (bajaFueraServ == "True" /*&& fechaReinicioServ >= fechaSalida*/ ) { MessageBox.Show("la aeronave se encuentra fuera de servicio en esa fecha"); fallo = 1; }
 
             //Validar que entre el último viaje que recorra esa aeronave y la fecha seleccionada hayan 2 días de diferencia.
 
