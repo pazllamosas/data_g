@@ -123,7 +123,7 @@ namespace AerolineaFrba.Abm_Aeronave
                 DataGridViewRow d = dgvAeronaves.SelectedRows[0];
                 string bajaVidaUtil = d.Cells[12].Value.ToString();
 
-                if (bajaVidaUtil == "0")
+                if (bajaVidaUtil == "False")
                 {
                     string matricula = d.Cells[1].Value.ToString();
                     string modelo = d.Cells[2].Value.ToString();
@@ -137,7 +137,7 @@ namespace AerolineaFrba.Abm_Aeronave
                     FormProvider.GenerarViaje.Show(); //mandar todos los parametros.
                     FormProvider.GenerarViaje.EditarGenerarViaje(matricula, modelo, espacioEncomienda, fabricante, servicio, cantidadButacas, ubicacion, bajaFueraServ, fechaReinicioServ);
                 }
-                else { MessageBox.Show("No se puede elegir una aeronave con baja por vida útil (vida util = 1)"); }
+                else { MessageBox.Show("No se puede elegir una aeronave con baja por vida útil (vida util = True)"); }
             }
             else
             {
