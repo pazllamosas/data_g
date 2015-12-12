@@ -223,6 +223,8 @@ DROP PROCEDURE DATA_G.GET_ESTADOS
 
 -------------- DROP FUNCTION ------------------------
 
+IF OBJECT_ID('DATA_G.RUTA_HABILITADA') IS NOT NULL
+DROP FUNCTION DATA_G.RUTA_HABILITADA
 IF OBJECT_ID('DATA_G.EXISTE_AERONAVE_ESTADO') IS NOT NULL
 DROP FUNCTION DATA_G.EXISTE_AERONAVE_ESTADO
 IF OBJECT_ID('DATA_G.ROL_HABILITADO') IS NOT NULL
@@ -1244,19 +1246,21 @@ AS BEGIN
 END
 
 GO
-CREATE FUNCTION DATA_G.GET_ID_RUTA(@CODIGO NUMERIC(18,0), @ORIGEN NUMERIC (18,0), @DESTINO NUMERIC (18,0), @SERVICIO INT) 
+CREATE FUNCTION DATA_G.GET_ID_RUTA(@CODIGO NUMERIC(18,0), @ORIGEN NVARCHAR(255), @DESTINO NVARCHAR(255), @SERVICIO NVARCHAR(255)) 
 RETURNS int 
 AS BEGIN
 	DECLARE @IDRUTA INT
 	
-	SELECT @IDRUTA = IdRuta  FROM DATA_G.RUTA
+	SELECT @IDRUTA = IdRuta  FROM DATA_G.RUTA R
 	WHERE Codigo = @CODIGO
-		AND Origen = @ORIGEN
-		AND Destino = @DESTINO
-		AND IdServicio = @SERVICIO
+		AND (SELECT C1.Nombre FROM DATA_G.CIUDAD C1 WHERE R.Origen = C1.CodigoCiudad) = @ORIGEN
+		AND (SELECT C2.Nombre FROM DATA_G.CIUDAD C2 WHERE R.Destino = C2.CodigoCiudad) = @DESTINO
+		AND (SELECT TS.Descripcion FROM DATA_G.TIPODESERVICIO TS WHERE R.IdServicio = TS.IdServicio) = @SERVICIO
 	
 	RETURN @IDRUTA
 END
+
+
 
 GO
 CREATE FUNCTION DATA_G.GET_CLIENTE_DNI(@dni VARCHAR(255)) 
@@ -1657,6 +1661,21 @@ BEGIN
 END
 GO
 
+
+CREATE FUNCTION DATA_G.RUTA_HABILITADA(@IdRuta int) 
+	RETURNS int
+	AS
+	BEGIN
+		DECLARE @CANTIDAD INT
+		
+		SELECT @CANTIDAD = COUNT(IdRuta) FROM DATA_G.RUTA
+		WHERE IdRuta = @IdRuta AND
+			  ESTADO = 1
+		
+		RETURN @CANTIDAD
+	END
+GO
+
 CREATE PROCEDURE DATA_G.CREAR_TIPO_SERVICIO (@SERVICIO NVARCHAR (255)) AS
 BEGIN 
 	IF (( NOT EXISTS ( SELECT * FROM DATA_G.TIPODESERVICIO WHERE Descripcion = @SERVICIO )))
@@ -1776,7 +1795,7 @@ BEGIN
 		UPDATE DATA_G.AERONAVE SET 
 			BajaPorFueraDeServicio = 1,
 			FechaDeFueraDeServicio = GETDATE (),
-			FechaReinicioDeServicio = DATEADD (DAY, 20, FechaDeFueraDeServicio)
+			FechaReinicioDeServicio = DATEADD (DAY, 20, GETDATE())
 			WHERE IdAeronave = @IDAERONAVE
 	END
 	ELSE
@@ -1885,36 +1904,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE DATA_G.BAJA_VUELO(@nrovuelo int)
-AS BEGIN
-	UPDATE DATA_G.VUELO  
-		SET Estado = 0
-		WHERE NroVuelo = @nrovuelo 
-			AND FechaSalida > GETDATE()
-END
-GO
 
-CREATE PROCEDURE DATA_G.BAJA_RUTA(@ID INT) AS
-BEGIN
-	DECLARE @idVuelo int
-	IF (( NOT EXISTS ( SELECT * FROM DATA_G.VUELO V WHERE IdRuta = @ID
-													AND FechaSalida > GETDATE())))
-		BEGIN
-		UPDATE DATA_G.RUTA SET
-			ESTADO = 0
-			WHERE IdRuta = @ID
-		SELECT V.NroVuelo Into #Temp FROM DATA_G.VUELO V WHERE V.IdRuta = @id
-		WHILE (SELECT COUNT(*) From #Temp) > 0
-			BEGIN
-				SELECT Top 1 @idVuelo = NroVuelo From #Temp
-				EXECUTE DATA_G.BAJA_VUELO @nrovuelo = @idvuelo
-				DELETE #Temp Where NroVuelo = @idVuelo
-			END
-		END
-	 ELSE
-		RAISERROR ('Hay vuelo asignado a la ruta', 16, 217) WITH SETERROR
-END
-GO
 
 CREATE PROCEDURE DATA_G.REGISTRO_LLEGADA(@nrovuelo int, @fechallegada nvarchar(255))
 AS BEGIN
@@ -2197,23 +2187,26 @@ CREATE FUNCTION DATA_G.TARJETA_VENCIDA(@vencimiento datetime )
 	END
 GO
 
+
 CREATE PROCEDURE DATA_G.CANCELAR_COMPRA(@nrocompra int)
 AS BEGIN
 DECLARE @motivo nvarchar(255)
 	SET @motivo = 'Cancelar compra'
+DECLARE @id int
 	INSERT INTO DATA_G.DEVOLUCION(FechaDevolucion,Motivo, NroCompra)
 			VALUES( GETDATE() , @motivo, @nrocompra)
+	
 	UPDATE DATA_G.PASAJE
 		SET IdDevolucion = SCOPE_IDENTITY()
-		WHERE @nrocompra = @nrocompra
+		WHERE NroCompra = @nrocompra
+			
 	UPDATE DATA_G.BUTACA
 		SET ESTADO = 'Libre'
 		WHERE IdAeronave IN (SELECT IdButaca FROM DATA_G.PASAJE P , DATA_G.COMPRA C 
 								WHERE C.NroCompra = @nrocompra 
 									AND C.NroCompra = P.NroCompra)
-	UPDATE DATA_G.PAQUETE
-		SET IdDevolucion=SCOPE_IDENTITY()
-		WHERE NroCompra = @nrocompra
+
+	
 END
 GO
 
@@ -2224,24 +2217,37 @@ BEGIN
 	DECLARE @nrovuelo int
 	DECLARE @id int
 	SET @motivo = 'Baja del vuelo' 
-	INSERT INTO DATA_G.DEVOLUCION ( FechaDevolucion, Motivo, NroCompra)
-		SELECT GETDATE(), @motivo, C.NroCompra FROM DATA_G.COMPRA C, DATA_G.VUELO V
-												WHERE C.NroVuelo = @nrovuelo
-													AND V.NroVuelo = C.NroVuelo
-													AND V.Estado = 0
-	SELECT C.NroCompra INTO #Temp FROM DATA_G.COMPRA C, DATA_G.VUELO V
+--	INSERT INTO DATA_G.DEVOLUCION ( FechaDevolucion, Motivo, NroCompra)
+--		SELECT GETDATE(), @motivo, C.NroCompra FROM DATA_G.COMPRA C, DATA_G.VUELO V
+--												WHERE C.NroVuelo = @nrovuelo
+--													AND V.NroVuelo = C.NroVuelo
+--													AND V.Estado = 0
+	SELECT C.NroCompra INTO #Tempcp FROM DATA_G.COMPRA C, DATA_G.VUELO V
 									WHERE C.NroVuelo = @nrovuelo
 										AND V.NroVuelo = C.NroVuelo
 										AND V.Estado = 0
-	WHILE (SELECT COUNT(*) FROM #Temp) >0 
+	WHILE (SELECT COUNT(*) FROM #Tempcp) >0 
 		BEGIN
-			SELECT TOP 1 @id = NroCompra FROM #Temp
+			SELECT TOP 1 @id = NroCompra FROM #Tempcp
 			EXECUTE DATA_G.CANCELAR_COMPRA @nrocompra = @id
-			--EXECUTE DATA_G.CANCELAR_PAQUETE @nrocompra = @id
-			DELETE #Temp WHERE NroCompra = @id
+	--UPDATE DATA_G.PASAJE 
+	--	SET IdDevolucion = D.IdDevolucion
+	--	FROM DATA_G.DEVOLUCION D, DATA_G.PASAJE P
+	--	WHERE P.NroCompra = @id
+	--		AND D.NroCompra = P.NroCompra
+	--UPDATE DATA_G.BUTACA
+	--	SET ESTADO = 'Libre'
+	--	WHERE IdAeronave IN (SELECT IdButaca FROM DATA_G.PASAJE P , DATA_G.COMPRA C 
+	--							WHERE C.NroCompra = @id 
+	--								AND C.NroCompra = P.NroCompra)
+	--UPDATE DATA_G.PAQUETE
+	--	SET IdDevolucion = SCOPE_IDENTITY()
+	--	WHERE NroCompra = @id
+			DELETE #Tempcp WHERE NroCompra = @id
 		END
 END
 GO
+
 
 CREATE FUNCTION DATA_G.EXISTE_COMPRA(@nrocompra int) 
 	RETURNS int
@@ -2253,6 +2259,56 @@ CREATE FUNCTION DATA_G.EXISTE_COMPRA(@nrocompra int)
 		WHERE NroCompra = @nrocompra
 			 
 		RETURN @CANTIDAD
+	END
+GO
+
+CREATE PROCEDURE DATA_G.BAJA_VUELO(@nrovuelo int)
+AS BEGIN
+	UPDATE DATA_G.VUELO    
+		SET Estado = 0
+		FROM DATA_G.AERONAVE A
+		WHERE NroVuelo = @nrovuelo 
+			AND FechaSalida > GETDATE()
+			AND A.IdEstado <> 1
+	DECLARE @motivo varchar(255)
+	DECLARE @id int
+	SET @motivo = 'Baja del vuelo' 
+	INSERT INTO DATA_G.DEVOLUCION ( FechaDevolucion, Motivo, NroCompra)
+		SELECT GETDATE(), @motivo, C.NroCompra FROM DATA_G.COMPRA C, DATA_G.VUELO V
+												WHERE C.NroVuelo = @nrovuelo
+													AND V.NroVuelo = C.NroVuelo
+													AND V.Estado = 0
+	--SELECT C.NroCompra INTO #Temp2 FROM DATA_G.COMPRA C, DATA_G.VUELO V
+	--								WHERE C.NroVuelo = @nrovuelo
+	--									AND V.NroVuelo = C.NroVuelo
+	--									AND V.Estado = 0
+	--WHILE (SELECT COUNT(*) FROM #Temp2) >0 
+	--	BEGIN
+	--		SELECT TOP 1 @id = NroCompra FROM #Temp2
+	--		EXECUTE DATA_G.CANCELAR_COMPRA @nrocompra = @id
+	--		DELETE #Temp2 WHERE NroCompra = @id
+	--	END
+END
+GO
+
+
+
+
+CREATE PROCEDURE DATA_G.BAJA_RUTA(@ID INT) AS
+BEGIN
+	DECLARE @idVuelo int
+	BEGIN
+		UPDATE DATA_G.RUTA SET
+			ESTADO = 0
+			WHERE IdRuta = @ID
+		SELECT V.NroVuelo Into #Temp FROM DATA_G.VUELO V WHERE V.IdRuta = @id
+		WHILE (SELECT COUNT(*) From #Temp) > 0
+			BEGIN
+				SELECT Top 1 @idVuelo = NroVuelo From #Temp
+				EXECUTE DATA_G.BAJA_VUELO @nrovuelo = @idvuelo
+				DELETE #Temp Where NroVuelo = @idVuelo
+			END
+		END
 	END
 GO
 

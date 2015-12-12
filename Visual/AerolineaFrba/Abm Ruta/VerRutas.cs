@@ -81,7 +81,42 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void button2_Click(object sender, EventArgs e)
         {
+            Int32 selectedRowCount = dgvRutas.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount > 0 && selectedRowCount < 2)
+            {
+                DataGridViewRow d = dgvRutas.SelectedRows[0];
+                string codigo = (d.Cells[0].Value.ToString());
+                string servicio = (d.Cells[3].Value.ToString());
+                string ciudadOrigen = (d.Cells[4].Value.ToString());
+                string ciudadDestino = (d.Cells[5].Value.ToString());
+                
+               
+                string query = "SELECT DATA_G.GET_ID_RUTA('" + codigo + "', '" + ciudadOrigen + "', '" + ciudadDestino+ "', '" + servicio + "' ) AS id";
 
+                SqlDataReader reader = Conexion.ejecutarQuery(query);
+                reader.Read();
+                int idRuta = int.Parse(reader["id"].ToString());
+                reader.Close();
+
+                if (rutaHabilitada(idRuta))
+                {
+                    bool resultado = Conexion.executeProcedure("DATA_G.BAJA_RUTA", Conexion.generarArgumentos("@ID"), idRuta );
+                    if (resultado)
+                    {
+                      MessageBox.Show("Ruta inhabilitada");
+                     }
+                }
+                else 
+                {
+                    MessageBox.Show("Ya se encuentra inhabilitada", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                
+                }
+           
+            }
+            else
+            {
+                MessageBox.Show("No podés dar de baja si no elegís una Ruta y sólo una ruta.");
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -134,5 +169,26 @@ namespace AerolineaFrba.Abm_Ruta
                 MessageBox.Show("No podés editar si no elegís una Ruta y sólo una ruta.");
             }
         }
+
+        public Boolean rutaHabilitada(Int32 ruta)
+        {
+            
+            string query = "SELECT  DATA_G.RUTA_HABILITADA ('" + ruta + "') AS id";
+
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+            reader.Read();
+            int respuesta = int.Parse(reader["id"].ToString());
+            reader.Close();
+
+            if (respuesta == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }
