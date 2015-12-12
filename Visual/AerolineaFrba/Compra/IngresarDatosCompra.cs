@@ -116,11 +116,12 @@ namespace AerolineaFrba.Compra
                     if (i < (cantidadDePasajes - 1))
                     {
                         idButacasOcupadas = idButacasOcupadas + dgvPasajes.Rows[i].Cells[2].Value.ToString() + ", ";
-                        tiposButacasOcupadas = tiposButacasOcupadas + "'" + dgvPasajes.Rows[i].Cells[3].Value.ToString() + "', "
+                        tiposButacasOcupadas = tiposButacasOcupadas + "'" + dgvPasajes.Rows[i].Cells[3].Value.ToString() + "', ";
                     }
                     else
                     {
                         idButacasOcupadas = idButacasOcupadas + "'" + dgvPasajes.Rows[i].Cells[2].Value.ToString()+"'";
+                        tiposButacasOcupadas = tiposButacasOcupadas + "'" + dgvPasajes.Rows[i].Cells[3].Value.ToString() + "'";
                     }
                 }
 
@@ -172,21 +173,25 @@ namespace AerolineaFrba.Compra
             int cantidadDePasajes = dgvPasajes.Rows.Count;
             
                 string idButacasOcupadas = "";
+                string tiposButacasOcupadas = "";
                 for (int i = 0; i < cantidadDePasajes; i++)
                 {
                     if (i < (cantidadDePasajes - 1))
                     {
                         idButacasOcupadas = idButacasOcupadas + dgvPasajes.Rows[i].Cells[2].Value.ToString() + ", ";
+                        tiposButacasOcupadas = tiposButacasOcupadas + "'" + dgvPasajes.Rows[i].Cells[3].Value.ToString() + "', ";
                     }
                     else
                     {
-                        idButacasOcupadas = idButacasOcupadas + dgvPasajes.Rows[i].Cells[2].Value.ToString();
+                        idButacasOcupadas = idButacasOcupadas + "'" + dgvPasajes.Rows[i].Cells[2].Value.ToString() + "'";
+                        tiposButacasOcupadas = tiposButacasOcupadas + "'" + dgvPasajes.Rows[i].Cells[3].Value.ToString() + "'";
                     }
                 }
 
+
             // muestro la otra pantalla
                 DataGridViewRow vuelos = dgvVuelos.SelectedRows[0];
-                FormProvider.ElegirButaca.CargarButacas(vuelos.Cells[2].Value.ToString(), idButacasOcupadas);
+                FormProvider.ElegirButaca.CargarButacas(vuelos.Cells[2].Value.ToString(), idButacasOcupadas, tiposButacasOcupadas);
                 FormProvider.ElegirButaca.EditarButaca(pasajes.Cells[1].Value.ToString(), pasajes.Cells[0].Value.ToString());
                 FormProvider.ElegirButaca.Show();
 
