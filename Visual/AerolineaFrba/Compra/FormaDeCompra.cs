@@ -54,6 +54,7 @@ namespace AerolineaFrba.Compra
                 label8.Enabled = false;
                 label9.Enabled = false;
             }
+            validarCamposCompra();
         }
 
         private void label11_Click(object sender, EventArgs e)
@@ -81,6 +82,8 @@ namespace AerolineaFrba.Compra
                 ElClienteExistia = true;
             }
             reader.Close();
+
+            validarCamposCompra();
         }
 
         private void generarCompra(int idComprador)
@@ -254,6 +257,7 @@ namespace AerolineaFrba.Compra
                 LaTarjetaExistia = true;
             }
             tarjeta.Close();
+            validarCamposCompra();
         }
 
         private void validarCamposCompra() { 
@@ -286,6 +290,51 @@ namespace AerolineaFrba.Compra
                 button1.Enabled = false;
             }
 
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            validarCamposCompra();
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            validarCamposCompra();
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            validarCamposCompra();
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            validarCamposCompra();
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+            validarCamposCompra();
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+            validarCamposCompra();
+        }
+
+        private void textBox11_TextChanged(object sender, EventArgs e)
+        {
+            validarCamposCompra();
+        }
+
+        private void textBox8_TextChanged(object sender, EventArgs e)
+        {
+            validarCamposCompra();
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            validarCamposCompra();
         }
     }
 }
