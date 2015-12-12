@@ -110,19 +110,21 @@ namespace AerolineaFrba.Compra
             else
             {
                 string idButacasOcupadas = "";
+                string tiposButacasOcupadas = "";
                 for (int i = 0; i < cantidadDePasajes; i++ )
                 {
                     if (i < (cantidadDePasajes - 1))
                     {
                         idButacasOcupadas = idButacasOcupadas + dgvPasajes.Rows[i].Cells[2].Value.ToString() + ", ";
+                        tiposButacasOcupadas = tiposButacasOcupadas + "'" + dgvPasajes.Rows[i].Cells[3].Value.ToString() + "', "
                     }
                     else
                     {
-                        idButacasOcupadas = idButacasOcupadas + dgvPasajes.Rows[i].Cells[2].Value.ToString();
+                        idButacasOcupadas = idButacasOcupadas + "'" + dgvPasajes.Rows[i].Cells[2].Value.ToString()+"'";
                     }
                 }
 
-                FormProvider.ElegirButaca.CargarButacas(d.Cells[2].Value.ToString(), idButacasOcupadas);
+                FormProvider.ElegirButaca.CargarButacas(d.Cells[2].Value.ToString(), idButacasOcupadas, tiposButacasOcupadas);
             }
         }
 
