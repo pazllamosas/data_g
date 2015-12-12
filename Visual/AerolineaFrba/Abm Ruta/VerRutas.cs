@@ -167,7 +167,7 @@ namespace AerolineaFrba.Abm_Ruta
             }
             else
             {
-                MessageBox.Show("No podés editar si no elegís una Ruta y sólo una ruta.");
+                MessageBox.Show("No podés generar viaje si no elegís una Ruta y sólo una ruta.");
             }
         }
 

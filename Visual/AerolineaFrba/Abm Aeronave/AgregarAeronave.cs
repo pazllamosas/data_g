@@ -18,16 +18,29 @@ namespace AerolineaFrba.Abm_Aeronave
         {
             InitializeComponent();
         }
+        private static bool editando = false;
 
         public void EditarAeronave(string matricula, string modelo, string espacioEncomienda, string fabricante, string servicio, string cantidadButacas, string ubicacion) //mandar todos los parametros para completar los texbox 
         {
-            txtMatricula.Text = matricula; //asignar los parametros a los text
+            AgregarAeronave.ActiveForm.Text = "Editar Aeronave";
+            editando = true;
+            txtMatricula.Text = matricula;
             txtModelo.Text = modelo;
             txtEspacioEncomienda.Text = espacioEncomienda;
             txtFabricante.Text = fabricante;
             txtCantButacas.Text = cantidadButacas;
             cmbTipoServicio.Text = servicio;
             cmbOrigen.Text = ubicacion;
+
+            string query = "SELECT DATA_G.GET_ID_AERONAVE ('" + matricula + "', '" + fabricante + "') AS id";
+
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+            reader.Read();
+            string idAeronave = (reader["id"].ToString());
+            reader.Close();
+            txtId.Text = idAeronave;
+
+            btnGuardar.Enabled = true;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -38,9 +51,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void AgregarAeronave_Load(object sender, EventArgs e)
         {
-            //Conexion.cargarCmb("Nombre", "CIUDAD", cmbOrigen);
-            //Conexion.cargarCmb("Descripcion", "TIPODESERVICIO", cmbTipoServicio);
-
+            
             cmbOrigen.ValueMember = "CodigoCiudad";
             cmbOrigen.DisplayMember = "Nombre";
             cmbOrigen.DataSource = Conexion.cargarTablaConsulta("DATA_G.GET_CIUDADES");
@@ -71,8 +82,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-           if (this.validacion())
-           {
+          
             double kg_disponibles = double.Parse(txtEspacioEncomienda.Text);
 
             double cantButacas = double.Parse(txtCantButacas.Text);
@@ -87,40 +97,76 @@ namespace AerolineaFrba.Abm_Aeronave
 
             Int32 origen = Convert.ToInt32(cmbOrigen.SelectedValue);
 
-            if (this.validacionDatos(matricula, modelo, kg_disponibles, fabricante, descripcionServicio, cantButacas))
+            if (this.validacionDatos( modelo, kg_disponibles, fabricante, descripcionServicio, cantButacas))
             {
+                if (this.validacion())
+             {
+                 if (!editando)
+                 {
+                     if (matriculaValida(matricula))
+                     {
 
 
-                bool resultado = Conexion.executeProcedure("DATA_G.CREAR_AERONAVE", Conexion.generarArgumentos("@MATRICULA", "@MODELO", "@KGDISP",
-                 "@FABRICANTE", "@IDSERV", "@CANTBUTACAS", "@UBICACION"), matricula, modelo, kg_disponibles, fabricante, descripcionServicio, cantButacas, origen);
+                         bool resultado = Conexion.executeProcedure("DATA_G.CREAR_AERONAVE", Conexion.generarArgumentos("@MATRICULA", "@MODELO", "@KGDISP",
+                          "@FABRICANTE", "@IDSERV", "@CANTBUTACAS", "@UBICACION"), matricula, modelo, kg_disponibles, fabricante, descripcionServicio, cantButacas, origen);
 
 
-                if (resultado)
-                {
-                    MessageBox.Show("Aeronave creada exitosamente");
+                         if (resultado)
+                         {
+                             MessageBox.Show("Aeronave creada exitosamente");
 
-                    this.txtEspacioEncomienda.Clear();
-                    this.txtCantButacas.Clear();
-                    this.txtModelo.Clear();
-                    this.txtFabricante.Clear();
-                    this.txtMatricula.Clear();
-                    this.cmbTipoServicio.SelectedIndex = -1;
-                    this.cmbOrigen.SelectedIndex = -1;
-                }
-            }
-        }
-           else
-            {
-                MessageBox.Show("Completar todos los campos");
-            }
+                             this.txtEspacioEncomienda.Clear();
+                             this.txtCantButacas.Clear();
+                             this.txtModelo.Clear();
+                             this.txtFabricante.Clear();
+                             this.txtMatricula.Clear();
+                             this.cmbTipoServicio.SelectedIndex = -1;
+                             this.cmbOrigen.SelectedIndex = -1;
+                         }
+                     }
+                     else
+                     {
+                         MessageBox.Show("La matricula ya existe");
+                         this.txtMatricula.Clear();
+                     }
+                 }
+                 else
+                 {
+                     if (editando)
+                     {
+                         string idAeronave = txtId.Text;
 
-           FormProvider.VerAeronaves.CargarAeronave();
+                         bool resultado = Conexion.executeProcedure("DATA_G.MODIFICAR_AERONAVE", Conexion.generarArgumentos("@IDAERONAVE", "@MATRICULA", "@MODELO", "@KGDISP",
+                            "@FABRICANTE", "@IDSERV", "@CANTBUTACAS", "@UBICACION"), idAeronave, matricula, modelo, kg_disponibles, fabricante, descripcionServicio, cantButacas, origen);
+                         if (resultado)
+                         {
+                             MessageBox.Show("Aeronave modificada exitosamente");
 
-        }
+                             this.txtEspacioEncomienda.Clear();
+                             this.txtCantButacas.Clear();
+                             this.txtModelo.Clear();
+                             this.txtFabricante.Clear();
+                             this.txtMatricula.Clear();
+                             this.cmbTipoServicio.SelectedIndex = -1;
+                             this.cmbOrigen.SelectedIndex = -1;
+                             this.Hide();
+                             FormProvider.VerAeronaves.Show();
+                         }
 
+                     }
+                 }
+                
+                     }
+                     else
+                        {
+                            MessageBox.Show("Completar todos los campos");
+                         }
+                     }
 
+                    FormProvider.VerAeronaves.CargarAeronave();
 
-          
+                 }
+
 
         private void txtCantButacasPasillo_TextChanged(object sender, EventArgs e)
         {
@@ -162,7 +208,7 @@ namespace AerolineaFrba.Abm_Aeronave
            return true;
              }
 
-        private bool validacionDatos(string matricula, string modelo, double kg_disponibles, string fabricante, Int32 descripcionServicio, double cantButacas)
+        private bool validacionDatos(string modelo, double kg_disponibles, string fabricante, Int32 descripcionServicio, double cantButacas)
         {
             if (kg_disponibles == 0)
             {
@@ -176,11 +222,7 @@ namespace AerolineaFrba.Abm_Aeronave
                 this.txtCantButacas.Clear();
                 return false;
             }
-            if (!matriculaValida(matricula))
-            {
-                this.txtMatricula.Clear();
-                return false;
-            }
+           
             return true;
         }
 
@@ -200,7 +242,6 @@ namespace AerolineaFrba.Abm_Aeronave
             }
             else
             {
-                MessageBox.Show("La matricula ya existe");
                 return false;
             }
         }
