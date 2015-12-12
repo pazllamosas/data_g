@@ -255,7 +255,7 @@ namespace AerolineaFrba.Compra
             idButacasOcupadas = idButacas;
             idVuelo = IdVuelo;
 
-            if (FormProvider.Login.loginMode == "invitado")
+            if (FormProvider.Login.getLoginMode() == "invitado")
             {
                 radioButton2.Enabled = false;
             }

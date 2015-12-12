@@ -16,7 +16,12 @@ namespace AerolineaFrba.Inicio
     public partial class Login : Form
     {
 
-        public static string loginMode = "";
+        public static string loginMode ="";
+
+        public string getLoginMode ()
+        {
+            return loginMode; 
+        }
 
         private string password = "";
         public Login()
