@@ -45,6 +45,7 @@ namespace AerolineaFrba.Compra
                 label8.Enabled = true;
                 label9.Enabled = true;
                 dateTimePicker2.Enabled = true;
+                comboBox1.Enabled = true;
             }
             else
             {
@@ -54,6 +55,7 @@ namespace AerolineaFrba.Compra
                 label11.Enabled = false;
                 label8.Enabled = false;
                 label9.Enabled = false;
+                comboBox1.Enabled = false;
             }
             validarCamposCompra();
         }
@@ -264,7 +266,7 @@ namespace AerolineaFrba.Compra
 
             comboBox1.ValueMember = "IdTarjeta";
             comboBox1.DisplayMember = "Descripcion";
-            comboBox1.DataSource = Conexion.cargarTablaConsulta("DATA_G.TIPODETARJETA");
+            comboBox1.DataSource = Conexion.cargarTablaConsulta("DATA_G.GET_TIPO_TARJETA");
 
         }
 
@@ -295,13 +297,13 @@ namespace AerolineaFrba.Compra
         
             DateTime fechaNac = DateTime.Parse(dateTimePicker1.Text);
 
-            if (!string.IsNullOrEmpty(textBox1.Text) && !string.IsNullOrEmpty(textBox2.Text) && !string.IsNullOrEmpty(textBox3.Text) && !string.IsNullOrEmpty(textBox4.Text) && !string.IsNullOrEmpty(textBox5.Text) && !string.IsNullOrEmpty(textBox6.Text) && !string.IsNullOrEmpty(textBox11.Text) && !string.IsNullOrEmpty(dateTimePicker1.Text) && fechaNac < new DateTime())
+            if (!string.IsNullOrEmpty(textBox1.Text) && !string.IsNullOrEmpty(textBox2.Text) && !string.IsNullOrEmpty(textBox3.Text) && !string.IsNullOrEmpty(textBox4.Text) && !string.IsNullOrEmpty(textBox5.Text) && !string.IsNullOrEmpty(textBox6.Text) && !string.IsNullOrEmpty(textBox11.Text) && fechaNac < DateTime.Today)
             {
 
                 if (radioButton1.Checked == true)
                 {
                     DateTime fechaVenc = DateTime.Parse(dateTimePicker2.Text);
-                    if (!string.IsNullOrEmpty(textBox7.Text) && !string.IsNullOrEmpty(textBox8.Text) && !string.IsNullOrEmpty(dateTimePicker2.Text) && fechaVenc > new DateTime())
+                    if (!string.IsNullOrEmpty(textBox7.Text) && !string.IsNullOrEmpty(textBox8.Text) && !string.IsNullOrEmpty(dateTimePicker2.Text) && fechaVenc > DateTime.Today)
                     {
                         button1.Enabled = true;
                     }
@@ -364,6 +366,11 @@ namespace AerolineaFrba.Compra
         }
 
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            validarCamposCompra();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             validarCamposCompra();
         }
