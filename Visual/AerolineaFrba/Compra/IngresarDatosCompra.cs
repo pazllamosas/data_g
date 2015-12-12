@@ -114,11 +114,11 @@ namespace AerolineaFrba.Compra
                 {
                     if (i < (cantidadDePasajes - 1))
                     {
-                        idButacasOcupadas = idButacasOcupadas + dgvPasajes.Rows[i].Cells[4].Value.ToString() + ", ";
+                        idButacasOcupadas = idButacasOcupadas + dgvPasajes.Rows[i].Cells[5].Value.ToString() + ", ";
                     }
                     else
                     {
-                        idButacasOcupadas = idButacasOcupadas + dgvPasajes.Rows[i].Cells[4].Value.ToString();
+                        idButacasOcupadas = idButacasOcupadas + dgvPasajes.Rows[i].Cells[5].Value.ToString();
                     }
                 }
 
@@ -126,8 +126,8 @@ namespace AerolineaFrba.Compra
             }
         }
 
-        public void AgregarButacaADgv(string dni, string nombre, string numerobutaca, string tipobutaca, string piso) {
-            dgvPasajes.Rows.Add(dni, nombre, numerobutaca, tipobutaca, piso);
+        public void AgregarButacaADgv(string dni, string nombre, string numerobutaca, string tipobutaca, string piso, string id) {
+            dgvPasajes.Rows.Add(dni, nombre, numerobutaca, tipobutaca, piso, id);
             int cantidadDePasajes = dgvPasajes.RowCount;
             if (cantidadDePasajes == int.Parse(txtCantPasajes.Text))
             {
@@ -136,13 +136,14 @@ namespace AerolineaFrba.Compra
             }
         }
 
-        public void EditarButacaEnDgv(string dni, string nombre, string numerobutaca, string tipobutaca, string piso)
+        public void EditarButacaEnDgv(string dni, string nombre, string numerobutaca, string tipobutaca, string piso, string id)
         {
             dgvPasajes.Rows[editandoPasaje].Cells[0].Value = dni;
             dgvPasajes.Rows[editandoPasaje].Cells[1].Value = nombre;
             dgvPasajes.Rows[editandoPasaje].Cells[2].Value = numerobutaca;
             dgvPasajes.Rows[editandoPasaje].Cells[3].Value = tipobutaca;
             dgvPasajes.Rows[editandoPasaje].Cells[4].Value = piso;
+            dgvPasajes.Rows[editandoPasaje].Cells[5].Value = id;
 
             int cantidadDePasajes = dgvPasajes.Rows.Count;
             if (cantidadDePasajes == int.Parse(txtCantPasajes.Text))
@@ -174,11 +175,11 @@ namespace AerolineaFrba.Compra
                 {
                     if (i < (cantidadDePasajes - 1))
                     {
-                        idButacasOcupadas = idButacasOcupadas + dgvPasajes.Rows[i].Cells[4].Value.ToString() + ", ";
+                        idButacasOcupadas = idButacasOcupadas + dgvPasajes.Rows[i].Cells[5].Value.ToString() + ", ";
                     }
                     else
                     {
-                        idButacasOcupadas = idButacasOcupadas + dgvPasajes.Rows[i].Cells[4].Value.ToString();
+                        idButacasOcupadas = idButacasOcupadas + dgvPasajes.Rows[i].Cells[5].Value.ToString();
                     }
                 }
 

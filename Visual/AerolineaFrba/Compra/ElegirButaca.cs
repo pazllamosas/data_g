@@ -35,7 +35,7 @@ namespace AerolineaFrba.Compra
 
             while (reader.Read())
             {
-                dgvSeleccionButaca.Rows.Add(reader["NroButaca"], reader["Tipo"].ToString(), reader["Piso"], reader["Estado"]);
+                dgvSeleccionButaca.Rows.Add(reader["NroButaca"], reader["Tipo"].ToString(), reader["Piso"], reader["Estado"], reader["IdButaca"]);
             }
             reader.Close();
         }
@@ -49,7 +49,7 @@ namespace AerolineaFrba.Compra
 
             while (reader.Read())
             {
-                dgvSeleccionButaca.Rows.Add(reader["NroButaca"], reader["Tipo"].ToString(), reader["Piso"], reader["Estado"]);
+                dgvSeleccionButaca.Rows.Add(reader["NroButaca"], reader["Tipo"].ToString(), reader["Piso"], reader["Estado"], reader["IdButaca"]);
             }
             reader.Close();
         }
@@ -73,11 +73,11 @@ namespace AerolineaFrba.Compra
         {
             if (editando)
             {
-                FormProvider.IngresarDatosCompra.EditarButacaEnDgv(txtDni.Text, txtNombre.Text, dgvSeleccionButaca.SelectedRows[0].Cells[0].Value.ToString(), dgvSeleccionButaca.SelectedRows[0].Cells[1].Value.ToString(), dgvSeleccionButaca.SelectedRows[0].Cells[2].Value.ToString());
+                FormProvider.IngresarDatosCompra.EditarButacaEnDgv(txtDni.Text, txtNombre.Text, dgvSeleccionButaca.SelectedRows[0].Cells[0].Value.ToString(), dgvSeleccionButaca.SelectedRows[0].Cells[1].Value.ToString(), dgvSeleccionButaca.SelectedRows[0].Cells[2].Value.ToString(), dgvSeleccionButaca.SelectedRows[0].Cells[4].Value.ToString());
             }
             else
             {
-                FormProvider.IngresarDatosCompra.AgregarButacaADgv(txtDni.Text, txtNombre.Text, dgvSeleccionButaca.SelectedRows[0].Cells[0].Value.ToString(), dgvSeleccionButaca.SelectedRows[0].Cells[1].Value.ToString(), dgvSeleccionButaca.SelectedRows[0].Cells[2].Value.ToString());
+                FormProvider.IngresarDatosCompra.AgregarButacaADgv(txtDni.Text, txtNombre.Text, dgvSeleccionButaca.SelectedRows[0].Cells[0].Value.ToString(), dgvSeleccionButaca.SelectedRows[0].Cells[1].Value.ToString(), dgvSeleccionButaca.SelectedRows[0].Cells[2].Value.ToString(), dgvSeleccionButaca.SelectedRows[0].Cells[4].Value.ToString());
             }
 
             txtDni.Clear();
