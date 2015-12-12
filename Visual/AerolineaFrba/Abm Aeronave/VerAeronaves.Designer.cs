@@ -33,7 +33,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deslogearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnEliminar = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -61,8 +60,8 @@
             // 
             this.btnAgregar.Image = global::AerolineaFrba.Properties.Resources.add;
             this.btnAgregar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAgregar.Location = new System.Drawing.Point(437, 33);
-            this.btnAgregar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAgregar.Location = new System.Drawing.Point(490, 35);
+            this.btnAgregar.Margin = new System.Windows.Forms.Padding(4);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(88, 28);
             this.btnAgregar.TabIndex = 1;
@@ -97,27 +96,12 @@
             this.deslogearToolStripMenuItem.Size = new System.Drawing.Size(107, 24);
             this.deslogearToolStripMenuItem.Text = "Salir";
             // 
-            // btnEliminar
-            // 
-            this.btnEliminar.Enabled = false;
-            this.btnEliminar.Image = global::AerolineaFrba.Properties.Resources.delete;
-            this.btnEliminar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEliminar.Location = new System.Drawing.Point(740, 33);
-            this.btnEliminar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(89, 28);
-            this.btnEliminar.TabIndex = 8;
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            // 
             // btnEditar
             // 
             this.btnEditar.Image = global::AerolineaFrba.Properties.Resources.modify;
             this.btnEditar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEditar.Location = new System.Drawing.Point(656, 33);
-            this.btnEditar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnEditar.Location = new System.Drawing.Point(586, 35);
+            this.btnEditar.Margin = new System.Windows.Forms.Padding(4);
             this.btnEditar.Name = "btnEditar";
             this.btnEditar.Size = new System.Drawing.Size(76, 28);
             this.btnEditar.TabIndex = 9;
@@ -132,7 +116,7 @@
             this.btnVolver.Image = global::AerolineaFrba.Properties.Resources.back;
             this.btnVolver.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnVolver.Location = new System.Drawing.Point(13, 33);
-            this.btnVolver.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(4);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(77, 28);
             this.btnVolver.TabIndex = 10;
@@ -170,7 +154,7 @@
             this.Column1,
             this.Column2});
             this.dgvAeronaves.Location = new System.Drawing.Point(16, 105);
-            this.dgvAeronaves.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvAeronaves.Margin = new System.Windows.Forms.Padding(4);
             this.dgvAeronaves.Name = "dgvAeronaves";
             this.dgvAeronaves.Size = new System.Drawing.Size(813, 325);
             this.dgvAeronaves.TabIndex = 12;
@@ -244,8 +228,8 @@
             // btnSeleccionar
             // 
             this.btnSeleccionar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSeleccionar.Location = new System.Drawing.Point(329, 33);
-            this.btnSeleccionar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSeleccionar.Location = new System.Drawing.Point(382, 35);
+            this.btnSeleccionar.Margin = new System.Windows.Forms.Padding(4);
             this.btnSeleccionar.Name = "btnSeleccionar";
             this.btnSeleccionar.Size = new System.Drawing.Size(100, 28);
             this.btnSeleccionar.TabIndex = 15;
@@ -258,12 +242,12 @@
             // 
             this.btnDarBaja.Image = global::AerolineaFrba.Properties.Resources.noplane;
             this.btnDarBaja.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDarBaja.Location = new System.Drawing.Point(533, 33);
-            this.btnDarBaja.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnDarBaja.Location = new System.Drawing.Point(670, 34);
+            this.btnDarBaja.Margin = new System.Windows.Forms.Padding(4);
             this.btnDarBaja.Name = "btnDarBaja";
-            this.btnDarBaja.Size = new System.Drawing.Size(115, 28);
+            this.btnDarBaja.Size = new System.Drawing.Size(147, 29);
             this.btnDarBaja.TabIndex = 16;
-            this.btnDarBaja.Text = "Dar de Baja";
+            this.btnDarBaja.Text = "Cambiar estado";
             this.btnDarBaja.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnDarBaja.UseVisualStyleBackColor = true;
             this.btnDarBaja.Click += new System.EventHandler(this.btnDarBaja_Click);
@@ -280,11 +264,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnEditar);
-            this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.btnAgregar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "VerAeronaves";
             this.Text = "Aeronaves";
             this.Load += new System.EventHandler(this.VerAeronaves_Load);
@@ -302,7 +285,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deslogearToolStripMenuItem;
-        private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Label label1;

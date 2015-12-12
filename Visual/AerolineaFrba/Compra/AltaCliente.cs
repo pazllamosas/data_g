@@ -30,6 +30,7 @@ namespace AerolineaFrba.Compra
             txtMail.Text = mail;
             txtDireccion.Text = direccion;
             AgregarCliente.ActiveForm.Text = "Editar Cliente";
+            editando = true;
         }
 
         private void button2_Click(object sender, EventArgs e)

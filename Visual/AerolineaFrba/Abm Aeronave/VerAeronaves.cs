@@ -38,8 +38,23 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void btnDarBaja_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            FormProvider.BajaAeronave.Show();
+
+            Int32 selectedRowCount = dgvAeronaves.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount > 0 && selectedRowCount < 2)
+            {
+                DataGridViewRow d = dgvAeronaves.SelectedRows[0];
+                string matricula = d.Cells[1].Value.ToString();
+                string fabricante = d.Cells[4].Value.ToString();
+                this.Hide();
+                FormProvider.BajaAeronave.Show(); 
+                FormProvider.BajaAeronave.bajaAeronave(matricula, fabricante);
+            }
+            else {
+                MessageBox.Show("No podés cambiar estado si no elegís una aeronave y sólo una aeronave.");
+            }
+
+            
+            
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
