@@ -66,7 +66,7 @@ namespace AerolineaFrba.Compra
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Hide();
-            FormProvider.MainMenu.Show();
+            FormProvider.IngresarDatosCompra.Show();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
