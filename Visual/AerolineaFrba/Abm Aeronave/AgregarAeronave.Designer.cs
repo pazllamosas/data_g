@@ -45,73 +45,82 @@
             this.label7 = new System.Windows.Forms.Label();
             this.cmbTipoServicio = new System.Windows.Forms.ComboBox();
             this.cmbOrigen = new System.Windows.Forms.ComboBox();
+            this.txtId = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 9);
+            this.label1.Location = new System.Drawing.Point(12, 11);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 13);
+            this.label1.Size = new System.Drawing.Size(143, 17);
             this.label1.TabIndex = 6;
             this.label1.Text = "Cantidad de Butacas:";
             // 
             // txtCantButacas
             // 
-            this.txtCantButacas.Location = new System.Drawing.Point(176, 6);
+            this.txtCantButacas.Location = new System.Drawing.Point(235, 7);
+            this.txtCantButacas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtCantButacas.Name = "txtCantButacas";
-            this.txtCantButacas.Size = new System.Drawing.Size(100, 20);
+            this.txtCantButacas.Size = new System.Drawing.Size(132, 22);
             this.txtCantButacas.TabIndex = 7;
             this.txtCantButacas.TextChanged += new System.EventHandler(this.txtCantButacasPasillo_TextChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 35);
+            this.label2.Location = new System.Drawing.Point(12, 43);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(161, 13);
+            this.label2.Size = new System.Drawing.Size(215, 17);
             this.label2.TabIndex = 8;
             this.label2.Text = "Espacio para Encomiendas (Kg):";
             // 
             // txtEspacioEncomienda
             // 
-            this.txtEspacioEncomienda.Location = new System.Drawing.Point(176, 32);
+            this.txtEspacioEncomienda.Location = new System.Drawing.Point(235, 39);
+            this.txtEspacioEncomienda.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtEspacioEncomienda.Name = "txtEspacioEncomienda";
-            this.txtEspacioEncomienda.Size = new System.Drawing.Size(100, 20);
+            this.txtEspacioEncomienda.Size = new System.Drawing.Size(132, 22);
             this.txtEspacioEncomienda.TabIndex = 9;
             this.txtEspacioEncomienda.TextChanged += new System.EventHandler(this.txtEspacioEncomienda_TextChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 61);
+            this.label3.Location = new System.Drawing.Point(12, 75);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 13);
+            this.label3.Size = new System.Drawing.Size(79, 17);
             this.label3.TabIndex = 10;
             this.label3.Text = "Fabricante:";
             // 
             // txtFabricante
             // 
-            this.txtFabricante.Location = new System.Drawing.Point(176, 58);
+            this.txtFabricante.Location = new System.Drawing.Point(235, 71);
+            this.txtFabricante.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtFabricante.Name = "txtFabricante";
-            this.txtFabricante.Size = new System.Drawing.Size(100, 20);
+            this.txtFabricante.Size = new System.Drawing.Size(132, 22);
             this.txtFabricante.TabIndex = 11;
             this.txtFabricante.TextChanged += new System.EventHandler(this.txtFabricante_TextChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(298, 9);
+            this.label6.Location = new System.Drawing.Point(397, 11);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(45, 13);
+            this.label6.Size = new System.Drawing.Size(58, 17);
             this.label6.TabIndex = 17;
             this.label6.Text = "Modelo:";
             // 
             // txtModelo
             // 
-            this.txtModelo.Location = new System.Drawing.Point(468, 6);
+            this.txtModelo.Location = new System.Drawing.Point(624, 7);
+            this.txtModelo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtModelo.Name = "txtModelo";
-            this.txtModelo.Size = new System.Drawing.Size(100, 20);
+            this.txtModelo.Size = new System.Drawing.Size(132, 22);
             this.txtModelo.TabIndex = 18;
             this.txtModelo.TextChanged += new System.EventHandler(this.txtModelo_TextChanged);
             // 
@@ -120,9 +129,10 @@
             this.btnGuardar.Enabled = false;
             this.btnGuardar.Image = global::AerolineaFrba.Properties.Resources.save;
             this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGuardar.Location = new System.Drawing.Point(12, 130);
+            this.btnGuardar.Location = new System.Drawing.Point(16, 160);
+            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardar.Size = new System.Drawing.Size(100, 28);
             this.btnGuardar.TabIndex = 5;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -134,9 +144,10 @@
             this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancelar.Image = global::AerolineaFrba.Properties.Resources.cancel;
             this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new System.Drawing.Point(496, 130);
+            this.btnCancelar.Location = new System.Drawing.Point(661, 160);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.Size = new System.Drawing.Size(100, 28);
             this.btnCancelar.TabIndex = 4;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -146,63 +157,79 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(298, 64);
+            this.label4.Location = new System.Drawing.Point(397, 79);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(108, 13);
+            this.label4.Size = new System.Drawing.Size(143, 17);
             this.label4.TabIndex = 19;
             this.label4.Text = "Número de Matricula:";
             // 
             // txtMatricula
             // 
-            this.txtMatricula.Location = new System.Drawing.Point(468, 61);
+            this.txtMatricula.Location = new System.Drawing.Point(624, 75);
+            this.txtMatricula.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtMatricula.Name = "txtMatricula";
-            this.txtMatricula.Size = new System.Drawing.Size(100, 20);
+            this.txtMatricula.Size = new System.Drawing.Size(132, 22);
             this.txtMatricula.TabIndex = 20;
             this.txtMatricula.TextChanged += new System.EventHandler(this.txtMatricula_TextChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 87);
+            this.label5.Location = new System.Drawing.Point(16, 107);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(92, 13);
+            this.label5.Size = new System.Drawing.Size(123, 17);
             this.label5.TabIndex = 21;
             this.label5.Text = "Ciudad de Origen:";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(298, 35);
+            this.label7.Location = new System.Drawing.Point(397, 43);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(93, 13);
+            this.label7.Size = new System.Drawing.Size(123, 17);
             this.label7.TabIndex = 23;
             this.label7.Text = "Servicio Brindado:";
             // 
             // cmbTipoServicio
             // 
             this.cmbTipoServicio.FormattingEnabled = true;
-            this.cmbTipoServicio.Location = new System.Drawing.Point(468, 32);
+            this.cmbTipoServicio.Location = new System.Drawing.Point(624, 39);
+            this.cmbTipoServicio.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbTipoServicio.Name = "cmbTipoServicio";
-            this.cmbTipoServicio.Size = new System.Drawing.Size(100, 21);
+            this.cmbTipoServicio.Size = new System.Drawing.Size(132, 24);
             this.cmbTipoServicio.TabIndex = 24;
             this.cmbTipoServicio.SelectedIndexChanged += new System.EventHandler(this.cmbTipoServicio_SelectedIndexChanged);
             // 
             // cmbOrigen
             // 
             this.cmbOrigen.FormattingEnabled = true;
-            this.cmbOrigen.Location = new System.Drawing.Point(176, 84);
+            this.cmbOrigen.Location = new System.Drawing.Point(235, 103);
+            this.cmbOrigen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cmbOrigen.Name = "cmbOrigen";
-            this.cmbOrigen.Size = new System.Drawing.Size(100, 21);
+            this.cmbOrigen.Size = new System.Drawing.Size(132, 24);
             this.cmbOrigen.TabIndex = 25;
             this.cmbOrigen.SelectedIndexChanged += new System.EventHandler(this.cmbOrigen_SelectedIndexChanged);
+            // 
+            // txtId
+            // 
+            this.txtId.Location = new System.Drawing.Point(124, 166);
+            this.txtId.Margin = new System.Windows.Forms.Padding(4);
+            this.txtId.Name = "txtId";
+            this.txtId.Size = new System.Drawing.Size(132, 22);
+            this.txtId.TabIndex = 26;
+            this.txtId.Visible = false;
             // 
             // AgregarAeronave
             // 
             this.AcceptButton = this.btnGuardar;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
-            this.ClientSize = new System.Drawing.Size(580, 165);
+            this.ClientSize = new System.Drawing.Size(773, 203);
+            this.Controls.Add(this.txtId);
             this.Controls.Add(this.cmbOrigen);
             this.Controls.Add(this.cmbTipoServicio);
             this.Controls.Add(this.label7);
@@ -220,6 +247,7 @@
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnCancelar);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "AgregarAeronave";
             this.Text = "Agregar Aeronave";
             this.Load += new System.EventHandler(this.AgregarAeronave_Load);
@@ -246,5 +274,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cmbTipoServicio;
         private System.Windows.Forms.ComboBox cmbOrigen;
+        private System.Windows.Forms.TextBox txtId;
     }
 }

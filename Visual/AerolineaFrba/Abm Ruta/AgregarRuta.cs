@@ -56,7 +56,14 @@ namespace AerolineaFrba.Abm_Ruta
             cmbTipoServicio.Text = servicio;
             cmbCiudadOrigen.Text = ciudadOrigen;
             cmbCiudadDestino.Text = ciudadDestino;
-            
+
+            string query = "SELECT DATA_G.GET_ID_RUTA('" + codigo + "', '" + ciudadOrigen + "', '" + ciudadDestino + "', '" + servicio + "' ) AS id";
+
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+            reader.Read();
+            string idRuta = (reader["id"].ToString());
+            reader.Close();
+            txtid.Text = idRuta;
 
             btnGuardar.Enabled = true;
 
@@ -83,54 +90,68 @@ namespace AerolineaFrba.Abm_Ruta
                 Int32 destino = Convert.ToInt32(cmbCiudadDestino.SelectedValue);
 
                 
-                if (this.validacionDatos(codigo, precio_kg, precio_pasaje, origen, destino))
-                {
-                    if (this.validacion())
-                    {
-                    if (!editando)
-                    {
-                    bool resultado = Conexion.executeProcedure("DATA_G.CREAR_RUTA", Conexion.generarArgumentos("@Codigo", "@PRECIO_KG", "@PRECIO_PASAJE",
-                     "@IDSERV", "@ORIGEN", "@DESTINO"), codigo, precio_kg, precio_pasaje, descripcionServicio, origen, destino);
+            if (this.validacionDatos( precio_kg, precio_pasaje, origen, destino))
+             {
+                 if (this.validacion())
+                 {
+                     if (!editando)
+                     {
+                         if (codigoValido(codigo))
+                         {
 
-                    if (resultado)
-                    {
-                        MessageBox.Show("Ruta creada exitosamente");
+                             bool resultado = Conexion.executeProcedure("DATA_G.CREAR_RUTA", Conexion.generarArgumentos("@Codigo", "@PRECIO_KG", "@PRECIO_PASAJE",
+                              "@IDSERV", "@ORIGEN", "@DESTINO"), codigo, precio_kg, precio_pasaje, descripcionServicio, origen, destino);
 
-                        this.txtCodigo.Clear();
-                        this.txtPrecioEncomienda.Clear();
-                        this.txtPrecioPasaje.Clear();
-                        this.cmbTipoServicio.SelectedIndex = -1;
-                        this.cmbCiudadOrigen.SelectedIndex = -1;
-                        this.cmbCiudadDestino.SelectedIndex = -1;
-                    }
-                }
+                             if (resultado)
+                             {
+                                 MessageBox.Show("Ruta creada exitosamente");
 
+                                 this.txtCodigo.Clear();
+                                 this.txtPrecioEncomienda.Clear();
+                                 this.txtPrecioPasaje.Clear();
+                                 this.cmbTipoServicio.SelectedIndex = -1;
+                                 this.cmbCiudadOrigen.SelectedIndex = -1;
+                                 this.cmbCiudadDestino.SelectedIndex = -1;
+                             }
+                         }
+                         else
+                         {
+                             MessageBox.Show("El codigo ya existe");
+                             this.txtCodigo.Clear();
+                         }
+                     }
+
+                     else
+                     {
+                         if (editando)
+                         {
+                             string idRuta = txtid.Text;
+
+                             bool resultado = Conexion.executeProcedure("DATA_G.MODIFICAR_RUTA", Conexion.generarArgumentos("@IDRUTA", "@Codigo", "@PRECIO_KG", "@PRECIO_PASAJE",
+                             "@IDSERV", "@ORIGEN", "@DESTINO"), idRuta, codigo, precio_kg, precio_pasaje, descripcionServicio, origen, destino);
+                             if (resultado)
+                             {
+                                 MessageBox.Show("Ruta modificada exitosamente");
+
+                                 this.txtCodigo.Clear();
+                                 this.txtPrecioEncomienda.Clear();
+                                 this.txtPrecioPasaje.Clear();
+                                 this.cmbTipoServicio.SelectedIndex = -1;
+                                 this.cmbCiudadOrigen.SelectedIndex = -1;
+                                 this.cmbCiudadDestino.SelectedIndex = -1;
+                                 this.Hide();
+                                 FormProvider.VerRutas.Show();
+                             }
+
+                         }
+                     }
+                 }
+                 else
+                 {
+                     MessageBox.Show("Completar todos los campos");
+                 }
             }
-            else
-            {
-                if (editando) {
-
-                    bool resultado = Conexion.executeProcedure("DATA_G.MODIFICAR_RUTA", Conexion.generarArgumentos("@Codigo", "@PRECIO_KG", "@PRECIO_PASAJE",
-                    "@IDSERV", "@ORIGEN", "@DESTINO"), codigo, precio_kg, precio_pasaje, descripcionServicio, origen, destino);
-                    if (resultado)
-                    {
-                        MessageBox.Show("Ruta modificada exitosamente");
-
-                        this.txtCodigo.Clear();
-                        this.txtPrecioEncomienda.Clear();
-                        this.txtPrecioPasaje.Clear();
-                        this.cmbTipoServicio.SelectedIndex = -1;
-                        this.cmbCiudadOrigen.SelectedIndex = -1;
-                        this.cmbCiudadDestino.SelectedIndex = -1;
-                    }
-                
-                }
-            }
-            }
-            else
-            {
-                MessageBox.Show("Completar todos los campos");
-            }
+            
 
             FormProvider.VerRutas.CargarRutas();
         }
@@ -200,7 +221,7 @@ namespace AerolineaFrba.Abm_Ruta
             return true;
         }
 
-        private bool validacionDatos(int codigo, string precio_kg, string precio_pasaje, int origen, int destino)
+        private bool validacionDatos( string precio_kg, string precio_pasaje, int origen, int destino)
         {
             if (origen == destino)
             {
@@ -219,12 +240,6 @@ namespace AerolineaFrba.Abm_Ruta
                 MessageBox.Show("El precio del pasaje no puede ser 0");
                 this.txtPrecioPasaje.Clear();
                 return false;
-            }
-            if (!codigoValido(codigo))
-            {
-                MessageBox.Show("El codigo ya existe");
-                this.txtCodigo.Clear();
-               return false;
             }
             return true;
         }

@@ -88,7 +88,20 @@ namespace AerolineaFrba
                 return _BajaAeronave;
             }
         }
-        private static Abm_Aeronave.BajaAeronave _BajaAeronave;
+        private static Abm_Aeronave.ReemplazarAeronave _BajaAeronave;
+
+        public static Abm_Aeronave.BajaAeronave BajaAeronave
+        {
+            get
+            {
+                if (_ReemplazarAeronave == null)
+                {
+                    _ReemplazarAeronave = new Abm_Aeronave.ReemplazarAeronave();
+                }
+                return _ReemplazarAeronave;
+            }
+        }
+        private static Abm_Aeronave.ReemplazarAeronave _BajaAeronave;
 
         public static Abm_Ciudad.VerCiudades VerCiudades
         {
