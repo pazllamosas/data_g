@@ -30,6 +30,7 @@ namespace AerolineaFrba.Compra
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
+            this.LimpiarFormulario();
             this.Hide();
             FormProvider.IngresarDatosCompra.Show();
         }
@@ -170,6 +171,9 @@ namespace AerolineaFrba.Compra
                 if (compra.Read())
                 {
                     MessageBox.Show("Compra exitosa!\nPrecio final: $" + compra["Monto"] + "\nPNR: código acá");
+
+                    this.LimpiarFormulario();
+                    FormProvider.IngresarDatosCompra.LimpiarFormulario();
                 }
                 compra.Close();
 
@@ -178,6 +182,26 @@ namespace AerolineaFrba.Compra
                 MessageBox.Show("Hubo un fallo al generar tu compra.");
             }
 
+        }
+
+        private void LimpiarFormulario()
+        {
+            //limpiar variables de clase
+            pesoEncomienda = "";
+            idButacasOcupadas = null;
+            idVuelo = "";
+            ElClienteExistia = false;
+            LaTarjetaExistia = false;
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
+            textBox5.Clear();
+            textBox6.Clear();
+            textBox7.Clear();
+            textBox8.Clear();
+            dateTimePicker1.Text = (new DateTime()).ToString();
+            dateTimePicker2.Text = (new DateTime()).ToString();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -214,12 +238,7 @@ namespace AerolineaFrba.Compra
                 bool resultado = Conexion.executeProcedure("DATA_G.ALTA_CLIENTE", Conexion.generarArgumentos("@nombre", "@apellido", "@dni", "@direccion", "@telefono", "@mail", "@fechaNac"), textBox2.Text, textBox3.Text, int.Parse(textBox1.Text), textBox4.Text, int.Parse(textBox5.Text), textBox6.Text, DateTime.Parse(dateTimePicker1.Text));
             }
             
-            //limpiar variables de clase
-            pesoEncomienda = "";
-            idButacasOcupadas = null;
-            idVuelo = "";
-            ElClienteExistia = false;
-            LaTarjetaExistia = false;
+            
             this.Hide();
             FormProvider.MainMenu.Show();
         }

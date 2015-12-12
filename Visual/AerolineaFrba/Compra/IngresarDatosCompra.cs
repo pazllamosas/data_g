@@ -326,6 +326,19 @@ namespace AerolineaFrba.Compra
             }
         }
 
+        public void LimpiarFormulario()
+        {
+            dgvPasajes.Rows.Clear();
+            dgvVuelos.Rows.Clear();
+            txtCantPasajes.Clear();
+            txtPesoEncomienda.Clear();
+            dtmVuelo.Text = new DateTime().ToString();
+            btnAgregar.Enabled = false;
+            btnEditar.Enabled = false;
+            btnBuscarVuelos.Enabled = false;
+            btnSiguiente.Enabled = false;
+        }
+
         private void dgvPasajes_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0)
