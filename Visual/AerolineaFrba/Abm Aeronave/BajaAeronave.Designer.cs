@@ -112,16 +112,15 @@
             // btnReemplazar
             // 
             this.btnReemplazar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnReemplazar.Font = new System.Drawing.Font("Bell MT", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReemplazar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnReemplazar.Image = global::AerolineaFrba.Properties.Resources.next;
             this.btnReemplazar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReemplazar.Location = new System.Drawing.Point(100, 177);
+            this.btnReemplazar.Location = new System.Drawing.Point(49, 177);
             this.btnReemplazar.Margin = new System.Windows.Forms.Padding(4);
             this.btnReemplazar.Name = "btnReemplazar";
-            this.btnReemplazar.Size = new System.Drawing.Size(200, 52);
+            this.btnReemplazar.Size = new System.Drawing.Size(280, 52);
             this.btnReemplazar.TabIndex = 23;
             this.btnReemplazar.Text = "Reemplazar Aeronave";
-            this.btnReemplazar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnReemplazar.UseVisualStyleBackColor = true;
             this.btnReemplazar.Visible = false;
             this.btnReemplazar.Click += new System.EventHandler(this.btnReemplazar_Click);

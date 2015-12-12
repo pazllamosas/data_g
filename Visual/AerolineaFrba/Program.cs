@@ -50,6 +50,19 @@ namespace AerolineaFrba
         private static Inicio.Login _Login;
 
 
+        public static Abm_Aeronave.reemplazarAeronave ReemplazarAeronave
+        {
+            get
+            {
+                if (_ReemplazarAeronave == null)
+                {
+                    _ReemplazarAeronave = new Abm_Aeronave.reemplazarAeronave();
+                }
+                return _ReemplazarAeronave;
+            }
+        }
+        private static Abm_Aeronave.reemplazarAeronave _ReemplazarAeronave;
+
         public static Abm_Aeronave.VerAeronaves VerAeronaves
         {
             get
@@ -88,20 +101,9 @@ namespace AerolineaFrba
                 return _BajaAeronave;
             }
         }
-        private static Abm_Aeronave.ReemplazarAeronave _BajaAeronave;
+        private static Abm_Aeronave.BajaAeronave _BajaAeronave;
 
-        public static Abm_Aeronave.BajaAeronave BajaAeronave
-        {
-            get
-            {
-                if (_ReemplazarAeronave == null)
-                {
-                    _ReemplazarAeronave = new Abm_Aeronave.ReemplazarAeronave();
-                }
-                return _ReemplazarAeronave;
-            }
-        }
-        private static Abm_Aeronave.ReemplazarAeronave _BajaAeronave;
+       
 
         public static Abm_Ciudad.VerCiudades VerCiudades
         {

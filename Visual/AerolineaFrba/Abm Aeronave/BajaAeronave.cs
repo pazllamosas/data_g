@@ -46,7 +46,7 @@ namespace AerolineaFrba.Abm_Aeronave
                     if (resultado)
                     {
                         MessageBox.Show("Estado Cambiado");
-                        string query2 = "SELECT DATA_G.GET_ESTADO_AERONAVE('" + idAeronave + "', '" + estado + "') AS id";
+                        string query2 = "SELECT DATA_G.GET_ESTADO_AERONAVE('" + idAeronave + "') AS id";
                         SqlDataReader reader2 = Conexion.ejecutarQuery(query2);
                         reader2.Read();
                         int respuesta = int.Parse(reader2["id"].ToString());
@@ -130,8 +130,10 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void btnReemplazar_Click(object sender, EventArgs e)
         {
+            FormProvider.ReemplazarAeronave.cargaAeronave(txtMatricula.Text, txtFabricante.Text);
             this.Hide();
             FormProvider.ReemplazarAeronave.Show();
+           
         }
 
     }

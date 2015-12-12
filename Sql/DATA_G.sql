@@ -221,6 +221,8 @@ IF OBJECT_ID('DATA_G.GET_ESTADOS') IS NOT NULL
 DROP PROCEDURE DATA_G.GET_ESTADOS
 IF OBJECT_ID('DATA_G.GET_TIPO_TARJETA') IS NOT NULL
 DROP PROCEDURE DATA_G.GET_TIPO_TARJETA
+IF OBJECT_ID('DATA_G.GET_VUELO') IS NOT NULL
+DROP PROCEDURE DATA_G.GET_VUELO
 
 
 -------------- DROP FUNCTION ------------------------
@@ -1189,17 +1191,19 @@ AS BEGIN
 END
 
 GO
-CREATE FUNCTION DATA_G.GET_ESTADO_AERONAVE(@ESTADO INT, @IDAERONAVE INT)
+CREATE FUNCTION DATA_G.GET_ESTADO_AERONAVE( @IDAERONAVE INT)
 RETURNS INT
 AS BEGIN
 	DECLARE @IDESTADO INT
 	
 	SELECT @IDESTADO = IdEstado FROM DATA_G.AERONAVE
-	WHERE IdEstado = @ESTADO
-		AND IdAeronave = @IDAERONAVE
+	WHERE IdAeronave = @IDAERONAVE
 	
 	RETURN @IDESTADO
 END
+
+
+
 
 GO
 CREATE FUNCTION DATA_G.GET_ID_ROL(@NOMBRE NVARCHAR(255))
@@ -1908,6 +1912,13 @@ CREATE FUNCTION DATA_G.EXISTE_MATRICULA(@matricula nvarchar(255))
 	END
 GO
 
+
+CREATE PROCEDURE DATA_G.GET_VUELO(@ID INT) AS
+BEGIN
+	SELECT NroVuelo FROM DATA_G.VUELO V, DATA_G.AERONAVE A
+	WHERE A.IdAeronave = @ID AND A.IdAeronave = V.IdAeronave
+END
+GO
 -- VUELO --
 
 CREATE PROCEDURE DATA_G.CREAR_VUELO ( @FECHALLEGADAESTIMADA nvarchar (255), @FECHALLEGADA nvarchar(255), @FECHASALIDA nvarchar(255), @RUTA INT, @AERONAVE NUMERIC(18,0)) AS
@@ -2027,6 +2038,11 @@ AS BEGIN
 	RETURN @precio 
 END
 GO
+
+--SELECT A.Matricula, A.Fabricante, A.CantButacas, A.KG_Disponibles, A.Modelo, C.Nombre, T.Descripcion 
+--FROM DATA_G.AERONAVE A, DATA_G.CIUDAD C, DATA_G.TIPODESERVICIO T 
+--WHERE A.IdEstado = '2' AND (select C.Nombre WHERE C.CodigoCiudad = A.Ubicacion) = ' Nueva York' AND A.CantButacas >= '45' AND A.KG_Disponibles >= '599' AND (select T.Descripcion WHERE T.IdServicio = A.IdServicio) =  'Primera Clase' AND A.Fabricante = 'Bombardier'
+            
 
 --UPDATE DATA_G.PAQUETE 
 --	SET Precio= DATA_G.PRECIO_PAQUETE(IdPaquete)
@@ -2169,19 +2185,26 @@ VALUES (@monto, @medio, @idComprador, @idVuelo, GETDATE(), 0)
 END
 GO
 
-CREATE PROCEDURE DATA_G.COMPRA_TARJETA(@comprador int, @tarjetanumero numeric (18,0), @tarjetacodigo nvarchar(255), @tarjetavencimiento datetime, @tipotarjeta int, @cuoatas numeric(18,0), @mediopago nvarchar(255))
+--declare @r int
+--exec @r = DATA_G.ALTA_COMPRA @monto = 0, @medio = 'Efectivo', @idComprador = 1, @idVuelo = 1 
+--PRINT @r
+
+
+CREATE PROCEDURE DATA_G.COMPRA_TARJETA(@comprador int, @tarjetanumero numeric (18,0), @tarjetacodigo nvarchar(255), @tarjetavencimiento datetime, @tipotarjeta int, @cuotas numeric(18,0), @mediopago nvarchar(255), @nroCompra int)
 AS
 BEGIN
 	DECLARE @tarjetaID int
 	IF(@mediopago = 'Tarjeta')
 	BEGIN
 		INSERT INTO DATA_G.TARJETA(NroTarjeta, CodSeguridad, VencimientoTarjeta, Cuotas, TipoTarjeta)
-		VALUES (@tarjetanumero, @tarjetacodigo, @tarjetavencimiento, @cuoatas, @tipotarjeta)
+		VALUES (@tarjetanumero, @tarjetacodigo, @tarjetavencimiento, @cuotas, @tipotarjeta)
 		
 		SET @tarjetaID = SCOPE_IDENTITY()
 		
-		INSERT INTO DATA_G.COMPRA(IdComprador, IdTarjeta)
-		VALUES(@comprador, @tarjetaID)
+		UPDATE DATA_G.COMPRA
+		SET IdTarjeta = @tarjetaID
+			WHERE IdComprador = @comprador
+				AND NroCompra = @nroCompra
 
 	END
 	

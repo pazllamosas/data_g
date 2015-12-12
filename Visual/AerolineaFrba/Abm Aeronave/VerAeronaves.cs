@@ -106,8 +106,10 @@ namespace AerolineaFrba.Abm_Aeronave
                 string servicio = d.Cells[5].Value.ToString();
                 string cantidadButacas = d.Cells[6].Value.ToString();
                 string ubicacion = d.Cells[11].Value.ToString();
+
                 FormProvider.AgregarAeronave.Show(); //mandar todos los parametros.
                 FormProvider.AgregarAeronave.EditarAeronave(matricula, modelo, espacioEncomienda, fabricante, servicio, cantidadButacas, ubicacion);
+                
             }
             else {
                 MessageBox.Show("No podés editar si no elegís una aeronave y sólo una aeronave.");
