@@ -290,13 +290,20 @@ namespace AerolineaFrba.Compra
                 Int32 selectedRowCount = dgvVuelos.Rows.GetRowCount(DataGridViewElementStates.Selected);
                 if (selectedRowCount > 0 && selectedRowCount < 2)
                 {
+                    if (txtCantPasajes.Text == "") txtCantPasajes.Text = "0";
+                    Int32 pasajesRowCount = dgvPasajes.Rows.GetRowCount(DataGridViewElementStates.Selected);
+                    if (pasajesRowCount > 0) dgvPasajes.Rows.Clear();
+
                     if (int.Parse(txtCantPasajes.Text) > 0)
                     {
                         btnAgregar.Enabled = true;
                         dgvPasajes.Enabled = true;
+                        btnSiguiente.Enabled = false;
                     }
                     else
                     {
+                        btnAgregar.Enabled = false;
+                        dgvPasajes.Enabled = false;
                         btnSiguiente.Enabled = true;
                     }
                 }
