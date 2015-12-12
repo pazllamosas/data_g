@@ -59,6 +59,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtFechaSalida = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtMinutos = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtHora = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAeronave)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRuta)).BeginInit();
@@ -305,11 +311,67 @@
             this.label4.TabIndex = 35;
             this.label4.Text = "(formato: aaaa-mm-dd)";
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(428, 62);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(39, 13);
+            this.label14.TabIndex = 41;
+            this.label14.Text = "(horas)";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(517, 62);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(49, 13);
+            this.label13.TabIndex = 40;
+            this.label13.Text = "(minutos)";
+            // 
+            // txtMinutos
+            // 
+            this.txtMinutos.Location = new System.Drawing.Point(485, 59);
+            this.txtMinutos.Name = "txtMinutos";
+            this.txtMinutos.Size = new System.Drawing.Size(26, 20);
+            this.txtMinutos.TabIndex = 39;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(469, 62);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(10, 13);
+            this.label12.TabIndex = 38;
+            this.label12.Text = ":";
+            // 
+            // txtHora
+            // 
+            this.txtHora.Location = new System.Drawing.Point(396, 59);
+            this.txtHora.Name = "txtHora";
+            this.txtHora.Size = new System.Drawing.Size(26, 20);
+            this.txtHora.TabIndex = 37;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(428, 33);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(87, 13);
+            this.label11.TabIndex = 36;
+            this.label11.Text = "hora de Llegada:";
+            // 
             // GenerarViaje
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(588, 395);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.txtMinutos);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.txtHora);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtFechaSalida);
@@ -368,5 +430,11 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column14;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txtMinutos;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txtHora;
+        private System.Windows.Forms.Label label11;
     }
 }
