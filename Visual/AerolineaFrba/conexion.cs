@@ -162,6 +162,7 @@ namespace AerolineaFrba
                 SqlDataReader dr;
                 SqlConnection cn = getSqlInstanceConnection() ;
                 SqlCommand cm = new SqlCommand(procedure, cn);
+                cm.CommandTimeout = 2000;
                 cm.CommandType = CommandType.StoredProcedure;
                 if (_validateArgumentsAndParameters(args, values))
                 {
