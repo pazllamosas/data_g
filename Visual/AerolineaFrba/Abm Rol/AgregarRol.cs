@@ -42,7 +42,7 @@ namespace AerolineaFrba.Abm_Rol
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (txtidRol.Text.Trim() == "")
+            if (!editando)
             {
                 string nombre = txtNombre.Text;
                 //string idRol = txtidRol.Text;
@@ -74,7 +74,7 @@ namespace AerolineaFrba.Abm_Rol
             }
             else
             {
-                if (txtidRol.Text.Trim() != "")
+                if (editando)
                 {
                     string nombre = txtNombre.Text;
                     string idRol = txtidRol.Text;
