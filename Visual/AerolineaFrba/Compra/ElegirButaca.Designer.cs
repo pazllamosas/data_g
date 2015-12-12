@@ -30,10 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ElegirButaca));
             this.dgvSeleccionButaca = new System.Windows.Forms.DataGridView();
-            this.butacaNro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.butacaTipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.butacaPiso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.butacaEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
@@ -41,6 +37,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.butacaNro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.butacaTipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.butacaPiso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.butacaEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdButaca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSeleccionButaca)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,7 +53,8 @@
             this.butacaNro,
             this.butacaTipo,
             this.butacaPiso,
-            this.butacaEstado});
+            this.butacaEstado,
+            this.IdButaca});
             this.dgvSeleccionButaca.Location = new System.Drawing.Point(12, 146);
             this.dgvSeleccionButaca.MultiSelect = false;
             this.dgvSeleccionButaca.Name = "dgvSeleccionButaca";
@@ -60,26 +62,6 @@
             this.dgvSeleccionButaca.Size = new System.Drawing.Size(610, 177);
             this.dgvSeleccionButaca.TabIndex = 9;
             this.dgvSeleccionButaca.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSeleccionButaca_CellClick);
-            // 
-            // butacaNro
-            // 
-            this.butacaNro.HeaderText = "Numero de Butaca";
-            this.butacaNro.Name = "butacaNro";
-            // 
-            // butacaTipo
-            // 
-            this.butacaTipo.HeaderText = "Tipo de Butaca";
-            this.butacaTipo.Name = "butacaTipo";
-            // 
-            // butacaPiso
-            // 
-            this.butacaPiso.HeaderText = "Piso";
-            this.butacaPiso.Name = "butacaPiso";
-            // 
-            // butacaEstado
-            // 
-            this.butacaEstado.HeaderText = "Estado";
-            this.butacaEstado.Name = "butacaEstado";
             // 
             // label1
             // 
@@ -154,6 +136,32 @@
             this.label2.TabIndex = 17;
             this.label2.Text = "Nombre:";
             // 
+            // butacaNro
+            // 
+            this.butacaNro.HeaderText = "Numero de Butaca";
+            this.butacaNro.Name = "butacaNro";
+            // 
+            // butacaTipo
+            // 
+            this.butacaTipo.HeaderText = "Tipo de Butaca";
+            this.butacaTipo.Name = "butacaTipo";
+            // 
+            // butacaPiso
+            // 
+            this.butacaPiso.HeaderText = "Piso";
+            this.butacaPiso.Name = "butacaPiso";
+            // 
+            // butacaEstado
+            // 
+            this.butacaEstado.HeaderText = "Estado";
+            this.butacaEstado.Name = "butacaEstado";
+            // 
+            // IdButaca
+            // 
+            this.IdButaca.HeaderText = "Id Butaca";
+            this.IdButaca.Name = "IdButaca";
+            this.IdButaca.Visible = false;
+            // 
             // ElegirButaca
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -191,5 +199,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn butacaTipo;
         private System.Windows.Forms.DataGridViewTextBoxColumn butacaPiso;
         private System.Windows.Forms.DataGridViewTextBoxColumn butacaEstado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdButaca;
     }
 }

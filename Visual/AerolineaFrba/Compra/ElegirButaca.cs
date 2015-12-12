@@ -40,11 +40,11 @@ namespace AerolineaFrba.Compra
             reader.Close();
         }
 
-        public void CargarButacas(string IdAeronave, string ButacasOcupadas, string TiposButacasOcupadas)
+        public void CargarButacas(string IdAeronave, string ButacasOcupadas)
         {
             dgvSeleccionButaca.Rows.Clear();
 
-            string query = "SELECT * FROM DATA_G.BUTACA WHERE Estado = 'Libre' and IdAeronave = " + IdAeronave + " AND Tipo NOT IN(" + TiposButacasOcupadas + ")  AND NroButaca NOT IN(" + ButacasOcupadas + ")";
+            string query = "SELECT * FROM DATA_G.BUTACA WHERE Estado = 'Libre' and IdAeronave = " + IdAeronave + " AND IdButaca NOT IN(" + ButacasOcupadas + ")";
             SqlDataReader reader = Conexion.ejecutarQuery(query);
 
             while (reader.Read())

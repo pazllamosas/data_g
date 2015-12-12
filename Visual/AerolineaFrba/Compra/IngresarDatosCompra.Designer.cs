@@ -60,6 +60,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
+            this.IdButaca = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVuelos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPasajes)).BeginInit();
@@ -274,16 +275,21 @@
             // dgvPasajes
             // 
             this.dgvPasajes.AllowUserToAddRows = false;
+            this.dgvPasajes.AllowUserToDeleteRows = false;
             this.dgvPasajes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPasajes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.campraDni,
             this.compraNombre,
             this.campraNumButaca,
             this.compraTipoButaca,
-            this.campraPisoButaca});
+            this.campraPisoButaca,
+            this.IdButaca});
+            this.dgvPasajes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnF2;
             this.dgvPasajes.Enabled = false;
             this.dgvPasajes.Location = new System.Drawing.Point(322, 164);
+            this.dgvPasajes.MultiSelect = false;
             this.dgvPasajes.Name = "dgvPasajes";
+            this.dgvPasajes.ReadOnly = true;
             this.dgvPasajes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPasajes.Size = new System.Drawing.Size(300, 128);
             this.dgvPasajes.TabIndex = 21;
@@ -293,26 +299,31 @@
             // 
             this.campraDni.HeaderText = "DNI";
             this.campraDni.Name = "campraDni";
+            this.campraDni.ReadOnly = true;
             // 
             // compraNombre
             // 
             this.compraNombre.HeaderText = "Nombre";
             this.compraNombre.Name = "compraNombre";
+            this.compraNombre.ReadOnly = true;
             // 
             // campraNumButaca
             // 
             this.campraNumButaca.HeaderText = "Numero de Butaca";
             this.campraNumButaca.Name = "campraNumButaca";
+            this.campraNumButaca.ReadOnly = true;
             // 
             // compraTipoButaca
             // 
             this.compraTipoButaca.HeaderText = "Tipo de Butaca";
             this.compraTipoButaca.Name = "compraTipoButaca";
+            this.compraTipoButaca.ReadOnly = true;
             // 
             // campraPisoButaca
             // 
             this.campraPisoButaca.HeaderText = "Piso";
             this.campraPisoButaca.Name = "campraPisoButaca";
+            this.campraPisoButaca.ReadOnly = true;
             // 
             // label7
             // 
@@ -359,6 +370,13 @@
             this.btnEditar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnEditar.UseVisualStyleBackColor = true;
             this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
+            // 
+            // IdButaca
+            // 
+            this.IdButaca.HeaderText = "Id Butaca";
+            this.IdButaca.Name = "IdButaca";
+            this.IdButaca.ReadOnly = true;
+            this.IdButaca.Visible = false;
             // 
             // IngresarDatosCompra
             // 
@@ -434,5 +452,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn NroVuelo;
         private System.Windows.Forms.DataGridViewTextBoxColumn FechaPartida;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdAeronave;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdButaca;
     }
 }
