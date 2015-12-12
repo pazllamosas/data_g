@@ -65,12 +65,14 @@ namespace AerolineaFrba.Compra
 
         }
 
+        private static bool ElClienteExistia = false;
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             string query = "SELECT * FROM DATA_G.CLIENTE WHERE Dni = " + textBox1.Text;
             SqlDataReader reader = Conexion.ejecutarQuery(query);
 
-            while (reader.Read())
+            if (reader.Read())
             {
                 textBox2.Text = reader["Nombre"].ToString();
                 textBox3.Text = reader["Apellido"].ToString();
@@ -78,19 +80,51 @@ namespace AerolineaFrba.Compra
                 textBox5.Text = reader["Telefono"].ToString();
                 textBox6.Text = reader["Mail"].ToString();
                 dateTimePicker1.Value = (DateTime)reader["Fecha_Nac"];
+                ElClienteExistia = true;
             }
             reader.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Precio final: $xxxx\nPNR: código acá");
+
+            //if (int.Parse(pesoEncomienda) > 0 && !string.IsNullOrEmpty(pesoEncomienda))
+            //{
+            //    string query = "SELECT DATA_G.PRECIO_PASAJE (" + +" ) AS codigo";
+
+            //    SqlDataReader reader = Conexion.ejecutarQuery(query);
+            //    reader.Read();
+            //    int respuesta = int.Parse(reader["id"].ToString());
+            //    reader.Close();
+            //}
+            
+
+            MessageBox.Show("Compra exitosa!\nPrecio final: $xxxx\nPNR: código acá");
+            if (!ElClienteExistia)
+            {
+                bool resultado = Conexion.executeProcedure("DATA_G.ALTA_CLIENTE", Conexion.generarArgumentos("@nombre", "@apellido", "@dni", "@direccion", "@telefono", "@mail", "@fechaNac"), textBox2.Text, textBox3.Text, int.Parse(textBox1.Text), textBox4.Text, int.Parse(textBox5.Text), textBox6.Text, DateTime.Parse(dateTimePicker1.Text));
+                if (!resultado)
+                {
+                    MessageBox.Show("Hubo un fallo al registrarte como cliente. ¡Perdón! Igual tu compra fue registrada.");
+                }
+            }
+
+            //limpiar variables de clase
+            pesoEncomienda = "";
+            idButacasOcupadas = null;
+            ElClienteExistia = false;
             this.Hide();
             FormProvider.MainMenu.Show();
         }
 
-        public void MostrarFormaDeCompra()
+        private static string pesoEncomienda = "";
+        private static List<string> idButacasOcupadas = null;
+
+        public void MostrarFormaDeCompra(string encomienda, List<string> idButacas)
         {
+            pesoEncomienda = encomienda;
+            idButacasOcupadas = idButacas;
+
             if (FormProvider.Login.loginMode == "invitado")
             {
                 this.deshabilitarEfectivo();

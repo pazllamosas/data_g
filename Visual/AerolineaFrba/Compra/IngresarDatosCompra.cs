@@ -72,7 +72,20 @@ namespace AerolineaFrba.Compra
         {
             this.Hide();
             FormProvider.FormaDeCompra.Show();
-            FormProvider.FormaDeCompra.MostrarFormaDeCompra();
+
+            List<string> idButacasOcupadas = new List<string>();
+            if (int.Parse(txtCantPasajes.Text) > 0 && !string.IsNullOrEmpty(txtCantPasajes.Text)) {
+                
+                int cantidadDePasajes = dgvPasajes.Rows.Count;
+
+                for (int i = 0; i < cantidadDePasajes; i++ )
+                {
+                    idButacasOcupadas.Add(dgvPasajes.Rows[i].Cells[5].Value.ToString());
+                }
+
+            }
+
+            FormProvider.FormaDeCompra.MostrarFormaDeCompra(txtPesoEncomienda, idButacasOcupadas);
         }
 
         private void txtCantPasajes_TextChanged(object sender, EventArgs e)
