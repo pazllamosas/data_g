@@ -262,6 +262,10 @@ namespace AerolineaFrba.Compra
                 radioButton2.Enabled = true;
             }
 
+            comboBox1.ValueMember = "IdTarjeta";
+            comboBox1.DisplayMember = "Descripcion";
+            comboBox1.DataSource = Conexion.cargarTablaConsulta("DATA_G.TIPODETARJETA");
+
         }
 
         private void textBox7_TextChanged(object sender, EventArgs e)
@@ -273,6 +277,14 @@ namespace AerolineaFrba.Compra
             {
                 textBox8.Text = tarjeta["CodSeguridad"].ToString();
                 dateTimePicker2.Text = tarjeta["VencimientoTarjeta"].ToString();
+
+                string query2 = "SELECT * FROM DATA_G.TIPODETARJETA WHERE NroTarjeta = " + tarjeta["TipoTarjeta"];
+                SqlDataReader tipotarjeta = Conexion.ejecutarQuery(query2);
+                if (tipotarjeta.Read())
+                {
+                    comboBox1.Text = tipotarjeta["Descripcion"].ToString();
+                }
+                tipotarjeta.Close();
                 LaTarjetaExistia = true;
             }
             tarjeta.Close();
