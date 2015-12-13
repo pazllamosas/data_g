@@ -46,10 +46,6 @@
             this.txtEncomienda = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.dgvAeronaves = new System.Windows.Forms.DataGridView();
-            this.btnGuardar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.txtId = new System.Windows.Forms.TextBox();
-            this.btnBuscar = new System.Windows.Forms.Button();
             this.aeroMatricula = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.aeroFabricante = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.aeroModelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,9 +53,14 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.aeroKgDisponibles = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.aeroCantidadButacas = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label9 = new System.Windows.Forms.Label();
-            this.cmbVuelo = new System.Windows.Forms.ComboBox();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.txtId = new System.Windows.Forms.TextBox();
+            this.btnBuscar = new System.Windows.Forms.Button();
+            this.dgvVuelo = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAeronaves)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVuelo)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -115,7 +116,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label4.Location = new System.Drawing.Point(245, 57);
+            this.label4.Location = new System.Drawing.Point(240, 57);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 17);
@@ -127,7 +128,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label5.Location = new System.Drawing.Point(247, 90);
+            this.label5.Location = new System.Drawing.Point(244, 90);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(51, 17);
@@ -139,7 +140,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label6.Location = new System.Drawing.Point(440, 60);
+            this.label6.Location = new System.Drawing.Point(438, 60);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(59, 17);
@@ -151,7 +152,7 @@
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label7.Location = new System.Drawing.Point(440, 90);
+            this.label7.Location = new System.Drawing.Point(438, 90);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(86, 17);
@@ -187,7 +188,7 @@
             // 
             // txtServ
             // 
-            this.txtServ.Location = new System.Drawing.Point(306, 57);
+            this.txtServ.Location = new System.Drawing.Point(304, 57);
             this.txtServ.Margin = new System.Windows.Forms.Padding(4);
             this.txtServ.Name = "txtServ";
             this.txtServ.ReadOnly = true;
@@ -196,7 +197,7 @@
             // 
             // txtOrigen
             // 
-            this.txtOrigen.Location = new System.Drawing.Point(306, 90);
+            this.txtOrigen.Location = new System.Drawing.Point(304, 90);
             this.txtOrigen.Margin = new System.Windows.Forms.Padding(4);
             this.txtOrigen.Name = "txtOrigen";
             this.txtOrigen.ReadOnly = true;
@@ -205,7 +206,7 @@
             // 
             // txtButacas
             // 
-            this.txtButacas.Location = new System.Drawing.Point(538, 57);
+            this.txtButacas.Location = new System.Drawing.Point(535, 57);
             this.txtButacas.Margin = new System.Windows.Forms.Padding(4);
             this.txtButacas.Name = "txtButacas";
             this.txtButacas.ReadOnly = true;
@@ -214,7 +215,7 @@
             // 
             // txtEncomienda
             // 
-            this.txtEncomienda.Location = new System.Drawing.Point(538, 90);
+            this.txtEncomienda.Location = new System.Drawing.Point(536, 90);
             this.txtEncomienda.Margin = new System.Windows.Forms.Padding(4);
             this.txtEncomienda.Name = "txtEncomienda";
             this.txtEncomienda.ReadOnly = true;
@@ -226,7 +227,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.label8.Location = new System.Drawing.Point(13, 126);
+            this.label8.Location = new System.Drawing.Point(172, 130);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(128, 18);
@@ -245,67 +246,12 @@
             this.Column1,
             this.aeroKgDisponibles,
             this.aeroCantidadButacas});
-            this.dgvAeronaves.Enabled = false;
-            this.dgvAeronaves.Location = new System.Drawing.Point(13, 156);
+            this.dgvAeronaves.Location = new System.Drawing.Point(175, 156);
             this.dgvAeronaves.Margin = new System.Windows.Forms.Padding(4);
             this.dgvAeronaves.Name = "dgvAeronaves";
-            this.dgvAeronaves.Size = new System.Drawing.Size(856, 296);
+            this.dgvAeronaves.Size = new System.Drawing.Size(694, 296);
             this.dgvAeronaves.TabIndex = 23;
             this.dgvAeronaves.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAeronaves_CellContentClick);
-            // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Enabled = false;
-            this.btnGuardar.Image = global::AerolineaFrba.Properties.Resources.save;
-            this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGuardar.Location = new System.Drawing.Point(203, 462);
-            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(116, 28);
-            this.btnGuardar.TabIndex = 24;
-            this.btnGuardar.Text = "Reemplazar";
-            this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Image = global::AerolineaFrba.Properties.Resources.cancel;
-            this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new System.Drawing.Point(534, 462);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(108, 28);
-            this.btnCancelar.TabIndex = 25;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // txtId
-            // 
-            this.txtId.Location = new System.Drawing.Point(374, 13);
-            this.txtId.Margin = new System.Windows.Forms.Padding(4);
-            this.txtId.Name = "txtId";
-            this.txtId.ReadOnly = true;
-            this.txtId.Size = new System.Drawing.Size(108, 22);
-            this.txtId.TabIndex = 26;
-            this.txtId.Visible = false;
-            this.txtId.TextChanged += new System.EventHandler(this.txtId_TextChanged);
-            // 
-            // btnBuscar
-            // 
-            this.btnBuscar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBuscar.Location = new System.Drawing.Point(358, 120);
-            this.btnBuscar.Margin = new System.Windows.Forms.Padding(4);
-            this.btnBuscar.Name = "btnBuscar";
-            this.btnBuscar.Size = new System.Drawing.Size(176, 28);
-            this.btnBuscar.TabIndex = 27;
-            this.btnBuscar.Text = "Buscar";
-            this.btnBuscar.UseVisualStyleBackColor = true;
-            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // aeroMatricula
             // 
@@ -342,34 +288,83 @@
             this.aeroCantidadButacas.HeaderText = "Cantidad de Butacas";
             this.aeroCantidadButacas.Name = "aeroCantidadButacas";
             // 
-            // label9
+            // btnGuardar
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label9.Location = new System.Drawing.Point(670, 93);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(44, 17);
-            this.label9.TabIndex = 28;
-            this.label9.Text = "Vuelo";
+            this.btnGuardar.Enabled = false;
+            this.btnGuardar.Image = global::AerolineaFrba.Properties.Resources.save;
+            this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGuardar.Location = new System.Drawing.Point(203, 462);
+            this.btnGuardar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(116, 28);
+            this.btnGuardar.TabIndex = 24;
+            this.btnGuardar.Text = "Reemplazar";
+            this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // cmbVuelo
+            // btnCancelar
             // 
-            this.cmbVuelo.FormattingEnabled = true;
-            this.cmbVuelo.Location = new System.Drawing.Point(722, 93);
-            this.cmbVuelo.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbVuelo.Name = "cmbVuelo";
-            this.cmbVuelo.Size = new System.Drawing.Size(119, 24);
-            this.cmbVuelo.TabIndex = 29;
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelar.Image = global::AerolineaFrba.Properties.Resources.cancel;
+            this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCancelar.Location = new System.Drawing.Point(534, 462);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(108, 28);
+            this.btnCancelar.TabIndex = 25;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // txtId
+            // 
+            this.txtId.Location = new System.Drawing.Point(776, 3);
+            this.txtId.Margin = new System.Windows.Forms.Padding(4);
+            this.txtId.Name = "txtId";
+            this.txtId.ReadOnly = true;
+            this.txtId.Size = new System.Drawing.Size(108, 22);
+            this.txtId.TabIndex = 26;
+            this.txtId.Visible = false;
+            this.txtId.TextChanged += new System.EventHandler(this.txtId_TextChanged);
+            // 
+            // btnBuscar
+            // 
+            this.btnBuscar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnBuscar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBuscar.Location = new System.Drawing.Point(358, 120);
+            this.btnBuscar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.Size = new System.Drawing.Size(176, 28);
+            this.btnBuscar.TabIndex = 27;
+            this.btnBuscar.Text = "Buscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
+            // dgvVuelo
+            // 
+            this.dgvVuelo.AllowUserToAddRows = false;
+            this.dgvVuelo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvVuelo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn7});
+            this.dgvVuelo.Location = new System.Drawing.Point(25, 156);
+            this.dgvVuelo.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvVuelo.Name = "dgvVuelo";
+            this.dgvVuelo.Size = new System.Drawing.Size(140, 296);
+            this.dgvVuelo.TabIndex = 28;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "Vuelo";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             // 
             // reemplazarAeronave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(882, 503);
-            this.Controls.Add(this.cmbVuelo);
-            this.Controls.Add(this.label9);
+            this.Controls.Add(this.dgvVuelo);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.txtId);
             this.Controls.Add(this.btnCancelar);
@@ -396,6 +391,7 @@
             this.Text = "Reemplazar Aeronave";
             this.Load += new System.EventHandler(this.reemplazarAeronave_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAeronaves)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVuelo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -431,7 +427,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn aeroKgDisponibles;
         private System.Windows.Forms.DataGridViewTextBoxColumn aeroCantidadButacas;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox cmbVuelo;
+        private System.Windows.Forms.DataGridView dgvVuelo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
     }
 }

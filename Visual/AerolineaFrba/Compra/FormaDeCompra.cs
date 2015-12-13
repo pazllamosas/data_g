@@ -174,7 +174,7 @@ namespace AerolineaFrba.Compra
                     bool resultadoPagarConTarjeta = Conexion.executeProcedure(
                         "DATA_G.COMPRA_TARJETA", 
                         Conexion.generarArgumentos("@comprador", "@tarjetanumero", "@tarjetacodigo", "@tarjetavencimiento", "@tipotarjeta", "@cuotas", "@mediopago", "@nroCompra"),
-                        int.Parse(textBox11.Text), int.Parse(textBox7.Text), textBox8.Text, dateTimePicker2.Value, int.Parse(comboBox1.Text), );
+                        int.Parse(textBox11.Text), int.Parse(textBox7.Text), textBox8.Text, dateTimePicker2.Value, int.Parse(comboBox1.Text) );
                 }
 
                 string conseguirCompraActualizada = "SELECT * FROM DATA_G.COMPRA WHERE NroCompra = " + idCompra;

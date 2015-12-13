@@ -109,6 +109,7 @@ namespace AerolineaFrba.Abm_Aeronave
         {
             txtMatricula.Text = matricula; 
             txtFabricante.Text = fabricante;
+            this.cmbFueraServicio.SelectedIndex = -1;
            
         }
 
@@ -135,6 +136,8 @@ namespace AerolineaFrba.Abm_Aeronave
             FormProvider.ReemplazarAeronave.Show();
            
         }
+
+
 
     }
 }
