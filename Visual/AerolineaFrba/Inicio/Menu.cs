@@ -116,11 +116,16 @@ namespace AerolineaFrba.Inicio
                         case "Compra de pasajes/encomiendas":
                             btnComprarPasaje.Visible = true;
                             break;
+                        case "Compra en efectivo":
+                            compraEnEfectivo = true;
+                            break;
                     }
                 }
             }
             Funcionalidades.Close();
         }
+
+        private static bool compraEnEfectivo;
 
         private void deslogearToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -130,6 +135,7 @@ namespace AerolineaFrba.Inicio
         private void button6_Click(object sender, EventArgs e)
         {
             this.Hide();
+            FormProvider.IngresarDatosCompra.mostrarFormulario(compraEnEfectivo);
             FormProvider.IngresarDatosCompra.Show();
         }
 

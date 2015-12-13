@@ -87,7 +87,7 @@ namespace AerolineaFrba.Compra
 
             DataGridViewRow d = dgvVuelos.SelectedRows[0];
 
-            FormProvider.FormaDeCompra.MostrarFormaDeCompra(txtPesoEncomienda.Text, idButacasOcupadas, d.Cells[2].Value.ToString());
+            FormProvider.FormaDeCompra.MostrarFormaDeCompra(txtPesoEncomienda.Text, idButacasOcupadas, d.Cells[2].Value.ToString(), compraEnEfectivo);
         }
 
         private void txtCantPasajes_TextChanged(object sender, EventArgs e)
@@ -339,6 +339,12 @@ namespace AerolineaFrba.Compra
             btnSiguiente.Enabled = false;
         }
 
+        public void mostrarFormulario(bool estado)
+        {
+            compraEnEfectivo = estado;
+        }
+
+        private static bool compraEnEfectivo;
         private void dgvPasajes_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0)

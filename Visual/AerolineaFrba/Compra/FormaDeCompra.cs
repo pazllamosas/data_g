@@ -174,7 +174,7 @@ namespace AerolineaFrba.Compra
                     bool resultadoPagarConTarjeta = Conexion.executeProcedure(
                         "DATA_G.COMPRA_TARJETA", 
                         Conexion.generarArgumentos("@comprador", "@tarjetanumero", "@tarjetacodigo", "@tarjetavencimiento", "@tipotarjeta", "@cuotas", "@mediopago", "@nroCompra"),
-                        int.Parse(textBox11.Text), int.Parse(textBox7.Text), textBox8.Text, dateTimePicker2.Value, int.Parse(comboBox1.Text), int.Parse(textBox9.Text), "Tarjeta", idCompra );
+                        int.Parse(textBox11.Text), int.Parse(textBox7.Text), textBox8.Text, dateTimePicker2.Value, int.Parse(comboBox1.Text), int.Parse(textBox9.Text), "Tarjeta", idCompra);
                 }
 
                 string conseguirCompraActualizada = "SELECT * FROM DATA_G.COMPRA WHERE NroCompra = " + idCompra;
@@ -256,13 +256,13 @@ namespace AerolineaFrba.Compra
         private static List<string> idButacasOcupadas;
         private static string idVuelo ="";
 
-        public void MostrarFormaDeCompra(string encomienda, List<string> idButacas, string IdVuelo)
+        public void MostrarFormaDeCompra(string encomienda, List<string> idButacas, string IdVuelo, bool compraEnEfectivo)
         {
             pesoEncomienda = encomienda;
             idButacasOcupadas = idButacas;
             idVuelo = IdVuelo;
 
-            if (FormProvider.Login.getLoginMode() == "invitado")
+            if (!compraEnEfectivo)
             {
                 radioButton2.Enabled = false;
             }
