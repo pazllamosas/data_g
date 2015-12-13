@@ -52,6 +52,7 @@
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSeleccionar = new System.Windows.Forms.Button();
             this.btnDarBaja = new System.Windows.Forms.Button();
+            this.btnReemplazar = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAeronaves)).BeginInit();
             this.SuspendLayout();
@@ -252,12 +253,28 @@
             this.btnDarBaja.UseVisualStyleBackColor = true;
             this.btnDarBaja.Click += new System.EventHandler(this.btnDarBaja_Click);
             // 
+            // btnReemplazar
+            // 
+            this.btnReemplazar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnReemplazar.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReemplazar.Image = global::AerolineaFrba.Properties.Resources.next;
+            this.btnReemplazar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReemplazar.Location = new System.Drawing.Point(607, 71);
+            this.btnReemplazar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnReemplazar.Name = "btnReemplazar";
+            this.btnReemplazar.Size = new System.Drawing.Size(210, 26);
+            this.btnReemplazar.TabIndex = 24;
+            this.btnReemplazar.Text = "Reemplazar o Cancelar";
+            this.btnReemplazar.UseVisualStyleBackColor = true;
+            this.btnReemplazar.Click += new System.EventHandler(this.btnReemplazar_Click);
+            // 
             // VerAeronaves
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnVolver;
             this.ClientSize = new System.Drawing.Size(845, 444);
+            this.Controls.Add(this.btnReemplazar);
             this.Controls.Add(this.btnDarBaja);
             this.Controls.Add(this.btnSeleccionar);
             this.Controls.Add(this.dgvAeronaves);
@@ -304,5 +321,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn aeroFechaReinicioDeServicio;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.Button btnReemplazar;
     }
 }

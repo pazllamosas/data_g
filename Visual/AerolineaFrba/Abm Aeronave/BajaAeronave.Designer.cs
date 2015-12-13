@@ -34,9 +34,8 @@
             this.txtMatricula = new System.Windows.Forms.TextBox();
             this.txtFabricante = new System.Windows.Forms.TextBox();
             this.btnGuardar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnReemplazar = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
+            this.btnCancelar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label4
@@ -84,7 +83,7 @@
             // 
             this.btnGuardar.Image = global::AerolineaFrba.Properties.Resources.save;
             this.btnGuardar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnGuardar.Location = new System.Drawing.Point(49, 252);
+            this.btnGuardar.Location = new System.Drawing.Point(82, 252);
             this.btnGuardar.Margin = new System.Windows.Forms.Padding(4);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(100, 28);
@@ -93,37 +92,6 @@
             this.btnGuardar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancelar.Image = global::AerolineaFrba.Properties.Resources.cancel;
-            this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancelar.Location = new System.Drawing.Point(229, 252);
-            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(100, 28);
-            this.btnCancelar.TabIndex = 19;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // btnReemplazar
-            // 
-            this.btnReemplazar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnReemplazar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReemplazar.Image = global::AerolineaFrba.Properties.Resources.next;
-            this.btnReemplazar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReemplazar.Location = new System.Drawing.Point(49, 177);
-            this.btnReemplazar.Margin = new System.Windows.Forms.Padding(4);
-            this.btnReemplazar.Name = "btnReemplazar";
-            this.btnReemplazar.Size = new System.Drawing.Size(280, 52);
-            this.btnReemplazar.TabIndex = 23;
-            this.btnReemplazar.Text = "Reemplazar Aeronave";
-            this.btnReemplazar.UseVisualStyleBackColor = true;
-            this.btnReemplazar.Visible = false;
-            this.btnReemplazar.Click += new System.EventHandler(this.btnReemplazar_Click);
             // 
             // btnVolver
             // 
@@ -140,13 +108,27 @@
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
+            // btnCancelar
+            // 
+            this.btnCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancelar.Image = global::AerolineaFrba.Properties.Resources.cancel;
+            this.btnCancelar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCancelar.Location = new System.Drawing.Point(217, 252);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(100, 28);
+            this.btnCancelar.TabIndex = 19;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
             // BajaAeronave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(379, 321);
             this.Controls.Add(this.btnVolver);
-            this.Controls.Add(this.btnReemplazar);
             this.Controls.Add(this.txtFabricante);
             this.Controls.Add(this.txtMatricula);
             this.Controls.Add(this.btnGuardar);
@@ -167,11 +149,10 @@
 
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmbFueraServicio;
-        private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.TextBox txtMatricula;
         private System.Windows.Forms.TextBox txtFabricante;
-        private System.Windows.Forms.Button btnReemplazar;
         private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.Button btnCancelar;
     }
 }

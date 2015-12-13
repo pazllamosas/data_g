@@ -151,5 +151,44 @@ namespace AerolineaFrba.Abm_Aeronave
         {
 
         }
+
+        private void btnReemplazar_Click(object sender, EventArgs e)
+        {
+            Int32 selectedRowCount = dgvAeronaves.Rows.GetRowCount(DataGridViewElementStates.Selected);
+            if (selectedRowCount > 0 && selectedRowCount < 2)
+          {
+            DataGridViewRow d = dgvAeronaves.SelectedRows[0];
+            string matricula = d.Cells[1].Value.ToString();
+            string fabricante = d.Cells[4].Value.ToString();
+
+            string query = "SELECT DATA_G.GET_ID_AERONAVE ('" + matricula + "', '" + fabricante + "' ) AS id";
+
+            SqlDataReader reader = Conexion.ejecutarQuery(query);
+            reader.Read();
+            Int32 idAeronave = Convert.ToInt32(reader["id"]);
+            reader.Close();
+
+            string query2 = "SELECT DATA_G.GET_ESTADO_AERONAVE('" + idAeronave + "') AS id";
+            SqlDataReader reader2 = Conexion.ejecutarQuery(query2);
+            reader2.Read();
+            int respuesta = int.Parse(reader2["id"].ToString());
+            reader2.Close();
+
+            if (respuesta == 3 || respuesta == 4)
+            {
+                FormProvider.ReemplazarAeronave.cargaAeronave(matricula, fabricante);
+                this.Hide();
+                FormProvider.ReemplazarAeronave.Show();
+            }
+            else
+            {
+                MessageBox.Show("Esta Aeronave no se puede reemplazar");
+            }
+          }
+            else
+            {
+                MessageBox.Show("No podés reemplazar si no elegís un aeronave y sólo un aeronave.");
+            }
+        }
     }
 }
