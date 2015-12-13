@@ -2118,8 +2118,12 @@ IF (( NOT EXISTS (SELECT * FROM DATA_G.PAQUETE WHERE NroCompra = @nrocompra
 												AND KG = @kg
 												AND Precio = @precio )))
 	
+	begin		
 			INSERT INTO DATA_G.PAQUETE(NroCompra, KG, Precio, Codigo)
 		VALUES (@nrocompra, @kg, @precio, @codigo+1)
+		UPDATE DATA_G.AERONAVE
+		SET KG_Disponibles = KG_Disponibles - @kg
+	end
 ELSE
 		RAISERROR ('El paquete ya existe o tiene errores',16, 217) WITH SETERROR
 
@@ -2152,6 +2156,10 @@ DECLARE @motivo nvarchar(255)
 		UPDATE DATA_G.PAQUETE
 		SET IdDevolucion=SCOPE_IDENTITY()
 		WHERE Codigo = @paquete	
+		UPDATE DATA_G.AERONAVE
+		SET KG_Disponibles = KG_Disponibles + P.KG
+		FROM DATA_G.PAQUETE P 
+		WHERE @paquete = P.Codigo
 END
 GO
 

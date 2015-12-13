@@ -172,12 +172,12 @@ namespace AerolineaFrba.Compra
                 if (!LaTarjetaExistia && radioButton1.Checked)
                 {
                     string fecha = dateTimePicker2.Value.ToString("yyyy-MM-dd");
-                    DateTime dt = DateTime.ParseExact(fecha, "ddMMyyyy", CultureInfo.InvariantCulture);
+                    DateTime dt = DateTime.Parse(fecha);
 
                     bool resultadoPagarConTarjeta = Conexion.executeProcedure(
                         "DATA_G.COMPRA_TARJETA", 
                         Conexion.generarArgumentos("@comprador", "@tarjetanumero", "@tarjetacodigo", "@tarjetavencimiento", "@tipotarjeta", "@cuotas", "@mediopago", "@nroCompra"),
-                        int.Parse(textBox11.Text), int.Parse(textBox7.Text), textBox8.Text, dt, int.Parse(comboBox1.Text), int.Parse(textBox9.Text), "Tarjeta", idCompra);
+                        int.Parse(textBox11.Text), int.Parse(textBox7.Text), textBox8.Text, dt, int.Parse(comboBox1.Text), int.Parse(textBox9.Text), "Tarjeta", int.Parse(idCompra));
                 }
 
                 string conseguirCompraActualizada = "SELECT * FROM DATA_G.COMPRA WHERE NroCompra = " + idCompra;
