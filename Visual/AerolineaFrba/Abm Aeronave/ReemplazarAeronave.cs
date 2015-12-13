@@ -25,7 +25,7 @@ namespace AerolineaFrba.Abm_Aeronave
             dgvAeronaves.Rows.Clear();
             FormProvider.VerAeronaves.Show();
             this.Hide();
-           
+
         }
 
         private void reemplazarAeronave_Load(object sender, EventArgs e)
@@ -40,9 +40,9 @@ namespace AerolineaFrba.Abm_Aeronave
 
         }
 
-        public void cargaAeronave(string matricula, string fabricante) 
+        public void cargaAeronave(string matricula, string fabricante)
         {
-            
+
             txtMatri.Text = matricula;
             txtFab.Text = fabricante;
 
@@ -67,7 +67,7 @@ namespace AerolineaFrba.Abm_Aeronave
             }
             reader2.Close();
 
-            
+
         }
 
         private void txtId_TextChanged(object sender, EventArgs e)
@@ -82,7 +82,7 @@ namespace AerolineaFrba.Abm_Aeronave
                 txtModelo.Text = reader["Modelo"].ToString();
                 txtOrigen.Text = reader["Nombre"].ToString();
                 txtServ.Text = reader["Descripcion"].ToString();
-                
+
             }
             reader.Close();
         }
@@ -103,17 +103,17 @@ namespace AerolineaFrba.Abm_Aeronave
                 {
                     while (reader.Read())
                     {
-                       
-                            dgvAeronaves.Rows.Add(reader["Matricula"].ToString(), reader["Fabricante"].ToString(), reader["Modelo"].ToString(), reader["Descripcion"].ToString(), reader["FechaSalida"].ToString(), reader["Nombre"].ToString(), reader["KG_Disponibles"].ToString(), reader["CantButacas"].ToString());
-                        }
-                        
+
+                        dgvAeronaves.Rows.Add(reader["Matricula"].ToString(), reader["Fabricante"].ToString(), reader["Modelo"].ToString(), reader["Descripcion"].ToString(), reader["FechaSalida"].ToString(), reader["Nombre"].ToString(), reader["KG_Disponibles"].ToString(), reader["CantButacas"].ToString());
+                    }
+
                     btnGuardar.Enabled = true;
-                    }
-                    else
-                     {
+                }
+                else
+                {
                     MessageBox.Show("No hay vuelos disponibles, vaya a alta de aeronave");
-                    }
-                 reader.Close();
+                }
+                reader.Close();
             }
             else
             {
@@ -161,7 +161,33 @@ namespace AerolineaFrba.Abm_Aeronave
             this.Hide();
             FormProvider.VerAeronaves.Show();
         }
-           
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Int32 selectedRowCount = dgvVuelo.Rows.GetRowCount(DataGridViewElementStates.Selected);
+
+            if (selectedRowCount > 0 && selectedRowCount < 2)
+            {
+                DataGridViewRow d = dgvVuelo.SelectedRows[0];
+                string vuelo = d.Cells[0].Value.ToString();
+                bool resultado = Conexion.executeProcedure("DATA_G.BAJA_VUELO", Conexion.generarArgumentos("@nrovuelo"), vuelo);
+                if (resultado)
+                {
+                    MessageBox.Show("Pasajes Y Encomiendas Canceladas");
+                    this.Hide();
+                    FormProvider.VerAeronaves.Show();
+                }
+                else
+                {
+                    MessageBox.Show("ERROR al cancelar");
+                }
+            }
+                else
+                {
+                    MessageBox.Show("Marcar un vuelo");
+                }
+            
+
+        }
     }
 }

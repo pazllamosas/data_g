@@ -60,6 +60,7 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.aeroKgDisponibles = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.aeroCantidadButacas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAeronaves)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVuelo)).BeginInit();
             this.SuspendLayout();
@@ -318,7 +319,7 @@
             this.dgvVuelo.Location = new System.Drawing.Point(25, 156);
             this.dgvVuelo.Margin = new System.Windows.Forms.Padding(4);
             this.dgvVuelo.Name = "dgvVuelo";
-            this.dgvVuelo.Size = new System.Drawing.Size(140, 296);
+            this.dgvVuelo.Size = new System.Drawing.Size(140, 268);
             this.dgvVuelo.TabIndex = 28;
             // 
             // dataGridViewTextBoxColumn7
@@ -366,11 +367,26 @@
             this.aeroCantidadButacas.HeaderText = "Cantidad de Butacas";
             this.aeroCantidadButacas.Name = "aeroCantidadButacas";
             // 
+            // button1
+            // 
+            this.button1.Image = global::AerolineaFrba.Properties.Resources.delete;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(49, 433);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(89, 58);
+            this.button1.TabIndex = 29;
+            this.button1.Text = "Cancelar Pasajes";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // reemplazarAeronave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(882, 503);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.dgvVuelo);
             this.Controls.Add(this.btnBuscar);
             this.Controls.Add(this.txtId);
@@ -437,5 +453,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn aeroKgDisponibles;
         private System.Windows.Forms.DataGridViewTextBoxColumn aeroCantidadButacas;
+        private System.Windows.Forms.Button button1;
     }
 }
