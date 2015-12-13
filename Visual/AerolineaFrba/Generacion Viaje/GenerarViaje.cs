@@ -108,6 +108,8 @@ namespace AerolineaFrba.Generacion_Viaje
         {
             int fallo = 0;
             string fechaSalida = txtFechaSalida.Text;
+            string hora  = txtHora.Text;
+            string minutos = txtMinutos.Text;
 
             string[] componentesFecha = fechaSalida.Split('-');
 
@@ -211,7 +213,20 @@ namespace AerolineaFrba.Generacion_Viaje
                     //string query3 = "DATA_G.CREAR_VUELO('', '"+fechaLlegada+"', '"+fechaSalida+"', '"+IdRuta+"', '"+IdAeronave+"')";
                     //SqlDataReader reader3 = Conexion.ejecutarQuery(query3);
                     //En teoria lo de arriba no es, tendría que ser lo de abajo por ser un procedure
-                    
+
+
+
+
+
+                    //DateTime fechaVueloAnterior1 = DateTime.ParseExact(fechaLlegada, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                    //fechaVueloAnterior1 = fechaVueloAnterior1.AddHours(int.Parse(hora));
+                    //fechaVueloAnterior1 = fechaVueloAnterior1.AddMinutes(int.Parse(minutos));
+                    //DateTime fechaVueloAnterior2 = DateTime.ParseExact(fechaSalida, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                    //fechaVueloAnterior2 = fechaVueloAnterior2.AddHours(int.Parse(hora));
+                    //fechaVueloAnterior2 = fechaVueloAnterior2.AddMinutes(int.Parse(minutos));
+                    //fechaLlegada = fechaVueloAnterior1.ToString("yyyy-MM-dd hh:mm:ss.sssssss");
+                    //fechaSalida = fechaVueloAnterior2.ToString("yyyy-MM-dd hh:mm:ss.sssssss");
+
                     bool resultadoGenerarvuelo = Conexion.executeProcedure("DATA_G.CREAR_VUELO", Conexion.generarArgumentos("@FECHALLEGADAESTIMADA", "@FECHALLEGADA", "@FECHASALIDA", "@RUTA", "@AERONAVE"), fechaLlegada, "" , fechaSalida, int.Parse(IdRuta), int.Parse(IdAeronave));
                     if (resultadoGenerarvuelo) { MessageBox.Show("Se generó el vuelo correctamente"); }
                     else { MessageBox.Show("no se ejecuto la operación de generar la aeronave"); }

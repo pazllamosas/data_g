@@ -347,6 +347,7 @@
             // 
             // txtHora
             // 
+            this.txtHora.ForeColor = System.Drawing.SystemColors.WindowText;
             this.txtHora.Location = new System.Drawing.Point(396, 59);
             this.txtHora.Name = "txtHora";
             this.txtHora.Size = new System.Drawing.Size(26, 20);
