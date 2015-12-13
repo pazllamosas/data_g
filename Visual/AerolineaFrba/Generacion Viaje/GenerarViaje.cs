@@ -218,16 +218,16 @@ namespace AerolineaFrba.Generacion_Viaje
 
 
 
-                    //DateTime fechaVueloAnterior1 = DateTime.ParseExact(fechaLlegada, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-                    //fechaVueloAnterior1 = fechaVueloAnterior1.AddHours(int.Parse(hora));
-                    //fechaVueloAnterior1 = fechaVueloAnterior1.AddMinutes(int.Parse(minutos));
-                    //DateTime fechaVueloAnterior2 = DateTime.ParseExact(fechaSalida, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-                    //fechaVueloAnterior2 = fechaVueloAnterior2.AddHours(int.Parse(hora));
-                    //fechaVueloAnterior2 = fechaVueloAnterior2.AddMinutes(int.Parse(minutos));
+                    DateTime fechaVueloAnterior1 = DateTime.ParseExact(fechaLlegada, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                    fechaVueloAnterior1 = fechaVueloAnterior1.AddHours(int.Parse(hora));
+                    fechaVueloAnterior1 = fechaVueloAnterior1.AddMinutes(int.Parse(minutos));
+                    DateTime fechaVueloAnterior2 = DateTime.ParseExact(fechaSalida, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                    fechaVueloAnterior2 = fechaVueloAnterior2.AddHours(int.Parse(hora));
+                    fechaVueloAnterior2 = fechaVueloAnterior2.AddMinutes(int.Parse(minutos));
                     //fechaLlegada = fechaVueloAnterior1.ToString("yyyy-MM-dd hh:mm:ss.sssssss");
                     //fechaSalida = fechaVueloAnterior2.ToString("yyyy-MM-dd hh:mm:ss.sssssss");
 
-                    bool resultadoGenerarvuelo = Conexion.executeProcedure("DATA_G.CREAR_VUELO", Conexion.generarArgumentos("@FECHALLEGADAESTIMADA", "@FECHALLEGADA", "@FECHASALIDA", "@RUTA", "@AERONAVE"), fechaLlegada, "" , fechaSalida, int.Parse(IdRuta), int.Parse(IdAeronave));
+                    bool resultadoGenerarvuelo = Conexion.executeProcedure("DATA_G.CREAR_VUELO", Conexion.generarArgumentos("@FECHALLEGADAESTIMADA", "@FECHALLEGADA", "@FECHASALIDA", "@RUTA", "@AERONAVE"), fechaVueloAnterior1, fechaVueloAnterior1, fechaVueloAnterior2, int.Parse(IdRuta), int.Parse(IdAeronave));
                     if (resultadoGenerarvuelo) { MessageBox.Show("Se generó el vuelo correctamente"); }
                     else { MessageBox.Show("no se ejecuto la operación de generar la aeronave"); }
                 }
