@@ -21,6 +21,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            dgvAeronaves.DataSource = null;
             dgvAeronaves.Rows.Clear();
             FormProvider.VerAeronaves.Show();
             this.Hide();
@@ -44,7 +45,9 @@ namespace AerolineaFrba.Abm_Aeronave
             
             txtMatri.Text = matricula;
             txtFab.Text = fabricante;
-            
+
+            dgvAeronaves.DataSource = null;
+
             string query = "SELECT DATA_G.GET_ID_AERONAVE ('" + matricula + "', '" + fabricante + "') AS id";
 
             SqlDataReader reader = Conexion.ejecutarQuery(query);
@@ -53,7 +56,8 @@ namespace AerolineaFrba.Abm_Aeronave
             reader.Close();
             txtId.Text = idAeronave;
 
-            //dgvVuelo.Rows.Clear();
+            dgvVuelo.Rows.Clear();
+            dgvAeronaves.Rows.Clear();
             string query2 = "SELECT NroVuelo FROM DATA_G.VUELO WHERE IdAeronave = '" + idAeronave + "'";
             SqlDataReader reader2 = Conexion.ejecutarQuery(query2);
 
@@ -92,15 +96,17 @@ namespace AerolineaFrba.Abm_Aeronave
                 DataGridViewRow d = dgvVuelo.SelectedRows[0];
                 string vuelo = d.Cells[0].Value.ToString();
 
-                string query = "SELECT distinct A.Matricula, A.Fabricante, A.Modelo, T.Descripcion, C.Nombre, A.KG_Disponibles, A.CantButacas FROM DATA_G.AERONAVE A, DATA_G.CIUDAD C, DATA_G.TIPODESERVICIO T, DATA_G.VUELO V,  DATA_G.VUELO V2,  DATA_G.VUELO V3 WHERE ((SELECT V.FechaSalida WHERE '" + vuelo + "' = V.NroVuelo) > (SELECT V2.FechaEstimadaLlegada WHERE V2.IdAeronave = A.IdAeronave)) AND ((SELECT V.FechaEstimadaLlegada WHERE '" + vuelo + "' = V.NroVuelo) > (SELECT V3.FechaSalida WHERE V3.IdAeronave = A.IdAeronave)) AND A.IdEstado = 2 AND (select C.Nombre WHERE C.CodigoCiudad = A.Ubicacion) = '" + txtOrigen.Text + "' AND A.CantButacas >= '" + txtButacas.Text + "' AND A.KG_Disponibles >= '" + txtEncomienda.Text + "' AND (select T.Descripcion WHERE T.IdServicio = A.IdServicio) =  '" + txtServ.Text + "' AND A.Fabricante = '" + txtFab.Text + "' ";
+                string query = "SELECT DISTINCT A.Matricula, A.Fabricante, A.Modelo, T.Descripcion, V3.FechaSalida, C.Nombre, A.KG_Disponibles, A.CantButacas FROM DATA_G.AERONAVE A, DATA_G.CIUDAD C, DATA_G.TIPODESERVICIO T, DATA_G.VUELO V,  DATA_G.VUELO V2,  DATA_G.VUELO V3 WHERE ((SELECT V.FechaSalida WHERE '" + vuelo + "' = V.NroVuelo) > (SELECT V2.FechaEstimadaLlegada WHERE V2.IdAeronave = A.IdAeronave)) AND ((SELECT V.FechaEstimadaLlegada WHERE '" + vuelo + "' = V.NroVuelo) > (SELECT V3.FechaSalida WHERE V3.IdAeronave = A.IdAeronave)) AND A.IdEstado = 2 AND (select C.Nombre WHERE C.CodigoCiudad = A.Ubicacion) = '" + txtOrigen.Text + "' AND A.CantButacas >= '" + txtButacas.Text + "' AND A.KG_Disponibles >= '" + txtEncomienda.Text + "' AND (select T.Descripcion WHERE T.IdServicio = A.IdServicio) =  '" + txtServ.Text + "' AND A.Fabricante = '" + txtFab.Text + "' ";
 
                 SqlDataReader reader = Conexion.ejecutarQuery(query);
                 if (reader.Read())
                 {
                     while (reader.Read())
                     {
-                        dgvAeronaves.Rows.Add(reader["Matricula"].ToString(), reader["Fabricante"].ToString(), reader["Modelo"].ToString(), reader["Descripcion"].ToString(), reader["Nombre"].ToString(), reader["KG_Disponibles"].ToString(), reader["CantButacas"].ToString());
-                    }
+                       
+                            dgvAeronaves.Rows.Add(reader["Matricula"].ToString(), reader["Fabricante"].ToString(), reader["Modelo"].ToString(), reader["Descripcion"].ToString(), reader["FechaSalida"].ToString(), reader["Nombre"].ToString(), reader["KG_Disponibles"].ToString(), reader["CantButacas"].ToString());
+                        }
+                        
                     btnGuardar.Enabled = true;
                     }
                     else
@@ -151,7 +157,7 @@ namespace AerolineaFrba.Abm_Aeronave
             {
                 MessageBox.Show("Elegir un aeronave y sólo un aeronave");
             }
-
+            dgvAeronaves.DataSource = null;
             this.Hide();
             FormProvider.VerAeronaves.Show();
         }

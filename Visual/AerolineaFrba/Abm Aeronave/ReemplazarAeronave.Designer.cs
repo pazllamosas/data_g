@@ -46,19 +46,20 @@
             this.txtEncomienda = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.dgvAeronaves = new System.Windows.Forms.DataGridView();
-            this.aeroMatricula = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aeroFabricante = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aeroModelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aeroIdServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aeroKgDisponibles = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aeroCantidadButacas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.txtId = new System.Windows.Forms.TextBox();
             this.btnBuscar = new System.Windows.Forms.Button();
             this.dgvVuelo = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aeroMatricula = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aeroFabricante = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aeroModelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aeroIdServicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fSalida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aeroKgDisponibles = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aeroCantidadButacas = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAeronaves)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVuelo)).BeginInit();
             this.SuspendLayout();
@@ -243,50 +244,16 @@
             this.aeroFabricante,
             this.aeroModelo,
             this.aeroIdServicio,
+            this.fSalida,
             this.Column1,
             this.aeroKgDisponibles,
             this.aeroCantidadButacas});
-            this.dgvAeronaves.Location = new System.Drawing.Point(175, 156);
+            this.dgvAeronaves.Location = new System.Drawing.Point(175, 152);
             this.dgvAeronaves.Margin = new System.Windows.Forms.Padding(4);
             this.dgvAeronaves.Name = "dgvAeronaves";
             this.dgvAeronaves.Size = new System.Drawing.Size(694, 296);
             this.dgvAeronaves.TabIndex = 23;
             this.dgvAeronaves.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAeronaves_CellContentClick);
-            // 
-            // aeroMatricula
-            // 
-            this.aeroMatricula.HeaderText = "Matricula";
-            this.aeroMatricula.Name = "aeroMatricula";
-            // 
-            // aeroFabricante
-            // 
-            this.aeroFabricante.HeaderText = "Fabricante";
-            this.aeroFabricante.Name = "aeroFabricante";
-            // 
-            // aeroModelo
-            // 
-            this.aeroModelo.HeaderText = "Modelo";
-            this.aeroModelo.Name = "aeroModelo";
-            // 
-            // aeroIdServicio
-            // 
-            this.aeroIdServicio.HeaderText = "Servicio";
-            this.aeroIdServicio.Name = "aeroIdServicio";
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Ubicación";
-            this.Column1.Name = "Column1";
-            // 
-            // aeroKgDisponibles
-            // 
-            this.aeroKgDisponibles.HeaderText = "Kg Disponibles";
-            this.aeroKgDisponibles.Name = "aeroKgDisponibles";
-            // 
-            // aeroCantidadButacas
-            // 
-            this.aeroCantidadButacas.HeaderText = "Cantidad de Butacas";
-            this.aeroCantidadButacas.Name = "aeroCantidadButacas";
             // 
             // btnGuardar
             // 
@@ -359,6 +326,46 @@
             this.dataGridViewTextBoxColumn7.HeaderText = "Vuelo";
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             // 
+            // aeroMatricula
+            // 
+            this.aeroMatricula.HeaderText = "Matricula";
+            this.aeroMatricula.Name = "aeroMatricula";
+            // 
+            // aeroFabricante
+            // 
+            this.aeroFabricante.HeaderText = "Fabricante";
+            this.aeroFabricante.Name = "aeroFabricante";
+            // 
+            // aeroModelo
+            // 
+            this.aeroModelo.HeaderText = "Modelo";
+            this.aeroModelo.Name = "aeroModelo";
+            // 
+            // aeroIdServicio
+            // 
+            this.aeroIdServicio.HeaderText = "Servicio";
+            this.aeroIdServicio.Name = "aeroIdServicio";
+            // 
+            // fSalida
+            // 
+            this.fSalida.HeaderText = "FechaSalida";
+            this.fSalida.Name = "fSalida";
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Ubicación";
+            this.Column1.Name = "Column1";
+            // 
+            // aeroKgDisponibles
+            // 
+            this.aeroKgDisponibles.HeaderText = "Kg Disponibles";
+            this.aeroKgDisponibles.Name = "aeroKgDisponibles";
+            // 
+            // aeroCantidadButacas
+            // 
+            this.aeroCantidadButacas.HeaderText = "Cantidad de Butacas";
+            this.aeroCantidadButacas.Name = "aeroCantidadButacas";
+            // 
             // reemplazarAeronave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -420,14 +427,15 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.DataGridView dgvVuelo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn aeroMatricula;
         private System.Windows.Forms.DataGridViewTextBoxColumn aeroFabricante;
         private System.Windows.Forms.DataGridViewTextBoxColumn aeroModelo;
         private System.Windows.Forms.DataGridViewTextBoxColumn aeroIdServicio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fSalida;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn aeroKgDisponibles;
         private System.Windows.Forms.DataGridViewTextBoxColumn aeroCantidadButacas;
-        private System.Windows.Forms.DataGridView dgvVuelo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
     }
 }
