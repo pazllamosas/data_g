@@ -46,6 +46,7 @@ namespace AerolineaFrba.Compra
                 label9.Enabled = true;
                 dateTimePicker2.Enabled = true;
                 comboBox1.Enabled = true;
+                textBox9.Enabled = true;
             }
             else
             {
@@ -56,6 +57,7 @@ namespace AerolineaFrba.Compra
                 label8.Enabled = false;
                 label9.Enabled = false;
                 comboBox1.Enabled = false;
+                textBox9.Enabled = false;
             }
             validarCamposCompra();
         }
@@ -167,6 +169,14 @@ namespace AerolineaFrba.Compra
                     }
                 }
 
+                if (!LaTarjetaExistia && radioButton1.Checked)
+                {
+                    bool resultadoPagarConTarjeta = Conexion.executeProcedure(
+                        "DATA_G.COMPRA_TARJETA", 
+                        Conexion.generarArgumentos("@comprador", "@tarjetanumero", "@tarjetacodigo", "@tarjetavencimiento", "@tipotarjeta", "@cuotas", "@mediopago", "@nroCompra"),
+                        int.Parse(textBox11.Text), int.Parse(textBox7.Text), textBox8.Text, dateTimePicker2.Value, int.Parse(comboBox1.Text), );
+                }
+
                 string conseguirCompraActualizada = "SELECT * FROM DATA_G.COMPRA WHERE NroCompra = " + idCompra;
                 SqlDataReader compra = Conexion.ejecutarQuery(conseguirCompraActualizada);
 
@@ -235,10 +245,7 @@ namespace AerolineaFrba.Compra
                 this.generarCompra(int.Parse(textBox11.Text));
             }
 
-            //if (!LaTarjetaExistia)
-            //{
-            //    bool resultado = Conexion.executeProcedure("DATA_G.ALTA_CLIENTE", Conexion.generarArgumentos("@nombre", "@apellido", "@dni", "@direccion", "@telefono", "@mail", "@fechaNac"), textBox2.Text, textBox3.Text, int.Parse(textBox1.Text), textBox4.Text, int.Parse(textBox5.Text), textBox6.Text, DateTime.Parse(dateTimePicker1.Text));
-            //}
+            
             
             
             this.Hide();
@@ -267,6 +274,7 @@ namespace AerolineaFrba.Compra
             comboBox1.ValueMember = "IdTarjeta";
             comboBox1.DisplayMember = "Descripcion";
             comboBox1.DataSource = Conexion.cargarTablaConsulta("DATA_G.GET_TIPO_TARJETA");
+
 
         }
 
@@ -303,7 +311,7 @@ namespace AerolineaFrba.Compra
                 if (radioButton1.Checked == true)
                 {
                     DateTime fechaVenc = DateTime.Parse(dateTimePicker2.Text);
-                    if (!string.IsNullOrEmpty(textBox7.Text) && !string.IsNullOrEmpty(textBox8.Text) && !string.IsNullOrEmpty(dateTimePicker2.Text) && fechaVenc > DateTime.Today)
+                    if (!string.IsNullOrEmpty(textBox7.Text) && !string.IsNullOrEmpty(textBox8.Text) && !string.IsNullOrEmpty(textBox9.Text) && !string.IsNullOrEmpty(dateTimePicker2.Text) && fechaVenc > DateTime.Today)
                     {
                         button1.Enabled = true;
                     }
@@ -370,9 +378,29 @@ namespace AerolineaFrba.Compra
             validarCamposCompra();
         }
 
+        private static int maxCuotas;
+
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             validarCamposCompra();
+
+            string query = "SELECT * FROM DATA_G.TIPODETARJETA WHERE Descripcion = '" + comboBox1.Text + "'";
+            SqlDataReader tipotarjeta = Conexion.ejecutarQuery(query);
+            if (tipotarjeta.Read())
+            {
+                maxCuotas = int.Parse(tipotarjeta["cuotasMax"].ToString());
+            }
+            tipotarjeta.Close();
+        }
+
+        private void textBox9_TextChanged(object sender, EventArgs e)
+        {
+            validarCamposCompra();
+            if (int.Parse(textBox9.Text) > maxCuotas || int.Parse(textBox9.Text) < 1)
+            {
+                MessageBox.Show("Cantidad de cuotas inválida. Por favor, modifique el valor.");
+                button1.Enabled = false;
+            }
         }
     }
 }

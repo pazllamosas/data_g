@@ -62,6 +62,8 @@
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.textBox7 = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.textBox9 = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -309,6 +311,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.textBox9);
+            this.groupBox2.Controls.Add(this.label13);
             this.groupBox2.Controls.Add(this.comboBox1);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.dateTimePicker2);
@@ -319,13 +323,14 @@
             this.groupBox2.Controls.Add(this.textBox7);
             this.groupBox2.Location = new System.Drawing.Point(12, 193);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(612, 74);
+            this.groupBox2.Size = new System.Drawing.Size(612, 103);
             this.groupBox2.TabIndex = 16;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos de la Tarjeta";
             // 
             // comboBox1
             // 
+            this.comboBox1.Enabled = false;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(461, 45);
             this.comboBox1.Name = "comboBox1";
@@ -395,6 +400,23 @@
             this.textBox7.TabIndex = 27;
             this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(346, 76);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(103, 13);
+            this.label13.TabIndex = 36;
+            this.label13.Text = "Cantidad de Cuotas:";
+            // 
+            // textBox9
+            // 
+            this.textBox9.Location = new System.Drawing.Point(461, 73);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(100, 20);
+            this.textBox9.TabIndex = 37;
+            this.textBox9.TextChanged += new System.EventHandler(this.textBox9_TextChanged);
+            // 
             // FormaDeCompra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -456,5 +478,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox textBox9;
     }
 }
